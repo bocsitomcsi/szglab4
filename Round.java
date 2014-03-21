@@ -37,7 +37,7 @@ public class Round
 		return this.enemyNumber;
 	}
 	
-	public int getEnemyAddingtime()
+	public int getEnemyAddingTime()
 	{
 		return this.enemyAddingTime;
 	}
@@ -68,7 +68,7 @@ public class Round
 		this.enemyNumber = en;
 	}
 	
-	public void setEnemyAddingtime(int et)
+	public void setEnemyAddingTime(int et)
 	{
 		this.enemyAddingTime = et;
 	}

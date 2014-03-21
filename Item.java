@@ -33,7 +33,7 @@ public abstract class Item
 		return this.maxMagicStoneNumber;
 	}
 	
-	public Cell getposition()
+	public Cell getPosition()
 	{
 		return this.position;
 	}
@@ -49,7 +49,7 @@ public abstract class Item
 		this.maxMagicStoneNumber = mm;
 	}
 	
-	public void getMagicStone(ArrayList<MagicStone> ms)
+	public void setMagicStone(ArrayList<MagicStone> ms)
 	{
 		this.magicStones = (ArrayList<MagicStone>)ms.clone();
 	}

@@ -37,7 +37,7 @@ public abstract class Enemy
 		
 		//Itt fel is töltsük a static adattagot?
 		
-		//itt is hasonló progbléma mint item-ben
+		//itt is hasonló probléma mint item-ben
 	}
 	
 	//Getter
@@ -82,27 +82,27 @@ public abstract class Enemy
 		this.healthPoint = hp;
 	}
 	
-	public void getActualSpeed(int as)
+	public void setActualSpeed(int as)
 	{
 		this.actualSpeed = as;
 	}
 	
-	public void getOriginalSpeed(int os)
+	public void setOriginalSpeed(int os)
 	{
 		this.originalSpeed = os;
 	}
 	
-	public void getMagic(int m)
+	public void setMagic(int m)
 	{
 		this.magic = m;
 	}
 	
-	public void getLastTime(long lt)
+	public void setLastTime(long lt)
 	{
 		this.lastTime = lt;
 	}
 	
-	public void getIsDead(boolean dead)
+	public void setIsDead(boolean dead)
 	{
 		this.isDead = dead;
 	}

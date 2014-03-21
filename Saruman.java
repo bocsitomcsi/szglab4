@@ -41,7 +41,7 @@ public class Saruman
 		return this.towerCost;
 	}
 	
-	public int getObstaclecost()
+	public int getObstacleCost()
 	{
 		return this.obstacleCost;
 	}
@@ -62,7 +62,7 @@ public class Saruman
 		this.towerCost = tc;
 	}
 	
-	public void setObstaclecost(int sc)
+	public void setObstacleCost(int sc)
 	{
 		this.obstacleCost = sc;
 	}

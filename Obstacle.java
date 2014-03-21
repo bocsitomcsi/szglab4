@@ -45,7 +45,7 @@ public class Obstacle extends Item
 		this.slowRate = sr;
 	}
 	
-	public void ssetBonusSlowRates(HashMap<String,Double> bonus)
+	public void setBonusSlowRates(HashMap<String,Double> bonus)
 	{
 		this.bonusSlowRates = (HashMap<String,Double>)bonus.clone();
 	}

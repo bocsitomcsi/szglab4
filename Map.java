@@ -42,17 +42,17 @@ public class Map
 	}
 
 	//Getter
-	public int getNeighBourNumber()
+	public int getNeighbourNumber()
 	{
 		return this.neighbourNumber;
 	}
 	
-	public long getlastenemyAddedTime()
+	public long getLastEnemyAddedTime()
 	{
 		return this.lastEnemyAddedTime;
 	}
 	
-	public long getRoundedStartTime()
+	public long getRoundStartedTime()
 	{
 		return this.roundStartedTime;
 	}
@@ -78,22 +78,22 @@ public class Map
 	}
 
 	//Setter
-	public void setNeighBourNumber(int neighbour)
+	public void setNeighbourNumber(int neighbour)
 	{
 		this.neighbourNumber = neighbour;
 	}
 	
-	public void setlastenemyAddedTime(long lastEnemy)
+	public void setLastEnemyAddedTime(long lastEnemy)
 	{
 		this.lastEnemyAddedTime = lastEnemy;
 	}
 	
-	public void setRoundedStartTime(long rt)
+	public void setRoundStartedTime(long rt)
 	{
 		this.roundStartedTime = rt;
 	}
 	
-	public void getCells(ArrayList<Cell> cell)
+	public void setCells(ArrayList<Cell> cell)
 	{
 		this.cells = (ArrayList<Cell>)cell.clone();
 	}
@@ -103,12 +103,12 @@ public class Map
 		this.enemys = (ArrayList<Enemy>)enemy.clone();
 	}
 	
-	public void getTowers(ArrayList<Tower> tower)
+	public void setTowers(ArrayList<Tower> tower)
 	{
 		this.towers = (ArrayList<Tower>) tower;
 	}
 	
-	public void getObstacles(ArrayList<Obstacle> obstacle)
+	public void setObstacles(ArrayList<Obstacle> obstacle)
 	{
 		this.obstacles = (ArrayList<Obstacle>)obstacle.clone();
 	}

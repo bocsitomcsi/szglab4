@@ -41,7 +41,7 @@ public class Tower extends Item
 		return this.firePower;
 	}
 	
-	public int getattackSpeed()
+	public int getAttackSpeed()
 	{
 		return this.attackSpeed;
 	}
@@ -77,7 +77,7 @@ public class Tower extends Item
 		this.range = r;
 	}
 	
-	public void setlasttime(long lt)
+	public void setLastTime(long lt)
 	{
 		this.lastTime = lt;
 	}

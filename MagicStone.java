@@ -25,7 +25,7 @@ public class MagicStone
 	
 	public MagicStone(String n, int fp, int as, int r, double sr)
 	{
-		//szerintem ide kéne a switchcase szerkezet de most nem látom!!! (enegyenlõre így írom meg hogy forduljon)
+		//szerintem ide kéne a switchcase szerkezet de most nem látom!!! (enegyelõre így írom meg hogy forduljon)
 		this.name = n; //Ez így jó vagy konstruktorosan??
 		this.firePower = fp;
 		this.attackSpeed = as;
@@ -51,12 +51,12 @@ public class MagicStone
 		return this.attackSpeed;
 	}
 	
-	public int getRang()
+	public int getRange()
 	{
 		return this.range;
 	}
 	
-	public double getslowRate()
+	public double getSlowRate()
 	{
 		return this.slowRate;
 	}
@@ -87,22 +87,22 @@ public class MagicStone
 		this.attackSpeed = as;
 	}
 	
-	public void setRang(int r)
+	public void setRange(int r)
 	{
 		this.range = r;
 	}
 	
-	public void getslowRate(double sr)
+	public void setSlowRate(double sr)
 	{
 		this.slowRate = sr;
 	}
 	
-	public void getBonusPowers(HashMap<String, Integer> bonusp)
+	public void setBonusPowers(HashMap<String, Integer> bonusp)
 	{
 		this.bonusPowers = (HashMap<String, Integer>)bonusp.clone();
 	}
 	
-	public void getBonusSlowRate(HashMap<String, Integer> bonuss)
+	public void setBonusSlowRate(HashMap<String, Integer> bonuss)
 	{
 		this.bonusSlowRates = (HashMap<String, Integer>)bonuss.clone();
 	}

@@ -43,16 +43,17 @@ public class Cell
 	{
 		return this.neighbours;
 	}
-	
+
 	//Setter
 	public void setBusy(boolean b)
 	{
 		this.busy = b;
 	}
-	
-	public Obstacle getObstacle()
+
+	public Obstacle setObstacle()
 	{
 		Obstacle ob = new Obstacle(0, 0, null); //csak kezdetlenes
 		return ob;
 	}
+
 }
