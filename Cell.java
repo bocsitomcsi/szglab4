@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Cell
 {
 	private boolean busy;
-	private Map map; //itt hogy adjuk meg a mappot
+	private Map map;
 	private ArrayList<Cell> neighbours;
 	protected enum CellType {Terrain, Road, StartPoint, EndPoint};
 	private CellType celltype;

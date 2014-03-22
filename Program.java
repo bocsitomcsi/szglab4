@@ -66,7 +66,9 @@ public class Program {
 						}
 					}
 
+					Logger.active = true;
 					map.addEnemy(enemyType, cell);
+					Logger.active = false;
 
 					//Ha lefutott a use-case var az enterre a felhasznalotol
 					try{
