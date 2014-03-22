@@ -193,9 +193,22 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Varazsko letrehozasa");
 
-					/*
-					* Ide jon a use-case
-					*/
+					Saruman saruman = new Saruman(100, 100, 100, 100, map);
+					String stoneType;
+					while(true) {
+						System.out.println("Letrehozando ko [cyan, green, purple]: ");
+						//Ask the user, don't explicitly set it
+						stoneType = "purple";
+						if(!(stoneType=="cyan" || stoneType=="green" || stoneType=="purple")) {
+							System.out.println("Helytelen ertek");
+						} else {
+							break;
+						}
+					}
+
+					Logger.active = true;
+					saruman.createStone(stoneType);
+					Logger.active = false;
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");

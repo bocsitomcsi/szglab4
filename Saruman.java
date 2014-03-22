@@ -19,82 +19,102 @@ public class Saruman
 	private int obstacleCost;
 	private int magicStoneCost;
 	private MagicStone selectedMagicStone;
-	private Map map;	//itt szintén hogy foja megkapni mint a towernél?
-	
+	private Map map;
+
 	//Constructors
-	public Saruman(int mp, int tc, int oc, int mc)
+	public Saruman(int mp, int tc, int oc, int mc, Map map)
 	{
 		this.magicPower = mp;
 		this.towerCost = tc;
 		this.obstacleCost = oc;
 		this.magicStoneCost = mc;
+		this.map = map;
 	}
-	
+
 	//Getter
 	public int getMagicPower()
 	{
 		return this.magicPower;
 	}
-	
+
 	public int getTowerCost()
 	{
 		return this.towerCost;
 	}
-	
+
 	public int getObstacleCost()
 	{
 		return this.obstacleCost;
 	}
-	
+
 	public int getMagicStoneCost()
 	{
 		return this.magicStoneCost;
 	}
-	
+
 	//Setter
 	public void setMagicPower(int mp)
 	{
 		this.magicPower = mp;
 	}
-	
+
 	public void setTowerCost(int tc)
 	{
 		this.towerCost = tc;
 	}
-	
+
 	public void setObstacleCost(int sc)
 	{
 		this.obstacleCost = sc;
 	}
-	
+
 	public void setMagicStoneCost(int mc)
 	{
 		this.magicStoneCost = mc;
 	}
-	
+
 	public boolean createStone(String type)
 	{
-		return true;
+		String logString = "Saruman.createStone(" + type + ")";
+		Logger.Log(1, logString);
+
+		MagicStone stone;
+		boolean enoughMagicPower = true;
+		if(enoughMagicPower) {
+			if(type=="purple") {
+				stone = new PurpleMagicStone("purple", 1, 1, 1, 1);
+			} else if(type=="cyan") {
+				stone = new CyanMagicStone("cyan", 1, 1, 1, 1);
+			} else { //it's green
+				stone = new GreenMagicStone("green", 1, 1, 1, 1);
+			}
+			this.selectedMagicStone = stone;
+			Logger.Log(0, logString);
+
+			return true;
+		}
+		Logger.Log(0, logString);
+
+		return false;
 	}
-	
-	
+
 	public boolean addTower(Cell pos)
 	{
 		return true;
 	}
-	
+
 	public boolean addObstacle(Cell pos)
 	{
 		return true;
 	}
-	
+
 	public boolean upgradeItem(Item item)
 	{
 		return true;
 	}
-	
+
 	public void changeMagicPowerBy(int power)
 	{
-	
+
 	}
 }
