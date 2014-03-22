@@ -121,23 +121,12 @@ public class Map
 		String logString = "Map.addEnemy(" + type + ", " + 1 + ")";
 		Logger.Log(1, logString);
 		Enemy enemy;
-		String enemyType;
-		while(true) {
-			System.out.println("Letrehozando ellenseg [human, elf, dwarf, hobbit]: ");
-			//Ask the user, don't explicitly set it
-			enemyType = "human";
-			if(!(enemyType=="human" || enemyType=="elf" || enemyType=="dwarf" || enemyType=="hobbit")) {
-				System.out.println("Helytelen ertek");
-			} else {
-				break;
-			}
-		}
 
-		if(enemyType=="human") {
+		if(type=="human") {
 			enemy = new Human(100, 5, 5, 30, 0);
-		} else if(enemyType=="elf") {
+		} else if(type=="elf") {
 			enemy = new Elf(100, 5, 5, 30, 0);
-		} else if(enemyType=="dwarf") {
+		} else if(type=="dwarf") {
 			enemy = new Dwarf(100, 5, 5, 30, 0);
 		} else { // it's a hobbit
 			enemy = new Hobbit(100, 5, 5, 30, 0);

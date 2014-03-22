@@ -47,9 +47,17 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Ellenseg letrehozasa");
 
-					/*
-					* Ide jon a use-case
-					*/
+					String enemyType;
+					while(true) {
+						System.out.println("Letrehozando ellenseg [human, elf, dwarf, hobbit]: ");
+						//Ask the user, don't explicitly set it
+						enemyType = "human";
+						if(!(enemyType=="human" || enemyType=="elf" || enemyType=="dwarf" || enemyType=="hobbit")) {
+							System.out.println("Helytelen ertek");
+						} else {
+							break;
+						}
+					}
 
 					//Ha lefutott a use-case var az enterre a felhasznalotol
 					try{
