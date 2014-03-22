@@ -10,7 +10,7 @@ public class Logger {
 			for(int i=0; i<depths; i++){
 				System.out.print("\t");
 			}
-			depths = depths + direction;
+			depths++;
 			System.out.print("->");
 			System.out.print(depths+". "+text+"\n");
 		}
@@ -20,7 +20,7 @@ public class Logger {
 			}
 			System.out.print("<-");
 			System.out.print(depths+". "+text+"\n");
-			depths = depths + direction;
+			depths--;
 		}
 	}
 }
