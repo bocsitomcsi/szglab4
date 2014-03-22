@@ -55,7 +55,7 @@ public class Cell
 
 	public Obstacle setObstacle()
 	{
-		Obstacle ob = new Obstacle(0, 0, null); //csak kezdetlenes
+		Obstacle ob = new Obstacle(0, 0); //csak kezdetlenes
 		return ob;
 	}
 

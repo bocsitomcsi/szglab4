@@ -9,6 +9,8 @@ public class Program {
 		//Konzolrol valo beolvasas
 		Scanner scanner = new Scanner (System.in);
 		Map map = new Map(4, 0, 0);
+		Saruman saruman;
+		Cell cell;
 		
 		while (true) {
 			//Use-case menu kiiratasa
@@ -50,7 +52,7 @@ public class Program {
 					System.out.println("Ellenseg letrehozasa");
 
 					ArrayList<Cell> cells = new ArrayList<Cell>();
-					Cell cell = new Cell(false, map, Cell.CellType.Road);
+					cell = new Cell(false, map, Cell.CellType.Road);
 					cells.add(cell);
 					map.setCells(cells);
 
@@ -154,6 +156,12 @@ public class Program {
 					/*
 					* Ide jon a use-case
 					*/
+					saruman = new Saruman(100, 100, 100, 100, map);
+					cell = new Cell(false, map, Cell.CellType.Terrain);
+
+					Logger.active = true;
+					saruman.addTower(cell);
+					Logger.active = false;
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -193,7 +201,7 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Varazsko letrehozasa");
 
-					Saruman saruman = new Saruman(100, 100, 100, 100, map);
+					saruman = new Saruman(100, 100, 100, 100, map);
 					String stoneType;
 					while(true) {
 						System.out.println("Letrehozando ko [cyan, green, purple]: ");

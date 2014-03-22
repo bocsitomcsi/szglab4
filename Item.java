@@ -21,7 +21,7 @@ public abstract class Item
 	private ArrayList<MagicStone> magicStones;
 	
 	//Constructor
-	public Item(int mm, ArrayList<MagicStone> ms)
+	public Item(int mm)
 	{
 		this.maxMagicStoneNumber = mm;
 		this.magicStones = new ArrayList<MagicStone>();

@@ -148,6 +148,15 @@ public class Map
 		return enemy;
 	}
 
+	protected void addTower(Tower tower) {
+		String logString = "Map.addTower(" + 1 + ")";
+		Logger.Log(1, logString);
+
+		towers.add(tower);
+
+		Logger.Log(0, logString);
+	}
+
 	public void simulateWorld()
 	{
 	

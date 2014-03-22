@@ -102,7 +102,24 @@ public class Saruman
 
 	public boolean addTower(Cell pos)
 	{
-		return true;
+		String logString = "Saruman.addTower(" + 1 + ")";
+		Logger.Log(1, logString);
+
+		Tower tower;
+
+		System.out.println("Lehet elhelyezni a cellara tornyot [igen, nem]: ");
+		boolean isEmpty=true;
+		if(isEmpty) {
+			tower = new Tower(1, 1, 1, 1, 1);
+			map.addTower(tower);
+			this.changeMagicPowerBy(-1);
+			Logger.Log(0, logString);
+
+			return true;
+		}
+		Logger.Log(0, logString);
+
+		return false;
 	}
 
 	public boolean addObstacle(Cell pos)
