@@ -109,7 +109,7 @@ public abstract class Enemy
 
 	public void setPosition(Cell pos)
 	{
-		String logString = "Enemy.setPosition("  + 1 + ")";
+		String logString = "Enemy.setPosition("  + pos.toString() + ")";
 		Logger.Log(1, logString);
 		this.position = pos;
 		Logger.Log(0, logString);

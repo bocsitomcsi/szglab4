@@ -17,14 +17,13 @@ import java.util.ArrayList;
 public abstract class Item
 {
 	private int maxMagicStoneNumber;
-	private Cell position;
+	private Cell position; //Cellat hogyan adjuk át konstruktorban???
 	private ArrayList<MagicStone> magicStones;
 	
 	//Constructor
-	public Item(int mm, Cell pos)
+	public Item(int mm, ArrayList<MagicStone> ms)
 	{
 		this.maxMagicStoneNumber = mm;
-		this.position = pos;
 		this.magicStones = new ArrayList<MagicStone>();
 	}
 	

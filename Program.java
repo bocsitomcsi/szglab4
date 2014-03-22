@@ -6,14 +6,16 @@ public class Program {
 
 	public static void main(String[] args){
 		
-		//Konzolrol valo beolvasas
+		//Read from console
 		Scanner scanner = new Scanner (System.in);
+		
+		//One instance
 		Map map = new Map(4, 0, 0);
-		Saruman saruman;
-		Cell cell;
+		Saruman saruman = new Saruman(100, 100, 100, 100, map);
+
 		
 		while (true) {
-			//Use-case menu kiiratasa
+			//Use-case menu print
 			System.out.println("[1]  Ellenseg letrehozasa");
 			System.out.println("[2]  Ellenseg celba er");
 			System.out.println("[3]  Ellenseg talalkozik egy masik ellenseggel");
@@ -28,7 +30,7 @@ public class Program {
 
 			System.out.print("Melyik Use-Case-t szeretne? : ");
 
-			//Megvizsgalja, hogy a felhasznalo nem szamtol eltero karaktert adott meg
+			//Check the wrong characters
 			while (!scanner.hasNextInt()) {
 				System.out.println("Nem lehet karaktert megadni!!!");
 				System.out.print("Adjon meg egy ervenyes szamot: "); 
@@ -38,30 +40,33 @@ public class Program {
 
 			int selection = scanner.nextInt();
 
-			//Kilepesi pont biztositasa
+			//Exit point
 			if (selection == 11) {
 				break;
 			}
 
-			//Az egyes szamok eseten meghivodo esemeny lancolatok
+			//Use-case pair with numbers
 			switch (selection){
 
 				case 1:
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Ellenseg letrehozasa");
-
+					
+					/*****Create enemy USE-CASE*****/
 					ArrayList<Cell> cells = new ArrayList<Cell>();
-					cell = new Cell(false, map, Cell.CellType.Road);
+					Cell cell = new Cell(false, map, Cell.CellType.Road);
 					cells.add(cell);
 					map.setCells(cells);
 
 					String enemyType;
 					while(true) {
-						System.out.println("Letrehozando ellenseg [human, elf, dwarf, hobbit]: ");
-						//Ask the user, don't explicitly set it
-						enemyType = "human";
-						if(!(enemyType=="human" || enemyType=="elf" || enemyType=="dwarf" || enemyType=="hobbit")) {
+						System.out.print("Letrehozando ellenseg [human | elf | dwarf | hobbit]: ");
+						//Prevent the unnecessary line cause error
+						System.out.print(scanner.nextLine());
+						
+						enemyType = scanner.nextLine();
+						if(!(enemyType.equals("human") || enemyType.equals("elf") || enemyType.equals("dwarf") || enemyType.equals("hobbit"))) {
 							System.out.println("Helytelen ertek");
 						} else {
 							break;
@@ -71,8 +76,9 @@ public class Program {
 					Logger.active = true;
 					map.addEnemy(enemyType, cell);
 					Logger.active = false;
-
-					//Ha lefutott a use-case var az enterre a felhasznalotol
+					/*******************************/
+					
+					//Waiting for the ENTER
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
 						System.in.read();
@@ -153,12 +159,9 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Torony lerakas");
 
-					saruman = new Saruman(100, 100, 100, 100, map);
-					cell = new Cell(false, map, Cell.CellType.Terrain);
-
-					Logger.active = true;
-					saruman.addTower(cell);
-					Logger.active = false;
+					/*
+					* Ide jon a use-case
+					*/
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -177,12 +180,9 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Akadaly lerakasa");
 
-					saruman = new Saruman(100, 100, 100, 100, map);
-					cell = new Cell(false, map, Cell.CellType.Road);
-
-					Logger.active = true;
-					saruman.addObstacle(cell);
-					Logger.active = false;
+					/*
+					* Ide jon a use-case
+					*/
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -201,23 +201,42 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Varazsko letrehozasa");
 
-					saruman = new Saruman(100, 100, 100, 100, map);
+					/****Create magic stone USE-CASE****/
 					String stoneType;
+					
 					while(true) {
-						System.out.println("Letrehozando ko [cyan, green, purple]: ");
-						//Ask the user, don't explicitly set it
-						stoneType = "purple";
-						if(!(stoneType=="cyan" || stoneType=="green" || stoneType=="purple")) {
+						System.out.print("Letrehozando ko [cyan | green | purple]: ");
+						System.out.print(scanner.nextLine());
+						
+						stoneType = scanner.nextLine();
+						if(!(stoneType.equals("cyan") || stoneType.equals("green") || stoneType.equals("purple"))) {
 							System.out.println("Helytelen ertek");
 						} else {
 							break;
 						}
 					}
-
-					Logger.active = true;
-					saruman.createStone(stoneType);
-					Logger.active = false;
-
+					
+					while(true) {
+						System.out.print("Van eleg varazs ero letrehozni [igen | nem] ");
+						
+						stoneType = scanner.nextLine();
+						if(stoneType.equals("igen")) {
+							
+							Logger.active = true;
+							saruman.createStone(stoneType);
+							Logger.active = false;
+							break;
+						} 
+						else if (stoneType.equals("nem")) {
+							break;
+						}
+						else {
+							System.out.println("Helytelen ertek");
+						}
+					}
+					
+					/**************************************/
+					
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
 						System.in.read();
@@ -235,9 +254,7 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Torony fejlesztes");
 
-					/*
-					* Ide jon a use-case
-					*/
+					
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -293,7 +310,7 @@ public class Program {
 					System.out.println("****************************");
 					break;
 
-				//Ha a menuben jelzettol eltero sorszamot adna meg a felhasznalo 	
+				//If the user set an invalid number  	
 				default:
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("Rossz sorszamot adott meg!!");

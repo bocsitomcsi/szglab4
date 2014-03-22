@@ -37,8 +37,7 @@ public class Map
 		this.enemys = new ArrayList<Enemy>();
 		this.obstacles = new ArrayList<Obstacle>();
 		this.towers = new ArrayList<Tower>();
-		/*this.round = new Round();*/ //Itt kellenenek fix ertekek?????!!!
-		
+		this.round = new Round(1,1,1,1,1,1);
 	}
 
 	//Getter
@@ -118,7 +117,9 @@ public class Map
 	{
 		//Cell needs a toString() function for logger
 		//In the meantime, it just writes a hardcoded integer (1)
-		String logString = "Map.addEnemy(" + type + ", " + 1 + ")";
+		
+		//Itt mire gondoltal? Sorszamot adjunk visszahanyadik a listaban? pos.toString();??
+		String logString = "Map.addEnemy(" + type + ", " + pos.toString() + ")";
 		Logger.Log(1, logString);
 		Enemy enemy;
 
@@ -146,24 +147,6 @@ public class Map
 	{
 		ArrayList<Enemy> enemy = new ArrayList<Enemy>();
 		return enemy;
-	}
-
-	protected void addTower(Tower tower) {
-		String logString = "Map.addTower(" + 1 + ")";
-		Logger.Log(1, logString);
-
-		towers.add(tower);
-
-		Logger.Log(0, logString);
-	}
-
-	protected void addObstacle(Obstacle obstacle) {
-		String logString = "Map.addObstacle(" + 1 + ")";
-		Logger.Log(1, logString);
-
-		obstacles.add(obstacle);
-
-		Logger.Log(0, logString);
 	}
 
 	public void simulateWorld()

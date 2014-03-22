@@ -89,8 +89,6 @@ public class Saruman
 				stone = new GreenMagicStone("green", 1, 1, 1, 1);
 			}
 			this.selectedMagicStone = stone;
-			//ez a forgatokonyvbe nincs benne, de attol meg kene, vagy nem?
-			this.changeMagicPowerBy(-1);
 			Logger.Log(0, logString);
 
 			return true;
@@ -102,46 +100,12 @@ public class Saruman
 
 	public boolean addTower(Cell pos)
 	{
-		String logString = "Saruman.addTower(" + 1 + ")";
-		Logger.Log(1, logString);
-
-		Tower tower;
-
-		System.out.println("Lehet elhelyezni a cellara tornyot [igen, nem]: ");
-		boolean isEmpty=true;
-		if(isEmpty) {
-			tower = new Tower(1, 1, 1, 1, 1, pos, map);
-			map.addTower(tower);
-			this.changeMagicPowerBy(-1);
-			Logger.Log(0, logString);
-
-			return true;
-		}
-		Logger.Log(0, logString);
-
-		return false;
+		return true;
 	}
 
 	public boolean addObstacle(Cell pos)
 	{
-		String logString = "Saruman.addObstacle(" + 1 + ")";
-		Logger.Log(1, logString);
-
-		Obstacle obstacle;
-
-		System.out.println("Lehet elhelyezni a cellara akadalyt [igen, nem]: ");
-		boolean isEmpty=true;
-		if(isEmpty) {
-			obstacle = new Obstacle(1, 1, pos);
-			map.addObstacle(obstacle);
-			this.changeMagicPowerBy(-1);
-			Logger.Log(0, logString);
-
-			return true;
-		}
-		Logger.Log(0, logString);
-
-		return false;
+		return true;
 	}
 
 	public boolean upgradeItem(Item item)
@@ -151,11 +115,6 @@ public class Saruman
 
 	public void changeMagicPowerBy(int power)
 	{
-		String logString = "Saruman.changeMagicPowerBy(" + power + ")";
-		Logger.Log(1, logString);
 
-		this.setMagicPower(4);
-
-		Logger.Log(0, logString);
 	}
 }
