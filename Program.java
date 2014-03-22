@@ -153,9 +153,6 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Torony lerakas");
 
-					/*
-					* Ide jon a use-case
-					*/
 					saruman = new Saruman(100, 100, 100, 100, map);
 					cell = new Cell(false, map, Cell.CellType.Terrain);
 
@@ -180,9 +177,12 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Akadaly lerakasa");
 
-					/*
-					* Ide jon a use-case
-					*/
+					saruman = new Saruman(100, 100, 100, 100, map);
+					cell = new Cell(false, map, Cell.CellType.Road);
+
+					Logger.active = true;
+					saruman.addObstacle(cell);
+					Logger.active = false;
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");

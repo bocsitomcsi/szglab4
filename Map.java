@@ -37,7 +37,7 @@ public class Map
 		this.enemys = new ArrayList<Enemy>();
 		this.obstacles = new ArrayList<Obstacle>();
 		this.towers = new ArrayList<Tower>();
-		/*this.round = new Round();*/ //Itt kellenének fix értékek?????!!!
+		/*this.round = new Round();*/ //Itt kellenenek fix ertekek?????!!!
 		
 	}
 
@@ -153,6 +153,15 @@ public class Map
 		Logger.Log(1, logString);
 
 		towers.add(tower);
+
+		Logger.Log(0, logString);
+	}
+
+	protected void addObstacle(Obstacle obstacle) {
+		String logString = "Map.addObstacle(" + 1 + ")";
+		Logger.Log(1, logString);
+
+		obstacles.add(obstacle);
 
 		Logger.Log(0, logString);
 	}

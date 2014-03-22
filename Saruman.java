@@ -124,7 +124,24 @@ public class Saruman
 
 	public boolean addObstacle(Cell pos)
 	{
-		return true;
+		String logString = "Saruman.addObstacle(" + 1 + ")";
+		Logger.Log(1, logString);
+
+		Obstacle obstacle;
+
+		System.out.println("Lehet elhelyezni a cellara akadalyt [igen, nem]: ");
+		boolean isEmpty=true;
+		if(isEmpty) {
+			obstacle = new Obstacle(1, 1);
+			map.addObstacle(obstacle);
+			this.changeMagicPowerBy(-1);
+			Logger.Log(0, logString);
+
+			return true;
+		}
+		Logger.Log(0, logString);
+
+		return false;
 	}
 
 	public boolean upgradeItem(Item item)
