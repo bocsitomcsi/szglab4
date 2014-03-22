@@ -50,7 +50,7 @@ public class Program {
 					System.out.println("Ellenseg letrehozasa");
 
 					ArrayList<Cell> cells = new ArrayList<Cell>();
-					Cell cell = new Cell(false, map);
+					Cell cell = new Cell(false, map, Cell.CellType.Road);
 					cells.add(cell);
 					map.setCells(cells);
 

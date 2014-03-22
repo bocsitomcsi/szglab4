@@ -19,14 +19,16 @@ public class Cell
 	private boolean busy;
 	private Map map; //itt hogy adjuk meg a mappot
 	private ArrayList<Cell> neighbours;
-	//private CellType type;
+	protected enum CellType {Terrain, Road, StartPoint, EndPoint};
+	private CellType celltype;
 	
 	//Constructors
-	public Cell(boolean b, Map map)
+	public Cell(boolean b, Map map, CellType ct)
 	{
 		this.busy = b;
 		this.map = map;
 		this.neighbours = new ArrayList<Cell>();
+		this.celltype = ct;
 	}
 	
 	//Getter
