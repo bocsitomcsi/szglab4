@@ -1,10 +1,10 @@
 public class Logger {
 	static int depths;
-	
+
 	public Logger(){
 		depths = 0;
 	}
-	
+
 	public static void Log(int direction, String text){
 		if(direction==1){
 			for(int i=0; i<depths; i++){

@@ -16,8 +16,8 @@ import java.util.HashMap;
 
 public class Elf extends Enemy
 {
-	public Elf(int hp, int as, int os, int m, boolean dead, long lt) {
-		super(hp, as, os, m, dead, lt);
+	public Elf(int hp, int as, int os, int m, long lt) {
+		super(hp, as, os, m, lt);
 	}
 
 	public boolean damage(int power, HashMap<String,Integer> bonus)

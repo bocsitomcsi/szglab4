@@ -26,13 +26,13 @@ public abstract class Enemy
 	private Cell position;
 
 	//Constructor
-	public Enemy(int hp, int as, int os, int m, boolean dead, long lt)
+	public Enemy(int hp, int as, int os, int m, long lt)
 	{
 		this.healthPoint = hp;
 		this.actualSpeed = as;
 		this.originalSpeed = os;
 		this.magic = m;
-		this.isDead = dead;
+		this.isDead = false;
 		this.lastTime = lt;
 		
 		//Itt fel is töltsük a static adattagot?
@@ -106,7 +106,12 @@ public abstract class Enemy
 	{
 		this.isDead = dead;
 	}
-	
+
+	public void setPosition(Cell pos)
+	{
+		this.position = pos;
+	}
+
 	public abstract boolean damage(int power, HashMap<String , Integer> bonus);
 	
 	public void tick()

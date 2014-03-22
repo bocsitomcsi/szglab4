@@ -25,7 +25,7 @@ public class Map
 	private ArrayList<Obstacle> obstacles;
 	private ArrayList<Tower> towers;
 	private Saruman saruman;
-	
+
 	//Constructor
 	public Map(int neighbour, long lastEnemy, long rt) 
 	{
@@ -46,17 +46,17 @@ public class Map
 	{
 		return this.neighbourNumber;
 	}
-	
+
 	public long getLastEnemyAddedTime()
 	{
 		return this.lastEnemyAddedTime;
 	}
-	
+
 	public long getRoundStartedTime()
 	{
 		return this.roundStartedTime;
 	}
-	
+
 	public ArrayList<Cell> getCells()
 	{
 		return this.cells;
@@ -66,12 +66,12 @@ public class Map
 	{
 		return this.enemys;
 	}
-	
+
 	public ArrayList<Tower> getTowers()
 	{
 		return this.towers;
 	}
-	
+
 	public ArrayList<Obstacle> getObstacles()
 	{
 		return this.obstacles;
@@ -82,17 +82,17 @@ public class Map
 	{
 		this.neighbourNumber = neighbour;
 	}
-	
+
 	public void setLastEnemyAddedTime(long lastEnemy)
 	{
 		this.lastEnemyAddedTime = lastEnemy;
 	}
-	
+
 	public void setRoundStartedTime(long rt)
 	{
 		this.roundStartedTime = rt;
 	}
-	
+
 	public void setCells(ArrayList<Cell> cell)
 	{
 		this.cells = (ArrayList<Cell>)cell.clone();
@@ -102,34 +102,63 @@ public class Map
 	{
 		this.enemys = (ArrayList<Enemy>)enemy.clone();
 	}
-	
+
 	public void setTowers(ArrayList<Tower> tower)
 	{
 		this.towers = (ArrayList<Tower>) tower;
 	}
-	
+
 	public void setObstacles(ArrayList<Obstacle> obstacle)
 	{
 		this.obstacles = (ArrayList<Obstacle>)obstacle.clone();
 	}
-	
+
 	//Methods
 	public void addEnemy(String type, Cell pos)
 	{
-	
+		//Cell needs a toString() function for logger
+		//In the meantime, it just writes a hardcoded integer (1)
+		String logString = "Map.addEnemy(" + type + ", " + 1 + ")";
+		Logger.Log(1, logString);
+		Enemy enemy;
+		String enemyType;
+		while(true) {
+			System.out.println("Letrehozando ellenseg [human, elf, dwarf, hobbit]: ");
+			//Ask the user, don't explicitly set it
+			enemyType = "human";
+			if(!(enemyType=="human" || enemyType=="elf" || enemyType=="dwarf" || enemyType=="hobbit")) {
+				System.out.println("Helytelen ertek");
+			} else {
+				break;
+			}
+		}
+
+		if(enemyType=="human") {
+			enemy = new Human(100, 5, 5, 30, 0);
+		} else if(enemyType=="elf") {
+			enemy = new Elf(100, 5, 5, 30, 0);
+		} else if(enemyType=="dwarf") {
+			enemy = new Dwarf(100, 5, 5, 30, 0);
+		} else { // it's a hobbit
+			enemy = new Hobbit(100, 5, 5, 30, 0);
+		}
+
+		enemy.setPosition(pos);
+		enemys.add(enemy);
+		Logger.Log(0, logString);
 	}
-	
+
 	public void removeEnemy(Enemy enemy)
 	{
-	
+		enemys.remove(enemy);
 	}
-	
+
 	public ArrayList<Enemy> getEnemysInRange(Tower tower)
 	{
 		ArrayList<Enemy> enemy = new ArrayList<Enemy>();
 		return enemy;
 	}
-	
+
 	public void simulateWorld()
 	{
 	
