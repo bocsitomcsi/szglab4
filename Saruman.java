@@ -89,6 +89,8 @@ public class Saruman
 				stone = new GreenMagicStone("green", 1, 1, 1, 1);
 			}
 			this.selectedMagicStone = stone;
+			//ez a forgatokonyvbe nincs benne, de attol meg kene, vagy nem?
+			this.changeMagicPowerBy(-1);
 			Logger.Log(0, logString);
 
 			return true;
@@ -115,6 +117,11 @@ public class Saruman
 
 	public void changeMagicPowerBy(int power)
 	{
+		String logString = "Saruman.changeMagicPowerBy(" + power + ")";
+		Logger.Log(1, logString);
 
+		this.setMagicPower(4);
+
+		Logger.Log(0, logString);
 	}
 }

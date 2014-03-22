@@ -41,7 +41,7 @@ public class Program {
 				break;
 			}
 
-			//Az egyes szamok eseten meghivodo esemeny lanculatok
+			//Az egyes szamok eseten meghivodo esemeny lancolatok
 			switch (selection){
 
 				case 1:
