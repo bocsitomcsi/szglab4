@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Program {
 
@@ -7,6 +8,7 @@ public class Program {
 		
 		//Konzolrol valo beolvasas
 		Scanner scanner = new Scanner (System.in);
+		Map map = new Map(4, 0, 0);
 		
 		while (true) {
 			//Use-case menu kiiratasa
@@ -47,6 +49,11 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Ellenseg letrehozasa");
 
+					ArrayList<Cell> cells = new ArrayList<Cell>();
+					Cell cell = new Cell(false, map);
+					cells.add(cell);
+					map.setCells(cells);
+
 					String enemyType;
 					while(true) {
 						System.out.println("Letrehozando ellenseg [human, elf, dwarf, hobbit]: ");
@@ -58,6 +65,8 @@ public class Program {
 							break;
 						}
 					}
+
+					map.addEnemy(enemyType, cell);
 
 					//Ha lefutott a use-case var az enterre a felhasznalotol
 					try{

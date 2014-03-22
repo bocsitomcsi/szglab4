@@ -109,7 +109,10 @@ public abstract class Enemy
 
 	public void setPosition(Cell pos)
 	{
+		String logString = "Enemy.setPosition("  + 1 + ")";
+		Logger.Log(1, logString);
 		this.position = pos;
+		Logger.Log(0, logString);
 	}
 
 	public abstract boolean damage(int power, HashMap<String , Integer> bonus);

@@ -22,9 +22,10 @@ public class Cell
 	//private CellType type;
 	
 	//Constructors
-	public Cell(boolean b)
+	public Cell(boolean b, Map map)
 	{
 		this.busy = b;
+		this.map = map;
 		this.neighbours = new ArrayList<Cell>();
 	}
 	
