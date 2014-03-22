@@ -25,9 +25,9 @@ public class Tower extends Item
 	private Map map;
 
 	//Constructor
-	public Tower(int power, int as, int r, long lt, int mm, Map map)
+	public Tower(int power, int as, int r, long lt, int mm, Cell pos, Map map)
 	{
-		super(mm);
+		super(mm, pos);
 		firePower = power;
 		attackSpeed = as;
 		range = r;

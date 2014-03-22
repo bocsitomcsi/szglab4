@@ -110,7 +110,7 @@ public class Saruman
 		System.out.println("Lehet elhelyezni a cellara tornyot [igen, nem]: ");
 		boolean isEmpty=true;
 		if(isEmpty) {
-			tower = new Tower(1, 1, 1, 1, 1, map);
+			tower = new Tower(1, 1, 1, 1, 1, pos, map);
 			map.addTower(tower);
 			this.changeMagicPowerBy(-1);
 			Logger.Log(0, logString);
@@ -132,7 +132,7 @@ public class Saruman
 		System.out.println("Lehet elhelyezni a cellara akadalyt [igen, nem]: ");
 		boolean isEmpty=true;
 		if(isEmpty) {
-			obstacle = new Obstacle(1, 1);
+			obstacle = new Obstacle(1, 1, pos);
 			map.addObstacle(obstacle);
 			this.changeMagicPowerBy(-1);
 			Logger.Log(0, logString);
