@@ -110,7 +110,7 @@ public class Saruman
 		System.out.println("Lehet elhelyezni a cellara tornyot [igen, nem]: ");
 		boolean isEmpty=true;
 		if(isEmpty) {
-			tower = new Tower(1, 1, 1, 1, 1);
+			tower = new Tower(1, 1, 1, 1, 1, map);
 			map.addTower(tower);
 			this.changeMagicPowerBy(-1);
 			Logger.Log(0, logString);

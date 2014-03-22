@@ -22,10 +22,10 @@ public class Tower extends Item
 	private int range;
 	private HashMap<String, Integer> bonusPowers;
 	private long lastTime;
-	private Map map;	//itt hogy fogja a konkrét egy db mappot megkapni?
+	private Map map;
 
 	//Constructor
-	public Tower(int power, int as, int r, long lt, int mm)
+	public Tower(int power, int as, int r, long lt, int mm, Map map)
 	{
 		super(mm);
 		firePower = power;
@@ -33,6 +33,7 @@ public class Tower extends Item
 		range = r;
 		bonusPowers = new HashMap<String,Integer>();
 		lastTime = lt;
+		this.map = map;
 	}
 
 	//Getters
