@@ -21,9 +21,9 @@ public class Obstacle extends Item
 	private HashMap<String, Double> bonusSlowRates;
 	
 	//Constructor
-	public Obstacle(double sr, int mm, ArrayList<MagicStone> ms)
+	public Obstacle(double sr, int mm)
 	{
-		super(mm,ms);
+		super(mm);
 		this.slowRate = sr;
 		bonusSlowRates = new HashMap<String,Double>();
 	}
@@ -52,6 +52,10 @@ public class Obstacle extends Item
 	
 	public boolean upgrade(MagicStone stone)
 	{
+		String logString = "Obstacle.upgrade(" + stone.toString() +")";
+		Logger.Log(1, logString);
+		
+		Logger.Log(0, logString);
 		return true;
 	}
 }

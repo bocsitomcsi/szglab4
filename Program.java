@@ -12,7 +12,6 @@ public class Program {
 		//One instance
 		Map map = new Map(4, 0, 0);
 		Saruman saruman = new Saruman(100, 100, 100, 100, map);
-
 		
 		while (true) {
 			//Use-case menu print
@@ -254,7 +253,46 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Torony fejlesztes");
 
-					
+					/****TowerUpgrade*****/
+					String result1;
+					saruman.createStone("green");
+					Tower t1 = new Tower(1,1,1,1,1);
+
+					while(true) {
+						System.out.print("Van varazsko letrehozva [igen | nem] ");
+						System.out.print(scanner.nextLine());
+						
+						result1 = scanner.nextLine();
+						if(result1.equals("igen")) {
+							
+							Logger.active = true;							
+							
+							while(true) {
+								System.out.print("Fejleszthetõ még a torony (max 5 ko) [igen | nem] ");
+								result1 = scanner.nextLine();
+								
+								if(result1.equals("igen")) {
+									saruman.upgradeItem(t1);
+									break;
+								}
+								else if(result1.equals("nem")) {
+									break;
+								}
+								else {
+									System.out.println("Helytelen ertek");
+								}
+							}
+							Logger.active = false;
+							break;
+						} 
+						else if (result1.equals("nem")) {
+							break;
+						}
+						else {
+							System.out.println("Helytelen ertek");
+						}
+					}
+					/*********************/
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -273,9 +311,46 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Akadaly fejlesztes");
 
-					/*
-					* Ide jon a use-case
-					*/
+					/****TowerUpgrade*****/
+					String result2;
+					saruman.createStone("purple");
+					Obstacle o1 = new Obstacle(1.0,1);
+
+					while(true) {
+						System.out.print("Van varazsko letrehozva [igen | nem] ");
+						System.out.print(scanner.nextLine());
+						
+						result2 = scanner.nextLine();
+						if(result2.equals("igen")) {
+							
+							Logger.active = true;							
+							
+							while(true) {
+								System.out.print("Fejleszthetõ még az akadaly (max 5 ko) [igen | nem] ");
+								result2 = scanner.nextLine();
+								
+								if(result2.equals("igen")) {
+									saruman.upgradeItem(o1);
+									break;
+								}
+								else if(result2.equals("nem")) {
+									break;
+								}
+								else {
+									System.out.println("Helytelen ertek");
+								}
+							}
+							Logger.active = false;
+							break;
+						} 
+						else if (result2.equals("nem")) {
+							break;
+						}
+						else {
+							System.out.println("Helytelen ertek");
+						}
+					}
+					/*********************/
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");

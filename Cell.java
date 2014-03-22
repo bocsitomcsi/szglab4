@@ -16,11 +16,10 @@ import java.util.ArrayList;
 
 public class Cell
 {
-	protected enum CellType {Terrain, Road, StartPoint, EndPoint};
-	
 	private boolean busy;
 	private Map map;
 	private ArrayList<Cell> neighbours;
+	protected enum CellType {Terrain, Road, StartPoint, EndPoint};
 	private CellType celltype;
 	
 	//Constructors
@@ -56,7 +55,7 @@ public class Cell
 
 	public Obstacle setObstacle()
 	{
-		Obstacle ob = new Obstacle(0, 0, null);
+		Obstacle ob = new Obstacle(0, 0);
 		return ob;
 	}
 

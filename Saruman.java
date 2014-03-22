@@ -51,6 +51,10 @@ public class Saruman
 	{
 		return this.magicStoneCost;
 	}
+	
+	public MagicStone getSelectedMagicStone() {
+		return this.selectedMagicStone;
+	}
 
 	//Setter
 	public void setMagicPower(int mp)
@@ -110,6 +114,12 @@ public class Saruman
 
 	public boolean upgradeItem(Item item)
 	{
+		String logString = "Saruman.upgradeItem(" + item.toString() +")";
+		Logger.Log(1, logString);
+		
+		item.upgrade(this.selectedMagicStone);
+		
+		Logger.Log(0, logString);
 		return true;
 	}
 

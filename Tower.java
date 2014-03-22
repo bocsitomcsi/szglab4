@@ -25,14 +25,14 @@ public class Tower extends Item
 	private Map map;	//itt hogy fogja a konkrét egy db mappot megkapni?
 	
 	//Constructor
-	public Tower(int power, int as, int r, long lt, int mm, ArrayList<MagicStone> ms)
+	public Tower(int power, int as, int r, long lt, int mm)
 	{
-		super(mm,ms);
-		firePower = power;
-		attackSpeed = as;
-		range = r;
-		bonusPowers = new HashMap<String,Integer>();
-		lastTime = lt;
+		super(mm);
+		this.firePower = power;
+		this.attackSpeed = as;
+		this.range = r;
+		this.bonusPowers = new HashMap<String,Integer>();
+		this.lastTime = lt;
 	}
 	
 	//Getters
@@ -90,6 +90,10 @@ public class Tower extends Item
 	//Methods
 	public boolean upgrade(MagicStone stone)
 	{
+		String logString = "Tower.upgrade(" + stone.toString() + ")";
+		Logger.Log(1, logString);
+		
+		Logger.Log(0, logString);
 		return true;
 	}
 	
