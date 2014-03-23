@@ -82,6 +82,11 @@ public class Cell
 	 */
 	public ArrayList<Cell> getNeighbours()
 	{
+		String logString = "Cell.getNeighbours()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
+
 		return this.neighbours;
 	}
 
@@ -116,4 +121,7 @@ public class Cell
 		this.busy = b;
 	}
 
+	public void setNeighbours(ArrayList<Cell> n) {
+		this.neighbours = n;
+	}
 }

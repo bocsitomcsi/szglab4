@@ -16,10 +16,9 @@ public class Program {
 		//One instance
 		Map map = new Map(4, 0, 0);
 		Saruman saruman = new Saruman(100, 100, 100, 100, map);
-		Cell cell1;
-		Cell cell2;
-		Hobbit hobbit;
-		Dwarf dwarf;
+		Cell cell1, cell2, cell3;
+		ArrayList<Cell> cells1, cells2;
+		Hobbit hobbit1, hobbit2;
 		Obstacle obstacle;
 		map.setSaruman(saruman);
 
@@ -130,9 +129,31 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Ellenseg talalkozik egy masik ellenseggel");
 
-					/*
-					* Ide jon a use-case
-					*/
+					hobbit1 = new Hobbit(1, 1, 1, 1, 1);
+					hobbit2 = new Hobbit(1, 1, 1, 1, 1);
+					cell1 = new Cell(false, map, Cell.CellType.Road);
+					cell2 = new Cell(false, map, Cell.CellType.Road);
+					cell3 = new Cell(false, map, Cell.CellType.Road);
+					cells1 = new ArrayList<Cell>();
+					cells2 = new ArrayList<Cell>();
+
+					Logger.AddName(hobbit1, "hobbit1");
+					Logger.AddName(hobbit2, "hobbit2");
+					Logger.AddName(cell1, "Cell1");
+					Logger.AddName(cell2, "Cell2");
+					Logger.AddName(cell3, "Cell3");
+
+					cells1.add(cell3);
+					cells2.add(cell3);
+					cell1.setNeighbours(cells1);
+					cell2.setNeighbours(cells2);
+					hobbit1.setPosition(cell1);
+					hobbit2.setPosition(cell2);
+
+					Logger.SetActive(true);
+					hobbit1.move();
+					hobbit2.move();
+					Logger.SetActive(false);
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -152,19 +173,28 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Ellenseg akadalyra lep");
 
-					hobbit = new Hobbit(1, 1, 1, 1, 1);
-					Logger.AddName(hobbit, "hobbitID");
+					hobbit1 = new Hobbit(1, 1, 1, 1, 1);
 					cell1 = new Cell(false, map, Cell.CellType.Road);
-					Logger.AddName(cell1, "Cell1");
-					hobbit.setPosition(cell1);
-					obstacle = new Obstacle(1, 1, cell1);
-					Logger.AddName(obstacle, "obstacleID");
+					cell2 = new Cell(false, map, Cell.CellType.Road);
+					obstacle = new Obstacle(1, 1, cell2);
+					cells1 = new ArrayList<Cell>();
+					cells2 = new ArrayList<Cell>();
 					ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+
+					Logger.AddName(hobbit1, "hobbit1");
+					Logger.AddName(cell1, "Cell1");
+					Logger.AddName(cell2, "Cell2");
+					Logger.AddName(obstacle, "obstacleID");
+
+					cells1.add(cell2);
+					cell1.setNeighbours(cells1);
+					hobbit1.setPosition(cell1);
+
 					obstacles.add(obstacle);
 					map.setObstacles(obstacles);
 
 					Logger.SetActive(true);
-					hobbit.move();
+					hobbit1.move();
 					Logger.SetActive(false);
 
 					try{

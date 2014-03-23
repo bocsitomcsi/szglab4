@@ -49,9 +49,14 @@ public class Hobbit extends Enemy
 		Cell cell;
 		Scanner scanner = new Scanner (System.in);
 
-		cell = this.getPosition();
+		// Kivalasztjuk a kovetkezo cellat, amire lepni fog az ellenseg
+		cell = this.getPosition().getNeighbours().get(0);
+
+		this.setPosition(cell);
+
 		cell.getBusy();
 
+		// Felhasznaloi interakcio
 		if(Program.usecaseNumber==4) {
 			while(true) {
 				System.out.print("Akadalyra lepett [igen, nem]: ");

@@ -217,7 +217,9 @@ public abstract class Enemy
 	{
 		String logString = "Enemy.setPosition(position)";
 		Logger.Log(1, logString, this);
+
 		this.position = pos;
+
 		Logger.Log(0, logString, this);
 	}
 
