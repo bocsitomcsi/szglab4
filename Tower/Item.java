@@ -15,13 +15,29 @@ import java.util.ArrayList;
 
 
 
+/**
+ * A pályára rakható objektumok összefoglaló absztrakt õsosztály.
+ */
 public abstract class Item
 {
+	/**
+	 * Az objektumra rakható varázskövek maximális száma.
+	 */
 	private int maxMagicStoneNumber;
+	/**
+	 * Az objektum pozíciója.
+	 */
 	private Cell position;
+	/**
+	 * Az objektumra helyezett varázskövek listája.
+	 */
 	private ArrayList<MagicStone> magicStones;
-
-	//Constructor
+	
+	/**
+	 * Konstruktor.
+	 * @param mm  Az objektumra rakható varázskövek maximális száma.
+	 * @param pos  Az objektum pozíciója.
+	 */
 	public Item(int mm, Cell pos)
 	{
 		this.maxMagicStoneNumber = mm;
@@ -29,12 +45,19 @@ public abstract class Item
 		this.position = pos;
 	}
 
-	//Getter
+	/**
+	 * Getter a maxMagicStoneNumber attribútumra.
+	 * @return  A maxMagicStoneNumber attribútum.
+	 */
 	public int getMaxMagicStoneNumber()
 	{
 		return this.maxMagicStoneNumber;
 	}
 
+	/**
+	 * Getter a position attribútumra.
+	 * @return  A position attribútum.
+	 */
 	public Cell getPosition()
 	{
 		String logString = "Item.getPosition()";
@@ -43,23 +66,40 @@ public abstract class Item
 		Logger.Log(0, logString, this);
 		return this.position;
 	}
-
+/**
+	 * Getter a magicStones attribútumra.
+	 * @return  A magicStones attribútum.
+	 */
 	public ArrayList<MagicStone> getMagicStone()
 	{
 		return this.magicStones;
 	}
-
-	//Setter
+	
+	/**
+	 * Setter a maxMagicStoneNumber attribútumra.
+	 * @param b  A maxMagicStoneNumber attribútum kívánt értéke.
+	 */
 	public void setMaxMagicStoneNumber(int mm)
 	{
 		this.maxMagicStoneNumber = mm;
 	}
-
+	
+	/**
+	 * Setter a magicStones attribútumra.
+	 * @param b  A magicStones attribútum kívánt értéke.
+	 */
 	public void setMagicStone(ArrayList<MagicStone> ms)
 	{
-		this.magicStones = ms;
+		this.magicStones = (ArrayList<MagicStone>)ms.clone();
 	}
-
+	
+	/**
+	 * Fejleszti az objektumot.
+	 * @param stone  A varázskõ.
+	 * @return A fejlesztés sikeressége.
+	 */
 	public abstract boolean upgrade(MagicStone stone);
 }
+
+
 

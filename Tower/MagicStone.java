@@ -14,16 +14,48 @@ import java.util.HashMap;
 
 
 
+/**
+ * A varázskövek õsosztálya..
+ */
 public class MagicStone
 {
+	/**
+	 * A varázskõ neve.
+	 */
 	public String name;
+	/**
+	 * Egy torony sebzési erejének növelése.
+	 */
 	public int firePower;
+	/**
+	 * Egy torony támadási sebességének növelése.
+	 */
 	public int attackSpeed;
+	/**
+	 * Egy torony lõtávolságának növelése.
+	 */
 	public int range;
+	/**
+	 * Egy akadály lassítási szorzójának növelése.
+	 */
 	public double slowRate;
+	/**
+	 * Az egyes ellenség típusokra vonatkozó sebzési erõ növelések torony esetén.
+	 */
 	public HashMap<String, Integer> bonusPowers;
+	/**
+	 * Az egyes ellenség típusokra vonatkozó lassítási szorzó növelések akadály esetén.
+	 */
 	public HashMap<String, Integer> bonusSlowRates;
 	
+	/**
+	 * Konstruktor.
+	 * @param n  A varázskõ neve.
+	 * @param fp  Egy torony sebzési erejének növelése.
+	 * @param as  Egy torony támadási sebességének növelése.
+	 * @param r  Egy torony lõtávolságának növelése.
+	 * @param sr  Egy akadály lassítási szorzójának növelése.
+	 */
 	public MagicStone(String n, int fp, int as, int r, double sr)
 	{
 		//szerintem ide kéne a switchcase szerkezet de most nem látom!!! (enegyelõre így írom meg hogy forduljon)
@@ -36,7 +68,9 @@ public class MagicStone
 		this.bonusSlowRates = new HashMap<String, Integer>();
 	}
 	
-	//Getter
+	// Ezeket még nem kommenteztem mert szerintem itt nincs szükség getter/setterekre.
+	// A varázskõ eleve csak egy leíró osztály kb egy struct is lehetne és minden attribútuma
+	// publikus szóval szükségtelen külön getter hozzá.
 	public String getName()
 	{
 		return this.name;

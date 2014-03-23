@@ -15,8 +15,20 @@ import java.util.HashMap;
 
 
 
+
+/**
+ * Törp ellenség.
+ */
 public class Dwarf extends Enemy
 {
+	/**
+	 * Konstruktor.
+	 * @param hp  Életerõ.
+	 * @param as  Az aktuális sebesség.
+	 * @param os  Az eredeti, lassítás nélküli sebesség.
+	 * @param m  Az ellenség halálakor szarumánhoz kerülõ varázserõ.
+	 * @param lt  Az az idõpont amikor az ellenség legutoljára lépett.
+	 */
 	public Dwarf(int hp, int as, int os, int m, long lt) {
 		super(hp, as, os, m, lt);
 	}
@@ -28,6 +40,6 @@ public class Dwarf extends Enemy
 	
 	public void move()
 	{
-	
+		
 	}
 }

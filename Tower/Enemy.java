@@ -15,18 +15,52 @@ import java.util.HashMap;
 
 
 
+/**
+ * Az ellenségek absztrakt õsosztálya.
+ */
 public abstract class Enemy
 {
+	/**
+	 * Életerõ.
+	 */
 	private int healthPoint;
+	/**
+	 * Az ellenség ennyi idõnként tud lépni.
+	 */
 	private int actualSpeed;
+	/**
+	 * Az ellenség lassítás nélkül ennyi idõnként tud lépni.
+	 */
 	private int originalSpeed;
+	/**
+	 * Az ellenség halálakor szarumánhoz kerülõ varázserõ.
+	 */
 	private int magic;
+	/**
+	 * Az ellenség életben van-e.
+	 */
 	private boolean isDead;
+	/**
+	 * Az az idõpont amikor az ellenség legutoljára lépett.
+	 */
 	private long lastTime;
+	/**
+	 * Az egyes ellenség típusok sebességei.
+	 */
 	public static HashMap<String, Integer> enemySpeeds;
+	/**
+	 * Az ellenség pozíciója.
+	 */
 	private Cell position;
 
-	//Constructor
+	/**
+	 * Konstruktor.
+	 * @param hp  Életerõ.
+	 * @param as  Az aktuális sebesség.
+	 * @param os  Az eredeti, lassítás nélküli sebesség.
+	 * @param m  Az ellenség halálakor szarumánhoz kerülõ varázserõ.
+	 * @param lt  Az az idõpont amikor az ellenség legutoljára lépett.
+	 */
 	public Enemy(int hp, int as, int os, int m, long lt)
 	{
 		this.healthPoint = hp;
@@ -38,12 +72,19 @@ public abstract class Enemy
 		this.enemySpeeds = new HashMap<String,Integer>();
 	}
 
-	//Getter
+	/**
+	 * Getter a healthPoint attribútumra.
+	 * @return  A healthPoint attribútum.
+	 */
 	public int getHealthPoint()
 	{
 		return this.healthPoint;
 	}
 
+	/**
+	 * Getter az actualSpeed attribútumra.
+	 * @return  Az actualSpeed attribútum.
+	 */
 	public int getActualSpeed()
 	{
 		String logString = "Enemy.getActualSpeed()";
@@ -54,6 +95,10 @@ public abstract class Enemy
 		return this.actualSpeed;
 	}
 
+	/**
+	 * Getter az originalSpeed attribútumra.
+	 * @return  Az originalSpeed attribútum.
+	 */
 	public int getOriginalSpeed()
 	{
 		String logString = "Enemy.getOriginalSpeed()";
@@ -64,21 +109,37 @@ public abstract class Enemy
 		return this.originalSpeed;
 	}
 
+	/**
+	 * Getter a magic attribútumra.
+	 * @return  A magic attribútum.
+	 */
 	public int getMagic()
 	{
 		return this.magic;
 	}
-
+	
+	/**
+	 * Getter a lastTime attribútumra.
+	 * @return  A lastTime attribútum.
+	 */
 	public long getLastTime()
 	{
 		return this.lastTime;
 	}
-
+	
+	/**
+	 * Getter az isDead attribútumra.
+	 * @return  Az isDead attribútum.
+	 */
 	public boolean getIsDead()
 	{
 		return this.isDead;
 	}
-
+	
+	/**
+	 * Getter a position attribútumra.
+	 * @return  A position attribútum.
+	 */
 	public Cell getPosition()
 	{
 		String logString = "Enemy.getPosition()";
@@ -89,12 +150,19 @@ public abstract class Enemy
 		return this.position;
 	}
 
-	//Setter
+	/**
+	 * Setter a healthPoint attribútumra.
+	 * @param b  A healthPoint attribútum kívánt értéke.
+	 */
 	public void setHealthPoint(int hp)
 	{
 		this.healthPoint = hp;
 	}
 
+	/**
+	 * Setter az actualSpeed attribútumra.
+	 * @param b  Az actualSpeed attribútum kívánt értéke.
+	 */
 	public void setActualSpeed(int as)
 	{
 		String logString = "Enemy.setActualSpeed(as)";
@@ -105,26 +173,46 @@ public abstract class Enemy
 		Logger.Log(0, logString, this);
 	}
 
+	/**
+	 * Setter az originalSpeed attribútumra.
+	 * @param b  Az originalSpeed attribútum kívánt értéke.
+	 */
 	public void setOriginalSpeed(int os)
 	{
 		this.originalSpeed = os;
 	}
 
+	/**
+	 * Setter a magic attribútumra.
+	 * @param b  A magic attribútum kívánt értéke.
+	 */
 	public void setMagic(int m)
 	{
 		this.magic = m;
 	}
 
+	/**
+	 * Setter a lastTime attribútumra.
+	 * @param b  A lastTime attribútum kívánt értéke.
+	 */
 	public void setLastTime(long lt)
 	{
 		this.lastTime = lt;
 	}
 
+	/**
+	 * Setter az isDead attribútumra.
+	 * @param b  Az isDead attribútum kívánt értéke.
+	 */
 	public void setIsDead(boolean dead)
 	{
 		this.isDead = dead;
 	}
 
+	/**
+	 * Setter a position attribútumra.
+	 * @param b  A position attribútum kívánt értéke.
+	 */
 	public void setPosition(Cell pos)
 	{
 		String logString = "Enemy.setPosition(position)";
@@ -133,11 +221,34 @@ public abstract class Enemy
 		Logger.Log(0, logString, this);
 	}
 
+	/**
+	 * Az ellenség életerejét a paraméterként kapott power-rel,
+	 *  és a bonus kollekcióban tárolt az ellenség konkrét típusához
+	 *  tartozó értékkel csökkenti.
+	 * Ha az élet 0 alá csökken, akkor beállítja az isDead változó értékét true-ra.
+	 * @param power  A sebzés értéke.
+	 * @param bonus  Az egyes ellenség típusokhoz tartozó bónusz sebzések.
+	 * @return Az ellenség belehalt-e a sebzésbe.
+	 */
 	public abstract boolean damage(int power, HashMap<String , Integer> bonus);
 
+	/**
+	 * Értesíti az ellenfelet az idõ múlásáról.
+	 */
 	public void tick()
 	{
 	}
 
+	/**
+	 * Az ellenséget mozgatja. 
+	 * Ha a következõ cellán akadály van, akkor az akadályt lekéri a cellától, 
+	 *  és az akadályhoz tartozó lassítási, és az akadályban tárolt 
+	 *  az ellenség konkrét típusához tartozó bónusz lassítási értékkel 
+	 *  megszorozza az actualSpeed-et ha az nem tér el az originalSpeed-tõl,
+	 *  mert abban az esetben már lassítva van az ellenfél. 
+	 * Ha a következõ cellán nincs akadály, és az originalSpeed különbözik 
+	 *  az actualSpeed-tõl akkor vissza kell állítani az aktuális sebességet 
+	 *  az originalSpeed-re, mert már nem lassítja az ellenfelet az akadály.
+	 */
 	public abstract void move();
 }

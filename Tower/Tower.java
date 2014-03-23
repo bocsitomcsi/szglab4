@@ -16,16 +16,47 @@ import java.util.HashMap;
 
 
 
+/**
+ * Torony.
+ */
 public class Tower extends Item
 {
+	/**
+	 * Sebzési erõ.
+	 */
 	private int firePower;
+	/**
+	 * Egy lövés után ennyi idõnek kell eltelnie, 
+	 *  hogy a torony újra lõhessen.
+	 */
 	private int attackSpeed;
+	/**
+	 * Lõtávolság.
+	 */
 	private int range;
+	/**
+	 * Az egyes ellenség típusokra vonatkozó bónusz sebzések.
+	 */
 	private HashMap<String, Integer> bonusPowers;
+	/**
+	 * Az az idõpont amikor a torony legutoljára lõtt.
+	 */
 	private long lastTime;
+	/**
+	 * A pálya referenciája.
+	 */
 	private Map map;
-	
-	//Constructor
+
+	/**
+	 * Konstruktor.
+	 * @param power  Sebzési erõ.
+	 * @param as  A torony lövései között eltelt idõ.
+	 * @param r  Lõtávolság.
+	 * @param lt  Az az idõpont amikor a torony legutoljára lõtt.
+	 * @param mm  A toronyra rakható varázskövek maximális száma.
+	 * @param pos  A torony pozíciója.
+	 * @param map  A pálya.
+	 */
 	public Tower(int power, int as, int r, long lt, int mm, Cell pos, Map map)
 	{
 		super(mm, pos);
@@ -37,59 +68,103 @@ public class Tower extends Item
 		this.map = map;
 	}
 	
-	//Getters
+	/**
+	 * Getter a firePower attribútumra.
+	 * @return  A firePower attribútum.
+	 */
 	public int getFirePower()
 	{
 		return this.firePower;
 	}
-	
+
+	/**
+	 * Getter az attackSpeed attribútumra.
+	 * @return  Az attackSpeed attribútum.
+	 */
 	public int getAttackSpeed()
 	{
 		return this.attackSpeed;
 	}
-	
+
+	/**
+	 * Getter a range attribútumra.
+	 * @return  A range attribútum.
+	 */
 	public int getRange()
 	{
 		return this.range;
 	}
 
+	/**
+	 * Getter a lastTime attribútumra.
+	 * @return  A lastTime attribútum.
+	 */
 	public long getLastTime()
 	{
 		return this.lastTime;
 	}
-	
+
+	/**
+	 * Getter a bonusPowers attribútumra.
+	 * @return  A bonusPowers attribútum.
+	 */
 	public HashMap<String,Integer> getBonusPowers()
 	{
 		return this.bonusPowers;
 	}
-	
-	//Setters
+
+	/**
+	 * Setter a firePower attribútumra.
+	 * @param b  A firePower attribútum kívánt értéke.
+	 */
 	public void setFirePower(int power)
 	{
 		this.firePower = power;
 	}
-	
+
+	/**
+	 * Setter az attackSpeed attribútumra.
+	 * @param b  Az attackSpeed attribútum kívánt értéke.
+	 */
 	public void setAttackSpeed(int as)
 	{
 		this.attackSpeed = as;
 	}
-	
+
+	/**
+	 * Setter a range attribútumra.
+	 * @param b  A range attribútum kívánt értéke.
+	 */
 	public void setRange(int r)
 	{
 		this.range = r;
 	}
-	
+
+	/**
+	 * Setter a lastTime attribútumra.
+	 * @param b  A lastTime attribútum kívánt értéke.
+	 */
 	public void setLastTime(long lt)
 	{
 		this.lastTime = lt;
 	}
-	
+
+	/**
+	 * Setter a bonusPowers attribútumra.
+	 * @param b  A bonusPowers attribútum kívánt értéke.
+	 */
 	public void setBonusPowers(HashMap<String,Integer> bonus)
 	{
 		this.bonusPowers = bonus;
 	}
 	
-	//Methods
+	/**
+	 * Megvizsgálja, hogy a maxMagicStoneNumber attribútum értéke kisebb-e
+	 *  mint a magicStones lista hossza, és ha igen akkor a kapott varázskõ
+	 *  attribútumait felhasználva módosítja a torony attribútumait
+	 *  és true-val tér vissza.
+	 * Ellenkezõ esetben false-szal tér vissza.
+	 */
 	public boolean upgrade(MagicStone stone)
 	{
 		String logString = "Tower.upgrade(stone)";

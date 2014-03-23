@@ -14,16 +14,38 @@ import java.util.ArrayList;
 
 
 
-
+/**
+ * A pálya egy egysége.
+ */
 public class Cell
 {
+	/**
+	 * A cella foglaltsága.
+	 */
 	private boolean busy;
+	/**
+	 * A cellát tartalmazó Map objektum.
+	 */
 	private Map map;
+	/**
+	 * A cella szomszédai.
+	 */
 	private ArrayList<Cell> neighbours;
+	/**
+	 * Egy cella lehetséges típusait tartalmazó enumeráció.
+	 */
 	protected enum CellType {Terrain, Road, StartPoint, EndPoint};
+	/**
+	 * A cella típusa.
+	 */
 	private CellType celltype;
-
-	//Constructors
+	
+	/**
+	 * Konstruktor.
+	 * @param b  A foglaltság állapota.
+	 * @param map  A cellát tartalmazó Map objektum.
+	 * @param ct  A cella típusa.
+	 */
 	public Cell(boolean b, Map map, CellType ct)
 	{
 		this.busy = b;
@@ -31,8 +53,11 @@ public class Cell
 		this.neighbours = new ArrayList<Cell>();
 		this.celltype = ct;
 	}
-
-	//Getter
+	
+	/**
+	 * Getter a busy attribútumra.
+	 * @return  A busy attribútum.
+	 */
 	public boolean getBusy()
 	{
 		String logString = "Cell.getBusy()";
@@ -42,16 +67,28 @@ public class Cell
 		return this.busy;
 	}
 
+	/**
+	 * Getter a map attribútumra.
+	 * @return  A map attribútum.
+	 */
 	public Map getMap()
 	{
 		return this.map;
 	}
 
+	/**
+	 * Getter a neighbours attribútumra.
+	 * @return  A neighbours attribútum.
+	 */
 	public ArrayList<Cell> getNeighbours()
 	{
 		return this.neighbours;
 	}
 
+	/**
+	 * Visszaadja a cellán található akadályt.
+	 * @return A cellán található akadály.
+	 */
 	public Obstacle getObstacle()
 	{
 		String logString = "Cell.getObstacle()";
@@ -70,7 +107,10 @@ public class Cell
 		return returnValue;
 	}
 
-	//Setter
+	/**
+	 * Setter a busy attribútumra.
+	 * @param b  A busy attribútum kívánt értéke.
+	 */
 	public void setBusy(boolean b)
 	{
 		this.busy = b;

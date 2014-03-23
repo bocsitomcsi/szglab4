@@ -15,8 +15,19 @@ import java.util.HashMap;
 
 
 
+/**
+ * Elf ellenség.
+ */
 public class Elf extends Enemy
 {
+	/**
+	 * Konstruktor.
+	 * @param hp  Életerõ.
+	 * @param as  Az aktuális sebesség.
+	 * @param os  Az eredeti, lassítás nélküli sebesség.
+	 * @param m  Az ellenség halálakor szarumánhoz kerülõ varázserõ.
+	 * @param lt  Az az idõpont amikor az ellenség legutoljára lépett.
+	 */
 	public Elf(int hp, int as, int os, int m, long lt) {
 		super(hp, as, os, m, lt);
 	}
