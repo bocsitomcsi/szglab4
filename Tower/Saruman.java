@@ -62,7 +62,12 @@ public class Saruman
 	//Setter
 	public void setMagicPower(int mp)
 	{
+		String logString = "Saruman.setMagicPower(mp)";
+		Logger.Log(1, logString, this);
+
 		this.magicPower = mp;
+
+		Logger.Log(0, logString, this);
 	}
 
 	public void setTowerCost(int tc)
@@ -86,26 +91,21 @@ public class Saruman
 		Logger.Log(1, logString, this);
 
 		MagicStone stone;
-		boolean enoughMagicPower = true;
-		if(enoughMagicPower) {
-			if(type=="purple") {
-				stone = new PurpleMagicStone("purple", 1, 1, 1, 1);
-				Logger.AddName(stone, "PurpleStoneID");
-			} else if(type=="cyan") {
-				stone = new CyanMagicStone("cyan", 1, 1, 1, 1);
-				Logger.AddName(stone, "CyanStoneID");
-			} else { //it's green
-				stone = new GreenMagicStone("green", 1, 1, 1, 1);
-				Logger.AddName(stone, "GreenStoneID");
-			}
-			this.selectedMagicStone = stone;
-			Logger.Log(0, logString, this);
 
-			return true;
+		if(type.equals("purple")) {
+			stone = new PurpleMagicStone("purple", 1, 1, 1, 1);
+			Logger.AddName(stone, "PurpleStoneID");
+		} else if(type.equals("cyan")) {
+			stone = new CyanMagicStone("cyan", 1, 1, 1, 1);
+			Logger.AddName(stone, "CyanStoneID");
+		} else { //it's green
+			stone = new GreenMagicStone("green", 1, 1, 1, 1);
+			Logger.AddName(stone, "GreenStoneID");
 		}
+		this.selectedMagicStone = stone;
 		Logger.Log(0, logString, this);
 
-		return false;
+		return true;
 	}
 
 	public boolean addTower(Cell pos)

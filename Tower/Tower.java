@@ -23,7 +23,7 @@ public class Tower extends Item
 	private int range;
 	private HashMap<String, Integer> bonusPowers;
 	private long lastTime;
-	private Map map;	//itt hogy fogja a konkrét egy db mappot megkapni?
+	private Map map;
 	
 	//Constructor
 	public Tower(int power, int as, int r, long lt, int mm, Cell pos, Map map)

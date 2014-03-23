@@ -14,13 +14,13 @@ public class Program {
 		//One instance
 		Map map = new Map(4, 0, 0);
 		Saruman saruman = new Saruman(100, 100, 100, 100, map);
-		Cell cell;
+		Cell cell1;
+		Cell cell2;
 		map.setSaruman(saruman);
 
 		Logger.AddName(map, "MapID");
 		Logger.AddName(saruman, "SarumanID");
 
-		
 		while (true) {
 			//Use-case menu print
 			System.out.println("[1]  Ellenseg letrehozasa");
@@ -62,8 +62,8 @@ public class Program {
 
 					/*****Create enemy USE-CASE*****/
 					ArrayList<Cell> cells = new ArrayList<Cell>();
-					cell = new Cell(false, map, Cell.CellType.Road);
-					cells.add(cell);
+					cell1 = new Cell(false, map, Cell.CellType.Road);
+					cells.add(cell1);
 					map.setCells(cells);
 
 					String enemyType;
@@ -79,7 +79,7 @@ public class Program {
 					}
 
 					Logger.SetActive(true);
-					map.addEnemy(enemyType, cell);
+					map.addEnemy(enemyType, cell1);
 					Logger.SetActive(false);
 					/*******************************/
 
@@ -143,9 +143,8 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Ellenseg akadalyra lep");
 
-					/*
-					* Ide jon a use-case
-					*/
+					cell1 = new Cell(false, map, Cell.CellType.Terrain);
+					cell2 = new Cell(false, map, Cell.CellType.Terrain);
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -164,12 +163,10 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Torony lerakas");
 
-					saruman = new Saruman(100, 100, 100, 100, map);
-					Logger.AddName(saruman, "sarumanID");
-					cell = new Cell(false, map, Cell.CellType.Terrain);
+					cell1 = new Cell(false, map, Cell.CellType.Terrain);
 
 					Logger.active = true;
-					saruman.addTower(cell);
+					saruman.addTower(cell1);
 					Logger.active = false;
 
 					try{
@@ -189,12 +186,10 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Akadaly lerakasa");
 
-					saruman = new Saruman(100, 100, 100, 100, map);
-					Logger.AddName(saruman, "sarumanID");
-					cell = new Cell(false, map, Cell.CellType.Road);
+					cell1 = new Cell(false, map, Cell.CellType.Road);
 
 					Logger.active = true;
-					saruman.addObstacle(cell);
+					saruman.addObstacle(cell1);
 					Logger.active = false;
 
 					try{
@@ -269,8 +264,8 @@ public class Program {
 					/****TowerUpgrade*****/
 					String result1;
 					saruman.createStone("green");
-					cell = new Cell(false, map, Cell.CellType.Road);
-					Tower t1 = new Tower(1, 1, 1, 1, 1, cell, map);
+					cell1 = new Cell(false, map, Cell.CellType.Road);
+					Tower t1 = new Tower(1, 1, 1, 1, 1, cell1, map);
 					Logger.AddName(t1, "TowerID");
 
 					while(true) {
