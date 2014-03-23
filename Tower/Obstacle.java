@@ -15,12 +15,26 @@ import java.util.HashMap;
 
 
 
+/**
+ * A pályára rakható objektumokat összefoglaló absztrakt õsosztály.
+ */
 public class Obstacle extends Item
 {
+	/**
+	 * A lassítási szorzó.
+	 */
 	private double slowRate;
+	/**
+	 * Az egyes ellenség típusokra vonatkozó bónusz lassítási szorzók.
+	 */
 	private HashMap<String, Double> bonusSlowRates;
-	
-	//Constructor
+
+	/**
+	 * Konstruktor.
+	 * @param sr  A lassítási szorzó.
+	 * @param mm  Az akadályra rakható varázskövek maximális száma.
+	 * @param pos  Az akadály pozíciója.
+	 */
 	public Obstacle(double sr, int mm, Cell pos)
 	{
 		super(mm, pos);
@@ -28,7 +42,10 @@ public class Obstacle extends Item
 		bonusSlowRates = new HashMap<String,Double>();
 	}
 	
-	//Getter
+	/**
+	 * Getter a slowRate attribútumra.
+	 * @return  A slowRate attribútum.
+	 */
 	public double getSlowRate()
 	{
 		String logString = "Obstacle.getSlowRate()";
@@ -38,6 +55,10 @@ public class Obstacle extends Item
 		return this.slowRate;
 	}
 	
+	/**
+	 * Getter a bonusSlowRates attribútumra.
+	 * @return  A bonusSlowRates attribútum.
+	 */
 	public HashMap<String,Double> getBonusSlowRates()
 	{
 		String logString = "Obstacle.getBonusSlowRates()";
@@ -47,17 +68,32 @@ public class Obstacle extends Item
 		return this.bonusSlowRates;
 	}
 	
-	//Setter
+	/**
+	 * Setter a slowRate attribútumra.
+	 * @param b  A slowRate attribútum kívánt értéke.
+	 */
 	public void setSlowRate(double sr)
 	{
 		this.slowRate = sr;
 	}
 	
+	/**
+	 * Setter a bonusSlowRates attribútumra.
+	 * @param b  A bonusSlowRates attribútum kívánt értéke.
+	 */
 	public void setBonusSlowRates(HashMap<String,Double> bonus)
 	{
 		this.bonusSlowRates = bonus;
 	}
 	
+	/**
+	 * /**
+	 * Megvizsgálja, hogy a maxMagicStoneNumber attribútum értéke kisebb-e
+	 *  mint a magicStones lista hossza, és ha igen akkor a kapott varázskõ
+	 *  attribútumait felhasználva módosítja az akadály attribútumait
+	 *  és true-val tér vissza.
+	 * Ellenkezõ esetben false-szal tér vissza.
+	 */
 	public boolean upgrade(MagicStone stone)
 	{
 		String logString = "Obstacle.upgrade(stone)";

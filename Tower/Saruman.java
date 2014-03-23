@@ -15,16 +15,44 @@ import java.util.Scanner;
 
 
 
+/**
+ * Szarumán.
+ */
 public class Saruman
 {
+	/**
+	 * A rendelkezésre álló varázserõ.
+	 */
 	private int magicPower;
+	/**
+	 * Egy torony lerakásának költsége.
+	 */
 	private int towerCost;
+	/**
+	 * Egy akadály lerakásának költsége.
+	 */
 	private int obstacleCost;
+	/**
+	 * Egy varázskõ használatának költsége.
+	 */
 	private int magicStoneCost;
+	/**
+	 * A kiválasztott varázskõ.
+	 */
 	private MagicStone selectedMagicStone;
+	/**
+	 * A pálya.
+	 */
 	private Map map;
 
-	//Constructors
+	/**
+	 * Konstruktor.
+	 * @param mp  A rendelkezésre álló varázserõ.
+	 * @param tc  Egy torony lerakásának költsége.
+	 * @param oc  Egy akadály lerakásának költsége.
+	 * @param mc  Egy varázskõ használatának költsége.
+	 * @param map  A pálya.
+	 */
 	public Saruman(int mp, int tc, int oc, int mc, Map map)
 	{
 		this.magicPower = mp;
@@ -34,32 +62,54 @@ public class Saruman
 		this.map = map;
 	}
 
-	//Getter
+/**
+	 * Getter a magicPower attribútumra.
+	 * @return  A magicPower attribútum.
+	 */
 	public int getMagicPower()
 	{
 		return this.magicPower;
 	}
 
+	/**
+	 * Getter a towerCost attribútumra.
+	 * @return  A towerCost attribútum.
+	 */
 	public int getTowerCost()
 	{
 		return this.towerCost;
 	}
 
+	/**
+	 * Getter az obstacleCost attribútumra.
+	 * @return  Az obstacleCost attribútum.
+	 */
 	public int getObstacleCost()
 	{
 		return this.obstacleCost;
 	}
 
+	/**
+	 * Getter a magicStoneCost attribútumra.
+	 * @return  A magicStoneCost attribútum.
+	 */
 	public int getMagicStoneCost()
 	{
 		return this.magicStoneCost;
 	}
 	
+	/**
+	 * Getter a selectedMagicStone attribútumra.
+	 * @return  A selectedMagicStone attribútum.
+	 */
 	public MagicStone getSelectedMagicStone() {
 		return this.selectedMagicStone;
 	}
 
-	//Setter
+	/**
+	 * Setter a magicPower attribútumra.
+	 * @param b  A magicPower attribútum kívánt értéke.
+	 */
 	public void setMagicPower(int mp)
 	{
 		String logString = "Saruman.setMagicPower(mp)";
@@ -70,21 +120,42 @@ public class Saruman
 		Logger.Log(0, logString, this);
 	}
 
+	/**
+	 * Setter a towerCost attribútumra.
+	 * @param b  A towerCost attribútum kívánt értéke.
+	 */
 	public void setTowerCost(int tc)
 	{
 		this.towerCost = tc;
 	}
 
+	/**
+	 * Setter az obstacleCost attribútumra.
+	 * @param b  Az obstacleCost attribútum kívánt értéke.
+	 */
 	public void setObstacleCost(int sc)
 	{
 		this.obstacleCost = sc;
 	}
 
+	/**
+	 * Setter a magicStoneCost attribútumra.
+	 * @param b  A magicStoneCost attribútum kívánt értéke.
+	 */
 	public void setMagicStoneCost(int mc)
 	{
 		this.magicStoneCost = mc;
 	}
 
+	/**
+	 * A megadott típusú varázskõ létrehozása. 
+	 * A létrehozott varázskövet a selectedMagicStone attribútumba tárolja el. 
+	 * Ha nincs elég varázserõ a kõ létrehozásához, akkor hamis értékkel 
+	 *  tér vissza, és nem hozza létre a követ. 
+	 * Ellenkezõ esetben igaz értékkel tér vissza.
+	 * @param type  A varázskõ típusa.
+	 * @return A varázskõ létrehozásának sikeressége.
+	 */
 	public boolean createStone(String type)
 	{
 		String logString = "Saruman.createStone(type)";
@@ -108,6 +179,17 @@ public class Saruman
 		return true;
 	}
 
+	/**
+	 * Hozzáad egy tornyot a paraméterként kapott cellához. 
+	 * Ehhez létrehoz egy új tornyot, és azt hozzáfûzi a map towers listájához. 
+	 * Ha nincs elég varázserõ a torony létrehozásához, vagy 
+	 *  a megadott cella már foglalt vagy út, akkor hamis értékkel 
+	 *  tér vissza, és nem hozza létre a tornyot. 
+	 * Ellenkezõ esetben igaz értékkel tér vissza. 
+	 * A varázserõt (magicPower) a hozzáadás sikerességétõl függõen csökkenti.
+	 * @param pos  A torony pozíciója.
+	 * @return A torony lerakásának sikeressége.
+	 */
 	public boolean addTower(Cell pos)
 	{
 		String logString = "Saruman.addTower(pos)";
@@ -145,6 +227,17 @@ public class Saruman
 		return false;
 	}
 
+	/**
+	 * Hozzáad egy akadályt  a paraméterként kapott cellához. 
+	 * Ehhez létrehoz egy új akadályt, és azt hozzáfûzi az obstacles listához. 
+	 * Ha nincs elég varázserõ az akadály létrehozásához, vagy 
+	 *  a megadott cella nem egy darab út, akkor hamis értékkel tér vissza, 
+	 *  és nem hozza létre az akadályt. 
+	 * Ellenkezõ esetben igaz értékkel tér vissza. 
+	 * A varázserõt (magicPower) a hozzáadás sikerességétõl függõen csökkenti.
+	 * @param pos  Az akadály pozíciója.
+	 * @return Az akadály lerakásának sikeressége.
+	 */
 	public boolean addObstacle(Cell pos)
 	{
 		String logString = "Saruman.addObstacle(pos)";
@@ -183,6 +276,13 @@ public class Saruman
 		return false;
 	}
 
+	/**
+	 * Meghívja az item-nek az upgrade függvényét átadva a kiválasztott varázskövet. 
+	 * Ha az upgrade igaz értékkel tér vissza, akkor a fejlesztés sikeres volt 
+	 *  és a selectedMagicStone referenciát null-ra állítja.
+	 * @param item  A fejlesztendõ objektum.
+	 * @return A fejlesztés sikeressége.
+	 */
 	public boolean upgradeItem(Item item)
 	{
 		String logString = "Saruman.upgradeItem(item)";
@@ -194,6 +294,10 @@ public class Saruman
 		return true;
 	}
 
+	/**
+	 * A kapott értéket hozzáadja a magicPower attribútumhoz.
+	 * @param power  A varázserõhöz hozzáadandó érték.
+	 */
 	public void changeMagicPowerBy(int power)
 	{
 		String logString = "Saruman.changeMagicPowerBy(power)";

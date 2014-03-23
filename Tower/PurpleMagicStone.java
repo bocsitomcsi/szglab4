@@ -12,10 +12,19 @@ package Tower;
 
 
 
-
+/**
+ * Lila varázskõ.
+ */
 public class PurpleMagicStone extends MagicStone
 {
-
+	/**
+	 * Konstruktor.
+	 * @param n  A varázskõ neve.
+	 * @param fp  Egy torony sebzési erejének növelése.
+	 * @param as  Egy torony támadási sebességének növelése.
+	 * @param r  Egy torony lõtávolságának növelése.
+	 * @param sr  Egy akadály lassítási szorzójának növelése.
+	 */
 	public PurpleMagicStone(String n, int fp, int as, int r, double sr) {
 		super(n, fp, as, r, sr);
 		// TODO Auto-generated constructor stub

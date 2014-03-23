@@ -13,15 +13,45 @@ package Tower;
 
 
 
+/**
+ * A játék egy körének leírója.
+ */
 public class Round
 {
+	/**
+	 * Az adott idõközönként a pályához adandó ellenségek száma.
+	 */
 	private int enemyNumber;
+	/**
+	 * Ennyi idõnként kell hozzáadni ellenfeleket a pályához.
+	 */
 	private int enemyAddingTime;
+	/**
+	 * Az enemyNumber attribútumot minden kör végén ennyivel kell szorozni.
+	 */
 	private double enemyNumberMultiplier;
+	/**
+	 * Az enemyAddingTime attribútumot minden kör végén ennyivel kell szorozni.
+	 */
 	private double enemyAddingTimeMultiplier;
+	/**
+	 * A kör ennyi ideig tart.
+	 */
 	private int roundTime;
+	/**
+	 * Összesen ennyi kör lesz.
+	 */
 	private int maxRounds;
 	
+	/**
+	 * Konstruktor.
+	 * @param en  Az adott idõközönként a pályához adandó ellenségek száma.
+	 * @param et  Ennyi idõnként kell hozzáadni ellenfeleket a pályához.
+	 * @param enm  Az enemyNumber attribútumot minden kör végén ennyivel kell szorozni.
+	 * @param etm  Az enemyAddingTime attribútumot minden kör végén ennyivel kell szorozni.
+	 * @param rt  A kör ennyi ideig tart.
+	 * @param mr  Összesen ennyi kör lesz.
+	 */
 	public Round(int en, int et, double enm, double etm, int rt, int mr){
 		
 		this.enemyNumber = en;
@@ -32,63 +62,109 @@ public class Round
 		this.maxRounds = mr;
 	}
 	
-	//Getter
+	/**
+	 * Getter az enemyNumber attribútumra.
+	 * @return  Az enemyNumber attribútum.
+	 */
 	public int getEnemyNumber()
 	{
 		return this.enemyNumber;
 	}
 	
+	/**
+	 * Getter az enemyAddingTime attribútumra.
+	 * @return  Az enemyAddingTime attribútum.
+	 */
 	public int getEnemyAddingTime()
 	{
 		return this.enemyAddingTime;
 	}
 	
+	/**
+	 * Getter az enemyNumberMultiplier attribútumra.
+	 * @return  Az enemyNumberMultiplier attribútum.
+	 */
 	public double getEnemyNumberMultiplier()
 	{
 		return this.enemyNumberMultiplier;
 	}
 	
+	/**
+	 * Getter az enemyAddingTimeMultiplier attribútumra.
+	 * @return  Az enemyAddingTimeMultiplier attribútum.
+	 */
 	public double getEnemyAddingTimeMultiplier()
 	{
 		return this.enemyAddingTimeMultiplier;
 	}
 	
+	/**
+	 * Getter a roundTime attribútumra.
+	 * @return  A roundTime attribútum.
+	 */
 	public int getRoundTime()
 	{
 		return this.roundTime;
 	}
 	
+	/**
+	 * Getter a maxRounds attribútumra.
+	 * @return  A maxRounds attribútum.
+	 */
 	public int getMaxRounds()
 	{
 		return this.maxRounds;
 	}
 	
-	//Setter
+	/**
+	 * Setter az enemyNumber attribútumra.
+	 * @param b  Az enemyNumber attribútum kívánt értéke.
+	 */
 	public void setEnemyNumber(int en)
 	{
 		this.enemyNumber = en;
 	}
 	
+	/**
+	 * Setter az enemyAddingTime attribútumra.
+	 * @param b  Az enemyAddingTime attribútum kívánt értéke.
+	 */
 	public void setEnemyAddingTime(int et)
 	{
 		this.enemyAddingTime = et;
 	}
 	
+	/**
+	 * Setter az enemyNumberMultiplier attribútumra.
+	 * @param b  Az enemyNumberMultiplier attribútum kívánt értéke.
+	 */
 	public void setEnemyNumberMultiplier(double enm)
 	{
 		this.enemyNumberMultiplier = enm;
 	}
 	
+	/**
+	 * Setter az enemyAddingTimeMultiplier attribútumra.
+	 * @param b  Az enemyAddingTimeMultiplier attribútum kívánt értéke.
+	 */
 	public void setEnemyAddingTimeMultiplier(double etm)
 	{
 		this.enemyAddingTimeMultiplier = etm;
 	}
 	
+	/**
+	 * Setter a roundTime attribútumra.
+	 * @param b  A roundTime attribútum kívánt értéke.
+	 */
 	public void setRoundTime(int rt)
 	{
 		this.roundTime = rt;
 	}
 	
+	/**
+	 * Setter a maxRounds attribútumra.
+	 * @param b  A maxRounds attribútum kívánt értéke.
+	 */
 	public void setMaxRounds(int mr)
 	{
 		this.maxRounds =  mr;
