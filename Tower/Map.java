@@ -138,6 +138,11 @@ public class Map
 	 */
 	public ArrayList<Obstacle> getObstacles()
 	{
+		String logString = "Map.getObstacles()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
+
 		return this.obstacles;
 	}
 
