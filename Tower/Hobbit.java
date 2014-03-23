@@ -58,6 +58,9 @@ public class Hobbit extends Enemy
 			obstacle = this.getPosition().getObstacle();
 			obstacle.getSlowRate();
 			obstacle.getBonusSlowRates();
+			this.setActualSpeed(1);
+		} else {
+			this.setActualSpeed(this.getOriginalSpeed());
 		}
 
 		Logger.Log(0, logString, this);

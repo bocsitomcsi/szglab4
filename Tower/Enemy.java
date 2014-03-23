@@ -46,11 +46,21 @@ public abstract class Enemy
 
 	public int getActualSpeed()
 	{
+		String logString = "Enemy.getActualSpeed()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
+
 		return this.actualSpeed;
 	}
 
 	public int getOriginalSpeed()
 	{
+		String logString = "Enemy.getOriginalSpeed()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
+
 		return this.originalSpeed;
 	}
 
@@ -82,7 +92,12 @@ public abstract class Enemy
 
 	public void setActualSpeed(int as)
 	{
+		String logString = "Enemy.setActualSpeed(as)";
+		Logger.Log(1, logString, this);
+
 		this.actualSpeed = as;
+
+		Logger.Log(0, logString, this);
 	}
 
 	public void setOriginalSpeed(int os)
