@@ -7,16 +7,16 @@ public class Program {
 
 	public static void main(String[] args){
 		Logger.Default();
-		
+
 		//Read from console
 		Scanner scanner = new Scanner (System.in);
-		
+
 		//One instance
 		Map map = new Map(4, 0, 0);
 		Saruman saruman = new Saruman(100, 100, 100, 100, map);
 		Cell cell;
 		map.setSaruman(saruman);
-		
+
 		Logger.AddName(map, "MapID");
 		Logger.AddName(saruman, "SarumanID");
 
@@ -189,9 +189,13 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Akadaly lerakasa");
 
-					/*
-					* Ide jon a use-case
-					*/
+					saruman = new Saruman(100, 100, 100, 100, map);
+					Logger.AddName(saruman, "sarumanID");
+					cell = new Cell(false, map, Cell.CellType.Road);
+
+					Logger.active = true;
+					saruman.addObstacle(cell);
+					Logger.active = false;
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");

@@ -147,7 +147,40 @@ public class Saruman
 
 	public boolean addObstacle(Cell pos)
 	{
-		return true;
+		String logString = "Saruman.addObstacle(pos)";
+		Logger.Log(1, logString, this);
+
+		Obstacle obstacle;
+		boolean isUsable;
+		String answerText;
+		Scanner scanner = new Scanner (System.in);
+
+		while(true) {
+			System.out.print("Lehet elhelyezni a cellara akadalyt [igen, nem]: ");
+			answerText = scanner.next();
+			if(answerText.equals("igen")) {
+				isUsable=true;
+				break;
+			} else if(answerText.equals("nem")) {
+				isUsable=false;
+				break;
+			} else {
+				System.out.println("Helytelen ertek");
+				continue;
+			}
+		}
+
+		if(isUsable) {
+			obstacle = new Obstacle(1, 1, pos);
+			map.addObstacle(obstacle);
+			this.changeMagicPowerBy(-1);
+			Logger.Log(0, logString, this);
+
+			return true;
+		}
+		Logger.Log(0, logString, this);
+
+		return false;
 	}
 
 	public boolean upgradeItem(Item item)

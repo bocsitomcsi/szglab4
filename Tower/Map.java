@@ -157,6 +157,15 @@ public class Map
 		Logger.Log(0, logString, this);
 	}
 
+	protected void addObstacle(Obstacle obstacle) {
+		String logString = "Map.addObstacle(obstacle)";
+		Logger.Log(1, logString, this);
+
+		obstacles.add(obstacle);
+
+		Logger.Log(0, logString, this);
+	}
+
 	public ArrayList<Enemy> getEnemysInRange(Tower tower)
 	{
 		ArrayList<Enemy> enemy = new ArrayList<Enemy>();
