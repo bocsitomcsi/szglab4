@@ -45,6 +45,7 @@ public class Hobbit extends Enemy
 
 		String answerText;
 		boolean isSlowed = false;
+		boolean isEndPoint = false;
 		Obstacle obstacle;
 		Cell cell;
 		Scanner scanner = new Scanner (System.in);

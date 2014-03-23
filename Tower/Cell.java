@@ -38,7 +38,7 @@ public class Cell
 	/**
 	 * A cella tipusa.
 	 */
-	private CellType celltype;
+	private CellType cellType;
 	
 	/**
 	 * Konstruktor.
@@ -51,7 +51,7 @@ public class Cell
 		this.busy = b;
 		this.map = map;
 		this.neighbours = new ArrayList<Cell>();
-		this.celltype = ct;
+		this.cellType = ct;
 	}
 	
 	/**
@@ -74,6 +74,16 @@ public class Cell
 	public Map getMap()
 	{
 		return this.map;
+	}
+
+		public CellType getCellType()
+	{
+		String logString = "Cell.getCellType()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
+
+		return this.cellType;
 	}
 
 	/**

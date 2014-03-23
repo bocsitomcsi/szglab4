@@ -18,6 +18,7 @@ public class Program {
 		Saruman saruman = new Saruman(100, 100, 100, 100, map);
 		Cell cell1, cell2, cell3;
 		ArrayList<Cell> cells1, cells2;
+		ArrayList<Enemy> enemies;
 		Hobbit hobbit1, hobbit2;
 		Obstacle obstacle;
 		map.setSaruman(saruman);
@@ -107,9 +108,25 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Ellenseg celba er");
 
-					/*
-					* Ide jon a use-case
-					*/
+					hobbit1 = new Hobbit(1, 1, 1, 1, 1);
+					cell1 = new Cell(false, map, Cell.CellType.Road);
+					cell2 = new Cell(false, map, Cell.CellType.EndPoint);
+					cells1 = new ArrayList<Cell>();
+					enemies = new ArrayList<Enemy>();
+					enemies.add(hobbit1);
+					map.setEnemies(enemies);
+
+					Logger.AddName(hobbit1, "hobbit1");
+					Logger.AddName(cell1, "Cell1");
+					Logger.AddName(cell2, "Cell2");
+
+					cells1.add(cell2);
+					cell1.setNeighbours(cells1);
+					hobbit1.setPosition(cell1);
+
+					Logger.SetActive(true);
+					map.simulateWorld();
+					Logger.SetActive(false);
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
