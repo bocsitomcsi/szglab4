@@ -16,50 +16,50 @@ import java.util.HashMap;
 
 
 /**
- * Az ellenségek absztrakt õsosztálya.
+ * Az ellensegek absztrakt ososztalya.
  */
 public abstract class Enemy
 {
 	/**
-	 * Életerõ.
+	 * eletero.
 	 */
 	private int healthPoint;
 	/**
-	 * Az ellenség ennyi idõnként tud lépni.
+	 * Az ellenseg ennyi idonkent tud lepni.
 	 */
 	private int actualSpeed;
 	/**
-	 * Az ellenség lassítás nélkül ennyi idõnként tud lépni.
+	 * Az ellenseg lassitas nelkul ennyi idonkent tud lepni.
 	 */
 	private int originalSpeed;
 	/**
-	 * Az ellenség halálakor szarumánhoz kerülõ varázserõ.
+	 * Az ellenseg halalakor szarumanhoz kerulo varazsero.
 	 */
 	private int magic;
 	/**
-	 * Az ellenség életben van-e.
+	 * Az ellenseg eletben van-e.
 	 */
 	private boolean isDead;
 	/**
-	 * Az az idõpont amikor az ellenség legutoljára lépett.
+	 * Az az idopont amikor az ellenseg legutoljara lepett.
 	 */
 	private long lastTime;
 	/**
-	 * Az egyes ellenség típusok sebességei.
+	 * Az egyes ellenseg tipusok sebessegei.
 	 */
 	public static HashMap<String, Integer> enemySpeeds;
 	/**
-	 * Az ellenség pozíciója.
+	 * Az ellenseg pozicioja.
 	 */
 	private Cell position;
 
 	/**
 	 * Konstruktor.
-	 * @param hp  Életerõ.
-	 * @param as  Az aktuális sebesség.
-	 * @param os  Az eredeti, lassítás nélküli sebesség.
-	 * @param m  Az ellenség halálakor szarumánhoz kerülõ varázserõ.
-	 * @param lt  Az az idõpont amikor az ellenség legutoljára lépett.
+	 * @param hp  eletero.
+	 * @param as  Az aktualis sebesseg.
+	 * @param os  Az eredeti, lassitas nelkuli sebesseg.
+	 * @param m  Az ellenseg halalakor szarumanhoz kerulo varazsero.
+	 * @param lt  Az az idopont amikor az ellenseg legutoljara lepett.
 	 */
 	public Enemy(int hp, int as, int os, int m, long lt)
 	{
@@ -73,8 +73,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Getter a healthPoint attribútumra.
-	 * @return  A healthPoint attribútum.
+	 * Getter a healthPoint attributumra.
+	 * @return  A healthPoint attributum.
 	 */
 	public int getHealthPoint()
 	{
@@ -82,8 +82,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Getter az actualSpeed attribútumra.
-	 * @return  Az actualSpeed attribútum.
+	 * Getter az actualSpeed attributumra.
+	 * @return  Az actualSpeed attributum.
 	 */
 	public int getActualSpeed()
 	{
@@ -96,8 +96,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Getter az originalSpeed attribútumra.
-	 * @return  Az originalSpeed attribútum.
+	 * Getter az originalSpeed attributumra.
+	 * @return  Az originalSpeed attributum.
 	 */
 	public int getOriginalSpeed()
 	{
@@ -110,8 +110,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Getter a magic attribútumra.
-	 * @return  A magic attribútum.
+	 * Getter a magic attributumra.
+	 * @return  A magic attributum.
 	 */
 	public int getMagic()
 	{
@@ -119,8 +119,8 @@ public abstract class Enemy
 	}
 	
 	/**
-	 * Getter a lastTime attribútumra.
-	 * @return  A lastTime attribútum.
+	 * Getter a lastTime attributumra.
+	 * @return  A lastTime attributum.
 	 */
 	public long getLastTime()
 	{
@@ -128,8 +128,8 @@ public abstract class Enemy
 	}
 	
 	/**
-	 * Getter az isDead attribútumra.
-	 * @return  Az isDead attribútum.
+	 * Getter az isDead attributumra.
+	 * @return  Az isDead attributum.
 	 */
 	public boolean getIsDead()
 	{
@@ -137,8 +137,8 @@ public abstract class Enemy
 	}
 	
 	/**
-	 * Getter a position attribútumra.
-	 * @return  A position attribútum.
+	 * Getter a position attributumra.
+	 * @return  A position attributum.
 	 */
 	public Cell getPosition()
 	{
@@ -151,8 +151,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Setter a healthPoint attribútumra.
-	 * @param b  A healthPoint attribútum kívánt értéke.
+	 * Setter a healthPoint attributumra.
+	 * @param b  A healthPoint attributum kivant erteke.
 	 */
 	public void setHealthPoint(int hp)
 	{
@@ -160,8 +160,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Setter az actualSpeed attribútumra.
-	 * @param b  Az actualSpeed attribútum kívánt értéke.
+	 * Setter az actualSpeed attributumra.
+	 * @param b  Az actualSpeed attributum kivant erteke.
 	 */
 	public void setActualSpeed(int as)
 	{
@@ -174,8 +174,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Setter az originalSpeed attribútumra.
-	 * @param b  Az originalSpeed attribútum kívánt értéke.
+	 * Setter az originalSpeed attributumra.
+	 * @param b  Az originalSpeed attributum kivant erteke.
 	 */
 	public void setOriginalSpeed(int os)
 	{
@@ -183,8 +183,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Setter a magic attribútumra.
-	 * @param b  A magic attribútum kívánt értéke.
+	 * Setter a magic attributumra.
+	 * @param b  A magic attributum kivant erteke.
 	 */
 	public void setMagic(int m)
 	{
@@ -192,8 +192,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Setter a lastTime attribútumra.
-	 * @param b  A lastTime attribútum kívánt értéke.
+	 * Setter a lastTime attributumra.
+	 * @param b  A lastTime attributum kivant erteke.
 	 */
 	public void setLastTime(long lt)
 	{
@@ -201,8 +201,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Setter az isDead attribútumra.
-	 * @param b  Az isDead attribútum kívánt értéke.
+	 * Setter az isDead attributumra.
+	 * @param b  Az isDead attributum kivant erteke.
 	 */
 	public void setIsDead(boolean dead)
 	{
@@ -210,8 +210,8 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Setter a position attribútumra.
-	 * @param b  A position attribútum kívánt értéke.
+	 * Setter a position attributumra.
+	 * @param b  A position attributum kivant erteke.
 	 */
 	public void setPosition(Cell pos)
 	{
@@ -222,33 +222,33 @@ public abstract class Enemy
 	}
 
 	/**
-	 * Az ellenség életerejét a paraméterként kapott power-rel,
-	 *  és a bonus kollekcióban tárolt az ellenség konkrét típusához
-	 *  tartozó értékkel csökkenti.
-	 * Ha az élet 0 alá csökken, akkor beállítja az isDead változó értékét true-ra.
-	 * @param power  A sebzés értéke.
-	 * @param bonus  Az egyes ellenség típusokhoz tartozó bónusz sebzések.
-	 * @return Az ellenség belehalt-e a sebzésbe.
+	 * Az ellenseg eleterejet a parameterkent kapott power-rel,
+	 *  es a bonus kollekcioban tarolt az ellenseg konkret tipusahoz
+	 *  tartozo ertekkel csokkenti.
+	 * Ha az elet 0 ala csokken, akkor beallitja az isDead valtozo erteket true-ra.
+	 * @param power  A sebzes erteke.
+	 * @param bonus  Az egyes ellenseg tipusokhoz tartozo bonusz sebzesek.
+	 * @return Az ellenseg belehalt-e a sebzesbe.
 	 */
 	public abstract boolean damage(int power, HashMap<String , Integer> bonus);
 
 	/**
-	 * Értesíti az ellenfelet az idõ múlásáról.
+	 * ertesiti az ellenfelet az ido mulasarol.
 	 */
 	public void tick()
 	{
 	}
 
 	/**
-	 * Az ellenséget mozgatja. 
-	 * Ha a következõ cellán akadály van, akkor az akadályt lekéri a cellától, 
-	 *  és az akadályhoz tartozó lassítási, és az akadályban tárolt 
-	 *  az ellenség konkrét típusához tartozó bónusz lassítási értékkel 
-	 *  megszorozza az actualSpeed-et ha az nem tér el az originalSpeed-tõl,
-	 *  mert abban az esetben már lassítva van az ellenfél. 
-	 * Ha a következõ cellán nincs akadály, és az originalSpeed különbözik 
-	 *  az actualSpeed-tõl akkor vissza kell állítani az aktuális sebességet 
-	 *  az originalSpeed-re, mert már nem lassítja az ellenfelet az akadály.
+	 * Az ellenseget mozgatja. 
+	 * Ha a kovetkezo cellan akadaly van, akkor az akadalyt lekeri a cellatol, 
+	 *  es az akadalyhoz tartozo lassitasi, es az akadalyban tarolt 
+	 *  az ellenseg konkret tipusahoz tartozo bonusz lassitasi ertekkel 
+	 *  megszorozza az actualSpeed-et ha az nem ter el az originalSpeed-tol,
+	 *  mert abban az esetben mar lassitva van az ellenfel. 
+	 * Ha a kovetkezo cellan nincs akadaly, es az originalSpeed kulonbozik 
+	 *  az actualSpeed-tol akkor vissza kell allitani az aktualis sebesseget 
+	 *  az originalSpeed-re, mert mar nem lassitja az ellenfelet az akadaly.
 	 */
 	public abstract void move();
 }

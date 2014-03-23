@@ -15,51 +15,51 @@ import java.util.HashMap;
 
 
 /**
- * A varázskövek õsosztálya..
+ * A varazskovek ososztalya..
  */
 public class MagicStone
 {
 	/**
-	 * A varázskõ neve.
+	 * A varazsko neve.
 	 */
 	public String name;
 	/**
-	 * Egy torony sebzési erejének növelése.
+	 * Egy torony sebzesi erejenek novelese.
 	 */
 	public int firePower;
 	/**
-	 * Egy torony támadási sebességének növelése.
+	 * Egy torony tamadasi sebessegenek novelese.
 	 */
 	public int attackSpeed;
 	/**
-	 * Egy torony lõtávolságának növelése.
+	 * Egy torony lotavolsaganak novelese.
 	 */
 	public int range;
 	/**
-	 * Egy akadály lassítási szorzójának növelése.
+	 * Egy akadaly lassitasi szorzojanak novelese.
 	 */
 	public double slowRate;
 	/**
-	 * Az egyes ellenség típusokra vonatkozó sebzési erõ növelések torony esetén.
+	 * Az egyes ellenseg tipusokra vonatkozo sebzesi ero novelesek torony eseten.
 	 */
 	public HashMap<String, Integer> bonusPowers;
 	/**
-	 * Az egyes ellenség típusokra vonatkozó lassítási szorzó növelések akadály esetén.
+	 * Az egyes ellenseg tipusokra vonatkozo lassitasi szorzo novelesek akadaly eseten.
 	 */
 	public HashMap<String, Integer> bonusSlowRates;
 	
 	/**
 	 * Konstruktor.
-	 * @param n  A varázskõ neve.
-	 * @param fp  Egy torony sebzési erejének növelése.
-	 * @param as  Egy torony támadási sebességének növelése.
-	 * @param r  Egy torony lõtávolságának növelése.
-	 * @param sr  Egy akadály lassítási szorzójának növelése.
+	 * @param n  A varazsko neve.
+	 * @param fp  Egy torony sebzesi erejenek novelese.
+	 * @param as  Egy torony tamadasi sebessegenek novelese.
+	 * @param r  Egy torony lotavolsaganak novelese.
+	 * @param sr  Egy akadaly lassitasi szorzojanak novelese.
 	 */
 	public MagicStone(String n, int fp, int as, int r, double sr)
 	{
-		//szerintem ide kéne a switchcase szerkezet de most nem látom!!! (enegyelõre így írom meg hogy forduljon)
-		this.name = n; //Ez így jó vagy konstruktorosan??
+		//szerintem ide kene a switchcase szerkezet de most nem latom!!! (enegyelore igy irom meg hogy forduljon)
+		this.name = n; //Ez igy jo vagy konstruktorosan??
 		this.firePower = fp;
 		this.attackSpeed = as;
 		this.range = r;
@@ -68,9 +68,9 @@ public class MagicStone
 		this.bonusSlowRates = new HashMap<String, Integer>();
 	}
 	
-	// Ezeket még nem kommenteztem mert szerintem itt nincs szükség getter/setterekre.
-	// A varázskõ eleve csak egy leíró osztály kb egy struct is lehetne és minden attribútuma
-	// publikus szóval szükségtelen külön getter hozzá.
+	// Ezeket meg nem kommenteztem mert szerintem itt nincs szukseg getter/setterekre.
+	// A varazsko eleve csak egy leiro osztaly kb egy struct is lehetne es minden attributuma
+	// publikus szoval szuksegtelen kulon getter hozza.
 	public String getName()
 	{
 		return this.name;

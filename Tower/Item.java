@@ -16,27 +16,27 @@ import java.util.ArrayList;
 
 
 /**
- * A pályára rakható objektumok összefoglaló absztrakt õsosztály.
+ * A palyara rakhato objektumok osszefoglalo absztrakt ososztaly.
  */
 public abstract class Item
 {
 	/**
-	 * Az objektumra rakható varázskövek maximális száma.
+	 * Az objektumra rakhato varazskovek maximalis szama.
 	 */
 	private int maxMagicStoneNumber;
 	/**
-	 * Az objektum pozíciója.
+	 * Az objektum pozicioja.
 	 */
 	private Cell position;
 	/**
-	 * Az objektumra helyezett varázskövek listája.
+	 * Az objektumra helyezett varazskovek listaja.
 	 */
 	private ArrayList<MagicStone> magicStones;
 	
 	/**
 	 * Konstruktor.
-	 * @param mm  Az objektumra rakható varázskövek maximális száma.
-	 * @param pos  Az objektum pozíciója.
+	 * @param mm  Az objektumra rakhato varazskovek maximalis szama.
+	 * @param pos  Az objektum pozicioja.
 	 */
 	public Item(int mm, Cell pos)
 	{
@@ -46,8 +46,8 @@ public abstract class Item
 	}
 
 	/**
-	 * Getter a maxMagicStoneNumber attribútumra.
-	 * @return  A maxMagicStoneNumber attribútum.
+	 * Getter a maxMagicStoneNumber attributumra.
+	 * @return  A maxMagicStoneNumber attributum.
 	 */
 	public int getMaxMagicStoneNumber()
 	{
@@ -55,8 +55,8 @@ public abstract class Item
 	}
 
 	/**
-	 * Getter a position attribútumra.
-	 * @return  A position attribútum.
+	 * Getter a position attributumra.
+	 * @return  A position attributum.
 	 */
 	public Cell getPosition()
 	{
@@ -67,8 +67,8 @@ public abstract class Item
 		return this.position;
 	}
 /**
-	 * Getter a magicStones attribútumra.
-	 * @return  A magicStones attribútum.
+	 * Getter a magicStones attributumra.
+	 * @return  A magicStones attributum.
 	 */
 	public ArrayList<MagicStone> getMagicStone()
 	{
@@ -76,8 +76,8 @@ public abstract class Item
 	}
 	
 	/**
-	 * Setter a maxMagicStoneNumber attribútumra.
-	 * @param b  A maxMagicStoneNumber attribútum kívánt értéke.
+	 * Setter a maxMagicStoneNumber attributumra.
+	 * @param b  A maxMagicStoneNumber attributum kivant erteke.
 	 */
 	public void setMaxMagicStoneNumber(int mm)
 	{
@@ -85,18 +85,18 @@ public abstract class Item
 	}
 	
 	/**
-	 * Setter a magicStones attribútumra.
-	 * @param b  A magicStones attribútum kívánt értéke.
+	 * Setter a magicStones attributumra.
+	 * @param b  A magicStones attributum kivant erteke.
 	 */
 	public void setMagicStone(ArrayList<MagicStone> ms)
 	{
-		this.magicStones = (ArrayList<MagicStone>)ms.clone();
+		this.magicStones = ms;
 	}
 	
 	/**
 	 * Fejleszti az objektumot.
-	 * @param stone  A varázskõ.
-	 * @return A fejlesztés sikeressége.
+	 * @param stone  A varazsko.
+	 * @return A fejlesztes sikeressege.
 	 */
 	public abstract boolean upgrade(MagicStone stone);
 }

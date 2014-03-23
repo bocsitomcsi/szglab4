@@ -13,21 +13,21 @@ package Tower;
 
 
 /**
- * Lila varázskõ.
+ * Lila varazsko.
  */
 public class PurpleMagicStone extends MagicStone
 {
 	/**
 	 * Konstruktor.
-	 * @param n  A varázskõ neve.
-	 * @param fp  Egy torony sebzési erejének növelése.
-	 * @param as  Egy torony támadási sebességének növelése.
-	 * @param r  Egy torony lõtávolságának növelése.
-	 * @param sr  Egy akadály lassítási szorzójának növelése.
+	 * @param n  A varazsko neve.
+	 * @param fp  Egy torony sebzesi erejenek novelese.
+	 * @param as  Egy torony tamadasi sebessegenek novelese.
+	 * @param r  Egy torony lotavolsaganak novelese.
+	 * @param sr  Egy akadaly lassitasi szorzojanak novelese.
 	 */
 	public PurpleMagicStone(String n, int fp, int as, int r, double sr) {
 		super(n, fp, as, r, sr);
 		// TODO Auto-generated constructor stub
 	}
-	//Itt is írjunk spéci konstruktort?
+	//Itt is irjunk speci konstruktort?
 }

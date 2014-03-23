@@ -16,24 +16,24 @@ import java.util.HashMap;
 
 
 /**
- * A pályára rakható objektumokat összefoglaló absztrakt õsosztály.
+ * A palyara rakhato objektumokat osszefoglalo absztrakt ososztaly.
  */
 public class Obstacle extends Item
 {
 	/**
-	 * A lassítási szorzó.
+	 * A lassitasi szorzo.
 	 */
 	private double slowRate;
 	/**
-	 * Az egyes ellenség típusokra vonatkozó bónusz lassítási szorzók.
+	 * Az egyes ellenseg tipusokra vonatkozo bonusz lassitasi szorzok.
 	 */
 	private HashMap<String, Double> bonusSlowRates;
 
 	/**
 	 * Konstruktor.
-	 * @param sr  A lassítási szorzó.
-	 * @param mm  Az akadályra rakható varázskövek maximális száma.
-	 * @param pos  Az akadály pozíciója.
+	 * @param sr  A lassitasi szorzo.
+	 * @param mm  Az akadalyra rakhato varazskovek maximalis szama.
+	 * @param pos  Az akadaly pozicioja.
 	 */
 	public Obstacle(double sr, int mm, Cell pos)
 	{
@@ -43,8 +43,8 @@ public class Obstacle extends Item
 	}
 	
 	/**
-	 * Getter a slowRate attribútumra.
-	 * @return  A slowRate attribútum.
+	 * Getter a slowRate attributumra.
+	 * @return  A slowRate attributum.
 	 */
 	public double getSlowRate()
 	{
@@ -56,8 +56,8 @@ public class Obstacle extends Item
 	}
 	
 	/**
-	 * Getter a bonusSlowRates attribútumra.
-	 * @return  A bonusSlowRates attribútum.
+	 * Getter a bonusSlowRates attributumra.
+	 * @return  A bonusSlowRates attributum.
 	 */
 	public HashMap<String,Double> getBonusSlowRates()
 	{
@@ -69,8 +69,8 @@ public class Obstacle extends Item
 	}
 	
 	/**
-	 * Setter a slowRate attribútumra.
-	 * @param b  A slowRate attribútum kívánt értéke.
+	 * Setter a slowRate attributumra.
+	 * @param b  A slowRate attributum kivant erteke.
 	 */
 	public void setSlowRate(double sr)
 	{
@@ -78,8 +78,8 @@ public class Obstacle extends Item
 	}
 	
 	/**
-	 * Setter a bonusSlowRates attribútumra.
-	 * @param b  A bonusSlowRates attribútum kívánt értéke.
+	 * Setter a bonusSlowRates attributumra.
+	 * @param b  A bonusSlowRates attributum kivant erteke.
 	 */
 	public void setBonusSlowRates(HashMap<String,Double> bonus)
 	{
@@ -88,11 +88,11 @@ public class Obstacle extends Item
 	
 	/**
 	 * /**
-	 * Megvizsgálja, hogy a maxMagicStoneNumber attribútum értéke kisebb-e
-	 *  mint a magicStones lista hossza, és ha igen akkor a kapott varázskõ
-	 *  attribútumait felhasználva módosítja az akadály attribútumait
-	 *  és true-val tér vissza.
-	 * Ellenkezõ esetben false-szal tér vissza.
+	 * Megvizsgalja, hogy a maxMagicStoneNumber attributum erteke kisebb-e
+	 *  mint a magicStones lista hossza, es ha igen akkor a kapott varazsko
+	 *  attributumait felhasznalva modositja az akadaly attributumait
+	 *  es true-val ter vissza.
+	 * Ellenkezo esetben false-szal ter vissza.
 	 */
 	public boolean upgrade(MagicStone stone)
 	{

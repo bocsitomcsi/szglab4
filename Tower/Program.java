@@ -292,7 +292,7 @@ public class Program {
 							Logger.SetActive(true);
 
 							while(true) {
-								System.out.print("Fejleszthetõ még a torony (max 5 ko) [igen | nem] ");
+								System.out.print("Fejlesztheto meg a torony (max 5 ko) [igen | nem] ");
 								result1 = scanner.next();
 
 								if(result1.equals("igen")) {
@@ -350,7 +350,7 @@ public class Program {
 							Logger.SetActive(true);							
 							
 							while(true) {
-								System.out.print("Fejleszthetõ még az akadaly (max 5 ko) [igen | nem] ");
+								System.out.print("Fejlesztheto meg az akadaly (max 5 ko) [igen | nem] ");
 								result2 = scanner.next();
 								
 								if(result2.equals("igen")) {

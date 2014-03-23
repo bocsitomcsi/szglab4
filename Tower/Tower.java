@@ -22,40 +22,40 @@ import java.util.HashMap;
 public class Tower extends Item
 {
 	/**
-	 * Sebzési erõ.
+	 * Sebzesi ero.
 	 */
 	private int firePower;
 	/**
-	 * Egy lövés után ennyi idõnek kell eltelnie, 
-	 *  hogy a torony újra lõhessen.
+	 * Egy loves utan ennyi idonek kell eltelnie, 
+	 *  hogy a torony ujra lohessen.
 	 */
 	private int attackSpeed;
 	/**
-	 * Lõtávolság.
+	 * Lotavolsag.
 	 */
 	private int range;
 	/**
-	 * Az egyes ellenség típusokra vonatkozó bónusz sebzések.
+	 * Az egyes ellenseg tipusokra vonatkozo bonusz sebzesek.
 	 */
 	private HashMap<String, Integer> bonusPowers;
 	/**
-	 * Az az idõpont amikor a torony legutoljára lõtt.
+	 * Az az idopont amikor a torony legutoljara lott.
 	 */
 	private long lastTime;
 	/**
-	 * A pálya referenciája.
+	 * A palya referenciaja.
 	 */
 	private Map map;
 
 	/**
 	 * Konstruktor.
-	 * @param power  Sebzési erõ.
-	 * @param as  A torony lövései között eltelt idõ.
-	 * @param r  Lõtávolság.
-	 * @param lt  Az az idõpont amikor a torony legutoljára lõtt.
-	 * @param mm  A toronyra rakható varázskövek maximális száma.
-	 * @param pos  A torony pozíciója.
-	 * @param map  A pálya.
+	 * @param power  Sebzesi ero.
+	 * @param as  A torony lovesei kozott eltelt ido.
+	 * @param r  Lotavolsag.
+	 * @param lt  Az az idopont amikor a torony legutoljara lott.
+	 * @param mm  A toronyra rakhato varazskovek maximalis szama.
+	 * @param pos  A torony pozicioja.
+	 * @param map  A palya.
 	 */
 	public Tower(int power, int as, int r, long lt, int mm, Cell pos, Map map)
 	{
@@ -69,8 +69,8 @@ public class Tower extends Item
 	}
 	
 	/**
-	 * Getter a firePower attribútumra.
-	 * @return  A firePower attribútum.
+	 * Getter a firePower attributumra.
+	 * @return  A firePower attributum.
 	 */
 	public int getFirePower()
 	{
@@ -78,8 +78,8 @@ public class Tower extends Item
 	}
 
 	/**
-	 * Getter az attackSpeed attribútumra.
-	 * @return  Az attackSpeed attribútum.
+	 * Getter az attackSpeed attributumra.
+	 * @return  Az attackSpeed attributum.
 	 */
 	public int getAttackSpeed()
 	{
@@ -87,8 +87,8 @@ public class Tower extends Item
 	}
 
 	/**
-	 * Getter a range attribútumra.
-	 * @return  A range attribútum.
+	 * Getter a range attributumra.
+	 * @return  A range attributum.
 	 */
 	public int getRange()
 	{
@@ -96,8 +96,8 @@ public class Tower extends Item
 	}
 
 	/**
-	 * Getter a lastTime attribútumra.
-	 * @return  A lastTime attribútum.
+	 * Getter a lastTime attributumra.
+	 * @return  A lastTime attributum.
 	 */
 	public long getLastTime()
 	{
@@ -105,8 +105,8 @@ public class Tower extends Item
 	}
 
 	/**
-	 * Getter a bonusPowers attribútumra.
-	 * @return  A bonusPowers attribútum.
+	 * Getter a bonusPowers attributumra.
+	 * @return  A bonusPowers attributum.
 	 */
 	public HashMap<String,Integer> getBonusPowers()
 	{
@@ -114,8 +114,8 @@ public class Tower extends Item
 	}
 
 	/**
-	 * Setter a firePower attribútumra.
-	 * @param b  A firePower attribútum kívánt értéke.
+	 * Setter a firePower attributumra.
+	 * @param b  A firePower attributum kivant erteke.
 	 */
 	public void setFirePower(int power)
 	{
@@ -123,8 +123,8 @@ public class Tower extends Item
 	}
 
 	/**
-	 * Setter az attackSpeed attribútumra.
-	 * @param b  Az attackSpeed attribútum kívánt értéke.
+	 * Setter az attackSpeed attributumra.
+	 * @param b  Az attackSpeed attributum kivant erteke.
 	 */
 	public void setAttackSpeed(int as)
 	{
@@ -132,8 +132,8 @@ public class Tower extends Item
 	}
 
 	/**
-	 * Setter a range attribútumra.
-	 * @param b  A range attribútum kívánt értéke.
+	 * Setter a range attributumra.
+	 * @param b  A range attributum kivant erteke.
 	 */
 	public void setRange(int r)
 	{
@@ -141,8 +141,8 @@ public class Tower extends Item
 	}
 
 	/**
-	 * Setter a lastTime attribútumra.
-	 * @param b  A lastTime attribútum kívánt értéke.
+	 * Setter a lastTime attributumra.
+	 * @param b  A lastTime attributum kivant erteke.
 	 */
 	public void setLastTime(long lt)
 	{
@@ -150,8 +150,8 @@ public class Tower extends Item
 	}
 
 	/**
-	 * Setter a bonusPowers attribútumra.
-	 * @param b  A bonusPowers attribútum kívánt értéke.
+	 * Setter a bonusPowers attributumra.
+	 * @param b  A bonusPowers attributum kivant erteke.
 	 */
 	public void setBonusPowers(HashMap<String,Integer> bonus)
 	{
@@ -159,11 +159,11 @@ public class Tower extends Item
 	}
 	
 	/**
-	 * Megvizsgálja, hogy a maxMagicStoneNumber attribútum értéke kisebb-e
-	 *  mint a magicStones lista hossza, és ha igen akkor a kapott varázskõ
-	 *  attribútumait felhasználva módosítja a torony attribútumait
-	 *  és true-val tér vissza.
-	 * Ellenkezõ esetben false-szal tér vissza.
+	 * Megvizsgalja, hogy a maxMagicStoneNumber attributum erteke kisebb-e
+	 *  mint a magicStones lista hossza, es ha igen akkor a kapott varazsko
+	 *  attributumait felhasznalva modositja a torony attributumait
+	 *  es true-val ter vissza.
+	 * Ellenkezo esetben false-szal ter vissza.
 	 */
 	public boolean upgrade(MagicStone stone)
 	{

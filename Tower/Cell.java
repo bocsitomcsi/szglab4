@@ -15,36 +15,36 @@ import java.util.ArrayList;
 
 
 /**
- * A pálya egy egysége.
+ * A palya egy egysege.
  */
 public class Cell
 {
 	/**
-	 * A cella foglaltsága.
+	 * A cella foglaltsaga.
 	 */
 	private boolean busy;
 	/**
-	 * A cellát tartalmazó Map objektum.
+	 * A cellat tartalmazo Map objektum.
 	 */
 	private Map map;
 	/**
-	 * A cella szomszédai.
+	 * A cella szomszedai.
 	 */
 	private ArrayList<Cell> neighbours;
 	/**
-	 * Egy cella lehetséges típusait tartalmazó enumeráció.
+	 * Egy cella lehetseges tipusait tartalmazo enumeracio.
 	 */
 	protected enum CellType {Terrain, Road, StartPoint, EndPoint};
 	/**
-	 * A cella típusa.
+	 * A cella tipusa.
 	 */
 	private CellType celltype;
 	
 	/**
 	 * Konstruktor.
-	 * @param b  A foglaltság állapota.
-	 * @param map  A cellát tartalmazó Map objektum.
-	 * @param ct  A cella típusa.
+	 * @param b  A foglaltsag allapota.
+	 * @param map  A cellat tartalmazo Map objektum.
+	 * @param ct  A cella tipusa.
 	 */
 	public Cell(boolean b, Map map, CellType ct)
 	{
@@ -55,8 +55,8 @@ public class Cell
 	}
 	
 	/**
-	 * Getter a busy attribútumra.
-	 * @return  A busy attribútum.
+	 * Getter a busy attributumra.
+	 * @return  A busy attributum.
 	 */
 	public boolean getBusy()
 	{
@@ -68,8 +68,8 @@ public class Cell
 	}
 
 	/**
-	 * Getter a map attribútumra.
-	 * @return  A map attribútum.
+	 * Getter a map attributumra.
+	 * @return  A map attributum.
 	 */
 	public Map getMap()
 	{
@@ -77,8 +77,8 @@ public class Cell
 	}
 
 	/**
-	 * Getter a neighbours attribútumra.
-	 * @return  A neighbours attribútum.
+	 * Getter a neighbours attributumra.
+	 * @return  A neighbours attributum.
 	 */
 	public ArrayList<Cell> getNeighbours()
 	{
@@ -86,8 +86,8 @@ public class Cell
 	}
 
 	/**
-	 * Visszaadja a cellán található akadályt.
-	 * @return A cellán található akadály.
+	 * Visszaadja a cellan talalhato akadalyt.
+	 * @return A cellan talalhato akadaly.
 	 */
 	public Obstacle getObstacle()
 	{
@@ -108,8 +108,8 @@ public class Cell
 	}
 
 	/**
-	 * Setter a busy attribútumra.
-	 * @param b  A busy attribútum kívánt értéke.
+	 * Setter a busy attributumra.
+	 * @param b  A busy attributum kivant erteke.
 	 */
 	public void setBusy(boolean b)
 	{

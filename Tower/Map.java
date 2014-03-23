@@ -16,53 +16,53 @@ import java.util.ArrayList;
 
 
 /**
- * A pályát reprezentáló osztály. 
- * Tárolja a pályán található objektumokat és õ értesít mindenkit az idõ múlásáról.
+ * A palyat reprezentalo osztaly. 
+ * Tarolja a palyan talalhato objektumokat es o ertesit mindenkit az ido mulasarol.
  */
 public class Map
 {
 	/**
-	 * A pályán szereplõ cellák szomszédainak maximális száma.
+	 * A palyan szereplo cellak szomszedainak maximalis szama.
 	 */
 	private int neighbourNumber;
 	/**
-	 * Az az idõpont, amikor legutoljára ellenséget adtak a pályához.
+	 * Az az idopont, amikor legutoljara ellenseget adtak a palyahoz.
 	 */
 	private long lastEnemyAddedTime;
 	/**
-	 * Az aktuális kör kezdetének idõpontja.
+	 * Az aktualis kor kezdetenek idopontja.
 	 */
 	private long roundStartedTime;
 	/**
-	 * A pályán lévõ cellák.
+	 * A palyan levo cellak.
 	 */
 	private ArrayList<Cell> cells;
 	/**
-	 * A játékhoz tartozó kör leírója.
+	 * A jatekhoz tartozo kor leiroja.
 	 */
 	private Round round;
 	/**
-	 * A pályán szereplõ ellenségek listája.
+	 * A palyan szereplo ellensegek listaja.
 	 */
-	private ArrayList<Enemy> enemys;
+	private ArrayList<Enemy> enemies;
 	/**
-	 * A pályán szereplõ akadályok listája.
+	 * A palyan szereplo akadalyok listaja.
 	 */
 	private ArrayList<Obstacle> obstacles;
 	/**
-	 * A pályán szereplõ tornyok listája.
+	 * A palyan szereplo tornyok listaja.
 	 */
 	private ArrayList<Tower> towers;
 	/**
-	 * Szarumán.
+	 * Szaruman.
 	 */
 	private Saruman saruman;
 
 	/**
 	 * Konstruktor.
-	 * @param neighbour  A pályán szereplõ cellák szomszédainak maximális száma.
-	 * @param lastEnemy  Az az idõpont, amikor legutoljára ellenséget adtak a pályához.
-	 * @param rt  Az aktuális kör kezdetének idõpontja.
+	 * @param neighbour  A palyan szereplo cellak szomszedainak maximalis szama.
+	 * @param lastEnemy  Az az idopont, amikor legutoljara ellenseget adtak a palyahoz.
+	 * @param rt  Az aktualis kor kezdetenek idopontja.
 	 */
 	public Map(int neighbour, long lastEnemy, long rt) 
 	{
@@ -78,8 +78,8 @@ public class Map
 	}
 
 	/**
-	 * Getter a neighbourNumber attribútumra.
-	 * @return  A neighbourNumber attribútum.
+	 * Getter a neighbourNumber attributumra.
+	 * @return  A neighbourNumber attributum.
 	 */
 	public int getNeighbourNumber()
 	{
@@ -87,8 +87,8 @@ public class Map
 	}
 
 	/**
-	 * Getter a lastEnemyAddedTime attribútumra.
-	 * @return  A lastEnemyAddedTime attribútum.
+	 * Getter a lastEnemyAddedTime attributumra.
+	 * @return  A lastEnemyAddedTime attributum.
 	 */
 	public long getLastEnemyAddedTime()
 	{
@@ -96,8 +96,8 @@ public class Map
 	}
 
 	/**
-	 * Getter a roundStartedTime attribútumra.
-	 * @return  A roundStartedTime attribútum.
+	 * Getter a roundStartedTime attributumra.
+	 * @return  A roundStartedTime attributum.
 	 */
 	public long getRoundStartedTime()
 	{
@@ -105,8 +105,8 @@ public class Map
 	}
 
 	/**
-	 * Getter a cells attribútumra.
-	 * @return  A cells attribútum.
+	 * Getter a cells attributumra.
+	 * @return  A cells attributum.
 	 */
 	public ArrayList<Cell> getCells()
 	{
@@ -114,17 +114,17 @@ public class Map
 	}
 
 	/**
-	 * Getter az enemys attribútumra.
-	 * @return  Az enemys attribútum.
+	 * Getter az enemies attributumra.
+	 * @return  Az enemies attributum.
 	 */
-	public ArrayList<Enemy> getEnemys()
+	public ArrayList<Enemy> getEnemies()
 	{
-		return this.enemys;
+		return this.enemies;
 	}
 
 	/**
-	 * Getter a towers attribútumra.
-	 * @return  A towers attribútum.
+	 * Getter a towers attributumra.
+	 * @return  A towers attributum.
 	 */
 	public ArrayList<Tower> getTowers()
 	{
@@ -132,8 +132,8 @@ public class Map
 	}
 
 	/**
-	 * Getter az obstacles attribútumra.
-	 * @return  Az obstacles attribútum.
+	 * Getter az obstacles attributumra.
+	 * @return  Az obstacles attributum.
 	 */
 	public ArrayList<Obstacle> getObstacles()
 	{
@@ -141,8 +141,8 @@ public class Map
 	}
 
 	/**
-	 * Setter a neighbourNumber attribútumra.
-	 * @param b  A neighbourNumber attribútum kívánt értéke.
+	 * Setter a neighbourNumber attributumra.
+	 * @param b  A neighbourNumber attributum kivant erteke.
 	 */
 	public void setNeighbourNumber(int neighbour)
 	{
@@ -150,8 +150,8 @@ public class Map
 	}
 
 	/**
-	 * Setter a lastEnemyAddedTime attribútumra.
-	 * @param b  A lastEnemyAddedTime attribútum kívánt értéke.
+	 * Setter a lastEnemyAddedTime attributumra.
+	 * @param b  A lastEnemyAddedTime attributum kivant erteke.
 	 */
 	public void setLastEnemyAddedTime(long lastEnemy)
 	{
@@ -159,8 +159,8 @@ public class Map
 	}
 
 	/**
-	 * Setter a roundStartedTime attribútumra.
-	 * @param b  A roundStartedTime attribútum kívánt értéke.
+	 * Setter a roundStartedTime attributumra.
+	 * @param b  A roundStartedTime attributum kivant erteke.
 	 */
 	public void setRoundStartedTime(long rt)
 	{
@@ -168,26 +168,26 @@ public class Map
 	}
 
 	/**
-	 * Setter a cells attribútumra.
-	 * @param b  A cells attribútum kívánt értéke.
+	 * Setter a cells attributumra.
+	 * @param b  A cells attributum kivant erteke.
 	 */
 	public void setCells(ArrayList<Cell> cell)
 	{
-		this.cells = (ArrayList<Cell>)cell.clone();
+		this.cells = cell;
 	}
 
 	/**
-	 * Setter az enemys attribútumra.
-	 * @param b  Az enemys attribútum kívánt értéke.
+	 * Setter az enemies attributumra.
+	 * @param b  Az enemies attributum kivant erteke.
 	 */
-	public void setEnemys(ArrayList<Enemy> enemy)
+	public void setEnemies(ArrayList<Enemy> enemy)
 	{
-		this.enemys = (ArrayList<Enemy>)enemy.clone();
+		this.enemies = enemy;
 	}
 
 	/**
-	 * Setter a towers attribútumra.
-	 * @param b  A towers attribútum kívánt értéke.
+	 * Setter a towers attributumra.
+	 * @param b  A towers attributum kivant erteke.
 	 */
 	public void setTowers(ArrayList<Tower> tower)
 	{
@@ -195,20 +195,24 @@ public class Map
 	}
 
 	/**
-	 * Setter az obstacles attribútumra.
-	 * @param b  Az obstacles attribútum kívánt értéke.
+	 * Setter az obstacles attributumra.
+	 * @param b  Az obstacles attributum kivant erteke.
 	 */
 	public void setObstacles(ArrayList<Obstacle> obstacle)
 	{
-		this.obstacles = (ArrayList<Obstacle>)obstacle.clone();
+		this.obstacles = obstacle;
+	}
+
+	public void setSaruman(Saruman s){
+		this.saruman = s;
 	}
 
 	/**
-	 * Létrehoz egy Enemy leszármazottat a paraméterként kapott 
-	 *  értékeknek megfelelõen, és az enemys listához adja. 
-	 * Ehhez a megfelelõ Enemy leszármazott osztály konstruktorát hívja meg.
-	 * @param type  Az ellenség típusa.
-	 * @param pos  Az ellenség pozíciója.
+	 * Letrehoz egy Enemy leszarmazottat a parameterkent kapott 
+	 *  ertekeknek megfeleloen, es az enemies listahoz adja. 
+	 * Ehhez a megfelelo Enemy leszarmazott osztaly konstruktorat hivja meg.
+	 * @param type  Az ellenseg tipusa.
+	 * @param pos  Az ellenseg pozicioja.
 	 */
 	public void addEnemy(String type, Cell pos)
 	{
@@ -236,10 +240,10 @@ public class Map
 	}
 
 	/**
-	 * Növeli Saruman varázserejét a changeMagicPowerBy metóduson keresztül, 
-	 *  felhasználva a kapott enemy magic attribútumát. 
-	 * Végül az enemy-t eltávolítja az enemys listából.
-	 * @param enemy  Az eltávolítandó ellenség.
+	 * Noveli Saruman varazserejet a changeMagicPowerBy metoduson keresztul, 
+	 *  felhasznalva a kapott enemy magic attributumat. 
+	 * Vegul az enemy-t eltavolitja az enemies listabol.
+	 * @param enemy  Az eltavolitando ellenseg.
 	 */
 	public void removeEnemy(Enemy enemy)
 	{
@@ -248,7 +252,7 @@ public class Map
 
 	/**
 	 * 
-	 * @param tower  A pályához adandó torony.
+	 * @param tower  A palyahoz adando torony.
 	 */
 	protected void addTower(Tower tower) {
 		String logString = "Map.addTower(tower)";
@@ -261,7 +265,7 @@ public class Map
 
 	/**
 	 * 
-	 * @param obstacle  A pályához adandó akadály.
+	 * @param obstacle  A palyahoz adando akadaly.
 	 */
 	protected void addObstacle(Obstacle obstacle) {
 		String logString = "Map.addObstacle(obstacle)";
@@ -273,26 +277,26 @@ public class Map
 	}
 
 	/**
-	 * Visszaadja a kapott torony lõtávolságán belüli ellenfelek listáját. 
-	 * Ehhez végigmegy az enemys listán, és ha olyan ellenfelet talál 
-	 *  benne, aki a torony lõtávolságán belül van akkor azt hozzáfûzi
-	 *  a visszaadandó listához. 
-	 * Ha nem talál ilyen ellenfelet akkor null-t ad vissza.
-	 * @param tower  A torony akinek a hatótávolságán belüli ellenfeleket kell visszaadni.
-	 * @return  A kapott torony lõtávolságán belüli ellenfelek listája.
-	 *  Ha nincs ellenfél a torony lõtávolságán belül akkor null-t ad vissza.
+	 * Visszaadja a kapott torony lotavolsagan beluli ellenfelek listajat. 
+	 * Ehhez vegigmegy az enemies listan, es ha olyan ellenfelet talal 
+	 *  benne, aki a torony lotavolsagan belul van akkor azt hozzafuzi
+	 *  a visszaadando listahoz. 
+	 * Ha nem talal ilyen ellenfelet akkor null-t ad vissza.
+	 * @param tower  A torony akinek a hatotavolsagan beluli ellenfeleket kell visszaadni.
+	 * @return  A kapott torony lotavolsagan beluli ellenfelek listaja.
+	 *  Ha nincs ellenfel a torony lotavolsagan belul akkor null-t ad vissza.
 	 */
-	public ArrayList<Enemy> getEnemysInRange(Tower tower)
+	public ArrayList<Enemy> getenemiesInRange(Tower tower)
 	{
 		ArrayList<Enemy> enemy = new ArrayList<Enemy>();
 		return enemy;
 	}
 
 	/**
-	 * A pályán lévõ ellenségeket, és tornyokat értesíti az idõ múlásáról.
-	 * Ehhez a towers és enemys listákban tárolt objektumok tick függvényét hívja meg. 
-	 * Ezek mellett meghívja adott idõközönként az addEnemy függvényt. 
-	 * Minden iteráció végén ellenõrzi, hogy véget ért-e a játék.
+	 * A palyan levo ellensegeket, es tornyokat ertesiti az ido mulasarol.
+	 * Ehhez a towers es enemies listakban tarolt objektumok tick fuggvenyet hivja meg. 
+	 * Ezek mellett meghivja adott idokozonkent az addEnemy fuggvenyt. 
+	 * Minden iteracio vegen ellenorzi, hogy veget ert-e a jatek.
 	 */
 	public void simulateWorld()
 	{

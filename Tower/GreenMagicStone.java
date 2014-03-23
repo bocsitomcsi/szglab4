@@ -13,20 +13,20 @@ package Tower;
 
 
 /**
- * Zöld varázskõ.
+ * Zold varazsko.
  */
 public class GreenMagicStone extends MagicStone
 {
 	/**
 	 * Konstruktor.
-	 * @param n  A varázskõ neve.
-	 * @param fp  Egy torony sebzési erejének növelése.
-	 * @param as  Egy torony támadási sebességének növelése.
-	 * @param r  Egy torony lõtávolságának növelése.
-	 * @param sr  Egy akadály lassítási szorzójának növelése.
+	 * @param n  A varazsko neve.
+	 * @param fp  Egy torony sebzesi erejenek novelese.
+	 * @param as  Egy torony tamadasi sebessegenek novelese.
+	 * @param r  Egy torony lotavolsaganak novelese.
+	 * @param sr  Egy akadaly lassitasi szorzojanak novelese.
 	 */
 	public GreenMagicStone(String n, int fp, int as, int r, double sr) {
 		super(n, fp, as, r, sr);
 	}
-	//Lásd purplemagicstone
+	//Lasd purplemagicstone
 }

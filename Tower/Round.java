@@ -14,43 +14,43 @@ package Tower;
 
 
 /**
- * A játék egy körének leírója.
+ * A jatek egy korenek leiroja.
  */
 public class Round
 {
 	/**
-	 * Az adott idõközönként a pályához adandó ellenségek száma.
+	 * Az adott idokozonkent a palyahoz adando ellensegek szama.
 	 */
 	private int enemyNumber;
 	/**
-	 * Ennyi idõnként kell hozzáadni ellenfeleket a pályához.
+	 * Ennyi idonkent kell hozzaadni ellenfeleket a palyahoz.
 	 */
 	private int enemyAddingTime;
 	/**
-	 * Az enemyNumber attribútumot minden kör végén ennyivel kell szorozni.
+	 * Az enemyNumber attributumot minden kor vegen ennyivel kell szorozni.
 	 */
 	private double enemyNumberMultiplier;
 	/**
-	 * Az enemyAddingTime attribútumot minden kör végén ennyivel kell szorozni.
+	 * Az enemyAddingTime attributumot minden kor vegen ennyivel kell szorozni.
 	 */
 	private double enemyAddingTimeMultiplier;
 	/**
-	 * A kör ennyi ideig tart.
+	 * A kor ennyi ideig tart.
 	 */
 	private int roundTime;
 	/**
-	 * Összesen ennyi kör lesz.
+	 * osszesen ennyi kor lesz.
 	 */
 	private int maxRounds;
 	
 	/**
 	 * Konstruktor.
-	 * @param en  Az adott idõközönként a pályához adandó ellenségek száma.
-	 * @param et  Ennyi idõnként kell hozzáadni ellenfeleket a pályához.
-	 * @param enm  Az enemyNumber attribútumot minden kör végén ennyivel kell szorozni.
-	 * @param etm  Az enemyAddingTime attribútumot minden kör végén ennyivel kell szorozni.
-	 * @param rt  A kör ennyi ideig tart.
-	 * @param mr  Összesen ennyi kör lesz.
+	 * @param en  Az adott idokozonkent a palyahoz adando ellensegek szama.
+	 * @param et  Ennyi idonkent kell hozzaadni ellenfeleket a palyahoz.
+	 * @param enm  Az enemyNumber attributumot minden kor vegen ennyivel kell szorozni.
+	 * @param etm  Az enemyAddingTime attributumot minden kor vegen ennyivel kell szorozni.
+	 * @param rt  A kor ennyi ideig tart.
+	 * @param mr  osszesen ennyi kor lesz.
 	 */
 	public Round(int en, int et, double enm, double etm, int rt, int mr){
 		
@@ -63,8 +63,8 @@ public class Round
 	}
 	
 	/**
-	 * Getter az enemyNumber attribútumra.
-	 * @return  Az enemyNumber attribútum.
+	 * Getter az enemyNumber attributumra.
+	 * @return  Az enemyNumber attributum.
 	 */
 	public int getEnemyNumber()
 	{
@@ -72,8 +72,8 @@ public class Round
 	}
 	
 	/**
-	 * Getter az enemyAddingTime attribútumra.
-	 * @return  Az enemyAddingTime attribútum.
+	 * Getter az enemyAddingTime attributumra.
+	 * @return  Az enemyAddingTime attributum.
 	 */
 	public int getEnemyAddingTime()
 	{
@@ -81,8 +81,8 @@ public class Round
 	}
 	
 	/**
-	 * Getter az enemyNumberMultiplier attribútumra.
-	 * @return  Az enemyNumberMultiplier attribútum.
+	 * Getter az enemyNumberMultiplier attributumra.
+	 * @return  Az enemyNumberMultiplier attributum.
 	 */
 	public double getEnemyNumberMultiplier()
 	{
@@ -90,8 +90,8 @@ public class Round
 	}
 	
 	/**
-	 * Getter az enemyAddingTimeMultiplier attribútumra.
-	 * @return  Az enemyAddingTimeMultiplier attribútum.
+	 * Getter az enemyAddingTimeMultiplier attributumra.
+	 * @return  Az enemyAddingTimeMultiplier attributum.
 	 */
 	public double getEnemyAddingTimeMultiplier()
 	{
@@ -99,8 +99,8 @@ public class Round
 	}
 	
 	/**
-	 * Getter a roundTime attribútumra.
-	 * @return  A roundTime attribútum.
+	 * Getter a roundTime attributumra.
+	 * @return  A roundTime attributum.
 	 */
 	public int getRoundTime()
 	{
@@ -108,8 +108,8 @@ public class Round
 	}
 	
 	/**
-	 * Getter a maxRounds attribútumra.
-	 * @return  A maxRounds attribútum.
+	 * Getter a maxRounds attributumra.
+	 * @return  A maxRounds attributum.
 	 */
 	public int getMaxRounds()
 	{
@@ -117,8 +117,8 @@ public class Round
 	}
 	
 	/**
-	 * Setter az enemyNumber attribútumra.
-	 * @param b  Az enemyNumber attribútum kívánt értéke.
+	 * Setter az enemyNumber attributumra.
+	 * @param b  Az enemyNumber attributum kivant erteke.
 	 */
 	public void setEnemyNumber(int en)
 	{
@@ -126,8 +126,8 @@ public class Round
 	}
 	
 	/**
-	 * Setter az enemyAddingTime attribútumra.
-	 * @param b  Az enemyAddingTime attribútum kívánt értéke.
+	 * Setter az enemyAddingTime attributumra.
+	 * @param b  Az enemyAddingTime attributum kivant erteke.
 	 */
 	public void setEnemyAddingTime(int et)
 	{
@@ -135,8 +135,8 @@ public class Round
 	}
 	
 	/**
-	 * Setter az enemyNumberMultiplier attribútumra.
-	 * @param b  Az enemyNumberMultiplier attribútum kívánt értéke.
+	 * Setter az enemyNumberMultiplier attributumra.
+	 * @param b  Az enemyNumberMultiplier attributum kivant erteke.
 	 */
 	public void setEnemyNumberMultiplier(double enm)
 	{
@@ -144,8 +144,8 @@ public class Round
 	}
 	
 	/**
-	 * Setter az enemyAddingTimeMultiplier attribútumra.
-	 * @param b  Az enemyAddingTimeMultiplier attribútum kívánt értéke.
+	 * Setter az enemyAddingTimeMultiplier attributumra.
+	 * @param b  Az enemyAddingTimeMultiplier attributum kivant erteke.
 	 */
 	public void setEnemyAddingTimeMultiplier(double etm)
 	{
@@ -153,8 +153,8 @@ public class Round
 	}
 	
 	/**
-	 * Setter a roundTime attribútumra.
-	 * @param b  A roundTime attribútum kívánt értéke.
+	 * Setter a roundTime attributumra.
+	 * @param b  A roundTime attributum kivant erteke.
 	 */
 	public void setRoundTime(int rt)
 	{
@@ -162,8 +162,8 @@ public class Round
 	}
 	
 	/**
-	 * Setter a maxRounds attribútumra.
-	 * @param b  A maxRounds attribútum kívánt értéke.
+	 * Setter a maxRounds attributumra.
+	 * @param b  A maxRounds attributum kivant erteke.
 	 */
 	public void setMaxRounds(int mr)
 	{
