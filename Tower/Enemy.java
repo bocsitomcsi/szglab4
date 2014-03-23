@@ -232,7 +232,7 @@ public abstract class Enemy
 	 * @param bonus  Az egyes ellenseg tipusokhoz tartozo bonusz sebzesek.
 	 * @return Az ellenseg belehalt-e a sebzesbe.
 	 */
-	public abstract boolean damage(int power, HashMap<String , Integer> bonus);
+	public abstract boolean damage(int power, HashMap<String, Integer> bonus);
 
 	/**
 	 * ertesiti az ellenfelet az ido mulasarol.

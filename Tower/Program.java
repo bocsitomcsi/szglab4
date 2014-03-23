@@ -21,6 +21,7 @@ public class Program {
 		ArrayList<Enemy> enemies;
 		Hobbit hobbit1, hobbit2;
 		Obstacle obstacle;
+		Tower tower1;
 		map.setSaruman(saruman);
 
 		Logger.AddName(map, "MapID");
@@ -337,8 +338,8 @@ public class Program {
 					String result1;
 					saruman.createStone("green");
 					cell1 = new Cell(false, map, Cell.CellType.Road);
-					Tower t1 = new Tower(1, 1, 1, 1, 1, cell1, map);
-					Logger.AddName(t1, "TowerID");
+					tower1 = new Tower(1, 1, 1, 1, 1, cell1, map);
+					Logger.AddName(tower1, "tower1");
 
 					while(true) {
 						System.out.print("Van varazsko letrehozva [igen | nem] ");
@@ -353,7 +354,7 @@ public class Program {
 								result1 = scanner.next();
 
 								if(result1.equals("igen")) {
-									saruman.upgradeItem(t1);
+									saruman.upgradeItem(tower1);
 									break;
 								}
 								else if(result1.equals("nem")) {
@@ -452,9 +453,20 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Torony lo");
 
-					/*
-					* Ide jon a use-case
-					*/
+					cell1 = new Cell(false, map, Cell.CellType.Terrain);
+					tower1 = new Tower(1, 1, 1, 1, 1, cell1, map);
+					hobbit1 = new Hobbit(1, 1, 1, 1, 1);
+
+					Logger.AddName(tower1, "tower1");
+					Logger.AddName(hobbit1, "hobbit1");
+
+					enemies = new ArrayList<Enemy>();
+					enemies.add(hobbit1);
+					map.setEnemies(enemies);
+
+					Logger.SetActive(true);
+					tower1.shoot();
+					Logger.SetActive(false);
 
 					try {
 						System.out.println("Kerem nyomjon ENTERT!");

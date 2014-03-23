@@ -1,6 +1,7 @@
 package Tower;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 //
 //
@@ -176,11 +177,47 @@ public class Tower extends Item
 	
 	public void shoot()
 	{
-	
+		Enemy enemy;
+		boolean isDead = false;
+		String answerText;
+		Scanner scanner = new Scanner (System.in);
+
+		String logString = "Tower.shoot()";
+		Logger.Log(1, logString, this);
+
+		ArrayList<Enemy> enemies;
+		enemies = map.getEnemiesInRange(this);
+
+		enemy = enemies.get(0);
+		HashMap<String, Integer> hm = new HashMap<String, Integer>();
+		hm.put("hobbit", 1);
+		enemy.damage(1, hm);
+
+		// Felhasznaloi interakcio
+		if(Program.usecaseNumber==10) {
+			while(true) {
+				System.out.print("Meghalt az ellenseg [igen, nem]: ");
+				answerText = scanner.next();
+				if(answerText.equals("igen")) {
+					isDead=true;
+					break;
+				} else if(answerText.equals("nem")) {
+					isDead=false;
+					break;
+				} else {
+					System.out.println("Helytelen ertek");
+					continue;
+				}
+			}
+		}
+
+		if(isDead) {
+			map.removeEnemy(enemy);
+		}
+		Logger.Log(0, logString, this);
 	}
 	
 	public void tick()
 	{
-	
 	}
 }

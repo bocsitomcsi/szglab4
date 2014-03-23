@@ -248,7 +248,13 @@ public class Map
 	 */
 	public void removeEnemy(Enemy enemy)
 	{
+		String logString = "Map.removeEnemy(enemy)";
+		Logger.Log(1, logString, this);
+
+		saruman.changeMagicPowerBy(1);
 		enemies.remove(enemy);
+
+		Logger.Log(0, logString, this);
 	}
 
 	/**
@@ -287,10 +293,19 @@ public class Map
 	 * @return  A kapott torony lotavolsagan beluli ellenfelek listaja.
 	 *  Ha nincs ellenfel a torony lotavolsagan belul akkor null-t ad vissza.
 	 */
-	public ArrayList<Enemy> getenemiesInRange(Tower tower)
+	public ArrayList<Enemy> getEnemiesInRange(Tower tower)
 	{
-		ArrayList<Enemy> enemy = new ArrayList<Enemy>();
-		return enemy;
+		String logString = "Map.getEnemiesInRange(tower)";
+		Logger.Log(1, logString, this);
+		ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+
+		tower.getPosition();
+		for(Enemy enemy: enemies) {
+			enemy.getPosition();
+			enemyList.add(enemy);
+		}
+		Logger.Log(0, logString, this);
+		return enemyList;
 	}
 
 	/**

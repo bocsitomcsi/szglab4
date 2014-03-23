@@ -32,7 +32,7 @@ public class Human extends Enemy
 		super(hp, as, os, m, lt);
 	}
 
-	public boolean damage(int power, HashMap<String,Integer> bonus)
+	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
 		return true;
 	}

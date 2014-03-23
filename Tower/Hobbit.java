@@ -35,6 +35,10 @@ public class Hobbit extends Enemy
 
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
+		String logString = "Hobbit.damage(power, bonus)";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
 		return true;
 	}
 
