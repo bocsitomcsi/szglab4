@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class Program {
 
+	public static int usecaseNumber;
+
 	public static void main(String[] args){
 		Logger.Default();
 
@@ -59,6 +61,7 @@ public class Program {
 			switch (selection){
 
 				case 1:
+					usecaseNumber=1;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Ellenseg letrehozasa");
@@ -100,6 +103,7 @@ public class Program {
 					break;
 
 				case 2:
+					usecaseNumber=2;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Ellenseg celba er");
@@ -121,6 +125,7 @@ public class Program {
 					break;
 
 				case 3:
+					usecaseNumber=3;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Ellenseg talalkozik egy masik ellenseggel");
@@ -142,6 +147,7 @@ public class Program {
 					break;
 
 				case 4:
+					usecaseNumber=4;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Ellenseg akadalyra lep");
@@ -174,6 +180,7 @@ public class Program {
 					break;
 
 				case 5:
+					usecaseNumber=5;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Torony lerakas");
@@ -197,6 +204,7 @@ public class Program {
 					break;
 
 				case 6:
+					usecaseNumber=6;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Akadaly lerakasa");
@@ -220,6 +228,7 @@ public class Program {
 					break;
 
 				case 7:
+					usecaseNumber=7;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Varazsko letrehozasa");
@@ -272,6 +281,7 @@ public class Program {
 					break;
 
 				case 8:
+					usecaseNumber=8;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Torony fejlesztes");
@@ -331,6 +341,7 @@ public class Program {
 					break;
 
 				case 9:
+					usecaseNumber=9;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Akadaly fejlesztes");
@@ -389,6 +400,7 @@ public class Program {
 					break;
 
 				case 10:
+					usecaseNumber=10;
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Torony lo");

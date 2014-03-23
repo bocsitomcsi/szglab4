@@ -44,7 +44,7 @@ public class Hobbit extends Enemy
 		Logger.Log(1, logString, this);
 
 		String answerText;
-		boolean isSlowed;
+		boolean isSlowed = false;
 		Obstacle obstacle;
 		Cell cell;
 		Scanner scanner = new Scanner (System.in);
@@ -52,18 +52,20 @@ public class Hobbit extends Enemy
 		cell = this.getPosition();
 		cell.getBusy();
 
-		while(true) {
-			System.out.print("Akadalyra lepett [igen, nem]: ");
-			answerText = scanner.next();
-			if(answerText.equals("igen")) {
-				isSlowed=true;
-				break;
-			} else if(answerText.equals("nem")) {
-				isSlowed=false;
-				break;
-			} else {
-				System.out.println("Helytelen ertek");
-				continue;
+		if(Program.usecaseNumber==4) {
+			while(true) {
+				System.out.print("Akadalyra lepett [igen, nem]: ");
+				answerText = scanner.next();
+				if(answerText.equals("igen")) {
+					isSlowed=true;
+					break;
+				} else if(answerText.equals("nem")) {
+					isSlowed=false;
+					break;
+				} else {
+					System.out.println("Helytelen ertek");
+					continue;
+				}
 			}
 		}
 
