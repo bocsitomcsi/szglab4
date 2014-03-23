@@ -1,3 +1,4 @@
+package Tower;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -84,16 +85,16 @@ public class Tower extends Item
 	
 	public void setBonusPowers(HashMap<String,Integer> bonus)
 	{
-		this.bonusPowers = (HashMap<String,Integer>)bonus.clone();
+		this.bonusPowers = bonus;
 	}
 	
 	//Methods
 	public boolean upgrade(MagicStone stone)
 	{
-		String logString = "Tower.upgrade(" + stone.toString() + ")";
-		Logger.Log(1, logString);
+		String logString = "Tower.upgrade(stone)";
+		Logger.Log(1, logString, this);
 		
-		Logger.Log(0, logString);
+		Logger.Log(0, logString, this);
 		return true;
 	}
 	

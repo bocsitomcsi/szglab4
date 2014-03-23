@@ -1,3 +1,4 @@
+package Tower;
 import java.util.ArrayList;
 
 //
@@ -94,12 +95,12 @@ public class Map
 
 	public void setCells(ArrayList<Cell> cell)
 	{
-		this.cells = (ArrayList<Cell>)cell.clone();
+		this.cells = cell;
 	}
 
 	public void setEnemys(ArrayList<Enemy> enemy)
 	{
-		this.enemys = (ArrayList<Enemy>)enemy.clone();
+		this.enemys = enemy;
 	}
 
 	public void setTowers(ArrayList<Tower> tower)
@@ -109,7 +110,7 @@ public class Map
 
 	public void setObstacles(ArrayList<Obstacle> obstacle)
 	{
-		this.obstacles = (ArrayList<Obstacle>)obstacle.clone();
+		this.obstacles = obstacle;
 	}
 	
 	public void setSaruman(Saruman s){
@@ -119,27 +120,27 @@ public class Map
 	//Methods
 	public void addEnemy(String type, Cell pos)
 	{
-		//Cell needs a toString() function for logger
-		//In the meantime, it just writes a hardcoded integer (1)
-		
-		//Itt mire gondoltal? Sorszamot adjunk visszahanyadik a listaban? pos.toString();??
-		String logString = "Map.addEnemy(" + type + ", " + pos.toString() + ")";
-		Logger.Log(1, logString);
+		String logString = "Map.addEnemy(type, position)";
+		Logger.Log(1, logString, this);
 		Enemy enemy;
-
-		if(type=="human") {
+		
+		if(type.equals("human")) {
 			enemy = new Human(100, 5, 5, 30, 0);
-		} else if(type=="elf") {
+			Logger.AddName(enemy, "HumanID");
+		} else if(type.equals("elf")) {
 			enemy = new Elf(100, 5, 5, 30, 0);
-		} else if(type=="dwarf") {
+			Logger.AddName(enemy, "ElfID");
+		} else if(type.equals("dwarf")) {
 			enemy = new Dwarf(100, 5, 5, 30, 0);
+			Logger.AddName(enemy, "DwarfID");
 		} else { // it's a hobbit
 			enemy = new Hobbit(100, 5, 5, 30, 0);
+			Logger.AddName(enemy, "HobbitID");
 		}
 
 		enemy.setPosition(pos);
 		enemys.add(enemy);
-		Logger.Log(0, logString);
+		Logger.Log(0, logString, this);
 	}
 
 	public void removeEnemy(Enemy enemy)

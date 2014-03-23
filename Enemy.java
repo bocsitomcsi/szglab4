@@ -1,3 +1,4 @@
+package Tower;
 import java.util.HashMap;
 
 //
@@ -106,10 +107,10 @@ public abstract class Enemy
 
 	public void setPosition(Cell pos)
 	{
-		String logString = "Enemy.setPosition("  + pos.toString() + ")";
-		Logger.Log(1, logString);
+		String logString = "Enemy.setPosition(position)";
+		Logger.Log(1, logString, this);
 		this.position = pos;
-		Logger.Log(0, logString);
+		Logger.Log(0, logString, this);
 	}
 
 	public abstract boolean damage(int power, HashMap<String , Integer> bonus);

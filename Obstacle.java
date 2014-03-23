@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package Tower;
 import java.util.HashMap;
 
 //
@@ -47,15 +47,15 @@ public class Obstacle extends Item
 	
 	public void setBonusSlowRates(HashMap<String,Double> bonus)
 	{
-		this.bonusSlowRates = (HashMap<String,Double>)bonus.clone();
+		this.bonusSlowRates = bonus;
 	}
 	
 	public boolean upgrade(MagicStone stone)
 	{
-		String logString = "Obstacle.upgrade(" + stone.toString() +")";
-		Logger.Log(1, logString);
+		String logString = "Obstacle.upgrade(stone)";
+		Logger.Log(1, logString, this);
 		
-		Logger.Log(0, logString);
+		Logger.Log(0, logString, this);
 		return true;
 	}
 }

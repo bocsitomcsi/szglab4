@@ -1,3 +1,4 @@
+package Tower;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -5,6 +6,7 @@ import java.util.ArrayList;
 public class Program {
 
 	public static void main(String[] args){
+		Logger.Default();
 		
 		//Read from console
 		Scanner scanner = new Scanner (System.in);
@@ -13,6 +15,10 @@ public class Program {
 		Map map = new Map(4, 0, 0);
 		Saruman saruman = new Saruman(100, 100, 100, 100, map);
 		map.setSaruman(saruman);
+		
+		Logger.AddName(map, "MapID");
+		Logger.AddName(saruman, "SarumanID");
+
 		
 		while (true) {
 			//Use-case menu print
@@ -71,9 +77,9 @@ public class Program {
 						}
 					}
 
-					Logger.active = true;
+					Logger.SetActive(true);
 					map.addEnemy(enemyType, cell);
-					Logger.active = false;
+					Logger.SetActive(false);
 					/*******************************/
 					
 					//Waiting for the ENTER
@@ -219,9 +225,9 @@ public class Program {
 						stoneType = scanner.next();
 						if(stoneType.equals("igen")) {
 							
-							Logger.active = true;
+							Logger.SetActive(true);
 							saruman.createStone(stoneType);
-							Logger.active = false;
+							Logger.SetActive(false);
 							break;
 						} 
 						else if (stoneType.equals("nem")) {
@@ -255,6 +261,7 @@ public class Program {
 					String result1;
 					saruman.createStone("green");
 					Tower t1 = new Tower(1,1,1,1,1);
+					Logger.AddName(t1, "TowerID");
 
 					while(true) {
 						System.out.print("Van varazsko letrehozva [igen | nem] ");
@@ -262,7 +269,7 @@ public class Program {
 						result1 = scanner.next();
 						if(result1.equals("igen")) {
 							
-							Logger.active = true;							
+							Logger.SetActive(true);							
 							
 							while(true) {
 								System.out.print("Fejleszthetõ még a torony (max 5 ko) [igen | nem] ");
@@ -279,7 +286,7 @@ public class Program {
 									System.out.println("Helytelen ertek");
 								}
 							}
-							Logger.active = false;
+							Logger.SetActive(false);
 							break;
 						} 
 						else if (result1.equals("nem")) {
@@ -312,6 +319,7 @@ public class Program {
 					String result2;
 					saruman.createStone("purple");
 					Obstacle o1 = new Obstacle(1.0,1);
+					Logger.AddName(o1,"ObstacleID");
 
 					while(true) {
 						System.out.print("Van varazsko letrehozva [igen | nem] ");
@@ -319,7 +327,7 @@ public class Program {
 						result2 = scanner.next();
 						if(result2.equals("igen")) {
 							
-							Logger.active = true;							
+							Logger.SetActive(true);							
 							
 							while(true) {
 								System.out.print("Fejleszthetõ még az akadaly (max 5 ko) [igen | nem] ");
@@ -336,7 +344,7 @@ public class Program {
 									System.out.println("Helytelen ertek");
 								}
 							}
-							Logger.active = false;
+							Logger.SetActive(false);
 							break;
 						} 
 						else if (result2.equals("nem")) {

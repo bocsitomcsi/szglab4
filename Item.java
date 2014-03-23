@@ -1,3 +1,4 @@
+package Tower;
 import java.util.ArrayList;
 
 //
@@ -51,7 +52,7 @@ public abstract class Item
 	
 	public void setMagicStone(ArrayList<MagicStone> ms)
 	{
-		this.magicStones = (ArrayList<MagicStone>)ms.clone();
+		this.magicStones = ms;
 	}
 	
 	public abstract boolean upgrade(MagicStone stone);

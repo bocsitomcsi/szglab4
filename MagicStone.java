@@ -1,3 +1,4 @@
+package Tower;
 import java.util.HashMap;
 //
 //
@@ -99,11 +100,11 @@ public class MagicStone
 	
 	public void setBonusPowers(HashMap<String, Integer> bonusp)
 	{
-		this.bonusPowers = (HashMap<String, Integer>)bonusp.clone();
+		this.bonusPowers = bonusp;
 	}
 	
 	public void setBonusSlowRate(HashMap<String, Integer> bonuss)
 	{
-		this.bonusSlowRates = (HashMap<String, Integer>)bonuss.clone();
+		this.bonusSlowRates = bonuss;
 	}
 }
