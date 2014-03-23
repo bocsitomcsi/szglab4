@@ -81,6 +81,11 @@ public abstract class Enemy
 
 	public Cell getPosition()
 	{
+		String logString = "Enemy.getPosition()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
+
 		return this.position;
 	}
 

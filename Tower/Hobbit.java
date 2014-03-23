@@ -35,9 +35,11 @@ public class Hobbit extends Enemy
 		String answerText;
 		boolean isSlowed;
 		Obstacle obstacle;
+		Cell cell;
 		Scanner scanner = new Scanner (System.in);
 
-		this.getPosition().getBusy();
+		cell = this.getPosition();
+		cell.getBusy();
 
 		while(true) {
 			System.out.print("Akadalyra lepett [igen, nem]: ");
@@ -55,7 +57,7 @@ public class Hobbit extends Enemy
 		}
 
 		if(isSlowed) {
-			obstacle = this.getPosition().getObstacle();
+			obstacle = cell.getObstacle();
 			obstacle.getSlowRate();
 			obstacle.getBonusSlowRates();
 			this.setActualSpeed(1);
