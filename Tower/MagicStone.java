@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 
 /**
- * A varazskovek ososztalya..
+ * A varazskovek ososztalya.
  */
 public class MagicStone
 {
@@ -68,75 +68,127 @@ public class MagicStone
 		this.bonusSlowRates = new HashMap<String, Integer>();
 	}
 	
-	// Ezeket meg nem kommenteztem mert szerintem itt nincs szukseg getter/setterekre.
-	// A varazsko eleve csak egy leiro osztaly kb egy struct is lehetne es minden attributuma
-	// publikus szoval szuksegtelen kulon getter hozza.
+	/**
+	 * Getter a name attributumra.
+	 * @return  A name attributum.
+	 */
 	public String getName()
 	{
 		return this.name;
 	}
 	
+	/**
+	 * Getter a firePower attributumra.
+	 * @return  A firePower attributum.
+	 */
 	public int getFirePower()
 	{
 		return this.firePower;
 	}
 	
+	/**
+	 * Getter az attackSpeed attributumra.
+	 * @return  Az attackSpeed attributum.
+	 */
 	public int getAttackSpeed()
 	{
 		return this.attackSpeed;
 	}
 	
+	/**
+	 * Getter a range attributumra.
+	 * @return  A range attributum.
+	 */
 	public int getRange()
 	{
 		return this.range;
 	}
 	
+	/**
+	 * Getter a slowRate attributumra.
+	 * @return  A slowRate attributum.
+	 */
 	public double getSlowRate()
 	{
 		return this.slowRate;
 	}
 	
+	/**
+	 * Getter a bonusPowers attributumra.
+	 * @return  A bonusPowers attributum.
+	 */
 	public HashMap<String, Integer> getBonusPowers()
 	{
 		return this.bonusPowers;
 	}
 	
+	/**
+	 * Getter a bonusSlowRates attributumra.
+	 * @return  A bonusSlowRates attributum.
+	 */
 	public HashMap<String, Integer> getBonusSlowRate()
 	{
 		return this.bonusSlowRates;
 	}
 	
-	//Setter
+	/**
+	 * Setter a name attributumra.
+	 * @param hp  A name attributum kivant erteke.
+	 */
 	public void setName(String n)
 	{
 		this.name = n;
 	}
 	
+	/**
+	 * Setter a firePower attributumra.
+	 * @param hp  A firePower attributum kivant erteke.
+	 */
 	public void setFirePower(int fp)
 	{
 		this.firePower = fp;
 	}
 	
+	/**
+	 * Setter az attackSpeed attributumra.
+	 * @param hp  Az attackSpeed attributum kivant erteke.
+	 */
 	public void setAttackSpeed(int as)
 	{
 		this.attackSpeed = as;
 	}
 	
+	/**
+	 * Setter a range attributumra.
+	 * @param hp  A range attributum kivant erteke.
+	 */
 	public void setRange(int r)
 	{
 		this.range = r;
 	}
 	
+	/**
+	 * Setter a slowRate attributumra.
+	 * @param hp  A slowRate attributum kivant erteke.
+	 */
 	public void setSlowRate(double sr)
 	{
 		this.slowRate = sr;
 	}
 	
+	/**
+	 * Setter a bonusPowers attributumra.
+	 * @param hp  A bonusPowers attributum kivant erteke.
+	 */
 	public void setBonusPowers(HashMap<String, Integer> bonusp)
 	{
 		this.bonusPowers = bonusp;
 	}
 	
+	/**
+	 * Setter a bonusSlowRates attributumra.
+	 * @param hp  A bonusSlowRates attributum kivant erteke.
+	 */
 	public void setBonusSlowRate(HashMap<String, Integer> bonuss)
 	{
 		this.bonusSlowRates = bonuss;

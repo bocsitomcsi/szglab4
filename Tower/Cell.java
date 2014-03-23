@@ -131,6 +131,10 @@ public class Cell
 		this.busy = b;
 	}
 
+	/**
+	 * Setter a neighbours attributumra.
+	 * @param b  A neighbours attributum kivant erteke.
+	 */
 	public void setNeighbours(ArrayList<Cell> n) {
 		this.neighbours = n;
 	}

@@ -175,6 +175,15 @@ public class Tower extends Item
 		return true;
 	}
 	
+	/**
+	 * A torony ralo egy ellenfelre.
+	 * Ehhez meghivja a map getEnemysInRange fuggvenyet atadva onmagat. 
+	 * Ha nem null erteket kap vissza, akkor egy logika alapjan kivalaszt 
+	 *  egy Enemy-t a kapott listabol és meghivja annak a damage fuggvenyet
+	 *  atadva a firePower-t, es a bonusPowers attributumok ertekeit. 
+	 * Ha a damage fuggveny true-val ter vissza akkor meghivja a map 
+	 *  removeEnemy fuggvenyet atadva a kivalasztott Enemy-t.
+	 */
 	public void shoot()
 	{
 		Enemy enemy;
@@ -217,6 +226,11 @@ public class Tower extends Item
 		Logger.Log(0, logString, this);
 	}
 	
+	/**
+	 * Ertesiti a tornyot az ido mulasarol.
+	 * Ha a legutolso loves idopontja ota eltelt az attackSpeed-ben
+	 *  levo ido, akkor meghivja a shoot fuggvenyt.
+	 */
 	public void tick()
 	{
 	}

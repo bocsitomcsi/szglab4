@@ -21,7 +21,7 @@ import java.util.HashMap;
 public abstract class Enemy
 {
 	/**
-	 * eletero.
+	 * Eletero.
 	 */
 	private int healthPoint;
 	/**
@@ -235,7 +235,7 @@ public abstract class Enemy
 	public abstract boolean damage(int power, HashMap<String, Integer> bonus);
 
 	/**
-	 * ertesiti az ellenfelet az ido mulasarol.
+	 * Ertesiti az ellenfelet az ido mulasarol.
 	 */
 	public void tick()
 	{
