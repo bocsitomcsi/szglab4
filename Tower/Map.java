@@ -22,7 +22,7 @@ public class Map
 	private long roundStartedTime;
 	private ArrayList<Cell> cells;
 	private Round round;
-	private ArrayList<Enemy> enemys;
+	private ArrayList<Enemy> enemies;
 	private ArrayList<Obstacle> obstacles;
 	private ArrayList<Tower> towers;
 	private Saruman saruman;
@@ -35,7 +35,7 @@ public class Map
 		this.roundStartedTime = rt;
 		
 		this.cells = new ArrayList<Cell>();
-		this.enemys = new ArrayList<Enemy>();
+		this.enemies = new ArrayList<Enemy>();
 		this.obstacles = new ArrayList<Obstacle>();
 		this.towers = new ArrayList<Tower>();
 		this.round = new Round(1,1,1,1,1,1);
@@ -64,7 +64,7 @@ public class Map
 
 	public ArrayList<Enemy> getEnemys()
 	{
-		return this.enemys;
+		return this.enemies;
 	}
 
 	public ArrayList<Tower> getTowers()
@@ -98,9 +98,9 @@ public class Map
 		this.cells = cell;
 	}
 
-	public void setEnemys(ArrayList<Enemy> enemy)
+	public void setEnemies(ArrayList<Enemy> enemy)
 	{
-		this.enemys = enemy;
+		this.enemies = enemy;
 	}
 
 	public void setTowers(ArrayList<Tower> tower)
@@ -139,13 +139,13 @@ public class Map
 		}
 
 		enemy.setPosition(pos);
-		enemys.add(enemy);
+		enemies.add(enemy);
 		Logger.Log(0, logString, this);
 	}
 
 	public void removeEnemy(Enemy enemy)
 	{
-		enemys.remove(enemy);
+		enemies.remove(enemy);
 	}
 
 	protected void addTower(Tower tower) {
@@ -174,6 +174,12 @@ public class Map
 
 	public void simulateWorld()
 	{
-	
+		String logString = "Map.simulateWorld()";
+		Logger.Log(1, logString, this);
+
+		for(Enemy enemy: enemies) {
+			enemy.tick();
+		}
+		Logger.Log(0, logString, this);
 	}
 }

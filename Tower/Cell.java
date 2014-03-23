@@ -22,7 +22,7 @@ public class Cell
 	private ArrayList<Cell> neighbours;
 	protected enum CellType {Terrain, Road, StartPoint, EndPoint};
 	private CellType celltype;
-	
+
 	//Constructors
 	public Cell(boolean b, Map map, CellType ct)
 	{
@@ -31,33 +31,49 @@ public class Cell
 		this.neighbours = new ArrayList<Cell>();
 		this.celltype = ct;
 	}
-	
+
 	//Getter
 	public boolean getBusy()
 	{
+		String logString = "Cell.getBusy()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
 		return this.busy;
 	}
-	
+
 	public Map getMap()
 	{
 		return this.map;
 	}
-	
+
 	public ArrayList<Cell> getNeighbours()
 	{
 		return this.neighbours;
+	}
+
+	public Obstacle getObstacle()
+	{
+		String logString = "Cell.getObstacle()";
+		Logger.Log(1, logString, this);
+
+		Obstacle returnValue = null;
+		ArrayList<Obstacle> obstacles = map.getObstacles();
+		for(Obstacle obstacle: obstacles) {
+			if(obstacle.getPosition() == this) {
+				returnValue = obstacle;
+				break;
+			}
+		}
+
+		Logger.Log(0, logString, this);
+		return returnValue;
 	}
 
 	//Setter
 	public void setBusy(boolean b)
 	{
 		this.busy = b;
-	}
-
-	public Obstacle setObstacle()
-	{
-		Obstacle ob = new Obstacle(0, 0, null);
-		return ob;
 	}
 
 }

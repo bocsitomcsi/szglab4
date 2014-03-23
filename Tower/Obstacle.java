@@ -31,11 +31,19 @@ public class Obstacle extends Item
 	//Getter
 	public double getSlowRate()
 	{
+		String logString = "Obstacle.getSlowRate()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
 		return this.slowRate;
 	}
 	
 	public HashMap<String,Double> getBonusSlowRates()
 	{
+		String logString = "Obstacle.getBonusSlowRates()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
 		return this.bonusSlowRates;
 	}
 	

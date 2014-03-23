@@ -20,7 +20,7 @@ public abstract class Item
 	private int maxMagicStoneNumber;
 	private Cell position;
 	private ArrayList<MagicStone> magicStones;
-	
+
 	//Constructor
 	public Item(int mm, Cell pos)
 	{
@@ -28,34 +28,38 @@ public abstract class Item
 		this.magicStones = new ArrayList<MagicStone>();
 		this.position = pos;
 	}
-	
+
 	//Getter
 	public int getMaxMagicStoneNumber()
 	{
 		return this.maxMagicStoneNumber;
 	}
-	
+
 	public Cell getPosition()
 	{
+		String logString = "Item.getPosition()";
+		Logger.Log(1, logString, this);
+
+		Logger.Log(0, logString, this);
 		return this.position;
 	}
-	
+
 	public ArrayList<MagicStone> getMagicStone()
 	{
 		return this.magicStones;
 	}
-	
+
 	//Setter
 	public void setMaxMagicStoneNumber(int mm)
 	{
 		this.maxMagicStoneNumber = mm;
 	}
-	
+
 	public void setMagicStone(ArrayList<MagicStone> ms)
 	{
 		this.magicStones = ms;
 	}
-	
+
 	public abstract boolean upgrade(MagicStone stone);
 }
 

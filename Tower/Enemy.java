@@ -37,38 +37,38 @@ public abstract class Enemy
 		this.lastTime = lt;
 		this.enemySpeeds = new HashMap<String,Integer>();
 	}
-	
+
 	//Getter
 	public int getHealthPoint()
 	{
 		return this.healthPoint;
 	}
-	
+
 	public int getActualSpeed()
 	{
 		return this.actualSpeed;
 	}
-	
+
 	public int getOriginalSpeed()
 	{
 		return this.originalSpeed;
 	}
-	
+
 	public int getMagic()
 	{
 		return this.magic;
 	}
-	
+
 	public long getLastTime()
 	{
 		return this.lastTime;
 	}
-	
+
 	public boolean getIsDead()
 	{
 		return this.isDead;
 	}
-	
+
 	public Cell getPosition()
 	{
 		return this.position;
@@ -79,27 +79,27 @@ public abstract class Enemy
 	{
 		this.healthPoint = hp;
 	}
-	
+
 	public void setActualSpeed(int as)
 	{
 		this.actualSpeed = as;
 	}
-	
+
 	public void setOriginalSpeed(int os)
 	{
 		this.originalSpeed = os;
 	}
-	
+
 	public void setMagic(int m)
 	{
 		this.magic = m;
 	}
-	
+
 	public void setLastTime(long lt)
 	{
 		this.lastTime = lt;
 	}
-	
+
 	public void setIsDead(boolean dead)
 	{
 		this.isDead = dead;
@@ -114,11 +114,10 @@ public abstract class Enemy
 	}
 
 	public abstract boolean damage(int power, HashMap<String , Integer> bonus);
-	
+
 	public void tick()
 	{
-	
 	}
-	
+
 	public abstract void move();
 }

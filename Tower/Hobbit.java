@@ -1,5 +1,6 @@
 package Tower;
 import java.util.HashMap;
+import java.util.Scanner;
 
 //
 //
@@ -25,9 +26,40 @@ public class Hobbit extends Enemy
 	{
 		return true;
 	}
-	
+
 	public void move()
 	{
-	
+		String logString = "Hobbit.move()";
+		Logger.Log(1, logString, this);
+
+		String answerText;
+		boolean isSlowed;
+		Obstacle obstacle;
+		Scanner scanner = new Scanner (System.in);
+
+		this.getPosition().getBusy();
+
+		while(true) {
+			System.out.print("Akadalyra lepett [igen, nem]: ");
+			answerText = scanner.next();
+			if(answerText.equals("igen")) {
+				isSlowed=true;
+				break;
+			} else if(answerText.equals("nem")) {
+				isSlowed=false;
+				break;
+			} else {
+				System.out.println("Helytelen ertek");
+				continue;
+			}
+		}
+
+		if(isSlowed) {
+			obstacle = this.getPosition().getObstacle();
+			obstacle.getSlowRate();
+			obstacle.getBonusSlowRates();
+		}
+
+		Logger.Log(0, logString, this);
 	}
 }

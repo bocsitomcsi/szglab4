@@ -16,6 +16,9 @@ public class Program {
 		Saruman saruman = new Saruman(100, 100, 100, 100, map);
 		Cell cell1;
 		Cell cell2;
+		Hobbit hobbit;
+		Dwarf dwarf;
+		Obstacle obstacle;
 		map.setSaruman(saruman);
 
 		Logger.AddName(map, "MapID");
@@ -143,8 +146,20 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Ellenseg akadalyra lep");
 
-					cell1 = new Cell(false, map, Cell.CellType.Terrain);
-					cell2 = new Cell(false, map, Cell.CellType.Terrain);
+					hobbit = new Hobbit(1, 1, 1, 1, 1);
+					Logger.AddName(hobbit, "hobbitID");
+					cell1 = new Cell(false, map, Cell.CellType.Road);
+					Logger.AddName(cell1, "Cell1");
+					hobbit.setPosition(cell1);
+					obstacle = new Obstacle(1, 1, cell1);
+					Logger.AddName(obstacle, "obstacleID");
+					ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+					obstacles.add(obstacle);
+					map.setObstacles(obstacles);
+
+					Logger.SetActive(true);
+					hobbit.move();
+					Logger.SetActive(false);
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -165,9 +180,9 @@ public class Program {
 
 					cell1 = new Cell(false, map, Cell.CellType.Terrain);
 
-					Logger.active = true;
+					Logger.SetActive(true);
 					saruman.addTower(cell1);
-					Logger.active = false;
+					Logger.SetActive(false);
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -188,9 +203,9 @@ public class Program {
 
 					cell1 = new Cell(false, map, Cell.CellType.Road);
 
-					Logger.active = true;
+					Logger.SetActive(true);
 					saruman.addObstacle(cell1);
-					Logger.active = false;
+					Logger.SetActive(false);
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
