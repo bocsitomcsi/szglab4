@@ -118,7 +118,7 @@ public class Round
 	
 	/**
 	 * Setter az enemyNumber attributumra.
-	 * @param b  Az enemyNumber attributum kivant erteke.
+	 * @param en  Az enemyNumber attributum kivant erteke.
 	 */
 	public void setEnemyNumber(int en)
 	{
@@ -127,7 +127,7 @@ public class Round
 	
 	/**
 	 * Setter az enemyAddingTime attributumra.
-	 * @param b  Az enemyAddingTime attributum kivant erteke.
+	 * @param et  Az enemyAddingTime attributum kivant erteke.
 	 */
 	public void setEnemyAddingTime(int et)
 	{
@@ -136,7 +136,7 @@ public class Round
 	
 	/**
 	 * Setter az enemyNumberMultiplier attributumra.
-	 * @param b  Az enemyNumberMultiplier attributum kivant erteke.
+	 * @param enm  Az enemyNumberMultiplier attributum kivant erteke.
 	 */
 	public void setEnemyNumberMultiplier(double enm)
 	{
@@ -145,7 +145,7 @@ public class Round
 	
 	/**
 	 * Setter az enemyAddingTimeMultiplier attributumra.
-	 * @param b  Az enemyAddingTimeMultiplier attributum kivant erteke.
+	 * @param etm  Az enemyAddingTimeMultiplier attributum kivant erteke.
 	 */
 	public void setEnemyAddingTimeMultiplier(double etm)
 	{
@@ -154,7 +154,7 @@ public class Round
 	
 	/**
 	 * Setter a roundTime attributumra.
-	 * @param b  A roundTime attributum kivant erteke.
+	 * @param rt  A roundTime attributum kivant erteke.
 	 */
 	public void setRoundTime(int rt)
 	{
@@ -163,7 +163,7 @@ public class Round
 	
 	/**
 	 * Setter a maxRounds attributumra.
-	 * @param b  A maxRounds attributum kivant erteke.
+	 * @param mr  A maxRounds attributum kivant erteke.
 	 */
 	public void setMaxRounds(int mr)
 	{

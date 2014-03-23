@@ -108,7 +108,7 @@ public class Saruman
 
 	/**
 	 * Setter a magicPower attributumra.
-	 * @param b  A magicPower attributum kivant erteke.
+	 * @param mp  A magicPower attributum kivant erteke.
 	 */
 	public void setMagicPower(int mp)
 	{
@@ -122,7 +122,7 @@ public class Saruman
 
 	/**
 	 * Setter a towerCost attributumra.
-	 * @param b  A towerCost attributum kivant erteke.
+	 * @param tc  A towerCost attributum kivant erteke.
 	 */
 	public void setTowerCost(int tc)
 	{
@@ -131,7 +131,7 @@ public class Saruman
 
 	/**
 	 * Setter az obstacleCost attributumra.
-	 * @param b  Az obstacleCost attributum kivant erteke.
+	 * @param sc  Az obstacleCost attributum kivant erteke.
 	 */
 	public void setObstacleCost(int sc)
 	{
@@ -140,7 +140,7 @@ public class Saruman
 
 	/**
 	 * Setter a magicStoneCost attributumra.
-	 * @param b  A magicStoneCost attributum kivant erteke.
+	 * @param mc  A magicStoneCost attributum kivant erteke.
 	 */
 	public void setMagicStoneCost(int mc)
 	{

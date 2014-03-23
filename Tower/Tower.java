@@ -115,7 +115,7 @@ public class Tower extends Item
 
 	/**
 	 * Setter a firePower attributumra.
-	 * @param b  A firePower attributum kivant erteke.
+	 * @param power  A firePower attributum kivant erteke.
 	 */
 	public void setFirePower(int power)
 	{
@@ -124,7 +124,7 @@ public class Tower extends Item
 
 	/**
 	 * Setter az attackSpeed attributumra.
-	 * @param b  Az attackSpeed attributum kivant erteke.
+	 * @param as  Az attackSpeed attributum kivant erteke.
 	 */
 	public void setAttackSpeed(int as)
 	{
@@ -133,7 +133,7 @@ public class Tower extends Item
 
 	/**
 	 * Setter a range attributumra.
-	 * @param b  A range attributum kivant erteke.
+	 * @param r  A range attributum kivant erteke.
 	 */
 	public void setRange(int r)
 	{
@@ -142,7 +142,7 @@ public class Tower extends Item
 
 	/**
 	 * Setter a lastTime attributumra.
-	 * @param b  A lastTime attributum kivant erteke.
+	 * @param lt  A lastTime attributum kivant erteke.
 	 */
 	public void setLastTime(long lt)
 	{
@@ -151,7 +151,7 @@ public class Tower extends Item
 
 	/**
 	 * Setter a bonusPowers attributumra.
-	 * @param b  A bonusPowers attributum kivant erteke.
+	 * @param bonus  A bonusPowers attributum kivant erteke.
 	 */
 	public void setBonusPowers(HashMap<String,Integer> bonus)
 	{

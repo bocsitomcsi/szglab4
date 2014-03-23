@@ -152,7 +152,7 @@ public abstract class Enemy
 
 	/**
 	 * Setter a healthPoint attributumra.
-	 * @param b  A healthPoint attributum kivant erteke.
+	 * @param hp  A healthPoint attributum kivant erteke.
 	 */
 	public void setHealthPoint(int hp)
 	{
@@ -161,7 +161,7 @@ public abstract class Enemy
 
 	/**
 	 * Setter az actualSpeed attributumra.
-	 * @param b  Az actualSpeed attributum kivant erteke.
+	 * @param as  Az actualSpeed attributum kivant erteke.
 	 */
 	public void setActualSpeed(int as)
 	{
@@ -175,7 +175,7 @@ public abstract class Enemy
 
 	/**
 	 * Setter az originalSpeed attributumra.
-	 * @param b  Az originalSpeed attributum kivant erteke.
+	 * @param os  Az originalSpeed attributum kivant erteke.
 	 */
 	public void setOriginalSpeed(int os)
 	{
@@ -184,7 +184,7 @@ public abstract class Enemy
 
 	/**
 	 * Setter a magic attributumra.
-	 * @param b  A magic attributum kivant erteke.
+	 * @param m  A magic attributum kivant erteke.
 	 */
 	public void setMagic(int m)
 	{
@@ -193,7 +193,7 @@ public abstract class Enemy
 
 	/**
 	 * Setter a lastTime attributumra.
-	 * @param b  A lastTime attributum kivant erteke.
+	 * @param lt  A lastTime attributum kivant erteke.
 	 */
 	public void setLastTime(long lt)
 	{
@@ -202,7 +202,7 @@ public abstract class Enemy
 
 	/**
 	 * Setter az isDead attributumra.
-	 * @param b  Az isDead attributum kivant erteke.
+	 * @param dead  Az isDead attributum kivant erteke.
 	 */
 	public void setIsDead(boolean dead)
 	{
@@ -211,7 +211,7 @@ public abstract class Enemy
 
 	/**
 	 * Setter a position attributumra.
-	 * @param b  A position attributum kivant erteke.
+	 * @param pos  A position attributum kivant erteke.
 	 */
 	public void setPosition(Cell pos)
 	{
