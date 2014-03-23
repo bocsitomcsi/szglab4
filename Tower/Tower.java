@@ -26,14 +26,15 @@ public class Tower extends Item
 	private Map map;	//itt hogy fogja a konkrét egy db mappot megkapni?
 	
 	//Constructor
-	public Tower(int power, int as, int r, long lt, int mm)
+	public Tower(int power, int as, int r, long lt, int mm, Cell pos, Map map)
 	{
-		super(mm);
+		super(mm, pos);
 		this.firePower = power;
 		this.attackSpeed = as;
 		this.range = r;
 		this.bonusPowers = new HashMap<String,Integer>();
 		this.lastTime = lt;
+		this.map = map;
 	}
 	
 	//Getters

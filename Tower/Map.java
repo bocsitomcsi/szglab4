@@ -148,6 +148,15 @@ public class Map
 		enemys.remove(enemy);
 	}
 
+	protected void addTower(Tower tower) {
+		String logString = "Map.addTower(tower)";
+		Logger.Log(1, logString, this);
+
+		towers.add(tower);
+
+		Logger.Log(0, logString, this);
+	}
+
 	public ArrayList<Enemy> getEnemysInRange(Tower tower)
 	{
 		ArrayList<Enemy> enemy = new ArrayList<Enemy>();

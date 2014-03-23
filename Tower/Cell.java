@@ -56,7 +56,7 @@ public class Cell
 
 	public Obstacle setObstacle()
 	{
-		Obstacle ob = new Obstacle(0, 0);
+		Obstacle ob = new Obstacle(0, 0, null);
 		return ob;
 	}
 

@@ -14,6 +14,7 @@ public class Program {
 		//One instance
 		Map map = new Map(4, 0, 0);
 		Saruman saruman = new Saruman(100, 100, 100, 100, map);
+		Cell cell;
 		map.setSaruman(saruman);
 		
 		Logger.AddName(map, "MapID");
@@ -58,17 +59,17 @@ public class Program {
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("****************************");   
 					System.out.println("Ellenseg letrehozasa");
-					
+
 					/*****Create enemy USE-CASE*****/
 					ArrayList<Cell> cells = new ArrayList<Cell>();
-					Cell cell = new Cell(false, map, Cell.CellType.Road);
+					cell = new Cell(false, map, Cell.CellType.Road);
 					cells.add(cell);
 					map.setCells(cells);
 
 					String enemyType;
 					while(true) {
 						System.out.print("Letrehozando ellenseg [human | elf | dwarf | hobbit]: ");
-						
+
 						enemyType = scanner.next();
 						if(!(enemyType.equals("human") || enemyType.equals("elf") || enemyType.equals("dwarf") || enemyType.equals("hobbit"))) {
 							System.out.println("Helytelen ertek");
@@ -81,7 +82,7 @@ public class Program {
 					map.addEnemy(enemyType, cell);
 					Logger.SetActive(false);
 					/*******************************/
-					
+
 					//Waiting for the ENTER
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -163,9 +164,13 @@ public class Program {
 					System.out.println("****************************");   
 					System.out.println("Torony lerakas");
 
-					/*
-					* Ide jon a use-case
-					*/
+					saruman = new Saruman(100, 100, 100, 100, map);
+					Logger.AddName(saruman, "sarumanID");
+					cell = new Cell(false, map, Cell.CellType.Terrain);
+
+					Logger.active = true;
+					saruman.addTower(cell);
+					Logger.active = false;
 
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
@@ -260,21 +265,22 @@ public class Program {
 					/****TowerUpgrade*****/
 					String result1;
 					saruman.createStone("green");
-					Tower t1 = new Tower(1,1,1,1,1);
+					cell = new Cell(false, map, Cell.CellType.Road);
+					Tower t1 = new Tower(1, 1, 1, 1, 1, cell, map);
 					Logger.AddName(t1, "TowerID");
 
 					while(true) {
 						System.out.print("Van varazsko letrehozva [igen | nem] ");
-						
+
 						result1 = scanner.next();
 						if(result1.equals("igen")) {
-							
-							Logger.SetActive(true);							
-							
+
+							Logger.SetActive(true);
+
 							while(true) {
 								System.out.print("Fejleszthetõ még a torony (max 5 ko) [igen | nem] ");
 								result1 = scanner.next();
-								
+
 								if(result1.equals("igen")) {
 									saruman.upgradeItem(t1);
 									break;
@@ -318,7 +324,7 @@ public class Program {
 					/****TowerUpgrade*****/
 					String result2;
 					saruman.createStone("purple");
-					Obstacle o1 = new Obstacle(1.0,1);
+					Obstacle o1 = new Obstacle(1.0, 1, null);
 					Logger.AddName(o1,"ObstacleID");
 
 					while(true) {

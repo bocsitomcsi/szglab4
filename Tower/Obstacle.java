@@ -21,9 +21,9 @@ public class Obstacle extends Item
 	private HashMap<String, Double> bonusSlowRates;
 	
 	//Constructor
-	public Obstacle(double sr, int mm)
+	public Obstacle(double sr, int mm, Cell pos)
 	{
-		super(mm);
+		super(mm, pos);
 		this.slowRate = sr;
 		bonusSlowRates = new HashMap<String,Double>();
 	}
