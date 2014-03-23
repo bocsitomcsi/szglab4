@@ -34,10 +34,7 @@ public abstract class Enemy
 		this.magic = m;
 		this.isDead = false;
 		this.lastTime = lt;
-		
-		//Itt fel is töltsük a static adattagot?
-		
-		//itt is hasonló probléma mint item-ben
+		this.enemySpeeds = new HashMap<String,Integer>();
 	}
 	
 	//Getter

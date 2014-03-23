@@ -111,6 +111,10 @@ public class Map
 	{
 		this.obstacles = (ArrayList<Obstacle>)obstacle.clone();
 	}
+	
+	public void setSaruman(Saruman s){
+		this.saruman = s;
+	}
 
 	//Methods
 	public void addEnemy(String type, Cell pos)

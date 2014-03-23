@@ -12,6 +12,7 @@ public class Program {
 		//One instance
 		Map map = new Map(4, 0, 0);
 		Saruman saruman = new Saruman(100, 100, 100, 100, map);
+		map.setSaruman(saruman);
 		
 		while (true) {
 			//Use-case menu print
@@ -61,10 +62,8 @@ public class Program {
 					String enemyType;
 					while(true) {
 						System.out.print("Letrehozando ellenseg [human | elf | dwarf | hobbit]: ");
-						//Prevent the unnecessary line cause error
-						System.out.print(scanner.nextLine());
 						
-						enemyType = scanner.nextLine();
+						enemyType = scanner.next();
 						if(!(enemyType.equals("human") || enemyType.equals("elf") || enemyType.equals("dwarf") || enemyType.equals("hobbit"))) {
 							System.out.println("Helytelen ertek");
 						} else {
@@ -205,9 +204,8 @@ public class Program {
 					
 					while(true) {
 						System.out.print("Letrehozando ko [cyan | green | purple]: ");
-						System.out.print(scanner.nextLine());
 						
-						stoneType = scanner.nextLine();
+						stoneType = scanner.next();
 						if(!(stoneType.equals("cyan") || stoneType.equals("green") || stoneType.equals("purple"))) {
 							System.out.println("Helytelen ertek");
 						} else {
@@ -218,7 +216,7 @@ public class Program {
 					while(true) {
 						System.out.print("Van eleg varazs ero letrehozni [igen | nem] ");
 						
-						stoneType = scanner.nextLine();
+						stoneType = scanner.next();
 						if(stoneType.equals("igen")) {
 							
 							Logger.active = true;
@@ -260,16 +258,15 @@ public class Program {
 
 					while(true) {
 						System.out.print("Van varazsko letrehozva [igen | nem] ");
-						System.out.print(scanner.nextLine());
 						
-						result1 = scanner.nextLine();
+						result1 = scanner.next();
 						if(result1.equals("igen")) {
 							
 							Logger.active = true;							
 							
 							while(true) {
 								System.out.print("Fejleszthetõ még a torony (max 5 ko) [igen | nem] ");
-								result1 = scanner.nextLine();
+								result1 = scanner.next();
 								
 								if(result1.equals("igen")) {
 									saruman.upgradeItem(t1);
@@ -318,16 +315,15 @@ public class Program {
 
 					while(true) {
 						System.out.print("Van varazsko letrehozva [igen | nem] ");
-						System.out.print(scanner.nextLine());
 						
-						result2 = scanner.nextLine();
+						result2 = scanner.next();
 						if(result2.equals("igen")) {
 							
 							Logger.active = true;							
 							
 							while(true) {
 								System.out.print("Fejleszthetõ még az akadaly (max 5 ko) [igen | nem] ");
-								result2 = scanner.nextLine();
+								result2 = scanner.next();
 								
 								if(result2.equals("igen")) {
 									saruman.upgradeItem(o1);

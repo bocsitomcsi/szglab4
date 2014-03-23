@@ -18,6 +18,9 @@ public class Human extends Enemy
 {
 	public Human(int hp, int as, int os, int m, long lt) {
 		super(hp, as, os, m, lt);
+		String logString = "Human.Human(healthpoin, actualspeed, originalspeed, magic, lastTime)";
+		Logger.Log(1, logString);
+		Logger.Log(0, logString);
 	}
 
 	public boolean damage(int power, HashMap<String,Integer> bonus)
