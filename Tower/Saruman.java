@@ -199,6 +199,8 @@ public class Saruman
 		boolean isUsable;
 		Scanner scanner = new Scanner (System.in);
 
+		pos.getCellType();
+		pos.getBusy();
 		while(true) {
 			System.out.print("Lehet elhelyezni a cellara tornyot [igen, nem]: ");
 			answerText = scanner.next();
@@ -248,6 +250,8 @@ public class Saruman
 		String answerText;
 		Scanner scanner = new Scanner (System.in);
 
+		pos.getCellType();
+		pos.getBusy();
 		while(true) {
 			System.out.print("Lehet elhelyezni a cellara akadalyt [igen, nem]: ");
 			answerText = scanner.next();

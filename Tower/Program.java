@@ -111,18 +111,13 @@ public class Program {
 
 					hobbit1 = new Hobbit(1, 1, 1, 1, 1);
 					cell1 = new Cell(false, map, Cell.CellType.Road);
-					cell2 = new Cell(false, map, Cell.CellType.EndPoint);
-					cells1 = new ArrayList<Cell>();
 					enemies = new ArrayList<Enemy>();
 					enemies.add(hobbit1);
 					map.setEnemies(enemies);
 
 					Logger.AddName(hobbit1, "hobbit1");
 					Logger.AddName(cell1, "Cell1");
-					Logger.AddName(cell2, "Cell2");
 
-					cells1.add(cell2);
-					cell1.setNeighbours(cells1);
 					hobbit1.setPosition(cell1);
 
 					Logger.SetActive(true);
@@ -234,6 +229,7 @@ public class Program {
 					System.out.println("Torony lerakas");
 
 					cell1 = new Cell(false, map, Cell.CellType.Terrain);
+					Logger.AddName(cell1, "cell1");
 
 					Logger.SetActive(true);
 					saruman.addTower(cell1);
@@ -258,6 +254,7 @@ public class Program {
 					System.out.println("Akadaly lerakasa");
 
 					cell1 = new Cell(false, map, Cell.CellType.Road);
+					Logger.AddName(cell1, "cell1");
 
 					Logger.SetActive(true);
 					saruman.addObstacle(cell1);
@@ -283,10 +280,10 @@ public class Program {
 
 					/****Create magic stone USE-CASE****/
 					String stoneType;
-					
+
 					while(true) {
 						System.out.print("Letrehozando ko [cyan | green | purple]: ");
-						
+
 						stoneType = scanner.next();
 						if(!(stoneType.equals("cyan") || stoneType.equals("green") || stoneType.equals("purple"))) {
 							System.out.println("Helytelen ertek");
@@ -294,13 +291,13 @@ public class Program {
 							break;
 						}
 					}
-					
+
 					while(true) {
 						System.out.print("Van eleg varazs ero letrehozni [igen | nem] ");
-						
+
 						stoneType = scanner.next();
 						if(stoneType.equals("igen")) {
-							
+
 							Logger.SetActive(true);
 							saruman.createStone(stoneType);
 							Logger.SetActive(false);
@@ -313,9 +310,9 @@ public class Program {
 							System.out.println("Helytelen ertek");
 						}
 					}
-					
+
 					/**************************************/
-					
+
 					try{
 						System.out.println("Kerem nyomjon ENTERT!");
 						System.in.read();
@@ -402,16 +399,16 @@ public class Program {
 
 					while(true) {
 						System.out.print("Van varazsko letrehozva [igen | nem] ");
-						
+
 						result2 = scanner.next();
 						if(result2.equals("igen")) {
-							
-							Logger.SetActive(true);							
-							
+
+							Logger.SetActive(true);
+
 							while(true) {
 								System.out.print("Fejlesztheto meg az akadaly (max 5 ko) [igen | nem] ");
 								result2 = scanner.next();
-								
+
 								if(result2.equals("igen")) {
 									saruman.upgradeItem(o1);
 									break;
@@ -480,7 +477,7 @@ public class Program {
 					System.out.println("****************************");
 					break;
 
-				//If the user set an invalid number  	
+				//If the user set an invalid number
 				default:
 					for(int i=0; i<5; i++){System.out.println();}
 					System.out.println("Rossz sorszamot adott meg!!");
