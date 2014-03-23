@@ -196,6 +196,11 @@ public class Saruman
 
 	public void changeMagicPowerBy(int power)
 	{
+		String logString = "Saruman.changeMagicPowerBy(power)";
+		Logger.Log(1, logString, this);
 
+		this.setMagicPower(4);
+
+		Logger.Log(0, logString, this);
 	}
 }
