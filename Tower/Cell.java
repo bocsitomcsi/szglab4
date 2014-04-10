@@ -114,8 +114,8 @@ public class Cell
 	 */
 	public Obstacle getObstacle()
 	{
-		String logString = "Cell.getObstacle()";
-		Logger.Log(1, logString, this);
+		//String logString = "Cell.getObstacle()";
+		//Logger.Log(1, logString, this);
 
 		Obstacle returnValue = null;
 		ArrayList<Obstacle> obstacles = map.getObstacles();
@@ -126,7 +126,7 @@ public class Cell
 			}
 		}
 
-		Logger.Log(0, logString, this);
+		//Logger.Log(0, logString, this);
 		return returnValue;
 	}
 

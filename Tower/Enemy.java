@@ -1,5 +1,9 @@
 package Tower;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
+
+import Tower.Cell.CellType;
 
 //
 //
@@ -234,7 +238,39 @@ public abstract class Enemy
 	 *  Ha nincs akadaly az uj cellan, akkor null-t ad vissza.
 	 */
 	private Obstacle moveToNextCell() {
-		return null;
+		ArrayList<Cell> nextCells = new ArrayList<Cell>();
+		// Vegigiteralunk a szomszedos cellakon
+		for(Entry<Cell, Boolean> neighbour : position.getNeighbours().values()) {
+			Cell cell = neighbour.getKey();
+			boolean bool = neighbour.getValue();
+			// Csak azokat mentjuk el a listankba, amelyek ut vagy vegpont tipusuak
+			// es igaz a hozzajuk tartozo bool valtozo
+			if ((cell.getCellType() == CellType.Road || cell.getCellType() == CellType.EndPoint)
+					&& bool) {
+				nextCells.add(cell);
+			}
+		}
+		
+		// Csak akkor lepunk, ha van jo szomszedos cella
+		if (!nextCells.isEmpty()) {
+			// A szomszedos cellak kozul kivalasztunk egy veletlen elemet
+			// es beallitjuk a pozicionkat
+			int random = (int)(Math.random() * nextCells.size());
+			position = nextCells.get(random);
+			
+			// Visszallitjuk a sebesseget az eredetire ha kell
+			if (actualSpeed != originalSpeed) {
+				actualSpeed = originalSpeed;
+			}
+		}
+		
+		// Elkerjuk az uj cellan levo akadalyt, es ha van akadaly akkor lassitunk
+		Obstacle obstacle = position.getObstacle();
+		if (obstacle != null) {
+			actualSpeed *= obstacle.getSlowRate();
+		}
+		
+		return obstacle;
 	}
 	
 	/**
