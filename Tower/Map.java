@@ -23,6 +23,18 @@ import java.util.Scanner;
 public class Map
 {
 	/**
+	 * Az iranyokat tarolo enumeracio.
+	 */
+	public enum Direction {
+		North, West, South, East
+	};
+	/**
+	 * A jatek lehetseges kimeneteleit tarolo enumeracio.
+	 */
+	public enum GameResult {
+		Win, Loose
+	};
+	/**
 	 * A palyan szereplo cellak szomszedainak maximalis szama.
 	 */
 	private int neighbourNumber;
@@ -58,7 +70,28 @@ public class Map
 	 * Szaruman.
 	 */
 	private Saruman saruman;
+	/**
+	 * Ennyi idonkent kerul kod egy toronyra.
+	 */
+	private int fogApplianceTime;
+	/**
+	 * Ekkor kerult utoljara kod egy toronyra.
+	 */
+	private long lastFog;
+	/**
+	 * A kod ennyivel csokkenti egy torony lotavolsagat.
+	 */
+	private final static int fogDecreason = 1;
+	/**
+	 * A kod ennyi ideig csokkenti egy torony lotavolsagat.
+	 */
+	private final static int fogDuration = 4000;
 
+	/**
+	 * Ennyi idonkent ertesulnek az objektumok az ido mulasarol.
+	 */
+	private final int dt = 50;
+	
 	/**
 	 * Konstruktor.
 	 * @param neighbour  A palyan szereplo cellak szomszedainak maximalis szama.
@@ -146,6 +179,22 @@ public class Map
 		return this.obstacles;
 	}
 
+	/**
+	 * Getter a fogDecreason attributumra.
+	 * @return  A fogDecreason attributum.
+	 */
+	public static int getFogdecreason() {
+		return fogDecreason;
+	}
+
+	/**
+	 * Getter a fogDuration attributumra.
+	 * @return  A fogDuration attributum.
+	 */
+	public static int getFogduration() {
+		return fogDuration;
+	}
+	
 	/**
 	 * Setter a neighbourNumber attributumra.
 	 * @param b  A neighbourNumber attributum kivant erteke.
@@ -263,7 +312,7 @@ public class Map
 	}
 
 	/**
-	 * 
+	 * Hozzaadja a paramterkent kapott tornyot a towers listahoz.
 	 * @param tower  A palyahoz adando torony.
 	 */
 	protected void addTower(Tower tower) {
@@ -276,7 +325,7 @@ public class Map
 	}
 
 	/**
-	 * 
+	 * Hozzaadja a paramterkent kapott akadalyt az obstacles listahoz.
 	 * @param obstacle  A palyahoz adando akadaly.
 	 */
 	protected void addObstacle(Obstacle obstacle) {
@@ -316,10 +365,11 @@ public class Map
 	/**
 	 * A palyan levo ellensegeket, es tornyokat ertesiti az ido mulasarol.
 	 * Ehhez a towers es enemies listakban tarolt objektumok tick fuggvenyet hivja meg. 
-	 * Ezek mellett meghivja adott idokozonkent az addEnemy fuggvenyt. 
+	 * Idonkenkent karbantartja az aktualis kort, hozzad ellenfeleket a palyahoz es
+	 *  kodoket rak a tornyokra. 
 	 * Minden iteracio vegen ellenorzi, hogy veget ert-e a jatek.
 	 */
-	public void simulateWorld()
+	public GameResult simulateWorld()
 	{
 		String logString = "Map.simulateWorld()";
 		Logger.Log(1, logString, this);
@@ -356,5 +406,6 @@ public class Map
 			}
 		}
 		Logger.Log(0, logString, this);
+		return null;
 	}
 }

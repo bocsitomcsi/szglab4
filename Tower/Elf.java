@@ -37,6 +37,14 @@ public class Elf extends Enemy
 		return true;
 	}
 	
+	/**
+	 * Az ellenseget mozgatja.
+	 * Meghivja a moveToNextCell metodust aminek hatasara az ellenseg
+	 *  a kovetkezo cellara lep es ha szukseges akkor a sebessege csokken.
+	 * Ha a moveToNextCell nem null-al ter vissza, akkor a kapott
+	 *  akadaly bonusSlowRates kollekciojabol kikeresi a Elf-hoz
+	 *  tartozo lassitasi erteket es beszorozza vele a speed attributumot.
+	 */
 	public void move()
 	{
 	

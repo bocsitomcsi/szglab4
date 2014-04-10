@@ -1,5 +1,9 @@
 package Tower;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+import Tower.Map.Direction;
 
 //
 //
@@ -29,16 +33,20 @@ public class Cell
 	private Map map;
 	/**
 	 * A cella szomszedai.
+	 * Minden szomszedhoz tartozik egy boolean ertek, amely jelzi, hogy
+	 *  tovabb lehet-e lepni a cellara.
 	 */
-	private ArrayList<Cell> neighbours;
+	private HashMap<Direction, Entry<Cell, Boolean>> neighbours;
 	/**
 	 * Egy cella lehetseges tipusait tartalmazo enumeracio.
 	 */
-	protected enum CellType {Terrain, Road, StartPoint, EndPoint};
+	protected enum CellType {
+		Terrain, Road, StartPoint, EndPoint
+	};
 	/**
 	 * A cella tipusa.
 	 */
-	private CellType cellType;
+	private CellType type;
 	
 	/**
 	 * Konstruktor.
@@ -50,8 +58,8 @@ public class Cell
 	{
 		this.busy = b;
 		this.map = map;
-		this.neighbours = new ArrayList<Cell>();
-		this.cellType = ct;
+		this.neighbours = new HashMap<Map.Direction, Entry<Cell, Boolean>>();
+		this.type = ct;
 	}
 	
 	/**
@@ -83,14 +91,14 @@ public class Cell
 
 		Logger.Log(0, logString, this);
 
-		return this.cellType;
+		return this.type;
 	}
 
 	/**
 	 * Getter a neighbours attributumra.
 	 * @return  A neighbours attributum.
 	 */
-	public ArrayList<Cell> getNeighbours()
+	public HashMap<Direction, Entry<Cell, Boolean>> getNeighbours()
 	{
 		String logString = "Cell.getNeighbours()";
 		Logger.Log(1, logString, this);
@@ -135,7 +143,7 @@ public class Cell
 	 * Setter a neighbours attributumra.
 	 * @param b  A neighbours attributum kivant erteke.
 	 */
-	public void setNeighbours(ArrayList<Cell> n) {
+	public void setNeighbours(HashMap<Direction, Entry<Cell, Boolean>> n) {
 		this.neighbours = n;
 	}
 }

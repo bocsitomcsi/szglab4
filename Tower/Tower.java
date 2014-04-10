@@ -47,6 +47,22 @@ public class Tower extends Item
 	 * A palya referenciaja.
 	 */
 	private Map map;
+	/**
+	 * Ennyivel van csokkentve a range attributum erteke az aktiv kod miatt.
+	 */
+	private int rangeDecreaseByFog;
+	/**
+	 * Eddig az idopontig lesz aktiv a kod a tornyon.
+	 */
+	private int fogRemovalTime;
+	/**
+	 * Igaz, ha van aktiv kod a tornyon.
+	 */
+	private boolean fogActive;
+	/**
+	 * Ennyi esellyel lo kettobe a torony egy ellenfelet.
+	 */
+	private double sliceShootProbability;
 
 	/**
 	 * Konstruktor.
@@ -115,6 +131,14 @@ public class Tower extends Item
 	}
 
 	/**
+	 * Getter a fogActive attributumra.
+	 * @return  A fogActive attributum.
+	 */
+	public boolean getFogActive() {
+		return fogActive;
+	}
+	
+	/**
 	 * Setter a firePower attributumra.
 	 * @param power  A firePower attributum kivant erteke.
 	 */
@@ -160,6 +184,14 @@ public class Tower extends Item
 	}
 	
 	/**
+	 * Setter a fogActive attributumra.
+	 * @param bonus  A fogActive attributum kivant erteke.
+	 */
+	public void setFogActive(boolean fogActive) {
+		this.fogActive = fogActive;
+	}
+	
+	/**
 	 * Megvizsgalja, hogy a maxMagicStoneNumber attributum erteke kisebb-e
 	 *  mint a magicStones lista hossza, es ha igen akkor a kapott varazsko
 	 *  attributumait felhasznalva modositja a torony attributumait
@@ -183,6 +215,7 @@ public class Tower extends Item
 	 *  atadva a firePower-t, es a bonusPowers attributumok ertekeit. 
 	 * Ha a damage fuggveny true-val ter vissza akkor meghivja a map 
 	 *  removeEnemy fuggvenyet atadva a kivalasztott Enemy-t.
+	 * Aktiv kod eseten leszedi a kodot a toronyrol, ha mar lejart az ideje.
 	 */
 	public void shoot()
 	{
@@ -224,6 +257,22 @@ public class Tower extends Item
 			map.removeEnemy(enemy);
 		}
 		Logger.Log(0, logString, this);
+	}
+	
+	/**
+	 * Aktival egy kodot a toronyra.
+	 * @param decrease A range attributumot ennyivel kell csokkenteni.
+	 * @param duration A kod ennyi ideig lesz aktiv a tornyon.
+	 */
+	public void applyFog(int decrease, int duration) {
+		
+	}
+	
+	/**
+	 * Leveszi a kodot a toronyrol.
+	 */
+	public void removeFog() {
+		
 	}
 	
 	/**

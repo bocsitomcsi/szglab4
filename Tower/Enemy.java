@@ -224,6 +224,20 @@ public abstract class Enemy
 	}
 
 	/**
+	 * Atlepteti az ellenseget egy olyan veletlenszeruen kivalasztott
+	 *  szomszedos cellara, amelyik ut vagy vegpont es a hozza tartozo
+	 *  boolean ertek igaz.
+	 * Az uj cellatol elkeri a rajta talalhato akadalyt es ha kell
+	 *  akkor lassitja az ellenseget, vagy visszaallitja a sebesseget az
+	 *  eredetire.
+	 * @return Az uj cellatol elkert akadaly objektum. 
+	 *  Ha nincs akadaly az uj cellan, akkor null-t ad vissza.
+	 */
+	private Obstacle moveToNextCell() {
+		return null;
+	}
+	
+	/**
 	 * Az ellenseg eleterejet a parameterkent kapott power-rel,
 	 *  es a bonus kollekcioban tarolt az ellenseg konkret tipusahoz
 	 *  tartozo ertekkel csokkenti.
@@ -243,14 +257,7 @@ public abstract class Enemy
 
 	/**
 	 * Az ellenseget mozgatja. 
-	 * Ha a kovetkezo cellan akadaly van, akkor az akadalyt lekeri a cellatol, 
-	 *  es az akadalyhoz tartozo lassitasi, es az akadalyban tarolt 
-	 *  az ellenseg konkret tipusahoz tartozo bonusz lassitasi ertekkel 
-	 *  megszorozza az actualSpeed-et ha az nem ter el az originalSpeed-tol,
-	 *  mert abban az esetben mar lassitva van az ellenfel. 
-	 * Ha a kovetkezo cellan nincs akadaly, es az originalSpeed kulonbozik 
-	 *  az actualSpeed-tol akkor vissza kell allitani az aktualis sebesseget 
-	 *  az originalSpeed-re, mert mar nem lassitja az ellenfelet az akadaly.
+	 * Ezen a szinten egy tisztan virtualis fuggveny.
 	 */
 	public abstract void move();
 }
