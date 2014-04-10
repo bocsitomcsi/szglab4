@@ -27,27 +27,27 @@ public abstract class Enemy
 	/**
 	 * Eletero.
 	 */
-	private int healthPoint;
+	protected int healthPoint;
 	/**
 	 * Az ellenseg ennyi idonkent tud lepni.
 	 */
-	private int actualSpeed;
+	protected int actualSpeed;
 	/**
 	 * Az ellenseg lassitas nelkul ennyi idonkent tud lepni.
 	 */
-	private int originalSpeed;
+	protected int originalSpeed;
 	/**
 	 * Az ellenseg halalakor szarumanhoz kerulo varazsero.
 	 */
-	private int magic;
+	protected int magic;
 	/**
 	 * Az ellenseg eletben van-e.
 	 */
-	private boolean isDead;
+	protected boolean isDead;
 	/**
 	 * Az az idopont amikor az ellenseg legutoljara lepett.
 	 */
-	private long lastTime;
+	protected long lastTime;
 	/**
 	 * Az egyes ellenseg tipusok sebessegei.
 	 */
@@ -55,7 +55,7 @@ public abstract class Enemy
 	/**
 	 * Az ellenseg pozicioja.
 	 */
-	private Cell position;
+	protected Cell position;
 
 	/**
 	 * Konstruktor.
@@ -237,7 +237,7 @@ public abstract class Enemy
 	 * @return Az uj cellatol elkert akadaly objektum. 
 	 *  Ha nincs akadaly az uj cellan, akkor null-t ad vissza.
 	 */
-	private Obstacle moveToNextCell() {
+	protected Obstacle moveToNextCell() {
 		ArrayList<Cell> nextCells = new ArrayList<Cell>();
 		// Vegigiteralunk a szomszedos cellakon
 		for(Entry<Cell, Boolean> neighbour : position.getNeighbours().values()) {

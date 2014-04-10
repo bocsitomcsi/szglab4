@@ -35,7 +35,20 @@ public class Dwarf extends Enemy
 
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
-		return true;
+		// Csokkentjuk az eleterot
+		healthPoint -= power;
+		
+		// Ha kell, akkor csokkentjuk az eleterot a bonusz sebzessel is
+		if (bonus.containsKey("dwarf")) {
+			healthPoint -= bonus.get("dwarf");
+		}
+		
+		// Ha az elet 0 ala csokken, akkor az ellenseg meghal
+		if (healthPoint <= 0) {
+			isDead = true;
+		}
+		
+		return isDead;
 	}
 	
 	/**
@@ -48,6 +61,13 @@ public class Dwarf extends Enemy
 	 */
 	public void move()
 	{
+		// Leptetjuk az ellenseget
+		Obstacle obstacle = moveToNextCell();
 		
+		// Ha van az uj cellan akadaly, es az akadalynak van
+		// bonusz lassitasa az ellensegre akkor lassitjuk
+		if (obstacle != null && obstacle.getBonusSlowRates().containsKey("dwarf")) {
+			actualSpeed *= obstacle.getBonusSlowRates().get("dwarf");
+		}
 	}
 }

@@ -35,11 +35,26 @@ public class Hobbit extends Enemy
 
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
-		String logString = "Hobbit.damage(power, bonus)";
+		/*String logString = "Hobbit.damage(power, bonus)";
 		Logger.Log(1, logString, this);
 
 		Logger.Log(0, logString, this);
-		return true;
+		return true;*/
+		
+		// Csokkentjuk az eleterot
+		healthPoint -= power;
+		
+		// Ha kell, akkor csokkentjuk az eleterot a bonusz sebzessel is
+		if (bonus.containsKey("hobbit")) {
+			healthPoint -= bonus.get("hobbit");
+		}
+		
+		// Ha az elet 0 ala csokken, akkor az ellenseg meghal
+		if (healthPoint <= 0) {
+			isDead = true;
+		}
+		
+		return isDead;
 	}
 
 	/**
@@ -52,6 +67,15 @@ public class Hobbit extends Enemy
 	 */
 	public void move()
 	{
+		// Leptetjuk az ellenseget
+		Obstacle obstacle = moveToNextCell();
+		
+		// Ha van az uj cellan akadaly, es az akadalynak van
+		// bonusz lassitasa az ellensegre akkor lassitjuk
+		if (obstacle != null && obstacle.getBonusSlowRates().containsKey("hobbit")) {
+			actualSpeed *= obstacle.getBonusSlowRates().get("hobbit");
+		}
+				
 		/*String logString = "Hobbit.move()";
 		Logger.Log(1, logString, this);
 
