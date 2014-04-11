@@ -46,7 +46,7 @@ public class MagicStone
 	/**
 	 * Az egyes ellenseg tipusokra vonatkozo lassitasi szorzo novelesek akadaly eseten.
 	 */
-	public HashMap<String, Integer> bonusSlowRates;
+	public HashMap<String, Double> bonusSlowRates;
 	
 	/**
 	 * Konstruktor.
@@ -65,7 +65,7 @@ public class MagicStone
 		this.range = r;
 		this.slowRate = sr;
 		this.bonusPowers = new HashMap<String, Integer>();
-		this.bonusSlowRates = new HashMap<String, Integer>();
+		this.bonusSlowRates = new HashMap<String, Double>();
 	}
 	
 	/**
@@ -126,7 +126,7 @@ public class MagicStone
 	 * Getter a bonusSlowRates attributumra.
 	 * @return  A bonusSlowRates attributum.
 	 */
-	public HashMap<String, Integer> getBonusSlowRate()
+	public HashMap<String, Double> getBonusSlowRate()
 	{
 		return this.bonusSlowRates;
 	}
@@ -189,7 +189,7 @@ public class MagicStone
 	 * Setter a bonusSlowRates attributumra.
 	 * @param hp  A bonusSlowRates attributum kivant erteke.
 	 */
-	public void setBonusSlowRate(HashMap<String, Integer> bonuss)
+	public void setBonusSlowRate(HashMap<String, Double> bonuss)
 	{
 		this.bonusSlowRates = bonuss;
 	}

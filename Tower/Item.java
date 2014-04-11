@@ -23,15 +23,15 @@ public abstract class Item
 	/**
 	 * Az objektumra rakhato varazskovek maximalis szama.
 	 */
-	private int maxMagicStoneNumber;
+	protected int maxMagicStoneNumber;
 	/**
 	 * Az objektum pozicioja.
 	 */
-	private Cell position;
+	protected Cell position;
 	/**
 	 * Az objektumra helyezett varazskovek listaja.
 	 */
-	private ArrayList<MagicStone> magicStones;
+	protected ArrayList<MagicStone> magicStones;
 	
 	/**
 	 * Konstruktor.

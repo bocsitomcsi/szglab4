@@ -200,11 +200,43 @@ public class Tower extends Item
 	 */
 	public boolean upgrade(MagicStone stone)
 	{
-		String logString = "Tower.upgrade(stone)";
+		// Csak akkor fejlesztunk, ha meg nem ertuk el a maximalis fejlesztesek szamat
+		if (maxMagicStoneNumber < magicStones.size()) {
+			// Elrakjuk a kovet az akadalyba
+			magicStones.add(stone);
+			
+			// Fejlesztjuk a tornyot
+			firePower += stone.firePower;
+			range += stone.range;
+			attackSpeed -= stone.attackSpeed;
+			
+			// Modositjuk a bonusz sebzesi eroket
+			for (String enemy : stone.bonusPowers.keySet()) {
+				// Ha van ilyen ellenseghez tartozo bejegyzes,
+				// akkor azt modositjuk
+				if (bonusPowers.containsKey(enemy)) {
+					bonusPowers.put(
+							enemy, 
+							bonusPowers.get(enemy) + stone.bonusPowers.get(enemy)
+							);
+				}
+				// Ha nincs, akkor letrehozzuk
+				else {
+					bonusPowers.put(enemy, stone.bonusPowers.get(enemy));
+				}
+			}
+			
+			return true;
+		}
+		
+		// Ha nem lehetett fejleszteni akkor visszaterunk false-szal
+		return false;
+		
+		/*String logString = "Tower.upgrade(stone)";
 		Logger.Log(1, logString, this);
 		
 		Logger.Log(0, logString, this);
-		return true;
+		return true;*/
 	}
 	
 	/**
