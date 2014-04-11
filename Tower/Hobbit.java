@@ -33,6 +33,19 @@ public class Hobbit extends Enemy
 		super(hp, as, os, m, lt);
 	}
 
+	public Enemy clone() {
+		Hobbit clone = new Hobbit(
+				healthPoint, 
+				actualSpeed, 
+				originalSpeed, 
+				magic, 
+				lastTime
+				);
+		clone.isDead = isDead;
+		clone.position = position;
+		return clone;
+	}
+	
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
 		/*String logString = "Hobbit.damage(power, bonus)";

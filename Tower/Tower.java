@@ -54,13 +54,14 @@ public class Tower extends Item
 	/**
 	 * Eddig az idopontig lesz aktiv a kod a tornyon.
 	 */
-	private int fogRemovalTime;
+	private long fogRemovalTime;
 	/**
 	 * Igaz, ha van aktiv kod a tornyon.
 	 */
 	private boolean fogActive;
 	/**
 	 * Ennyi esellyel lo kettobe a torony egy ellenfelet.
+	 * A [0, 1) intervallumba esik.
 	 */
 	private double sliceShootProbability;
 
@@ -74,7 +75,7 @@ public class Tower extends Item
 	 * @param pos  A torony pozicioja.
 	 * @param map  A palya.
 	 */
-	public Tower(int power, int as, int r, long lt, int mm, Cell pos, Map map)
+	public Tower(int power, int as, int r, long lt, int mm, Cell pos, Map map, double slice)
 	{
 		super(mm, pos);
 		this.firePower = power;
@@ -83,6 +84,8 @@ public class Tower extends Item
 		this.bonusPowers = new HashMap<String,Integer>();
 		this.lastTime = lt;
 		this.map = map;
+		this.fogActive = false;
+		sliceShootProbability = slice;
 	}
 	
 	/**
@@ -251,6 +254,37 @@ public class Tower extends Item
 	 */
 	public void shoot()
 	{
+		// Ha van kod a tornyon es lejart az ideje, akkor azt eltavolitjuk
+		if (fogActive && System.currentTimeMillis() >= fogRemovalTime ) {
+			removeFog();
+		}
+		
+		// Elkerjuk a maptol a lotavolsagon beluli ellensegeket
+		ArrayList<Enemy> enemys = map.getEnemiesInRange(this);
+		
+		// Ha van ellenseg lotavolsagon belul, akkor valakire loni fogunk
+		// veletlenszeruen
+		if (enemys != null) {
+			int random = (int)(Math.random() * enemys.size());
+			Enemy enemy = enemys.get(random);
+			boolean result = enemy.damage(firePower, bonusPowers);
+			
+			// Ha meghalt az ellenseg, akkor eltavolitjuk a palyarol
+			if (result) {
+				map.removeEnemy(enemy);
+			}
+			// Ha nem halt meg az ellenseg, akkor a tarolt valoszinusegnek
+			// megfeleloen kettobe lojuk
+			else if (Math.random() < sliceShootProbability) {
+				// Felezzuk az eleterot
+				enemy.healthPoint /= 2;
+				// Lemasoljuk az ellenseget es hozzadjuk a klont a maphoz
+				Enemy enemy2 = enemy.clone();
+				map.getEnemies().add(enemy2);
+			}
+		}
+		
+		/*
 		Enemy enemy;
 		boolean isDead = false;
 		String answerText;
@@ -289,6 +323,7 @@ public class Tower extends Item
 			map.removeEnemy(enemy);
 		}
 		Logger.Log(0, logString, this);
+		*/
 	}
 	
 	/**
@@ -297,14 +332,24 @@ public class Tower extends Item
 	 * @param duration A kod ennyi ideig lesz aktiv a tornyon.
 	 */
 	public void applyFog(int decrease, int duration) {
-		
+		// Jelezzuk, hogy van kod a tornyon
+		fogActive = true;
+		// Beallitjuk azt az idot amikor majd le kell szedni a kodot
+		fogRemovalTime = System.currentTimeMillis() + duration;
+		// Elmentjuk, hogy mennyivel csokkentettuk a lotavolsagot
+		rangeDecreaseByFog = decrease;
+		// Csokkentjuk a lotavolsagot
+		range -= decrease;
 	}
 	
 	/**
 	 * Leveszi a kodot a toronyrol.
 	 */
 	public void removeFog() {
-		
+		// Jelezzuk, hogy mar nincs kod a tornyon
+		fogActive = false;
+		// Visszaallitjuk a lotavolsagot
+		range += rangeDecreaseByFog;
 	}
 	
 	/**
@@ -314,5 +359,13 @@ public class Tower extends Item
 	 */
 	public void tick()
 	{
+		
+		long current = System.currentTimeMillis();
+		// Ha eljott a loves ideje, akkor lovunk
+		// es elmentjuk a loves idopontjat
+		if (current - lastTime >= attackSpeed) {
+			shoot();
+			lastTime = current;
+		}
 	}
 }

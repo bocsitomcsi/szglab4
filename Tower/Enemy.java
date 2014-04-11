@@ -77,6 +77,14 @@ public abstract class Enemy
 	}
 
 	/**
+	 * Visszaad egy masolatot az objektumrol. Csak shallow copy tortenik.
+	 * @return  A klon objektum.
+	 */
+	public Enemy clone() {
+		return null;
+	}
+	
+	/**
 	 * Getter a healthPoint attributumra.
 	 * @return  A healthPoint attributum.
 	 */

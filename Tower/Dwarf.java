@@ -33,6 +33,19 @@ public class Dwarf extends Enemy
 		super(hp, as, os, m, lt);
 	}
 
+	public Enemy clone() {
+		Dwarf clone = new Dwarf(
+				healthPoint, 
+				actualSpeed, 
+				originalSpeed, 
+				magic, 
+				lastTime
+				);
+		clone.isDead = isDead;
+		clone.position = position;
+		return clone;
+	}
+	
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
 		// Csokkentjuk az eleterot

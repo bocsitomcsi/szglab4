@@ -217,7 +217,7 @@ public class Saruman
 		}
 
 		if(isUsable) {
-			tower = new Tower(1, 1, 1, 1, 1, pos, map);
+			tower = new Tower(1, 1, 1, 1, 1, pos, map, 0);
 			map.addTower(tower);
 			this.changeMagicPowerBy(-1);
 			Logger.Log(0, logString, this);
