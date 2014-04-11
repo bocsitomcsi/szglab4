@@ -22,15 +22,27 @@ import java.util.Scanner;
 public class Hobbit extends Enemy
 {
 	/**
+	 * Konstruktor. Peldanyositashoz ajanlott ezt hasznalni.
+	 * Default parameterekkel jon letre a hobbit. 
+	 */
+	public Hobbit() {
+		this(
+				100, // Health
+				enemySpeeds.get("hobbit"), // Aktualis sebesseb
+				enemySpeeds.get("hobbit"), // Eredeti sebesseg
+				30 // Varazsero
+				);
+	}
+	
+	/**
 	 * Konstruktor.
 	 * @param hp  eletero.
 	 * @param as  Az aktualis sebesseg.
 	 * @param os  Az eredeti, lassitas nelkuli sebesseg.
 	 * @param m  Az ellenseg halalakor szarumanhoz kerulo varazsero.
-	 * @param lt  Az az idopont amikor az ellenseg legutoljara lepett.
 	 */
-	public Hobbit(int hp, int as, int os, int m, long lt) {
-		super(hp, as, os, m, lt);
+	public Hobbit(int hp, int as, int os, int m) {
+		super(hp, as, os, m);
 	}
 
 	public Enemy clone() {
@@ -38,9 +50,9 @@ public class Hobbit extends Enemy
 				healthPoint, 
 				actualSpeed, 
 				originalSpeed, 
-				magic, 
-				lastTime
+				magic
 				);
+		clone.lastTime = lastTime;
 		clone.isDead = isDead;
 		clone.position = position;
 		return clone;

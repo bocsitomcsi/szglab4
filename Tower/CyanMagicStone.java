@@ -19,6 +19,20 @@ package Tower;
 public class CyanMagicStone extends MagicStone
 {
 	/**
+	 * Konstruktor. Peldanyositashoz ajanlott ezt hasznalni.
+	 * Default parameterekkel jon letre a cian ko. 
+	 */
+	public CyanMagicStone() {
+		this(
+				"cyan",	// A varazsko neve 
+				100,	// Power bonus
+				100, 	// Speed bonus
+				100, 	// Range bonus
+				100		// Slowrate bonus
+				);
+	}
+	
+	/**
 	 * Konstruktor.
 	 * @param n  A varazsko neve.
 	 * @param fp  Egy torony sebzesi erejenek novelese.
@@ -29,5 +43,4 @@ public class CyanMagicStone extends MagicStone
 	public CyanMagicStone(String n, int fp, int as, int r, double sr) {
 		super(n, fp, as, r, sr);
 	}
-	//Lasd purplemagicstone
 }

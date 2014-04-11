@@ -18,6 +18,20 @@ package Tower;
 public class PurpleMagicStone extends MagicStone
 {
 	/**
+	 * Konstruktor. Peldanyositashoz ajanlott ezt hasznalni.
+	 * Default parameterekkel jon letre a lila ko. 
+	 */
+	public PurpleMagicStone() {
+		this(
+				"purple",	// A varazsko neve 
+				100,	// Power bonus
+				100, 	// Speed bonus
+				100, 	// Range bonus
+				100		// Slowrate bonus
+				);
+	}
+	
+	/**
 	 * Konstruktor.
 	 * @param n  A varazsko neve.
 	 * @param fp  Egy torony sebzesi erejenek novelese.
@@ -27,7 +41,5 @@ public class PurpleMagicStone extends MagicStone
 	 */
 	public PurpleMagicStone(String n, int fp, int as, int r, double sr) {
 		super(n, fp, as, r, sr);
-		// TODO Auto-generated constructor stub
 	}
-	//Itt is irjunk speci konstruktort?
 }

@@ -58,8 +58,7 @@ public class MagicStone
 	 */
 	public MagicStone(String n, int fp, int as, int r, double sr)
 	{
-		//szerintem ide kene a switchcase szerkezet de most nem latom!!! (enegyelore igy irom meg hogy forduljon)
-		this.name = n; //Ez igy jo vagy konstruktorosan??
+		this.name = n; 
 		this.firePower = fp;
 		this.attackSpeed = as;
 		this.range = r;

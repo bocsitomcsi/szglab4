@@ -12,6 +12,8 @@ import java.util.Scanner;
 //
 //
 
+import Tower.Cell.CellType;
+
 
 
 
@@ -158,6 +160,21 @@ public class Saruman
 	 */
 	public boolean createStone(String type)
 	{
+		// Ha van eleg varazsero akkor letrehozzuk a kovet
+		/*if (magicPower >= magicStoneCost) {
+			// Letrehozzuk a megfelelo kovet
+			if (condition) {
+				
+			}
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+		*/
+		return false;
+		/*
 		String logString = "Saruman.createStone(type)";
 		Logger.Log(1, logString, this);
 
@@ -177,6 +194,7 @@ public class Saruman
 		Logger.Log(0, logString, this);
 
 		return true;
+		*/
 	}
 
 	/**
@@ -192,6 +210,27 @@ public class Saruman
 	 */
 	public boolean addTower(Cell pos)
 	{
+		// Ha van eleg varazsero es a tornyot le lehet rakni a megadott cellara,
+		// akkor letrehozzuk a tornyot
+		if (magicPower >= towerCost && pos.getCellType() == CellType.Terrain && !pos.getBusy()) {
+			// Hozzadjuk a tornyot
+			Tower tower = new Tower(pos, map);
+			map.addTower(tower);
+			
+			// Csokkentjuk a varazserot
+			magicPower -= towerCost;
+			// Jelezzuk a cella foglaltsagat
+			pos.setBusy(true);
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		
+		
+		/*
 		String logString = "Saruman.addTower(pos)";
 		Logger.Log(1, logString, this);
 		String answerText;
@@ -227,6 +266,7 @@ public class Saruman
 		Logger.Log(0, logString, this);
 
 		return false;
+		*/
 	}
 
 	/**
@@ -242,6 +282,25 @@ public class Saruman
 	 */
 	public boolean addObstacle(Cell pos)
 	{
+		// Ha van eleg varazsero es az akadalyt le lehet rakni a megadott cellara,
+		// akkor letrehozzuk az akadalyt
+		if (magicPower >= obstacleCost && pos.getCellType() == CellType.Road && !pos.getBusy()) {
+			// Hozzadjuk az akadalyt
+			Obstacle obstacle = new Obstacle(pos);
+			map.addObstacle(obstacle);
+			
+			// Csokkentjuk a varazserot
+			magicPower -= obstacleCost;
+			// Jelezzuk a cella foglaltsagat
+			pos.setBusy(true);
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		/*
 		String logString = "Saruman.addObstacle(pos)";
 		Logger.Log(1, logString, this);
 
@@ -278,6 +337,7 @@ public class Saruman
 		Logger.Log(0, logString, this);
 
 		return false;
+		*/
 	}
 
 	/**
@@ -289,6 +349,17 @@ public class Saruman
 	 */
 	public boolean upgradeItem(Item item)
 	{
+		// Fejlesztjuk az item-et
+		boolean result = item.upgrade(selectedMagicStone);
+		
+		// Ha sikeres volt a fejlesztes akkor megsemmisitjuk a kovet
+		if (result) {
+			selectedMagicStone = null;
+		}
+		
+		return result;
+		
+		/*
 		String logString = "Saruman.upgradeItem(item)";
 		Logger.Log(1, logString, this);
 		
@@ -296,6 +367,7 @@ public class Saruman
 		
 		Logger.Log(0, logString, this);
 		return true;
+		*/
 	}
 
 	/**

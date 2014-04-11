@@ -1,4 +1,5 @@
 package Tower;
+
 import java.util.HashMap;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
@@ -31,6 +32,19 @@ public class Obstacle extends Item
 	 */
 	private HashMap<String, Double> bonusSlowRates;
 
+	/**
+	 * Konstruktor. Peldanyositashoz ajanlott ezt hasznalni.
+	 * Default parameterekkel jon letre az akadaly. 
+	 * @param pos
+	 */
+	public Obstacle(Cell pos) {
+		this(
+				0.25, // Lassitas
+				3, // Varazskovek maximalis szama
+				pos
+				);
+	}
+	
 	/**
 	 * Konstruktor.
 	 * @param sr  A lassitasi szorzo.
@@ -121,7 +135,7 @@ public class Obstacle extends Item
 					bonusSlowRates.put(enemy, stone.bonusSlowRates.get(enemy));
 				}
 			}
-			
+
 			return true;
 		}
 		

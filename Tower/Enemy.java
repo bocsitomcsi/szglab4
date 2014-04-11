@@ -49,13 +49,24 @@ public abstract class Enemy
 	 */
 	protected long lastTime;
 	/**
-	 * Az egyes ellenseg tipusok sebessegei.
-	 */
-	public static HashMap<String, Integer> enemySpeeds;
-	/**
 	 * Az ellenseg pozicioja.
 	 */
 	protected Cell position;
+	/**
+	 * Az egyes ellenseg tipusok sebessegei.
+	 */
+	public static HashMap<String, Integer> enemySpeeds = 
+			new HashMap<String,Integer>();
+	/**
+	 * Statikus inicializalo blokk az egyes ellenseg tipusok
+	 * alapertelmezett sebessegeinek beallitasara
+	 */
+	static {
+		enemySpeeds.put("dwarf", 2000);
+		enemySpeeds.put("elf", 500);
+		enemySpeeds.put("hobbit", 700);
+		enemySpeeds.put("human", 1000);
+	}
 
 	/**
 	 * Konstruktor.
@@ -63,16 +74,15 @@ public abstract class Enemy
 	 * @param as  Az aktualis sebesseg.
 	 * @param os  Az eredeti, lassitas nelkuli sebesseg.
 	 * @param m  Az ellenseg halalakor szarumanhoz kerulo varazsero.
-	 * @param lt  Az az idopont amikor az ellenseg legutoljara lepett.
 	 */
-	public Enemy(int hp, int as, int os, int m, long lt)
+	public Enemy(int hp, int as, int os, int m)
 	{
 		this.healthPoint = hp;
 		this.actualSpeed = as;
 		this.originalSpeed = os;
 		this.magic = m;
 		this.isDead = false;
-		this.lastTime = lt;
+		this.lastTime = System.currentTimeMillis();
 		this.enemySpeeds = new HashMap<String,Integer>();
 	}
 
@@ -80,9 +90,7 @@ public abstract class Enemy
 	 * Visszaad egy masolatot az objektumrol. Csak shallow copy tortenik.
 	 * @return  A klon objektum.
 	 */
-	public Enemy clone() {
-		return null;
-	}
+	public abstract Enemy clone();
 	
 	/**
 	 * Getter a healthPoint attributumra.

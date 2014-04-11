@@ -66,23 +66,41 @@ public class Tower extends Item
 	private double sliceShootProbability;
 
 	/**
+	 * Konstruktor. Peldanyositashoz ajanlott ezt hasznalni.
+	 * Default parameterekkel jon letre a torony. 
+	 * @param pos
+	 * @param m
+	 */
+	public Tower(Cell pos, Map m) {
+		this(
+				20, // Power
+				2000, // AttackSpeed
+				1, // Range
+				3, // Varazskovek maximalis szama
+				pos, // Pozicio
+				m, // Map referencia
+				0.1 // Kettobe vagas eselye
+				);
+	}
+	
+	/**
 	 * Konstruktor.
 	 * @param power  Sebzesi ero.
 	 * @param as  A torony lovesei kozott eltelt ido.
 	 * @param r  Lotavolsag.
-	 * @param lt  Az az idopont amikor a torony legutoljara lott.
 	 * @param mm  A toronyra rakhato varazskovek maximalis szama.
 	 * @param pos  A torony pozicioja.
 	 * @param map  A palya.
+	 * @param slice  Az a valoszniuseg, amely alapjan kettobe lo a torony egy ellenseget.
 	 */
-	public Tower(int power, int as, int r, long lt, int mm, Cell pos, Map map, double slice)
+	public Tower(int power, int as, int r, int mm, Cell pos, Map map, double slice)
 	{
 		super(mm, pos);
 		this.firePower = power;
 		this.attackSpeed = as;
 		this.range = r;
 		this.bonusPowers = new HashMap<String,Integer>();
-		this.lastTime = lt;
+		this.lastTime = System.currentTimeMillis();
 		this.map = map;
 		this.fogActive = false;
 		sliceShootProbability = slice;

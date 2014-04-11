@@ -276,16 +276,16 @@ public class Map
 		Enemy enemy;
 		
 		if(type.equals("human")) {
-			enemy = new Human(100, 5, 5, 30, 0);
+			enemy = new Human(100, 5, 5, 30);
 			Logger.AddName(enemy, "HumanID");
 		} else if(type.equals("elf")) {
-			enemy = new Elf(100, 5, 5, 30, 0);
+			enemy = new Elf(100, 5, 5, 30);
 			Logger.AddName(enemy, "ElfID");
 		} else if(type.equals("dwarf")) {
-			enemy = new Dwarf(100, 5, 5, 30, 0);
+			enemy = new Dwarf(100, 5, 5, 30);
 			Logger.AddName(enemy, "DwarfID");
 		} else { // it's a hobbit
-			enemy = new Hobbit(100, 5, 5, 30, 0);
+			enemy = new Hobbit(100, 5, 5, 30);
 			Logger.AddName(enemy, "HobbitID");
 		}
 

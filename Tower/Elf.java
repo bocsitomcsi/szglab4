@@ -21,17 +21,42 @@ import java.util.HashMap;
 public class Elf extends Enemy
 {
 	/**
+	 * Konstruktor. Peldanyositashoz ajanlott ezt hasznalni.
+	 * Default parameterekkel jon letre az elf. 
+	 */
+	public Elf() {
+		this(
+				150, // Health
+				enemySpeeds.get("elf"), // Aktualis sebesseb
+				enemySpeeds.get("elf"), // Eredeti sebesseg
+				30 // Varazsero
+				);
+	}
+	
+	/**
 	 * Konstruktor.
 	 * @param hp  eletero.
 	 * @param as  Az aktualis sebesseg.
 	 * @param os  Az eredeti, lassitas nelkuli sebesseg.
 	 * @param m  Az ellenseg halalakor szarumanhoz kerulo varazsero.
-	 * @param lt  Az az idopont amikor az ellenseg legutoljara lepett.
 	 */
-	public Elf(int hp, int as, int os, int m, long lt) {
-		super(hp, as, os, m, lt);
+	public Elf(int hp, int as, int os, int m) {
+		super(hp, as, os, m);
 	}
 
+	public Enemy clone() {
+		Elf clone = new Elf(
+				healthPoint, 
+				actualSpeed, 
+				originalSpeed, 
+				magic
+				);
+		clone.lastTime = lastTime;
+		clone.isDead = isDead;
+		clone.position = position;
+		return clone;
+	}
+	
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
 		// Csokkentjuk az eleterot
