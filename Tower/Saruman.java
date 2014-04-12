@@ -161,19 +161,33 @@ public class Saruman
 	public boolean createStone(String type)
 	{
 		// Ha van eleg varazsero akkor letrehozzuk a kovet
-		/*if (magicPower >= magicStoneCost) {
+		if (magicPower >= magicStoneCost) {
 			// Letrehozzuk a megfelelo kovet
-			if (condition) {
-				
+			if (type.equals("cyan")) {
+				selectedMagicStone = new CyanMagicStone();
+			} else if (type.equals("green")) {
+				selectedMagicStone = new GreenMagicStone();
+			} else if (type.equals("purple")) {
+				selectedMagicStone = new PurpleMagicStone();
 			}
+			// Ha nem letezo varazsko nevet adtak meg akkor false-t
+			// adunk vissza
+			else {
+				return false;
+			}
+			
+			// Csokkentjuk a varazserot
+			magicPower -= magicStoneCost;
 			
 			return true;
 		}
+		// Ha nincs eleg varazsero false-t adunk vissza
 		else {
 			return false;
 		}
-		*/
-		return false;
+		
+		
+		
 		/*
 		String logString = "Saruman.createStone(type)";
 		Logger.Log(1, logString, this);
