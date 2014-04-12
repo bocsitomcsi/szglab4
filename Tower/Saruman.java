@@ -393,7 +393,7 @@ public class Saruman
 		String logString = "Saruman.changeMagicPowerBy(power)";
 		Logger.Log(1, logString, this);
 
-		this.setMagicPower(4);
+		magicPower += power;
 
 		Logger.Log(0, logString, this);
 	}

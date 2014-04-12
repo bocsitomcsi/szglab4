@@ -1,6 +1,11 @@
 package Tower;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.Map.Entry;
+
+import Tower.Cell.CellType;
 
 //
 //
@@ -273,24 +278,32 @@ public class Map
 	{
 		String logString = "Map.addEnemy(type, position)";
 		Logger.Log(1, logString, this);
-		Enemy enemy;
 		
-		if(type.equals("human")) {
-			enemy = new Human(100, 5, 5, 30);
+		Enemy enemy;
+		// Letrehozzuk a megfelelo ellenseget
+		if (type.equals("human")) {
+			enemy = new Human();
 			Logger.AddName(enemy, "HumanID");
-		} else if(type.equals("elf")) {
-			enemy = new Elf(100, 5, 5, 30);
+		} else if (type.equals("elf")) {
+			enemy = new Elf();
 			Logger.AddName(enemy, "ElfID");
-		} else if(type.equals("dwarf")) {
-			enemy = new Dwarf(100, 5, 5, 30);
+		} else if (type.equals("dwarf")) {
+			enemy = new Dwarf();
 			Logger.AddName(enemy, "DwarfID");
-		} else { // it's a hobbit
-			enemy = new Hobbit(100, 5, 5, 30);
+		} else if (type.equals("hobbit")) { 
+			enemy = new Hobbit();
 			Logger.AddName(enemy, "HobbitID");
 		}
+		// Ha nem letezo ellenseg tipust kaptunk akkor 
+		// nem hozunk letre semmit
+		else {
+			return;
+		}
 
+		// Beallitjuk az ellenseg poziciojat es hozzaadjuk a map-hoz
 		enemy.setPosition(pos);
 		enemies.add(enemy);
+		
 		Logger.Log(0, logString, this);
 	}
 
@@ -305,7 +318,9 @@ public class Map
 		String logString = "Map.removeEnemy(enemy)";
 		Logger.Log(1, logString, this);
 
-		saruman.changeMagicPowerBy(1);
+		// Noveljuk saruman varazserejet
+		saruman.changeMagicPowerBy(enemy.getMagic());
+		// Eltavolitjuk az ellenseget
 		enemies.remove(enemy);
 
 		Logger.Log(0, logString, this);
@@ -319,6 +334,7 @@ public class Map
 		String logString = "Map.addTower(tower)";
 		Logger.Log(1, logString, this);
 
+		// Hozzadjuk a tornyot a listahoz
 		towers.add(tower);
 
 		Logger.Log(0, logString, this);
@@ -332,6 +348,7 @@ public class Map
 		String logString = "Map.addObstacle(obstacle)";
 		Logger.Log(1, logString, this);
 
+		// Hozzaadjuk az akadalyt a listahoz
 		obstacles.add(obstacle);
 
 		Logger.Log(0, logString, this);
@@ -349,6 +366,44 @@ public class Map
 	 */
 	public ArrayList<Enemy> getEnemiesInRange(Tower tower)
 	{
+		// Lekerjuk a lotavolsagon beluli cellakat egy halmazba
+		Set<Cell> cellsInRange = new HashSet<Cell>();
+		getNeighbourCellsInRange(
+				tower.getPosition(), 
+				tower.getRange(), 
+				cellsInRange
+				);
+		
+		// Eltavolitjuk azokat a cellakat, amelyek terep tipusuak
+		// mert azokon nem lehet ellenseg
+		for (Cell cell : cellsInRange) {
+			if (cell.getCellType() == CellType.Terrain) {
+				cellsInRange.remove(cell);
+			}
+		}
+		
+		// Vegigmegyunk az ellensegek listajan
+		ArrayList<Enemy> enemiesInRange = new ArrayList<Enemy>();
+		for (Enemy enemy : enemies) {
+			// Ha az ellenseg olyan cellan van, amely benne van a listankban,
+			// akkor hozzadjuk az ellenseget az enemiesInRange-hez
+			if (cellsInRange.contains(enemy.getPosition())) {
+				enemiesInRange.add(enemy);
+			}
+		}
+		
+		// Ha talaltunk ellenseget lotavolsagon belul,
+		// akkor visszaadjuk a listat
+		if (!enemiesInRange.isEmpty()) {
+			return enemiesInRange;
+		}
+		
+		// Kulonben null-t adunk vissza
+		return null;
+		
+		
+		
+		/*
 		String logString = "Map.getEnemiesInRange(tower)";
 		Logger.Log(1, logString, this);
 		ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
@@ -360,8 +415,35 @@ public class Map
 		}
 		Logger.Log(0, logString, this);
 		return enemyList;
+		*/
 	}
 
+	/**
+	 * Rekurziv metodus, amely a kapott cellabol kiindulva elmenti 
+	 *  a set kollekcioba a cell-bol range darab lepessel elerheto
+	 *  cellakat.
+	 * @param cell A kiindulo cella.
+	 * @param range A tavolsag, avagy a lepesek szama, 
+	 * 	amennyit meg lephetunk a cellabol.
+	 * @param set A halmaz, amibe a range lepesbol elerheto cellakat mentjuk.
+	 */
+	private void getNeighbourCellsInRange(Cell cell, int range, Set<Cell> set) {
+		// Vegigmegyunk a cella szomszedain
+		for (Entry<Cell, Boolean> neighbour : cell.getNeighbours().values()) {
+			Cell neighbourCell = neighbour.getKey();
+			// Ha a tavolsag nagyobb 0-nal, akkor
+			// a kozvetlen szomszedot elmentjuk.
+			if (range > 0) {
+				set.add(neighbourCell);
+			}
+			// Ha a tavolsag 1-nel is nagyobb, akkor a kozvetlen szomszedon
+			// is meg kell hivni a fuggvenyt de 1-el kisebb tavolsaggal
+			if (range > 1) {
+				getNeighbourCellsInRange(neighbourCell, range - 1, set);
+			}
+		}
+	}
+	
 	/**
 	 * A palyan levo ellensegeket, es tornyokat ertesiti az ido mulasarol.
 	 * Ehhez a towers es enemies listakban tarolt objektumok tick fuggvenyet hivja meg. 
