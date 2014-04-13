@@ -1,4 +1,5 @@
 package Tower;
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -52,6 +53,10 @@ public class Map
 	 */
 	private long roundStartedTime;
 	/**
+	 * Az akutalis kor sorszama.
+	 */
+	private long roundNumber;
+	/**
 	 * A palyan levo cellak.
 	 */
 	private ArrayList<Cell> cells;
@@ -100,20 +105,27 @@ public class Map
 	/**
 	 * Konstruktor.
 	 * @param neighbour  A palyan szereplo cellak szomszedainak maximalis szama.
-	 * @param lastEnemy  Az az idopont, amikor legutoljara ellenseget adtak a palyahoz.
-	 * @param rt  Az aktualis kor kezdetenek idopontja.
 	 */
-	public Map(int neighbour, long lastEnemy, long rt) 
+	public Map(int neighbour) 
 	{
-		this.neighbourNumber = neighbour;
-		this.lastEnemyAddedTime = lastEnemy;
-		this.roundStartedTime = rt;
-		
+		long current = System.currentTimeMillis();
+
 		this.cells = new ArrayList<Cell>();
 		this.enemies = new ArrayList<Enemy>();
 		this.obstacles = new ArrayList<Obstacle>();
 		this.towers = new ArrayList<Tower>();
-		this.round = new Round(1,1,1,1,1,1);
+		
+		this.neighbourNumber = neighbour;
+		this.lastEnemyAddedTime = current;
+		this.roundStartedTime = current;
+		
+		// Fog tulajdonsagok
+		fogApplianceTime = 5000;
+		lastFog = current;
+		
+		// Round letrehozasa
+		this.round = new Round();
+		roundNumber = 1;
 	}
 
 	/**
@@ -453,6 +465,131 @@ public class Map
 	 */
 	public GameResult simulateWorld()
 	{
+		boolean gameRunning = true;
+		GameResult gameResult = GameResult.Loose;
+		
+		// GAME LOOP
+		while (gameRunning) {
+			long currentTime = System.currentTimeMillis();
+			int random;
+			
+			// ELLENSEGEK ES TORNYOK ERTESITESE
+			for (Enemy enemy : enemies) {
+				enemy.tick();
+			}
+			for (Tower tower : towers) {
+				tower.tick();
+			}
+			
+			// FOG ELHELYEZESE
+			// Ha eltelt a legutobbi kod elhelyezese ota a megfelelo ido,
+			// akkor elhelyezunk egy kodot egy toronyra
+			if (currentTime - lastFog >= fogApplianceTime) {
+				// Vegigiteralunk a tornyokon
+				ArrayList<Tower> fogTowers = new ArrayList<Tower>();
+				for (Tower tower : towers) {
+					// Ha nincs kod a tornyon akkor betesszuk a kod mentes
+					// tornyok listajaba
+					if (!tower.getFogActive()) {
+						fogTowers.add(tower);
+					}
+				}
+				
+				// Ha van kod mentes torony
+				if (!fogTowers.isEmpty()) {
+					// Kivalasztunk egyet veletlenszeruen
+					random = (int)(Math.random() * fogTowers.size());
+					Tower fogTower = fogTowers.get(random);
+					
+					// Elhelyezzuk rajta a kodot
+					fogTower.applyFog(fogDecreason, fogDuration);
+					
+					// Elmentjuk az elhelyezes idejet
+					lastFog = currentTime;
+				}
+			}
+			
+			// ROUND KARBANTARTAS
+			// Ha veget ert az aktualis kor es ez nem az utolso volt akkor,
+			// atlepunk a kovetkezo korbe
+			if (currentTime - roundStartedTime >= round.roundTime && 
+					roundNumber < round.maxRounds) {
+				// Leptetjuk a kort
+				round.enemyNumber *= round.enemyNumberMultiplier;
+				round.enemyAddingTime *= round.enemyAddingTimeMultiplier;
+				// Noveljuk az aktualis kor sorszamat
+				roundNumber++;
+				// Beallitjuk az uj kor kezdetenek idejet
+				roundStartedTime = currentTime;
+			}
+			
+			// ENEMY HOZZAADAS
+			// Ha meg tart az aktualis kor es eljott 
+			// az ellenseg hozzaadasanak ideje
+			if (currentTime - roundStartedTime < round.roundTime &&
+					currentTime - lastEnemyAddedTime >= round.enemyAddingTime) {
+				// A round-ban tarolt enemyNumber erteknek megfeleloen
+				// hozaadunk enemyNumber darab ellenseget a palyahoz
+				for (int i = 0; i < round.enemyNumber; i++) {
+					// Kivalasztunk veletlenszeruen egy ellenseg tipust
+					String[] enemyTypes = {"dwarf", "elf", "hobbit", "human"};
+					random = (int)(Math.random() * enemyTypes.length);
+					String enemyType = enemyTypes[random];
+					
+					// Kigyujtjuk a StartPoint tipusu cellakat
+					ArrayList<Cell> startPoints = new ArrayList<Cell>();
+					for (Cell cell : cells) {
+						if (cell.getCellType() == CellType.StartPoint) {
+							startPoints.add(cell);
+						}
+					}
+					// Kivalasztunk egyet veletlenszeruen
+					random = (int)(Math.random() * startPoints.size());
+					Cell startPoint = startPoints.get(random);
+					
+					// Hozzaadjuk az ellenseget a palyahoz
+					addEnemy(enemyType, startPoint);
+				}
+				
+				// Beallitjuk a legutoljara hozzaadott ellenseg idejet
+				lastEnemyAddedTime = currentTime;
+			}
+			
+			// JATEK VEGE CHECK
+			// Ha elfogytak az ellensegek es nincs tobb kor,
+			// akkor a jatek veget ert gyozelemmel
+			if (enemies.isEmpty() && currentTime - roundStartedTime >= round.roundTime) {
+				gameRunning = false;
+				gameResult = GameResult.Win;
+			}
+			// Ha nincs gyozelem, akkor megnezzuk, hogy vesztettunk-e
+			else {
+				// Vegigiteralunk az ellensegeken es megnezzuk,
+				// hogy van-e valaki vegponton
+				for (Enemy enemy : enemies) {
+					// Ha valaki vegponton van akkor jelezzuk a vereseget
+					if (enemy.getPosition().getCellType() == CellType.EndPoint) {
+						gameRunning = false;
+						gameResult = GameResult.Loose;
+						break;
+					}
+				}
+			}
+			
+			// Ha meg nem ert veget a jatek akkor varunk dt idot
+			if (gameRunning) {
+				try {
+					Thread.sleep(dt);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		// Visszaterunk az eredmennyel
+		return gameResult;
+				
+		/*
 		String logString = "Map.simulateWorld()";
 		Logger.Log(1, logString, this);
 
@@ -489,5 +626,6 @@ public class Map
 		}
 		Logger.Log(0, logString, this);
 		return null;
+		*/
 	}
 }

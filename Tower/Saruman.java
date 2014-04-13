@@ -48,6 +48,21 @@ public class Saruman
 	private Map map;
 
 	/**
+	 * Konstruktor. Peldanyositashoz ajanlott ezt hasznalni.
+	 * A tornyok, akadalyok, varazskovek alapertelmezett koltsei
+	 *  predefinialtak. 
+	 */
+	public Saruman(Map map) {
+		this(
+				200,	// Varazsero
+				50, 	// Torony ar
+				80, 	// Akadaly ar
+				100, 	// Varazsko ar
+				map		// Map referencia
+				);
+	}
+	
+	/**
 	 * Konstruktor.
 	 * @param mp  A rendelkezesre allo varazsero.
 	 * @param tc  Egy torony lerakasanak koltsege.

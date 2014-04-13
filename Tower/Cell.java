@@ -49,14 +49,13 @@ public class Cell
 	private CellType type;
 	
 	/**
-	 * Konstruktor.
-	 * @param b  A foglaltsag allapota.
+	 * Konstruktor. A foglaltsag allapota false lesz alapbol.
 	 * @param map  A cellat tartalmazo Map objektum.
 	 * @param ct  A cella tipusa.
 	 */
-	public Cell(boolean b, Map map, CellType ct)
+	public Cell(Map map, CellType ct)
 	{
-		this.busy = b;
+		this.busy = false;
 		this.map = map;
 		this.neighbours = new HashMap<Map.Direction, Entry<Cell, Boolean>>();
 		this.type = ct;

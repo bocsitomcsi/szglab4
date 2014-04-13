@@ -21,27 +21,42 @@ public class Round
 	/**
 	 * Az adott idokozonkent a palyahoz adando ellensegek szama.
 	 */
-	private int enemyNumber;
+	public int enemyNumber;
 	/**
 	 * Ennyi idonkent kell hozzaadni ellenfeleket a palyahoz.
 	 */
-	private int enemyAddingTime;
+	public int enemyAddingTime;
 	/**
 	 * Az enemyNumber attributumot minden kor vegen ennyivel kell szorozni.
 	 */
-	private double enemyNumberMultiplier;
+	public double enemyNumberMultiplier;
 	/**
 	 * Az enemyAddingTime attributumot minden kor vegen ennyivel kell szorozni.
 	 */
-	private double enemyAddingTimeMultiplier;
+	public double enemyAddingTimeMultiplier;
 	/**
 	 * A kor ennyi ideig tart.
 	 */
-	private int roundTime;
+	public int roundTime;
 	/**
 	 * osszesen ennyi kor lesz.
 	 */
-	private int maxRounds;
+	public int maxRounds;
+	
+	/**
+	 * Default konstruktor. A konstruktorban definialt 
+	 *  adatoknak megfeleloen hozza letre a Round-ot.
+	 */
+	public Round() {
+		this(
+				1, 	// EnemyNumber
+				4000, 	// EnemyAddingTime
+				2, 	// Number multiplier
+				0.8,	// AddingTime multiplier
+				30000, 	// Round time
+				3		// Max rounds number
+				);
+	}
 	
 	/**
 	 * Konstruktor.
