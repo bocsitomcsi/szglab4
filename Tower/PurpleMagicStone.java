@@ -24,13 +24,13 @@ public class PurpleMagicStone extends MagicStone
 	public PurpleMagicStone() {
 		this(
 				"purple",	// A varazsko neve 
-				100,	// Power bonus
-				100, 	// Speed bonus
-				100, 	// Range bonus
-				100		// Slowrate bonus
+				100,		// Power bonus
+				100,		// Speed bonus
+				100,		// Range bonus
+				100			// Slowrate bonus
 				);
 	}
-	
+
 	/**
 	 * Konstruktor.
 	 * @param n  A varazsko neve.

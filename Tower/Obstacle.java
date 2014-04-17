@@ -39,12 +39,12 @@ public class Obstacle extends Item
 	 */
 	public Obstacle(Cell pos) {
 		this(
-				0.25, // Lassitas
-				3, // Varazskovek maximalis szama
+				0.25,	// Lassitas
+				3,		// Varazskovek maximalis szama
 				pos
 				);
 	}
-	
+
 	/**
 	 * Konstruktor.
 	 * @param sr  A lassitasi szorzo.
@@ -57,7 +57,7 @@ public class Obstacle extends Item
 		this.slowRate = sr;
 		bonusSlowRates = new HashMap<String,Double>();
 	}
-	
+
 	/**
 	 * Getter a slowRate attributumra.
 	 * @return  A slowRate attributum.
@@ -70,7 +70,7 @@ public class Obstacle extends Item
 		Logger.Log(0, logString, this);
 		return this.slowRate;
 	}
-	
+
 	/**
 	 * Getter a bonusSlowRates attributumra.
 	 * @return  A bonusSlowRates attributum.
@@ -83,7 +83,7 @@ public class Obstacle extends Item
 		Logger.Log(0, logString, this);
 		return this.bonusSlowRates;
 	}
-	
+
 	/**
 	 * Setter a slowRate attributumra.
 	 * @param b  A slowRate attributum kivant erteke.
@@ -92,7 +92,7 @@ public class Obstacle extends Item
 	{
 		this.slowRate = sr;
 	}
-	
+
 	/**
 	 * Setter a bonusSlowRates attributumra.
 	 * @param b  A bonusSlowRates attributum kivant erteke.
@@ -101,7 +101,7 @@ public class Obstacle extends Item
 	{
 		this.bonusSlowRates = bonus;
 	}
-	
+
 	/**
 	 * /**
 	 * Megvizsgalja, hogy a maxMagicStoneNumber attributum erteke kisebb-e
@@ -116,10 +116,10 @@ public class Obstacle extends Item
 		if (maxMagicStoneNumber < magicStones.size()) {
 			// Elrakjuk a kovet az akadalyba
 			magicStones.add(stone);
-			
+
 			// Noveljuk a lassitasi szorzot
 			slowRate *= stone.slowRate;
-			
+
 			// Modositjuk a bonusz lassitasi szorzokat
 			for (String enemy : stone.bonusSlowRates.keySet()) {
 				// Ha van ilyen ellenseghez tartozo bejegyzes,
@@ -138,14 +138,14 @@ public class Obstacle extends Item
 
 			return true;
 		}
-		
+
 		// Ha nem lehetett fejleszteni akkor visszaterunk false-szal
 		return false;
-		
+
 		/*
 		String logString = "Obstacle.upgrade(stone)";
 		Logger.Log(1, logString, this);
-		
+
 		Logger.Log(0, logString, this);
 		return true;
 		*/

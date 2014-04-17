@@ -137,7 +137,7 @@ public abstract class Enemy
 	{
 		return this.magic;
 	}
-	
+
 	/**
 	 * Getter a lastTime attributumra.
 	 * @return  A lastTime attributum.
@@ -146,7 +146,7 @@ public abstract class Enemy
 	{
 		return this.lastTime;
 	}
-	
+
 	/**
 	 * Getter az isDead attributumra.
 	 * @return  Az isDead attributum.
@@ -155,7 +155,7 @@ public abstract class Enemy
 	{
 		return this.isDead;
 	}
-	
+
 	/**
 	 * Getter a position attributumra.
 	 * @return  A position attributum.
@@ -266,29 +266,29 @@ public abstract class Enemy
 				nextCells.add(cell);
 			}
 		}
-		
+
 		// Csak akkor lepunk, ha van jo szomszedos cella
 		if (!nextCells.isEmpty()) {
 			// A szomszedos cellak kozul kivalasztunk egy veletlen elemet
 			// es beallitjuk a pozicionkat
 			int random = (int)(Math.random() * nextCells.size());
 			position = nextCells.get(random);
-			
+
 			// Visszallitjuk a sebesseget az eredetire ha kell
 			if (actualSpeed != originalSpeed) {
 				actualSpeed = originalSpeed;
 			}
 		}
-		
+
 		// Elkerjuk az uj cellan levo akadalyt, es ha van akadaly akkor lassitunk
 		Obstacle obstacle = position.getObstacle();
 		if (obstacle != null) {
 			actualSpeed *= obstacle.getSlowRate();
 		}
-		
+
 		return obstacle;
 	}
-	
+
 	/**
 	 * Az ellenseg eleterejet a parameterkent kapott power-rel,
 	 *  es a bonus kollekcioban tarolt az ellenseg konkret tipusahoz

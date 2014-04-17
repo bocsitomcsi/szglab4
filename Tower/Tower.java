@@ -73,16 +73,16 @@ public class Tower extends Item
 	 */
 	public Tower(Cell pos, Map m) {
 		this(
-				20, // Power
-				2000, // AttackSpeed
-				1, // Range
-				3, // Varazskovek maximalis szama
-				pos, // Pozicio
-				m, // Map referencia
-				0.1 // Kettobe vagas eselye
+				20,		// Power
+				2000,	// AttackSpeed
+				1,		// Range
+				3,		// Varazskovek maximalis szama
+				pos,	// Pozicio
+				m,		// Map referencia
+				0.1		// Kettobe vagas eselye
 				);
 	}
-	
+
 	/**
 	 * Konstruktor.
 	 * @param power  Sebzesi ero.
@@ -105,7 +105,7 @@ public class Tower extends Item
 		this.fogActive = false;
 		sliceShootProbability = slice;
 	}
-	
+
 	/**
 	 * Getter a firePower attributumra.
 	 * @return  A firePower attributum.
@@ -158,7 +158,7 @@ public class Tower extends Item
 	public boolean getFogActive() {
 		return fogActive;
 	}
-	
+
 	/**
 	 * Setter a firePower attributumra.
 	 * @param power  A firePower attributum kivant erteke.
@@ -203,7 +203,7 @@ public class Tower extends Item
 	{
 		this.bonusPowers = bonus;
 	}
-	
+
 	/**
 	 * Setter a fogActive attributumra.
 	 * @param bonus  A fogActive attributum kivant erteke.
@@ -211,7 +211,7 @@ public class Tower extends Item
 	public void setFogActive(boolean fogActive) {
 		this.fogActive = fogActive;
 	}
-	
+
 	/**
 	 * Megvizsgalja, hogy a maxMagicStoneNumber attributum erteke kisebb-e
 	 *  mint a magicStones lista hossza, es ha igen akkor a kapott varazsko
@@ -225,12 +225,12 @@ public class Tower extends Item
 		if (maxMagicStoneNumber < magicStones.size()) {
 			// Elrakjuk a kovet az akadalyba
 			magicStones.add(stone);
-			
+
 			// Fejlesztjuk a tornyot
 			firePower += stone.firePower;
 			range += stone.range;
 			attackSpeed -= stone.attackSpeed;
-			
+
 			// Modositjuk a bonusz sebzesi eroket
 			for (String enemy : stone.bonusPowers.keySet()) {
 				// Ha van ilyen ellenseghez tartozo bejegyzes,
@@ -246,16 +246,16 @@ public class Tower extends Item
 					bonusPowers.put(enemy, stone.bonusPowers.get(enemy));
 				}
 			}
-			
+
 			return true;
 		}
-		
+
 		// Ha nem lehetett fejleszteni akkor visszaterunk false-szal
 		return false;
-		
+
 		/*String logString = "Tower.upgrade(stone)";
 		Logger.Log(1, logString, this);
-		
+
 		Logger.Log(0, logString, this);
 		return true;*/
 	}
@@ -276,17 +276,17 @@ public class Tower extends Item
 		if (fogActive && System.currentTimeMillis() >= fogRemovalTime ) {
 			removeFog();
 		}
-		
+
 		// Elkerjuk a maptol a lotavolsagon beluli ellensegeket
 		ArrayList<Enemy> enemys = map.getEnemiesInRange(this);
-		
+
 		// Ha van ellenseg lotavolsagon belul, akkor valakire loni fogunk
 		// veletlenszeruen
 		if (enemys != null) {
 			int random = (int)(Math.random() * enemys.size());
 			Enemy enemy = enemys.get(random);
 			boolean result = enemy.damage(firePower, bonusPowers);
-			
+
 			// Ha meghalt az ellenseg, akkor eltavolitjuk a palyarol
 			if (result) {
 				map.removeEnemy(enemy);
@@ -301,7 +301,7 @@ public class Tower extends Item
 				map.getEnemies().add(enemy2);
 			}
 		}
-		
+
 		/*
 		Enemy enemy;
 		boolean isDead = false;
@@ -343,7 +343,7 @@ public class Tower extends Item
 		Logger.Log(0, logString, this);
 		*/
 	}
-	
+
 	/**
 	 * Aktival egy kodot a toronyra.
 	 * @param decrease A range attributumot ennyivel kell csokkenteni.
@@ -359,7 +359,7 @@ public class Tower extends Item
 		// Csokkentjuk a lotavolsagot
 		range -= decrease;
 	}
-	
+
 	/**
 	 * Leveszi a kodot a toronyrol.
 	 */
@@ -369,7 +369,7 @@ public class Tower extends Item
 		// Visszaallitjuk a lotavolsagot
 		range += rangeDecreaseByFog;
 	}
-	
+
 	/**
 	 * Ertesiti a tornyot az ido mulasarol.
 	 * Ha a legutolso loves idopontja ota eltelt az attackSpeed-ben
@@ -377,7 +377,7 @@ public class Tower extends Item
 	 */
 	public void tick()
 	{
-		
+
 		long current = System.currentTimeMillis();
 		// Ha eljott a loves ideje, akkor lovunk
 		// es elmentjuk a loves idopontjat

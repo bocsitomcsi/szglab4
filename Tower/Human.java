@@ -27,12 +27,12 @@ public class Human extends Enemy
 	public Human() {
 		this(
 				200, // Health
-				enemySpeeds.get("human"), // Aktualis sebesseb
+				enemySpeeds.get("human"), // Aktualis sebesseg
 				enemySpeeds.get("human"), // Eredeti sebesseg
 				30 // Varazsero
 				);
 	}
-	
+
 	/**
 	 * Konstruktor.
 	 * @param hp  eletero.
@@ -56,7 +56,7 @@ public class Human extends Enemy
 		clone.position = position;
 		return clone;
 	}
-	
+
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
 		// Csokkentjuk az eleterot
@@ -66,7 +66,7 @@ public class Human extends Enemy
 		if (bonus.containsKey("human")) {
 			healthPoint -= bonus.get("human");
 		}
-		
+
 		// Ha az elet 0 ala csokken, akkor az ellenseg meghal
 		if (healthPoint <= 0) {
 			isDead = true;
@@ -74,12 +74,12 @@ public class Human extends Enemy
 		
 		return isDead;
 	}
-	
+
 	/**
 	 * Az ellenseget mozgatja.
 	 * Meghivja a moveToNextCell metodust aminek hatasara az ellenseg
 	 *  a kovetkezo cellara lep es ha szukseges akkor a sebessege csokken.
-	 * Ha a moveToNextCell nem null-al ter vissza, akkor a kapott
+	 * Ha a moveToNextCell nem null-lal ter vissza, akkor a kapott
 	 *  akadaly bonusSlowRates kollekciojabol kikeresi a Human-hoz
 	 *  tartozo lassitasi erteket es beszorozza vele a speed attributumot.
 	 */

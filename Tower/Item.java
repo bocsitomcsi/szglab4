@@ -32,7 +32,7 @@ public abstract class Item
 	 * Az objektumra helyezett varazskovek listaja.
 	 */
 	protected ArrayList<MagicStone> magicStones;
-	
+
 	/**
 	 * Konstruktor.
 	 * @param mm  Az objektumra rakhato varazskovek maximalis szama.
@@ -74,7 +74,7 @@ public abstract class Item
 	{
 		return this.magicStones;
 	}
-	
+
 	/**
 	 * Setter a maxMagicStoneNumber attributumra.
 	 * @param b  A maxMagicStoneNumber attributum kivant erteke.
@@ -83,7 +83,7 @@ public abstract class Item
 	{
 		this.maxMagicStoneNumber = mm;
 	}
-	
+
 	/**
 	 * Setter a magicStones attributumra.
 	 * @param b  A magicStones attributum kivant erteke.
@@ -92,7 +92,7 @@ public abstract class Item
 	{
 		this.magicStones = ms;
 	}
-	
+
 	/**
 	 * Fejleszti az objektumot.
 	 * @param stone  A varazsko.

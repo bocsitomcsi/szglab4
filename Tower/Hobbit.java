@@ -28,12 +28,12 @@ public class Hobbit extends Enemy
 	public Hobbit() {
 		this(
 				100, // Health
-				enemySpeeds.get("hobbit"), // Aktualis sebesseb
+				enemySpeeds.get("hobbit"), // Aktualis sebesseg
 				enemySpeeds.get("hobbit"), // Eredeti sebesseg
 				30 // Varazsero
 				);
 	}
-	
+
 	/**
 	 * Konstruktor.
 	 * @param hp  eletero.
@@ -57,7 +57,7 @@ public class Hobbit extends Enemy
 		clone.position = position;
 		return clone;
 	}
-	
+
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
 		/*String logString = "Hobbit.damage(power, bonus)";
@@ -65,20 +65,20 @@ public class Hobbit extends Enemy
 
 		Logger.Log(0, logString, this);
 		return true;*/
-		
+
 		// Csokkentjuk az eleterot
 		healthPoint -= power;
-		
+
 		// Ha kell, akkor csokkentjuk az eleterot a bonusz sebzessel is
 		if (bonus.containsKey("hobbit")) {
 			healthPoint -= bonus.get("hobbit");
 		}
-		
+
 		// Ha az elet 0 ala csokken, akkor az ellenseg meghal
 		if (healthPoint <= 0) {
 			isDead = true;
 		}
-		
+
 		return isDead;
 	}
 
@@ -86,7 +86,7 @@ public class Hobbit extends Enemy
 	 * Az ellenseget mozgatja.
 	 * Meghivja a moveToNextCell metodust aminek hatasara az ellenseg
 	 *  a kovetkezo cellara lep es ha szukseges akkor a sebessege csokken.
-	 * Ha a moveToNextCell nem null-al ter vissza, akkor a kapott
+	 * Ha a moveToNextCell nem null-lal ter vissza, akkor a kapott
 	 *  akadaly bonusSlowRates kollekciojabol kikeresi a Hobbit-hoz
 	 *  tartozo lassitasi erteket es beszorozza vele a speed attributumot.
 	 */

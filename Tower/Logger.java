@@ -12,7 +12,7 @@ public class Logger {
 		active = false;
 		hm = new HashMap<Object, String>();
 	}
-	
+
 	public static void SetActive(boolean act){
 		active = act;
 	}
@@ -20,7 +20,7 @@ public class Logger {
 	public static void AddName(Object obj, String name){
 		hm.put(obj,name);
 	}
-	
+
 	public static void Log(int direction, String text, Object obj) {
 		if(active) {
 			if(direction==1){

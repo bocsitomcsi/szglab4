@@ -55,13 +55,13 @@ public class Saruman
 	public Saruman(Map map) {
 		this(
 				200,	// Varazsero
-				50, 	// Torony ar
-				80, 	// Akadaly ar
-				100, 	// Varazsko ar
+				50,		// Torony ar
+				80,		// Akadaly ar
+				100,	// Varazsko ar
 				map		// Map referencia
 				);
 	}
-	
+
 	/**
 	 * Konstruktor.
 	 * @param mp  A rendelkezesre allo varazsero.
@@ -114,7 +114,7 @@ public class Saruman
 	{
 		return this.magicStoneCost;
 	}
-	
+
 	/**
 	 * Getter a selectedMagicStone attributumra.
 	 * @return  A selectedMagicStone attributum.
@@ -190,19 +190,17 @@ public class Saruman
 			else {
 				return false;
 			}
-			
+
 			// Csokkentjuk a varazserot
 			magicPower -= magicStoneCost;
-			
+
 			return true;
 		}
 		// Ha nincs eleg varazsero false-t adunk vissza
 		else {
 			return false;
 		}
-		
-		
-		
+
 		/*
 		String logString = "Saruman.createStone(type)";
 		Logger.Log(1, logString, this);
@@ -245,20 +243,18 @@ public class Saruman
 			// Hozzadjuk a tornyot
 			Tower tower = new Tower(pos, map);
 			map.addTower(tower);
-			
+
 			// Csokkentjuk a varazserot
 			magicPower -= towerCost;
 			// Jelezzuk a cella foglaltsagat
 			pos.setBusy(true);
-			
+
 			return true;
 		}
 		else {
 			return false;
 		}
-		
-		
-		
+
 		/*
 		String logString = "Saruman.addTower(pos)";
 		Logger.Log(1, logString, this);
@@ -317,18 +313,18 @@ public class Saruman
 			// Hozzadjuk az akadalyt
 			Obstacle obstacle = new Obstacle(pos);
 			map.addObstacle(obstacle);
-			
+
 			// Csokkentjuk a varazserot
 			magicPower -= obstacleCost;
 			// Jelezzuk a cella foglaltsagat
 			pos.setBusy(true);
-			
+
 			return true;
 		}
 		else {
 			return false;
 		}
-		
+
 		/*
 		String logString = "Saruman.addObstacle(pos)";
 		Logger.Log(1, logString, this);
@@ -380,20 +376,20 @@ public class Saruman
 	{
 		// Fejlesztjuk az item-et
 		boolean result = item.upgrade(selectedMagicStone);
-		
+
 		// Ha sikeres volt a fejlesztes akkor megsemmisitjuk a kovet
 		if (result) {
 			selectedMagicStone = null;
 		}
-		
+
 		return result;
-		
+
 		/*
 		String logString = "Saruman.upgradeItem(item)";
 		Logger.Log(1, logString, this);
-		
+
 		item.upgrade(this.selectedMagicStone);
-		
+
 		Logger.Log(0, logString, this);
 		return true;
 		*/

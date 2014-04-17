@@ -47,7 +47,7 @@ public class Cell
 	 * A cella tipusa.
 	 */
 	private CellType type;
-	
+
 	/**
 	 * Konstruktor. A foglaltsag allapota false lesz alapbol.
 	 * @param map  A cellat tartalmazo Map objektum.
@@ -60,7 +60,7 @@ public class Cell
 		this.neighbours = new HashMap<Map.Direction, Entry<Cell, Boolean>>();
 		this.type = ct;
 	}
-	
+
 	/**
 	 * Getter a busy attributumra.
 	 * @return  A busy attributum.

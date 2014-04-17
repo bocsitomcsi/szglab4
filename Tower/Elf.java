@@ -27,7 +27,7 @@ public class Elf extends Enemy
 	public Elf() {
 		this(
 				150, // Health
-				enemySpeeds.get("elf"), // Aktualis sebesseb
+				enemySpeeds.get("elf"), // Aktualis sebesseg
 				enemySpeeds.get("elf"), // Eredeti sebesseg
 				30 // Varazsero
 				);
@@ -56,7 +56,7 @@ public class Elf extends Enemy
 		clone.position = position;
 		return clone;
 	}
-	
+
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
 		// Csokkentjuk az eleterot
@@ -66,7 +66,7 @@ public class Elf extends Enemy
 		if (bonus.containsKey("elf")) {
 			healthPoint -= bonus.get("elf");
 		}
-		
+
 		// Ha az elet 0 ala csokken, akkor az ellenseg meghal
 		if (healthPoint <= 0) {
 			isDead = true;
@@ -74,12 +74,12 @@ public class Elf extends Enemy
 		
 		return isDead;
 	}
-	
+
 	/**
 	 * Az ellenseget mozgatja.
 	 * Meghivja a moveToNextCell metodust aminek hatasara az ellenseg
 	 *  a kovetkezo cellara lep es ha szukseges akkor a sebessege csokken.
-	 * Ha a moveToNextCell nem null-al ter vissza, akkor a kapott
+	 * Ha a moveToNextCell nem null-lal ter vissza, akkor a kapott
 	 *  akadaly bonusSlowRates kollekciojabol kikeresi a Elf-hoz
 	 *  tartozo lassitasi erteket es beszorozza vele a speed attributumot.
 	 */
@@ -87,7 +87,7 @@ public class Elf extends Enemy
 	{
 		// Leptetjuk az ellenseget
 		Obstacle obstacle = moveToNextCell();
-		
+
 		// Ha van az uj cellan akadaly, es az akadalynak van
 		// bonusz lassitasa az ellensegre akkor lassitjuk
 		if (obstacle != null && obstacle.getBonusSlowRates().containsKey("elf")) {

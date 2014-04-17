@@ -28,12 +28,12 @@ public class Dwarf extends Enemy
 	public Dwarf() {
 		this(
 				300, // Health
-				enemySpeeds.get("dwarf"), // Aktualis sebesseb
+				enemySpeeds.get("dwarf"), // Aktualis sebesseg
 				enemySpeeds.get("dwarf"), // Eredeti sebesseg
 				30 // Varazsero
 				);
 	}
-	
+
 	/**
 	 * Konstruktor.
 	 * @param hp  eletero.
@@ -57,7 +57,7 @@ public class Dwarf extends Enemy
 		clone.position = position;
 		return clone;
 	}
-	
+
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
 		// Csokkentjuk az eleterot
@@ -67,7 +67,7 @@ public class Dwarf extends Enemy
 		if (bonus.containsKey("dwarf")) {
 			healthPoint -= bonus.get("dwarf");
 		}
-		
+
 		// Ha az elet 0 ala csokken, akkor az ellenseg meghal
 		if (healthPoint <= 0) {
 			isDead = true;
@@ -75,12 +75,12 @@ public class Dwarf extends Enemy
 		
 		return isDead;
 	}
-	
+
 	/**
 	 * Az ellenseget mozgatja.
 	 * Meghivja a moveToNextCell metodust aminek hatasara az ellenseg
 	 *  a kovetkezo cellara lep es ha szukseges akkor a sebessege csokken.
-	 * Ha a moveToNextCell nem null-al ter vissza, akkor a kapott
+	 * Ha a moveToNextCell nem null-lal ter vissza, akkor a kapott
 	 *  akadaly bonusSlowRates kollekciojabol kikeresi a Dwarf-hoz
 	 *  tartozo lassitasi erteket es beszorozza vele a speed attributumot.
 	 */
@@ -88,7 +88,7 @@ public class Dwarf extends Enemy
 	{
 		// Leptetjuk az ellenseget
 		Obstacle obstacle = moveToNextCell();
-		
+
 		// Ha van az uj cellan akadaly, es az akadalynak van
 		// bonusz lassitasa az ellensegre akkor lassitjuk
 		if (obstacle != null && obstacle.getBonusSlowRates().containsKey("dwarf")) {

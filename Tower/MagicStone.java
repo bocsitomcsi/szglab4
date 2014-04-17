@@ -66,7 +66,7 @@ public class MagicStone
 		this.bonusPowers = new HashMap<String, Integer>();
 		this.bonusSlowRates = new HashMap<String, Double>();
 	}
-	
+
 	/**
 	 * Getter a name attributumra.
 	 * @return  A name attributum.
@@ -75,7 +75,7 @@ public class MagicStone
 	{
 		return this.name;
 	}
-	
+
 	/**
 	 * Getter a firePower attributumra.
 	 * @return  A firePower attributum.
@@ -84,7 +84,7 @@ public class MagicStone
 	{
 		return this.firePower;
 	}
-	
+
 	/**
 	 * Getter az attackSpeed attributumra.
 	 * @return  Az attackSpeed attributum.
@@ -93,7 +93,7 @@ public class MagicStone
 	{
 		return this.attackSpeed;
 	}
-	
+
 	/**
 	 * Getter a range attributumra.
 	 * @return  A range attributum.
@@ -102,7 +102,7 @@ public class MagicStone
 	{
 		return this.range;
 	}
-	
+
 	/**
 	 * Getter a slowRate attributumra.
 	 * @return  A slowRate attributum.
@@ -111,7 +111,7 @@ public class MagicStone
 	{
 		return this.slowRate;
 	}
-	
+
 	/**
 	 * Getter a bonusPowers attributumra.
 	 * @return  A bonusPowers attributum.
@@ -120,7 +120,7 @@ public class MagicStone
 	{
 		return this.bonusPowers;
 	}
-	
+
 	/**
 	 * Getter a bonusSlowRates attributumra.
 	 * @return  A bonusSlowRates attributum.
@@ -129,7 +129,7 @@ public class MagicStone
 	{
 		return this.bonusSlowRates;
 	}
-	
+
 	/**
 	 * Setter a name attributumra.
 	 * @param hp  A name attributum kivant erteke.
@@ -138,7 +138,7 @@ public class MagicStone
 	{
 		this.name = n;
 	}
-	
+
 	/**
 	 * Setter a firePower attributumra.
 	 * @param hp  A firePower attributum kivant erteke.
@@ -147,7 +147,7 @@ public class MagicStone
 	{
 		this.firePower = fp;
 	}
-	
+
 	/**
 	 * Setter az attackSpeed attributumra.
 	 * @param hp  Az attackSpeed attributum kivant erteke.
@@ -156,7 +156,7 @@ public class MagicStone
 	{
 		this.attackSpeed = as;
 	}
-	
+
 	/**
 	 * Setter a range attributumra.
 	 * @param hp  A range attributum kivant erteke.
@@ -165,7 +165,7 @@ public class MagicStone
 	{
 		this.range = r;
 	}
-	
+
 	/**
 	 * Setter a slowRate attributumra.
 	 * @param hp  A slowRate attributum kivant erteke.
@@ -174,7 +174,7 @@ public class MagicStone
 	{
 		this.slowRate = sr;
 	}
-	
+
 	/**
 	 * Setter a bonusPowers attributumra.
 	 * @param hp  A bonusPowers attributum kivant erteke.
@@ -183,7 +183,7 @@ public class MagicStone
 	{
 		this.bonusPowers = bonusp;
 	}
-	
+
 	/**
 	 * Setter a bonusSlowRates attributumra.
 	 * @param hp  A bonusSlowRates attributum kivant erteke.

@@ -118,11 +118,11 @@ public class Map
 		this.neighbourNumber = neighbour;
 		this.lastEnemyAddedTime = current;
 		this.roundStartedTime = current;
-		
+
 		// Fog tulajdonsagok
 		fogApplianceTime = 5000;
 		lastFog = current;
-		
+
 		// Round letrehozasa
 		this.round = new Round();
 		roundNumber = 1;
@@ -315,7 +315,7 @@ public class Map
 		// Beallitjuk az ellenseg poziciojat es hozzaadjuk a map-hoz
 		enemy.setPosition(pos);
 		enemies.add(enemy);
-		
+
 		Logger.Log(0, logString, this);
 	}
 
@@ -385,7 +385,7 @@ public class Map
 				tower.getRange(), 
 				cellsInRange
 				);
-		
+
 		// Eltavolitjuk azokat a cellakat, amelyek terep tipusuak
 		// mert azokon nem lehet ellenseg
 		for (Cell cell : cellsInRange) {
@@ -393,7 +393,7 @@ public class Map
 				cellsInRange.remove(cell);
 			}
 		}
-		
+
 		// Vegigmegyunk az ellensegek listajan
 		ArrayList<Enemy> enemiesInRange = new ArrayList<Enemy>();
 		for (Enemy enemy : enemies) {
@@ -403,18 +403,16 @@ public class Map
 				enemiesInRange.add(enemy);
 			}
 		}
-		
+
 		// Ha talaltunk ellenseget lotavolsagon belul,
 		// akkor visszaadjuk a listat
 		if (!enemiesInRange.isEmpty()) {
 			return enemiesInRange;
 		}
-		
+
 		// Kulonben null-t adunk vissza
 		return null;
-		
-		
-		
+
 		/*
 		String logString = "Map.getEnemiesInRange(tower)";
 		Logger.Log(1, logString, this);
@@ -436,7 +434,7 @@ public class Map
 	 *  cellakat.
 	 * @param cell A kiindulo cella.
 	 * @param range A tavolsag, avagy a lepesek szama, 
-	 * 	amennyit meg lephetunk a cellabol.
+	 *  amennyit meg lephetunk a cellabol.
 	 * @param set A halmaz, amibe a range lepesbol elerheto cellakat mentjuk.
 	 */
 	private void getNeighbourCellsInRange(Cell cell, int range, Set<Cell> set) {
@@ -449,13 +447,13 @@ public class Map
 				set.add(neighbourCell);
 			}
 			// Ha a tavolsag 1-nel is nagyobb, akkor a kozvetlen szomszedon
-			// is meg kell hivni a fuggvenyt de 1-el kisebb tavolsaggal
+			// is meg kell hivni a fuggvenyt de 1-gyel kisebb tavolsaggal
 			if (range > 1) {
 				getNeighbourCellsInRange(neighbourCell, range - 1, set);
 			}
 		}
 	}
-	
+
 	/**
 	 * A palyan levo ellensegeket, es tornyokat ertesiti az ido mulasarol.
 	 * Ehhez a towers es enemies listakban tarolt objektumok tick fuggvenyet hivja meg. 
@@ -467,12 +465,12 @@ public class Map
 	{
 		boolean gameRunning = true;
 		GameResult gameResult = GameResult.Loose;
-		
+
 		// GAME LOOP
 		while (gameRunning) {
 			long currentTime = System.currentTimeMillis();
 			int random;
-			
+
 			// ELLENSEGEK ES TORNYOK ERTESITESE
 			for (Enemy enemy : enemies) {
 				enemy.tick();
@@ -480,7 +478,7 @@ public class Map
 			for (Tower tower : towers) {
 				tower.tick();
 			}
-			
+
 			// FOG ELHELYEZESE
 			// Ha eltelt a legutobbi kod elhelyezese ota a megfelelo ido,
 			// akkor elhelyezunk egy kodot egy toronyra
@@ -494,21 +492,21 @@ public class Map
 						fogTowers.add(tower);
 					}
 				}
-				
+
 				// Ha van kod mentes torony
 				if (!fogTowers.isEmpty()) {
 					// Kivalasztunk egyet veletlenszeruen
 					random = (int)(Math.random() * fogTowers.size());
 					Tower fogTower = fogTowers.get(random);
-					
+
 					// Elhelyezzuk rajta a kodot
 					fogTower.applyFog(fogDecreason, fogDuration);
-					
+
 					// Elmentjuk az elhelyezes idejet
 					lastFog = currentTime;
 				}
 			}
-			
+
 			// ROUND KARBANTARTAS
 			// Ha veget ert az aktualis kor es ez nem az utolso volt akkor,
 			// atlepunk a kovetkezo korbe
@@ -522,7 +520,7 @@ public class Map
 				// Beallitjuk az uj kor kezdetenek idejet
 				roundStartedTime = currentTime;
 			}
-			
+
 			// ENEMY HOZZAADAS
 			// Ha meg tart az aktualis kor es eljott 
 			// az ellenseg hozzaadasanak ideje
@@ -550,11 +548,11 @@ public class Map
 					// Hozzaadjuk az ellenseget a palyahoz
 					addEnemy(enemyType, startPoint);
 				}
-				
+
 				// Beallitjuk a legutoljara hozzaadott ellenseg idejet
 				lastEnemyAddedTime = currentTime;
 			}
-			
+
 			// JATEK VEGE CHECK
 			// Ha elfogytak az ellensegek es nincs tobb kor,
 			// akkor a jatek veget ert gyozelemmel
@@ -575,7 +573,7 @@ public class Map
 					}
 				}
 			}
-			
+
 			// Ha meg nem ert veget a jatek akkor varunk dt idot
 			if (gameRunning) {
 				try {
@@ -585,10 +583,10 @@ public class Map
 				}
 			}
 		}
-		
+
 		// Visszaterunk az eredmennyel
 		return gameResult;
-				
+
 		/*
 		String logString = "Map.simulateWorld()";
 		Logger.Log(1, logString, this);

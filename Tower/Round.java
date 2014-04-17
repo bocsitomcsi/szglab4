@@ -42,22 +42,22 @@ public class Round
 	 * osszesen ennyi kor lesz.
 	 */
 	public int maxRounds;
-	
+
 	/**
 	 * Default konstruktor. A konstruktorban definialt 
 	 *  adatoknak megfeleloen hozza letre a Round-ot.
 	 */
 	public Round() {
 		this(
-				1, 	// EnemyNumber
-				4000, 	// EnemyAddingTime
-				2, 	// Number multiplier
+				1,		// EnemyNumber
+				4000,	// EnemyAddingTime
+				2,		// Number multiplier
 				0.8,	// AddingTime multiplier
-				30000, 	// Round time
+				30000,	// Round time
 				3		// Max rounds number
 				);
 	}
-	
+
 	/**
 	 * Konstruktor.
 	 * @param en  Az adott idokozonkent a palyahoz adando ellensegek szama.
@@ -76,7 +76,7 @@ public class Round
 		this.roundTime = rt;
 		this.maxRounds = mr;
 	}
-	
+
 	/**
 	 * Getter az enemyNumber attributumra.
 	 * @return  Az enemyNumber attributum.
@@ -85,7 +85,7 @@ public class Round
 	{
 		return this.enemyNumber;
 	}
-	
+
 	/**
 	 * Getter az enemyAddingTime attributumra.
 	 * @return  Az enemyAddingTime attributum.
@@ -94,7 +94,7 @@ public class Round
 	{
 		return this.enemyAddingTime;
 	}
-	
+
 	/**
 	 * Getter az enemyNumberMultiplier attributumra.
 	 * @return  Az enemyNumberMultiplier attributum.
@@ -103,7 +103,7 @@ public class Round
 	{
 		return this.enemyNumberMultiplier;
 	}
-	
+
 	/**
 	 * Getter az enemyAddingTimeMultiplier attributumra.
 	 * @return  Az enemyAddingTimeMultiplier attributum.
@@ -112,7 +112,7 @@ public class Round
 	{
 		return this.enemyAddingTimeMultiplier;
 	}
-	
+
 	/**
 	 * Getter a roundTime attributumra.
 	 * @return  A roundTime attributum.
@@ -121,7 +121,7 @@ public class Round
 	{
 		return this.roundTime;
 	}
-	
+
 	/**
 	 * Getter a maxRounds attributumra.
 	 * @return  A maxRounds attributum.
@@ -130,7 +130,7 @@ public class Round
 	{
 		return this.maxRounds;
 	}
-	
+
 	/**
 	 * Setter az enemyNumber attributumra.
 	 * @param en  Az enemyNumber attributum kivant erteke.
@@ -139,7 +139,7 @@ public class Round
 	{
 		this.enemyNumber = en;
 	}
-	
+
 	/**
 	 * Setter az enemyAddingTime attributumra.
 	 * @param et  Az enemyAddingTime attributum kivant erteke.
@@ -148,7 +148,7 @@ public class Round
 	{
 		this.enemyAddingTime = et;
 	}
-	
+
 	/**
 	 * Setter az enemyNumberMultiplier attributumra.
 	 * @param enm  Az enemyNumberMultiplier attributum kivant erteke.
@@ -157,7 +157,7 @@ public class Round
 	{
 		this.enemyNumberMultiplier = enm;
 	}
-	
+
 	/**
 	 * Setter az enemyAddingTimeMultiplier attributumra.
 	 * @param etm  Az enemyAddingTimeMultiplier attributum kivant erteke.
@@ -166,7 +166,7 @@ public class Round
 	{
 		this.enemyAddingTimeMultiplier = etm;
 	}
-	
+
 	/**
 	 * Setter a roundTime attributumra.
 	 * @param rt  A roundTime attributum kivant erteke.
@@ -175,7 +175,7 @@ public class Round
 	{
 		this.roundTime = rt;
 	}
-	
+
 	/**
 	 * Setter a maxRounds attributumra.
 	 * @param mr  A maxRounds attributum kivant erteke.

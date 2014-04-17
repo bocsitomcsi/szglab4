@@ -26,12 +26,12 @@ public class CyanMagicStone extends MagicStone
 		this(
 				"cyan",	// A varazsko neve 
 				100,	// Power bonus
-				100, 	// Speed bonus
-				100, 	// Range bonus
+				100,	// Speed bonus
+				100,	// Range bonus
 				100		// Slowrate bonus
 				);
 	}
-	
+
 	/**
 	 * Konstruktor.
 	 * @param n  A varazsko neve.
