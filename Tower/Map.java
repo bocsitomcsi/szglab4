@@ -213,6 +213,14 @@ public class Map
 	}
 	
 	/**
+	 * Getter a round attributumra.
+	 * @return  A round attributum.
+	 */
+	public Round getRound() {
+		return round;
+	}
+	
+	/**
 	 * Setter a neighbourNumber attributumra.
 	 * @param b  A neighbourNumber attributum kivant erteke.
 	 */
