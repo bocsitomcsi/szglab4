@@ -5,9 +5,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Locale;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -28,13 +30,17 @@ public class Program {
 
 	public static void main(String[] args) {
 		try {
+			// Beolvassa a beadott testcase<number>.xml-t és az xml-t parseolja
 			File tc = new File(args[0]);
 			DocumentBuilder casedBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document tcdoc = casedBuilder.parse(tc);
+			// Ha a gyoker nem testCase
 			if(!tcdoc.getDocumentElement().getNodeName().equals("testCase")){
 				System.out.println("The file input is wrong");
 				System.exit(-1);
 			}
+			
+			// A neve a tesztnek
 			testcase = (tcdoc.getDocumentElement()).getAttribute("name");
 			Node commands = tcdoc.getFirstChild();
 			command(commands);
@@ -44,18 +50,23 @@ public class Program {
 		}
 	}
 
+	/* 
+	Az xml commandjat olvassa ki es hajtja vegre 
+	*/
 	private static void command(Node commands){
 		CellIDs = new HashMap<String, Cell>();
 		NodeList command = commands.getChildNodes();
 		NodeList nodeList = command.item(1).getChildNodes();
+		// Minden egyes commandon vegigmegyunk
 		for (int count = 0; count < nodeList.getLength(); count++) {
 			Node tempNode = nodeList.item(count);
-			// make sure it's element node.
+			// Megnezzuk hogy Element_Node-e
 			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
 				String nodeName = tempNode.getNodeName();
 				if(nodeName.equals("load")) {
 					inputfile = ((Element)tempNode).getAttribute("file");
 					try{
+						// Beolvassuk commandban megadott xml fajlt xml parse-olva
 						File file = new File("xml/" + inputfile);
 						DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 						Document doc = dBuilder.parse(file);
@@ -64,29 +75,36 @@ public class Program {
 							System.exit(-1);
 						}
 						if (doc.hasChildNodes()) {
+							// A felepito fuggveny meghivasa
 							printNote(doc.getChildNodes());
 						}
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
+						e.printStackTrace();
 					}
 				} else if (nodeName.equals("save")) {
+					// Ha mentes parancsot kap meghivja a mento fuggvenyt
 					outputfile = ((Element)tempNode).getAttribute("file");
 					xmlSave();
 				} else if (nodeName.equals("addTower")) {
+					// Hozza ad egy tornyot a megfelelo pozicioban
 					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
 					saruman.addTower(cellatid);
 				} else if (nodeName.equals("addObstacle")) {
+					// Hozza ad egy akadalyt a megfelelo pozicioban
 					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
 					saruman.addObstacle(cellatid);
 				} else if (nodeName.equals("createStone")) {
+					// Letrehoz egy varazskovet
 					saruman.createStone(((Element)tempNode).getAttribute("type"));
 				} else if (nodeName.equals("upgradeTower")) {
 					//TODO:Saruman nem kezeli le ha nincs kove
+					// Meghivja a megfelelo torony upgradejet, a megadott cellaban
 					if(saruman.getSelectedMagicStone() != null){
 						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
 						ArrayList<Tower> towers = map.getTowers();
 						for(Tower tower : towers){
-							if(tower.getPosition() == cellatid){
+							if(tower.getPosition().equals(cellatid)){
 								saruman.upgradeItem(tower);
 							}
 						}
@@ -96,11 +114,12 @@ public class Program {
 					}
 				} else if (nodeName.equals("upgradeObstacle")) {
 					//TODO:Saruman nem kezeli le ha nincs kove
+					// Meghivja a megadott cellaban az akadaly upgrade fuggvenyet
 					if(saruman.getSelectedMagicStone() != null){
 						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
 						ArrayList<Obstacle> obstacles = map.getObstacles();
 						for(Obstacle obs : obstacles){
-							if(obs.getPosition() == cellatid){
+							if(obs.getPosition().equals(cellatid)){
 								saruman.upgradeItem(obs);
 							}
 						}
@@ -113,10 +132,12 @@ public class Program {
 		}
 	}
 	
+	/*
+	Egyesevel vegig megy az xml elemeken es meghivja a megfelelo letrehozo fuggvenyt
+	*/
 	private static void printNote(NodeList nodeList) {
 		for (int count = 0; count < nodeList.getLength(); count++) {
 			Node tempNode = nodeList.item(count);
-			// make sure it's element node.
 			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
 				String nodeName = tempNode.getNodeName();
 				if(nodeName.equals("map")) {
@@ -129,13 +150,16 @@ public class Program {
 					xmlRound((Element)tempNode);
 				}
 				if (tempNode.hasChildNodes()) {
-					// loop again if it has child nodes
+					// Vegig iteral a gyerek elemein is
 					printNote(tempNode.getChildNodes());
 				}
 			}
 		}
 	}
 
+	/*
+	Letrehozza a map peldanyt es beallitja a megfelelo attributumokat
+	*/
 	private static void xmlMap(Element tempNode) {
 		int nn = 4;
 		
@@ -143,8 +167,16 @@ public class Program {
 			nn = Integer.parseInt(tempNode.getAttribute("neightbourNumber"));
 		}
 		map = new Map(nn);
+		
+		if(tempNode.getAttribute("sliceShootProbability") != "") {
+			//TODO az osszes toronynak beallitani a sliceshootprobabilityt
+		}
+		//TODO: FOGdecression fog appliance and fog duration
 	}
 
+	/*
+	 * Letrehozza a Cell peldanyokat es hozzaadja a maphoz
+	 */
 	private static void xmlCell(Element Node, NodeList nodeList) {
 		Cell cell;
 		if(Node.getAttribute("type").equals("startpoint")) {
@@ -161,13 +193,14 @@ public class Program {
 		cellList.add(cell);
 		map.setCells(cellList);
 		
+		// Egy valtozoban eltaroljuk az ID-ket mivel a Cell-nek nincs ilyen attributuma
 		CellIDs.put(Node.getAttribute("id"), cell);
 		
 		//TODO: a cellanak vannak szomszedjai ezeket hozzakene adni a cellahoz
 		
+		// A cellaban levo Item-ek es Enemy-k feldolgozasa
 		for (int count = 0; count < nodeList.getLength(); count++) {
 			Node tempNode = nodeList.item(count);
-			// make sure it's element node.
 			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
 				String nodeName = tempNode.getNodeName();
 				if (nodeName.equals("enemy")) {
@@ -181,38 +214,50 @@ public class Program {
 		}
 	}
 	
+	/*
+	 * A saruman-t letrehozo fuggveny a megfelelo ertekekkel
+	 */
 	private static void xmlSaruman(Element tempNode) {
+		// Magic Power, tower cost, obstacle cost, magicstone cost, magic stone type
 		int mp = 200;
 		int tc = 50;
 		int oc = 80;
 		int mc = 100;
 		String ms;
 		
-		if(tempNode.getAttribute("magicPower") != "") {
+		if(tempNode.hasAttribute("magicPower")) {
 			mp = Integer.parseInt(tempNode.getAttribute("magicPower"));
 		}
-		if(tempNode.getAttribute("towerCost") != "") {
+		if(tempNode.hasAttribute("towerCost")) {
 			tc = Integer.parseInt(tempNode.getAttribute("towerCost"));
 		}
-		if(tempNode.getAttribute("obstacleCost") != "") {
+		if(tempNode.hasAttribute("obstacleCost")) {
 			oc = Integer.parseInt(tempNode.getAttribute("obstacleCost"));
 		}
-		if(tempNode.getAttribute("magicStoneCost") != "") {
+		if(tempNode.hasAttribute("magicStoneCost")) {
 			mc = Integer.parseInt(tempNode.getAttribute("magicStoneCost"));
 		}
 		saruman = new Saruman(mp,tc,oc,mc,map);
 		
-		if(tempNode.getAttribute("magicStone") != "") {
+		// Ha van varazs kove azt is letrehozza
+		if(tempNode.hasAttribute("magicStone")) {
 			ms = tempNode.getAttribute("magicStone");
 			saruman.createStone(ms);
 		}
 		
+		// Mapnak beallitjuk a saruman referenciat
 		map.setSaruman(saruman);
 	}
 	
+	/*
+	 * Enemy letrehozasa megfelelo ertekekkel
+	 * A map.addEnemy()-t azert nem hasznaltuk, mert azon keresztul nem tudjuk
+	 * beallitani az enemy-nek az ertekeit
+	 */
 	private static void xmlEnemy(Element tempNode, Cell cell) {
 		Enemy enemy;
 		
+		// Tipustol fuggoen hozzuk letre
 		if(tempNode.getAttribute("type").equals("human")) {
 			enemy = new Human();
 		} else if(tempNode.getAttribute("type").equals("elf")) {
@@ -223,141 +268,203 @@ public class Program {
 			enemy = new Hobbit();
 		}
 			
-		if(tempNode.getAttribute("health") != "") {
+		if(tempNode.hasAttribute("health")) {
 			enemy.setHealthPoint(Integer.parseInt(tempNode.getAttribute("health")));
 		}
-		if(tempNode.getAttribute("actualSpeed") != "") {
+		if(tempNode.hasAttribute("actualSpeed")) {
 			enemy.setActualSpeed(Integer.parseInt(tempNode.getAttribute("actualSpeed")));
 		}
-		if(tempNode.getAttribute("magic") != "") {
+		if(tempNode.hasAttribute("magic")) {
 			enemy.setMagic(Integer.parseInt(tempNode.getAttribute("magic")));
 		}
+		// Cellajat is beadjuk a konstruktorba
 		enemy.setPosition(cell);
 		
+		// Maphoz is hozza adjuk
 		ArrayList<Enemy> enemyList;
 		enemyList = map.getEnemies();
 		enemyList.add(enemy);
 		map.setEnemies(enemyList);
 	}
 	
+	/*
+	 * Akadaly letrehozasa megfelelo ertekekkel
+	 * Map.addObstacle()-t nem hasznaltuk mert az ertekeit nem lehet beallitani ugy
+	 */
 	private static void xmlObstacle(Element tempNode, Cell cell) {
 		Obstacle obs;
+		
+		// A bonus lassitas a megfelelo fajok ellen
 		HashMap<String, Double> bonus;
 		
+		// Beallitjuk a cell-t foglaltra a rajta letrehozott obstacle miatt
 		obs = new Obstacle(cell);
 		cell.setBusy(true);
 		bonus = new HashMap<String, Double>();
 		
-		if(tempNode.getAttribute("slowRate") != "") {
+		if(tempNode.hasAttribute("slowRate")) {
 			obs.setSlowRate(Integer.parseInt(tempNode.getAttribute("slowRate")));
 		}
-		if(tempNode.getAttribute("humanBonus") != "") {
+		if(tempNode.hasAttribute("humanBonus")) {
 			bonus.put("humanBonus", Double.valueOf(tempNode.getAttribute("humanBonus")));
 		}
-		if(tempNode.getAttribute("dwarfBonus") != "") {
+		if(tempNode.hasAttribute("dwarfBonus")) {
 			bonus.put("dwarfBonus", Double.valueOf(tempNode.getAttribute("dwarfBonus")));
 		}
-		if(tempNode.getAttribute("elfBonus") != "") {
+		if(tempNode.hasAttribute("elfBonus")) {
 			bonus.put("elfBonus", Double.valueOf(tempNode.getAttribute("elfBonus")));
 		}
-		if(tempNode.getAttribute("hobbitBonus") != "") {
+		if(tempNode.hasAttribute("hobbitBonus")) {
 			bonus.put("hobbitBonus", Double.valueOf(tempNode.getAttribute("hobbitBonus")));
 		}
 		
 		obs.setBonusSlowRates(bonus);
 		
+		// Map-hoz beallitjuk az uj obstacle-t
 		ArrayList<Obstacle> obsList;
 		obsList = map.getObstacles();
 		obsList.add(obs);
 		map.setObstacles(obsList);
 	}
 	
+	/*
+	 * Torony letrehozo fuggveny
+	 * Map.addTower()-t nem hasznaltuk mert ugy nem lehet beallitani az ertekeit
+	 */
 	private static void xmlTower(Element tempNode, Cell cell) {
 		Tower tower;
+		// Bonusz sebzes a megfelelo fajok ellen
 		HashMap<String, Integer> bonus;
 		
+		// Cell foglaltsag beallitasa
 		tower = new Tower(cell, map);
 		cell.setBusy(true);
 		bonus = new HashMap<String, Integer>();
 		
-		if(tempNode.getAttribute("power") != "") {
+		if(tempNode.hasAttribute("power")) {
 			tower.setFirePower(Integer.parseInt(tempNode.getAttribute("power")));
 		}
-		if(tempNode.getAttribute("attackSpeed") != "") {
+		if(tempNode.hasAttribute("attackSpeed")) {
 			tower.setAttackSpeed(Integer.parseInt(tempNode.getAttribute("attackSpeed")));
 		}
-		if(tempNode.getAttribute("range") != "") {
+		if(tempNode.hasAttribute("range")) {
 			tower.setRange(Integer.parseInt(tempNode.getAttribute("range")));
 		}
-		if(tempNode.getAttribute("fogActive") != "") {
+		if(tempNode.hasAttribute("fogActive")) {
 			Boolean fogActive = false;
-			if(tempNode.getAttribute("fogActive") == "true"){
+			if(tempNode.getAttribute("fogActive").equals("true")){
 				fogActive = true;
 			}
 			tower.setFogActive(fogActive);
 		}
-		if(tempNode.getAttribute("humanBonus") != "") {
+		if(tempNode.hasAttribute("humanBonus")) {
 			bonus.put("humanBonus", Integer.parseInt(tempNode.getAttribute("humanBonus")));
 		}
-		if(tempNode.getAttribute("dwarfBonus") != "") {
+		if(tempNode.hasAttribute("dwarfBonus")) {
 			bonus.put("dwarfBonus", Integer.parseInt(tempNode.getAttribute("dwarfBonus")));
 		}
-		if(tempNode.getAttribute("elfBonus") != "") {
+		if(tempNode.hasAttribute("elfBonus")) {
 			bonus.put("elfBonus", Integer.parseInt(tempNode.getAttribute("elfBonus")));
 		}
-		if(tempNode.getAttribute("hobbitBonus") != "") {
+		if(tempNode.hasAttribute("hobbitBonus")) {
 			bonus.put("hobbitBonus", Integer.parseInt(tempNode.getAttribute("hobbitBonus")));
 		}
 		tower.setBonusPowers(bonus);
 		
+		// Maphoz hozza adjuk a tornyot
 		ArrayList<Tower> towerList;
 		towerList = map.getTowers();
 		towerList.add(tower);
 		map.setTowers(towerList);
 	}
 	
+	/*
+	 * A Round letrehozasa es ertekeinek beallitasa
+	 */
 	private static void xmlRound(Element tempNode) {
 		round = new Round();
 		
-		if(tempNode.getAttribute("enemyNumber") != "") {
+		if(tempNode.hasAttribute("enemyNumber")) {
 			round.setEnemyNumber(Integer.parseInt(tempNode.getAttribute("enemyNumber")));
 		}
-		if(tempNode.getAttribute("enemyAddingTime") != "") {
+		if(tempNode.hasAttribute("enemyAddingTime")) {
 			round.setEnemyAddingTime(Integer.parseInt(tempNode.getAttribute("enemyAddingTime")));
 		}
-		if(tempNode.getAttribute("enemyNumberMultiplier") != "") {
+		if(tempNode.hasAttribute("enemyNumberMultiplier")) {
 			round.setEnemyNumberMultiplier(Double.valueOf(tempNode.getAttribute("enemyNumberMultiplier")));
 		}
-		if(tempNode.getAttribute("enemyAddingTimeMultiplier") != "") {
+		if(tempNode.hasAttribute("enemyAddingTimeMultiplier")) {
 			round.setEnemyAddingTimeMultiplier(Double.valueOf(tempNode.getAttribute("enemyAddingTimeMultiplier")));
 		}
-		if(tempNode.getAttribute("roundTime") != "") {
+		if(tempNode.hasAttribute("roundTime")) {
 			round.setRoundTime(Integer.parseInt(tempNode.getAttribute("roundTime")));
 		}
-		if(tempNode.getAttribute("maxRounds") != "") {
+		if(tempNode.hasAttribute("maxRounds")) {
 			round.setMaxRounds(Integer.parseInt(tempNode.getAttribute("maxRounds")));
 		}
+		
+		// Maphoz beallitjuk a Round referenciat
 		map.setRound(round);
 	}
 	
+	/*
+	 * Kimentesre szolgalo fuggveny
+	 */
 	private static void xmlSave(){
+		// Megfelelo testcase kimento fuggveny fut le
 		if(testcase.equals("1-startGame")){
 			Writer writer = null;
 
 			try {
+				// A beolvasott fajlba irunk
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
+			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
-			    //Kiprobaltam az osszehasonlitast java kimenettel
-			    writer.write("\t<cell id=\"1\" type=\"startpoint\" northCell=\"2\" northCellEnabled=\"true\">\n");
-			    writer.write("\t\t<enemy type=\"elf\" health=\"40\" actualSpeed=\"1000\" magic=\"50\"/>\n");
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" northCell=\"2\" northCellEnabled=\"true\">\n");
+			    
+			    ArrayList<Enemy> enemyList = map.getEnemies();
+			    for(Enemy enemy : enemyList){
+			    	if(enemy.getPosition().equals(cell)){
+			    		writer.write("\t\t<enemy type=\"" + enemy.getClass().toString().toLowerCase()
+				    			+ "\" health=\"" + enemy.getHealthPoint()
+				    			+ "\" actualSpeed=\"" + enemy.getActualSpeed()
+				    			+ "\" magic=\"" + enemy.getMagic()
+				    			+ "\"/>\n");
+			    	}	
+			    }
+			    
 			    writer.write("\t</cell>\n");
-			    writer.write("\t<cell id=\"2\" type=\"road\" southCell=\"1\" westCell=\"3\" southCellEnabled=\"false\"/>\n");
-			    writer.write("\t<cell id=\"3\" type=\"terrain\" eastCell=\"2\"/>\n");
-			    writer.write("\t<saruman magicPower=\"300\"/>\n");
-			    writer.write("\t<round enemyNumber=\"1\" enemyAddingTime=\"1000\" enemyNumberMultiplier=\"1.5\" enemyAddingTimeMultiplier=\"2\" roundTime=\"1\" maxRounds=\"3\"/>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    
+			    cell = CellIDs.get("2");
+			    writer.write("\t<cell id=\"2\" type=\"" + cell.getCellType().toString()
+			    		+ "\" southCell=\"1\" westCell=\"3\" southCellEnabled=\"false\"/>\n");
+			    
+			    cell = CellIDs.get("3");
+			    writer.write("\t<cell id=\"3\" type=\"" + cell.getCellType().toString()
+			    		+ "\" eastCell=\"2\"/>\n");
+			    
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\"/>\n");
+			    
+			    // A Double erteknek a elvalasztojat pontra allitja es formazza
+			    Round round = map.getRound();
+			    DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
+			    otherSymbols.setDecimalSeparator('.');
+			    otherSymbols.setGroupingSeparator('.'); 
+			    DecimalFormat df = new DecimalFormat("#.##", otherSymbols);
+			    writer.write("\t<round enemyNumber=\"" + round.getEnemyNumber()
+			    		+ "\" enemyAddingTime=\"" + round.getEnemyAddingTime()
+			    		+ "\" enemyNumberMultiplier=\"" + df.format(round.getEnemyNumberMultiplier())
+			    		+ "\" enemyAddingTimeMultiplier=\"" + df.format(round.getEnemyAddingTimeMultiplier())
+			    		+ "\" roundTime=\"" + round.getRoundTime()
+			    		+"\" maxRounds=\"" + round.getMaxRounds()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			    <map>
@@ -371,13 +478,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -402,13 +507,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -433,13 +536,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -460,13 +561,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -489,13 +588,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -518,13 +615,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -548,13 +643,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -580,13 +673,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -613,13 +704,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -647,13 +736,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -676,13 +763,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -708,13 +793,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -741,13 +824,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
@@ -772,13 +853,11 @@ public class Program {
 				</map>
 			    */
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 			   try {
 				   writer.close();
 			   } catch (IOException e) {
-				   // TODO Auto-generated catch block
 				   e.printStackTrace();
 			   }
 			}
