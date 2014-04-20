@@ -46,7 +46,8 @@ public class Program {
 
 	private static void command(Node commands){
 		CellIDs = new HashMap<String, Cell>();
-		NodeList nodeList = commands.getChildNodes();
+		NodeList command = commands.getChildNodes();
+		NodeList nodeList = command.item(1).getChildNodes();
 		for (int count = 0; count < nodeList.getLength(); count++) {
 			Node tempNode = nodeList.item(count);
 			// make sure it's element node.
@@ -83,8 +84,7 @@ public class Program {
 						map.setTowers(towerList);
 					}
 					else {
-						//TODO: Rendes hibauzenet
-						System.out.println("Sarumannak nincs magicje, why!");
+						System.out.println("Sarumannak nincs elegendo varazsereje, hogy tornyot epitsen.");
 					}
 				} else if (nodeName.equals("addObstacle")) {
 					if(saruman.getMagicPower() > saruman.getObstacleCost()){
@@ -98,8 +98,7 @@ public class Program {
 						map.setObstacles(obsList);
 					}
 					else {
-						//TODO: Rendes hibauzenet
-						System.out.println("Sarumannak nincs magicje, why!");
+						System.out.println("Sarumannak nincs elegendo varazsereje, hogy akadalyt epitsen.");
 					}
 				} else if (nodeName.equals("createStone")) {
 					if(saruman.getMagicPower() > saruman.getMagicStoneCost()){
@@ -107,29 +106,33 @@ public class Program {
 						saruman.createStone(((Element)tempNode).getAttribute("type"));
 					}
 					else {
-						//TODO: Rendes hibauzenet
-						System.out.println("Sarumannak nincs magicje, why!");
+						System.out.println("Sarumannak nincs elegendo varazsereje, hogy varazskovet hozzon letre.");
 					}
 				} else if (nodeName.equals("upgradeTower")) {
 					if(saruman.getSelectedMagicStone() != null){
 						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
-						//TODO: get tower on the cell with the ID
-						Tower tower = new Tower(new Cell(map, null),map);
-						saruman.upgradeItem(tower);
+						ArrayList<Tower> towers = map.getTowers();
+						for(Tower tower : towers){
+							if(tower.getPosition() == cellatid){
+								saruman.upgradeItem(tower);
+							}
+						}
 					}
 					else {
-						//TODO: Rendes hibauzenet
-						System.out.println("Sarumannak nincs magicstoneja, why!");
+						System.out.println("Sarumannak nincs letrehozott varazskove, hogy tornyot fejlesszen.");
 					}
 				} else if (nodeName.equals("upgradeObstacle")) {
 					if(saruman.getSelectedMagicStone() != null){
-						//TODO: Megfelelo CellID-n levo akadaly upgradeje
-						Obstacle obs = new Obstacle(new Cell(map, null));
-						saruman.upgradeItem(obs);
+						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+						ArrayList<Obstacle> obstacles = map.getObstacles();
+						for(Obstacle obs : obstacles){
+							if(obs.getPosition() == cellatid){
+								saruman.upgradeItem(obs);
+							}
+						}
 					}
 					else {
-						//TODO: Rendes hibauzenet
-						System.out.println("Sarumannak nincs magicstoneja, why!");
+						System.out.println("Sarumannak nincs letrehozott varazskove, hogy akadalyt fejlesszen.");
 					}
 				}
 			}
@@ -362,14 +365,14 @@ public class Program {
 	}
 	
 	private static void xmlSave(){
-		if(testcase == "1-startGame"){
+		if(testcase.equals("1-startGame")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -394,14 +397,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "2-putTower"){
+		} else if(testcase.equals("2-putTower")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -425,14 +428,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "3-putObstacle"){
+		} else if(testcase.equals("3-putObstacle")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -456,14 +459,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "4-createMagicStone"){
+		} else if(testcase.equals("4-createMagicStone")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -483,14 +486,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "5-upgradeTower"){
+		} else if(testcase.equals("5-upgradeTower")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -512,14 +515,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "6-upgradeObstacle"){
+		} else if(testcase.equals("6-upgradeObstacle")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -541,14 +544,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "7-enemyMoves"){
+		} else if(testcase.equals("7-enemyMoves")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -571,14 +574,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "8-enemyAtCrossMoves"){
+		} else if(testcase.equals("8-enemyAtCrossMoves")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -603,14 +606,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "9-towerShoots"){
+		} else if(testcase.equals("9-towerShoots")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -636,14 +639,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "10-enemySliced"){
+		} else if(testcase.equals("10-enemySliced")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -670,14 +673,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "11-putFog"){
+		} else if(testcase.equals("11-putFog")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -699,14 +702,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "12-enemyObstacle"){
+		} else if(testcase.equals("12-enemyObstacle")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -731,14 +734,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "13-Victory"){
+		} else if(testcase.equals("13-Victory")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -763,14 +766,14 @@ public class Program {
 				   e.printStackTrace();
 			   }
 			}
-		} else if(testcase == "14-Loss"){
+		} else if(testcase.equals("14-Loss")){
 			Writer writer = null;
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>");
+			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
