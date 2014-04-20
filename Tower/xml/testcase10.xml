@@ -1,0 +1,6 @@
+<testCase name="10-enemySliced">
+    <commands>
+        <load file="10-enemySlicedInputMap.xml"/>
+        <save file="10-enemySlicedOutput.xml" delay="700"/>
+    </commands>
+</testCase>
