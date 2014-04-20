@@ -73,8 +73,8 @@ public class Tower extends Item
 	 */
 	public Tower(Cell pos, Map m) {
 		this(
-				10,		// Power
-				500,	// AttackSpeed
+				20,		// Power
+				2000,	// AttackSpeed
 				1,		// Range
 				3,		// Varazskovek maximalis szama
 				pos,	// Pozicio
