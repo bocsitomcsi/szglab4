@@ -1,4 +1,6 @@
 <map>
-    <cell id="1" type="road"/>
-    <saruman magicPower="200" magicStoneCost="50" magicStone="purple"/>
+    <cell id="1" type="terrain">
+        <tower power="10" attackSpeed="600" range="1" humanBonus="2" dwarfBonus="1" elfBonus="3" hobbitBonus="4"/>
+    </cell>
+    <saruman magicPower="300" magicStone="" towerCost="50"/>
 </map>
