@@ -1,0 +1,7 @@
+<testCase name="6-upgradeObstacle">
+    <commands>
+        <load file="6-upgradeObstacleInputMap.xml"/>
+        <upgradeObstacle cellId="2"/>
+        <save file="6-upgradeObstacleOutput.xml"/>
+    </commands>
+</testCase>
