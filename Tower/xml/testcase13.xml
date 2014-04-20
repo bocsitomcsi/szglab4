@@ -1,0 +1,6 @@
+<testCase name="13-Victory">
+    <commands>
+        <load file="13-VictoryInputMap.xml"/>
+        <save file="13-VictoryOutput.xml" delay="700"/>
+    </commands>
+</testCase>
