@@ -113,7 +113,7 @@ public class Obstacle extends Item
 	public boolean upgrade(MagicStone stone)
 	{
 		// Csak akkor fejlesztunk, ha meg nem ertuk el a maximalis fejlesztesek szamat
-		if (maxMagicStoneNumber < magicStones.size()) {
+		if (maxMagicStoneNumber > magicStones.size()) {
 			// Elrakjuk a kovet az akadalyba
 			magicStones.add(stone);
 
