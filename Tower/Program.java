@@ -1,5 +1,10 @@
 package Tower;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -65,7 +70,7 @@ public class Program {
 					}
 				} else if (nodeName.equals("save")) {
 					outputfile = ((Element)tempNode).getAttribute("file");
-					//TODO: save
+					xmlSave();
 				} else if (nodeName.equals("addTower")) {
 					//TODO: Cell id-n keresztuli letrehozas
 					if(saruman.getMagicPower() > saruman.getTowerCost()){
@@ -351,5 +356,440 @@ public class Program {
 			round.setMaxRounds(Integer.parseInt(tempNode.getAttribute("maxRounds")));
 		}
 		//TODO map.setRound(round);
+	}
+	
+	private static void xmlSave(){
+		if(testcase == "1-startGame"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			    <map>
+    				<cell id="1" type="startpoint" northCell="2" northCellEnabled="true">
+        				<enemy type="elf" health="40" actualSpeed="1000" magic="50"/>
+    				</cell>
+    				<cell id="2" type="road" southCell="1" westCell="3" southCellEnabled="false"/>
+					<cell id="3" type="terrain" eastCell="2"/>
+					<saruman magicPower="300"/>
+    				<round enemyNumber="1" enemyAddingTime="1000" enemyNumberMultiplier="1.5" enemyAddingTimeMultiplier="2" roundTime="1" maxRounds="3"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "2-putTower"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			    <map>
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    				<cell id="2" type="road" southCell="1" westCell="3" southCellEnabled="false"/>
+    				<cell id="3" type="terrain" eastCell="2">
+        				<tower power="10" attackSpeed="500" range="1"/>
+    				</cell>
+    				<saruman magicPower="250" towerCost="50"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "3-putObstacle"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			    <map>
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    				<cell id="2" type="road" southCell="1" westCell="3" southCellEnabled="false">
+        				<obstacle slowRate="10"/>
+    				</cell>
+    				<cell id="3" type="terrain" eastCell="2"/>
+    				<saruman magicPower="250" obstacleCost="50"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "4-createMagicStone"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			    <map>
+    				<cell id="1" type="road"/>
+    				<saruman magicPower="200" magicStoneCost="50" magicStone="purple"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "5-upgradeTower"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			    <map>
+    				<cell id="1" type="terrain">
+        				<tower power="10" attackSpeed="600" range="1" humanBonus="2" dwarfBonus="1" elfBonus="3" hobbitBonus="4"/>
+    				</cell>
+    				<saruman magicPower="300" magicStone="" towerCost="50"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "6-upgradeObstacle"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			    <map>
+    				<cell id="1" type="road">
+       					<obstacle slowRate="10" humanBonus="2" dwarfBonus="1" elfBonus="3" hobbitBonus="4"/>
+    				</cell>
+    				<saruman magicPower="250" magicStone=""/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "7-enemyMoves"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			    <map>
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    				<cell id="2" type="road" southCell="1" southCellEnabled="false">
+        				<enemy type="elf" health="40" actualSpeed="1000" magic="50"/>
+    				</cell>
+    				<saruman magicPower="300"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "8-enemyAtCrossMoves"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			   <map>
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    				<cell id="2" type="road" southCell="1" westCell="3" eastCell="4" southCellEnabled="false" eastCellEnabled="true" westCellEnabled="false"/>
+    				<cell id="3" type="road" eastCell="2" eastCellEnabled="true"/>
+    				<cell id="4" type="road" westCell="2" westCellEnabled="false">
+        				<enemy type="elf" health="40" actualSpeed="1000" magic="50"/>
+    				</cell>
+    				<saruman magicPower="300"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "9-towerShoots"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			   	<map sliceShootProbability="0">
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true">
+        				<enemy type="elf" health="30" actualSpeed="1000" magic="50"/>
+    				</cell>
+    				<cell id="2" type="road" westCell="3" southCell="1" southCellEnabled="false"/>
+    				<cell id="3" type="terrain" eastCell="2">
+        				<tower power="10" attackSpeed="500" range="1"/>
+    				</cell>
+    				<saruman magicPower="300"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "10-enemySliced"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			   	<map sliceShootProbability="1">
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true">
+        				<enemy type="elf" health="15" actualSpeed="1000" magic="50"/>
+        				<enemy type="elf" health="15" actualSpeed="1000" magic="50"/>
+    				</cell>
+    				<cell id="2" type="road" westCell="3" southCell="1" southCellEnabled="false"/>
+    				<cell id="3" type="terrain" eastCell="2">
+        				<tower power="10" attackSpeed="500" range="1"/>
+    				</cell>
+   					<saruman magicPower="300"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "11-putFog"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			   	<map fogApplianceTime="100" fogDecreason="5" fogDuration="5000">
+    				<cell id="1" type="terrain" eastCell="2">
+        				<tower power="10" attackSpeed="500" range="3" rangeDecreaseByFog="1" fogActive="true"/>
+    				</cell>
+    				<saruman magicPower="250"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "12-enemyObstacle"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			   	<map>
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    				<cell id="2" type="road" southCell="1" westCell="3" southCellEnabled="false">
+        				<obstacle slowRate="10"/>
+        				<enemy type="elf" health="40" actualSpeed="900" magic="50"/>
+    				</cell>
+    				<cell id="3" type="terrain" eastCell="2"/>
+    				<saruman magicPower="300"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "13-Victory"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			   	<map>
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    				<cell id="2" type="road" westCell="3" southCell="1" southCellEnabled="false"/>
+    				<cell id="3" type="terrain" eastCell="2">
+        				<tower power="10" attackSpeed="500" range="1"/>
+    				</cell>
+    				<saruman magicPower="300"/>
+    				<round enemyNumber="0" enemyAddingTime="1000" enemyNumberMultiplier="1.5" enemyAddingTimeMultiplier="2" roundTime="1" maxRounds="1"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		} else if(testcase == "14-Loss"){
+			Writer writer = null;
+
+			try {
+			    writer = new BufferedWriter(new OutputStreamWriter(
+			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			    
+			    writer.write("<map>");
+			    //TODO: Rendes sorrendben kiirni
+			    writer.write("</map>");
+			    /*Elvart kimenet:
+			   	<map>
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    				<cell id="2" type="endpoint" southCell="1" southCellEnabled="false">
+        				<enemy type="elf" health="40" actualSpeed="1000" magic="50"/>
+    				</cell>
+    				<saruman magicPower="300"/>
+				</map>
+			    */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+			   try {
+				   writer.close();
+			   } catch (IOException e) {
+				   // TODO Auto-generated catch block
+				   e.printStackTrace();
+			   }
+			}
+		}
 	}
 }
