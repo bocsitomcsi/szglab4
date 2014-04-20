@@ -1,6 +1,7 @@
-<map>
-    <cell id="1" type="road" northCell="2" northCellEnabled="true"/>
-    <cell id="2" type="road" southCell="1" westCell="3" southCellEnabled="false"/>
-    <cell id="3" type="terrain" eastCell="2"/>
-    <saruman magicPower="300" towerCost="50"/>
-</map>
+<testCase name="2-putTower">
+    <commands>
+        <load file="2-putTowerInputMap.xml"/>
+        <addTower cellId="3"/>
+        <save file="2-putTowerOutput.xml"/>
+    </commands>
+</testCase>
