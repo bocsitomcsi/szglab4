@@ -1,0 +1,6 @@
+<testCase name="12-enemyObstacle">
+    <commands>
+        <load file="12-enemyObstacleInputMap.xml"/>
+        <save file="12-enemyObstacleOutput.xml" delay="1200"/>
+    </commands>
+</testCase>
