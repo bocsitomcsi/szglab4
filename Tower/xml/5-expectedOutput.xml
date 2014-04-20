@@ -1,0 +1,4 @@
+<map>
+    <cell id="1" type="road"/>
+    <saruman magicPower="200" magicStoneCost="50" magicStone="purple"/>
+</map>
