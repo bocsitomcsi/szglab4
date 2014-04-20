@@ -1,0 +1,6 @@
+<testCase name="7-enemyMoves">
+    <commands>
+        <load file="7-enemyMovesInputMap.xml"/>
+        <save file="7-enemyMovesOutput.xml" delay="1200"/>
+    </commands>
+</testCase>
