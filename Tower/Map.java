@@ -280,6 +280,14 @@ public class Map
 	}
 
 	/**
+	 * Setter a round attributumra.
+	 * @param b A round attributum kivant erteke.
+	 */
+	public void setRound(Round r){
+		this.round = r;
+	}
+	
+	/**
 	 * Letrehoz egy Enemy leszarmazottat a parameterkent kapott 
 	 *  ertekeknek megfeleloen, es az enemies listahoz adja. 
 	 * Ehhez a megfelelo Enemy leszarmazott osztaly konstruktorat hivja meg.
