@@ -1,0 +1,6 @@
+<testCase name="1-startGame">
+    <commands>
+        <load file="1-startGameInputMap.xml"/>
+        <save file="1-startGameOutput.xml"/>
+    </commands>
+</testCase>
