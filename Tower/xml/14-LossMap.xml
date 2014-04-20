@@ -1,0 +1,8 @@
+<map>
+    <cell id="1" type="road" northCell="2" northCellEnabled="true">
+        <enemy type="elf" health="40" actualSpeed="1000" magic="50"/>
+    </cell>
+    <cell id="2" type="endpoint" southCell="1" southCellEnabled="false">
+    </cell>
+    <saruman magicPower="300"/>
+</map>
