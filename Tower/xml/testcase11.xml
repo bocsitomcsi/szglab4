@@ -1,0 +1,6 @@
+<testCase name="11-putFog">
+    <commands>
+        <load file="11-putFogInputMap.xml"/>
+        <save file="11-putFogOutput.xml" delay="200"/>
+    </commands>
+</testCase>
