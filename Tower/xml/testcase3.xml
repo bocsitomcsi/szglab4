@@ -1,0 +1,7 @@
+<testCase name="3-putObstacle">
+    <commands>
+        <load file="3-putObstacleInputMap.xml"/>
+        <addObstacle cellId="2"/>
+        <save file="3-putObstacleOutput.xml"/>
+    </commands>
+</testCase>
