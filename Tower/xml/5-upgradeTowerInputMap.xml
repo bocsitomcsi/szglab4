@@ -1,0 +1,6 @@
+<map>
+    <cell id="1" type="terrain">
+        <tower power="10" attackSpeed="500" range="2" humanBonus="1" dwarfBonus="1" elfBonus="1" hobbitBonus="1"/>
+    </cell>
+    <saruman magicPower="300" magicStone="purple" towerCost="50"/>
+</map>
