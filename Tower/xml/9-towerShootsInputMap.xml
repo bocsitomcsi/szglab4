@@ -1,0 +1,10 @@
+<map sliceShootProbability="0">
+    <cell id="1" type="road" northCell="2" northCellEnabled="true">
+        <enemy type="elf" health="40" actualSpeed="1000" magic="50"/>
+    </cell>
+    <cell id="2" type="road" southCell="1" westCell="3" southCellEnabled="false"/>
+    <cell id="3" type="terrain" eastCell="2">
+        <tower power="10" attackSpeed="500" range="2"/>
+    </cell>
+    <saruman magicPower="300"/>
+</map>
