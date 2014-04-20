@@ -1,0 +1,6 @@
+<map>
+    <cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    <cell id="2" type="road" southCell="1" westCell="3" southCellEnabled="false"/>
+    <cell id="3" type="terrain" eastCell="2"/>
+    <saruman magicPower="300" obstacleCost="50"/>
+</map>
