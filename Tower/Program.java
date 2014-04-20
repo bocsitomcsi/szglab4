@@ -73,42 +73,15 @@ public class Program {
 					outputfile = ((Element)tempNode).getAttribute("file");
 					xmlSave();
 				} else if (nodeName.equals("addTower")) {
-					if(saruman.getMagicPower() > saruman.getTowerCost()){
-						saruman.changeMagicPowerBy((-1)*saruman.getTowerCost());
-						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
-						Tower tower = new Tower(cellatid,map);
-					
-						ArrayList<Tower> towerList;
-						towerList = map.getTowers();
-						towerList.add(tower);
-						map.setTowers(towerList);
-					}
-					else {
-						System.out.println("Sarumannak nincs elegendo varazsereje, hogy tornyot epitsen.");
-					}
+					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+					saruman.addTower(cellatid);
 				} else if (nodeName.equals("addObstacle")) {
-					if(saruman.getMagicPower() > saruman.getObstacleCost()){
-						saruman.changeMagicPowerBy((-1)*saruman.getObstacleCost());
-						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
-						Obstacle obs = new Obstacle(cellatid);
-					
-						ArrayList<Obstacle> obsList;
-						obsList = map.getObstacles();
-						obsList.add(obs);
-						map.setObstacles(obsList);
-					}
-					else {
-						System.out.println("Sarumannak nincs elegendo varazsereje, hogy akadalyt epitsen.");
-					}
+					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+					saruman.addObstacle(cellatid);
 				} else if (nodeName.equals("createStone")) {
-					if(saruman.getMagicPower() > saruman.getMagicStoneCost()){
-						saruman.changeMagicPowerBy((-1)*saruman.getMagicStoneCost());
-						saruman.createStone(((Element)tempNode).getAttribute("type"));
-					}
-					else {
-						System.out.println("Sarumannak nincs elegendo varazsereje, hogy varazskovet hozzon letre.");
-					}
+					saruman.createStone(((Element)tempNode).getAttribute("type"));
 				} else if (nodeName.equals("upgradeTower")) {
+					//TODO:Saruman nem kezeli le ha nincs kove
 					if(saruman.getSelectedMagicStone() != null){
 						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
 						ArrayList<Tower> towers = map.getTowers();
@@ -122,6 +95,7 @@ public class Program {
 						System.out.println("Sarumannak nincs letrehozott varazskove, hogy tornyot fejlesszen.");
 					}
 				} else if (nodeName.equals("upgradeObstacle")) {
+					//TODO:Saruman nem kezeli le ha nincs kove
 					if(saruman.getSelectedMagicStone() != null){
 						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
 						ArrayList<Obstacle> obstacles = map.getObstacles();
@@ -232,6 +206,8 @@ public class Program {
 			ms = tempNode.getAttribute("magicStone");
 			saruman.createStone(ms);
 		}
+		
+		map.setSaruman(saruman);
 	}
 	
 	private static void xmlEnemy(Element tempNode, Cell cell) {
@@ -361,7 +337,7 @@ public class Program {
 		if(tempNode.getAttribute("maxRounds") != "") {
 			round.setMaxRounds(Integer.parseInt(tempNode.getAttribute("maxRounds")));
 		}
-		//TODO map.setRound(round);
+		map.setRound(round);
 	}
 	
 	private static void xmlSave(){
@@ -373,6 +349,14 @@ public class Program {
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
+			    //Kiprobaltam az osszehasonlitast java kimenettel
+			    writer.write("\t<cell id=\"1\" type=\"startpoint\" northCell=\"2\" northCellEnabled=\"true\">\n");
+			    writer.write("\t\t<enemy type=\"elf\" health=\"40\" actualSpeed=\"1000\" magic=\"50\"/>\n");
+			    writer.write("\t</cell>\n");
+			    writer.write("\t<cell id=\"2\" type=\"road\" southCell=\"1\" westCell=\"3\" southCellEnabled=\"false\"/>\n");
+			    writer.write("\t<cell id=\"3\" type=\"terrain\" eastCell=\"2\"/>\n");
+			    writer.write("\t<saruman magicPower=\"300\"/>\n");
+			    writer.write("\t<round enemyNumber=\"1\" enemyAddingTime=\"1000\" enemyNumberMultiplier=\"1.5\" enemyAddingTimeMultiplier=\"2\" roundTime=\"1\" maxRounds=\"3\"/>\n");
 			    //TODO: Rendes sorrendben kiirni
 			    writer.write("</map>");
 			    /*Elvart kimenet:
@@ -746,7 +730,8 @@ public class Program {
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			   	<map>
-    				<cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true">
+    				</cell>
     				<cell id="2" type="road" westCell="3" southCell="1" southCellEnabled="false"/>
     				<cell id="3" type="terrain" eastCell="2">
         				<tower power="10" attackSpeed="500" range="1"/>
@@ -778,7 +763,8 @@ public class Program {
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			   	<map>
-    				<cell id="1" type="road" northCell="2" northCellEnabled="true"/>
+    				<cell id="1" type="road" northCell="2" northCellEnabled="true">
+    				</cell>
     				<cell id="2" type="endpoint" southCell="1" southCellEnabled="false">
         				<enemy type="elf" health="40" actualSpeed="1000" magic="50"/>
     				</cell>
