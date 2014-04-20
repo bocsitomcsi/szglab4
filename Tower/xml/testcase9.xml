@@ -1,0 +1,6 @@
+<testCase name="9-towerShoots">
+    <commands>
+        <load file="9-towerShootsInputMap.xml"/>
+        <save file="9-towerShootsOutput.xml" delay="700"/>
+    </commands>
+</testCase>
