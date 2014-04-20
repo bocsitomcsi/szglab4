@@ -1,5 +1,6 @@
 package Tower;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,28 +14,122 @@ import org.w3c.dom.NamedNodeMap;
 import Tower.Cell.CellType;
 
 public class Program {
+	static String testcase;
+	static String inputfile;
+	static String outputfile;
+	
 	static Map map;
 	static Saruman saruman;
 	static Round round;
 
 	public static void main(String[] args) {
 		try {
-			File file = new File(args[0]);
-			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document doc = dBuilder.parse(file);
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-			if(!doc.getDocumentElement().getNodeName().equals("map")) {
-				// TODO: a root element nem 'map', ami nalunk nem lehet. kulturaltan kilepni
+			File tc = new File(args[0]);
+			DocumentBuilder casedBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document tcdoc = casedBuilder.parse(tc);
+			if(!tcdoc.getDocumentElement().getNodeName().equals("testCase")){
+				//TODO: EXIT
 				System.exit(-1);
 			}
-			if (doc.hasChildNodes()) {
-				printNote(doc.getChildNodes());
-			}
+			testcase = (tcdoc.getDocumentElement()).getAttribute("name");
+			Node commands = tcdoc.getFirstChild();
+			command(commands);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
+	private static void command(Node commands){
+		NodeList nodeList = commands.getChildNodes();
+		for (int count = 0; count < nodeList.getLength(); count++) {
+			Node tempNode = nodeList.item(count);
+			// make sure it's element node.
+			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+				String nodeName = tempNode.getNodeName();
+				if(nodeName.equals("load")) {
+					inputfile = ((Element)tempNode).getAttribute("file");
+					try{
+						File file = new File("xml/" + inputfile);
+						DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+						Document doc = dBuilder.parse(file);
+						if(!doc.getDocumentElement().getNodeName().equals("map")) {
+							// TODO: a root element nem 'map', ami nalunk nem lehet. kulturaltan kilepni
+							System.exit(-1);
+						}
+						if (doc.hasChildNodes()) {
+							printNote(doc.getChildNodes());
+						}
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+				} else if (nodeName.equals("save")) {
+					outputfile = ((Element)tempNode).getAttribute("file");
+					//TODO: save
+				} else if (nodeName.equals("addTower")) {
+					//TODO: Cell id-n keresztuli letrehozas
+					if(saruman.getMagicPower() > saruman.getTowerCost()){
+						saruman.changeMagicPowerBy((-1)*saruman.getTowerCost());
+						Tower tower = new Tower(new Cell(map, null),map);
+					
+						ArrayList<Tower> towerList;
+						towerList = map.getTowers();
+						towerList.add(tower);
+						map.setTowers(towerList);
+					}
+					else {
+						//TODO: Rendes hibauzenet
+						System.out.println("Sarumannak nincs magicje, why!");
+					}
+				} else if (nodeName.equals("addObstacle")) {
+					//TODO: Cell id-n keresztuli letrehozas
+					if(saruman.getMagicPower() > saruman.getObstacleCost()){
+						saruman.changeMagicPowerBy((-1)*saruman.getObstacleCost());
+						Obstacle obs = new Obstacle(new Cell(map, null));
+					
+						ArrayList<Obstacle> obsList;
+						obsList = map.getObstacles();
+						obsList.add(obs);
+						map.setObstacles(obsList);
+					}
+					else {
+						//TODO: Rendes hibauzenet
+						System.out.println("Sarumannak nincs magicje, why!");
+					}
+				} else if (nodeName.equals("createStone")) {
+					if(saruman.getMagicPower() > saruman.getMagicStoneCost()){
+						saruman.changeMagicPowerBy((-1)*saruman.getMagicStoneCost());
+						saruman.createStone(((Element)tempNode).getAttribute("type"));
+					}
+					else {
+						//TODO: Rendes hibauzenet
+						System.out.println("Sarumannak nincs magicje, why!");
+					}
+				} else if (nodeName.equals("upgradeTower")) {
+					if(saruman.getSelectedMagicStone() != null){
+						//TODO: Megfelelo CellID-n levo torony upgradeje
+						Tower tower = new Tower(new Cell(map, null),map);
+						saruman.upgradeItem(tower);
+					}
+					else {
+						//TODO: Rendes hibauzenet
+						System.out.println("Sarumannak nincs magicstoneja, why!");
+					}
+				} else if (nodeName.equals("upgradeObstacle")) {
+					if(saruman.getSelectedMagicStone() != null){
+						//TODO: Megfelelo CellID-n levo akadaly upgradeje
+						Obstacle obs = new Obstacle(new Cell(map, null));
+						saruman.upgradeItem(obs);
+					}
+					else {
+						//TODO: Rendes hibauzenet
+						System.out.println("Sarumannak nincs magicstoneja, why!");
+					}
+				}
+			}
+		}
+	}
+	
 	private static void printNote(NodeList nodeList) {
 		for (int count = 0; count < nodeList.getLength(); count++) {
 			Node tempNode = nodeList.item(count);
@@ -44,34 +139,16 @@ public class Program {
 				if(nodeName.equals("map")) {
 					xmlMap((Element)tempNode);
 				} else if (nodeName.equals("cell")) {
-					xmlCell((Element)tempNode);
+					xmlCell((Element)tempNode, tempNode.getChildNodes());
 				} else if (nodeName.equals("saruman")) {
 					xmlSaruman((Element)tempNode);
-				} else if (nodeName.equals("enemy")) {
-					xmlEnemy((Element)tempNode);
-				} else if (nodeName.equals("obstacle")) {
-					xmlObstacle((Element)tempNode);
-				} else if (nodeName.equals("tower")) {
-					xmlTower((Element)tempNode);
 				} else if (nodeName.equals("round")) {
 					xmlRound((Element)tempNode);
-				}
-				// get node name and value
-				System.out.println("\nNode Name =" + nodeName + " [OPEN]");
-				if (tempNode.hasAttributes()) {
-					// get attributes names and values
-					NamedNodeMap nodeMap = tempNode.getAttributes();
-					for (int i = 0; i < nodeMap.getLength(); i++) {
-						Node node = nodeMap.item(i);
-						System.out.println("attr name : " + node.getNodeName());
-						System.out.println("attr value : " + node.getNodeValue());
-					} 
 				}
 				if (tempNode.hasChildNodes()) {
 					// loop again if it has child nodes
 					printNote(tempNode.getChildNodes());
 				}
-				System.out.println("Node Name =" + tempNode.getNodeName() + " [CLOSE]");
 			}
 		}
 	}
@@ -85,19 +162,38 @@ public class Program {
 		map = new Map(nn);
 	}
 
-	private static void xmlCell(Element tempNode) {
+	private static void xmlCell(Element Node, NodeList nodeList) {
 		Cell cell;
-		if(tempNode.getAttribute("type").equals("startpoint")) {
+		if(Node.getAttribute("type").equals("startpoint")) {
 			cell = new Cell(map, CellType.StartPoint);
-		} else if(tempNode.getAttribute("type").equals("endpoint")) {
+		} else if(Node.getAttribute("type").equals("endpoint")) {
 			cell = new Cell(map, CellType.EndPoint);
-		} else if(tempNode.getAttribute("type").equals("road")) {
+		} else if(Node.getAttribute("type").equals("road")) {
 			cell = new Cell(map, CellType.Road);
-		} else if(tempNode.getAttribute("type").equals("terrain")) {
+		} else {
 			cell = new Cell(map, CellType.Terrain);
 		}
-		//TODO: cellat hozza is kell adni map-hoz
+		ArrayList<Cell> cellList;
+		cellList = map.getCells();
+		cellList.add(cell);
+		map.setCells(cellList);
+		
 		//TODO: a cellanak vannak szomszedjai ezeket hozzakene adni a cellahoz
+		
+		for (int count = 0; count < nodeList.getLength(); count++) {
+			Node tempNode = nodeList.item(count);
+			// make sure it's element node.
+			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+				String nodeName = tempNode.getNodeName();
+				if (nodeName.equals("enemy")) {
+					xmlEnemy((Element)tempNode, cell);
+				} else if (nodeName.equals("obstacle")) {
+					xmlObstacle((Element)tempNode, cell);
+				} else if (nodeName.equals("tower")) {
+					xmlTower((Element)tempNode, cell);
+				}
+			}
+		}
 	}
 	
 	private static void xmlSaruman(Element tempNode) {
@@ -127,7 +223,7 @@ public class Program {
 		}
 	}
 	
-	private static void xmlEnemy(Element tempNode) {
+	private static void xmlEnemy(Element tempNode, Cell cell) {
 		Enemy enemy;
 		
 		if(tempNode.getAttribute("type").equals("human")) {
@@ -149,42 +245,52 @@ public class Program {
 		if(tempNode.getAttribute("magic") != "") {
 			enemy.setMagic(Integer.parseInt(tempNode.getAttribute("magic")));
 		}
-		//TODO: add enemy to cell
+		enemy.setPosition(cell);
+		
+		ArrayList<Enemy> enemyList;
+		enemyList = map.getEnemies();
+		enemyList.add(enemy);
+		map.setEnemies(enemyList);
 	}
 	
-	private static void xmlObstacle(Element tempNode) {
+	private static void xmlObstacle(Element tempNode, Cell cell) {
 		Obstacle obs;
 		HashMap<String, Double> bonus;
 		
-		//TODO: a parent Cellat beadni isBusy-t beallitani
-		obs = new Obstacle(new Cell(map, CellType.Terrain));
+		obs = new Obstacle(cell);
+		cell.setBusy(true);
 		bonus = new HashMap<String, Double>();
 		
 		if(tempNode.getAttribute("slowRate") != "") {
 			obs.setSlowRate(Integer.parseInt(tempNode.getAttribute("slowRate")));
 		}
 		if(tempNode.getAttribute("humanBonus") != "") {
-			bonus.put("humanBonus", Double.parseDouble(tempNode.getAttribute("humanBonus")));
+			bonus.put("humanBonus", Double.valueOf(tempNode.getAttribute("humanBonus")));
 		}
 		if(tempNode.getAttribute("dwarfBonus") != "") {
-			bonus.put("dwarfBonus", Double.parseDouble(tempNode.getAttribute("dwarfBonus")));
+			bonus.put("dwarfBonus", Double.valueOf(tempNode.getAttribute("dwarfBonus")));
 		}
 		if(tempNode.getAttribute("elfBonus") != "") {
-			bonus.put("elfBonus", Double.parseDouble(tempNode.getAttribute("elfBonus")));
+			bonus.put("elfBonus", Double.valueOf(tempNode.getAttribute("elfBonus")));
 		}
 		if(tempNode.getAttribute("hobbitBonus") != "") {
-			bonus.put("hobbitBonus", Double.parseDouble(tempNode.getAttribute("hobbitBonus")));
+			bonus.put("hobbitBonus", Double.valueOf(tempNode.getAttribute("hobbitBonus")));
 		}
 		
 		obs.setBonusSlowRates(bonus);
+		
+		ArrayList<Obstacle> obsList;
+		obsList = map.getObstacles();
+		obsList.add(obs);
+		map.setObstacles(obsList);
 	}
 	
-	private static void xmlTower(Element tempNode) {
+	private static void xmlTower(Element tempNode, Cell cell) {
 		Tower tower;
 		HashMap<String, Integer> bonus;
 		
-		//TODO: a parent Cellat beadni isBusy-t beallitani
-		tower = new Tower(new Cell(map, CellType.Terrain), map);
+		tower = new Tower(cell, map);
+		cell.setBusy(true);
 		bonus = new HashMap<String, Integer>();
 		
 		if(tempNode.getAttribute("power") != "") {
@@ -195,10 +301,6 @@ public class Program {
 		}
 		if(tempNode.getAttribute("range") != "") {
 			tower.setRange(Integer.parseInt(tempNode.getAttribute("range")));
-		}
-		if(tempNode.getAttribute("rangeDecreaseByFog") != "") {
-			//ilyen setterunk nincs
-			//tower.set(Integer.parseInt(tempNode.getAttribute("rangeDecreaseByFog")));
 		}
 		if(tempNode.getAttribute("fogActive") != "") {
 			Boolean fogActive = false;
@@ -220,6 +322,11 @@ public class Program {
 			bonus.put("hobbitBonus", Integer.parseInt(tempNode.getAttribute("hobbitBonus")));
 		}
 		tower.setBonusPowers(bonus);
+		
+		ArrayList<Tower> towerList;
+		towerList = map.getTowers();
+		towerList.add(tower);
+		map.setTowers(towerList);
 	}
 	
 	private static void xmlRound(Element tempNode) {
@@ -232,20 +339,17 @@ public class Program {
 			round.setEnemyAddingTime(Integer.parseInt(tempNode.getAttribute("enemyAddingTime")));
 		}
 		if(tempNode.getAttribute("enemyNumberMultiplier") != "") {
-			round.setEnemyNumberMultiplier(Integer.parseInt(tempNode.getAttribute("enemyNumberMultiplier")));
+			round.setEnemyNumberMultiplier(Double.valueOf(tempNode.getAttribute("enemyNumberMultiplier")));
 		}
 		if(tempNode.getAttribute("enemyAddingTimeMultiplier") != "") {
-			round.setEnemyAddingTimeMultiplier(Integer.parseInt(tempNode.getAttribute("enemyAddingTimeMultiplier")));
+			round.setEnemyAddingTimeMultiplier(Double.valueOf(tempNode.getAttribute("enemyAddingTimeMultiplier")));
 		}
 		if(tempNode.getAttribute("roundTime") != "") {
 			round.setRoundTime(Integer.parseInt(tempNode.getAttribute("roundTime")));
 		}
-		if(tempNode.getAttribute("roundNumber") != "") {
-			//TODO: nincs setRoundNumberunk
-			//round.setRoundNumber(Integer.parseInt(tempNode.getAttribute("roundNumber")));
-		}
 		if(tempNode.getAttribute("maxRounds") != "") {
 			round.setMaxRounds(Integer.parseInt(tempNode.getAttribute("maxRounds")));
 		}
+		//TODO map.setRound(round);
 	}
 }
