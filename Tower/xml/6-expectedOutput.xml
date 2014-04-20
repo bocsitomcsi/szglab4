@@ -1,0 +1,6 @@
+<map>
+    <cell id="1" type="road">
+        <obstacle slowRate="10" humanBonus="2" dwarfBonus="1" elfBonus="3" hobbitBonus="4"/>
+    </cell>
+    <saruman magicPower="250" magicStone=""/>
+</map>
