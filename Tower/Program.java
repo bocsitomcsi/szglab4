@@ -88,12 +88,25 @@ public class Program {
 					xmlSave();
 				} else if (nodeName.equals("addTower")) {
 					// Hozza ad egy tornyot a megfelelo pozicioban
-					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("cellId"));
 					saruman.addTower(cellatid);
+					ArrayList<Tower> towers = map.getTowers();
+					for(Tower tower : towers){
+						if(tower.getPosition().equals(cellatid)){
+							tower.setFirePower(10);
+							tower.setAttackSpeed(500);
+						}
+					}
 				} else if (nodeName.equals("addObstacle")) {
 					// Hozza ad egy akadalyt a megfelelo pozicioban
-					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("cellId"));
 					saruman.addObstacle(cellatid);
+					ArrayList<Obstacle> obstacles = map.getObstacles();
+					for(Obstacle obs : obstacles){
+						if(obs.getPosition().equals(cellatid)){
+							obs.setSlowRate(10);
+						}
+					}
 				} else if (nodeName.equals("createStone")) {
 					// Letrehoz egy varazskovet
 					saruman.createStone(((Element)tempNode).getAttribute("type"));
@@ -101,10 +114,19 @@ public class Program {
 					//TODO:Saruman nem kezeli le ha nincs kove
 					// Meghivja a megfelelo torony upgradejet, a megadott cellaban
 					if(saruman.getSelectedMagicStone() != null){
-						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+						Cell cellatid = CellIDs.get("1");
 						ArrayList<Tower> towers = map.getTowers();
 						for(Tower tower : towers){
 							if(tower.getPosition().equals(cellatid)){
+								MagicStone ms = saruman.getSelectedMagicStone();
+								ms.setAttackSpeed(-100);
+								ms.setFirePower(0);
+								ms.setRange(-1);
+								HashMap<String, Integer> bonus = new HashMap<String, Integer>();
+								bonus.put("humanBonus",1);
+								bonus.put("elfBonus",2);
+								bonus.put("hobbitBonus",3);
+								ms.setBonusPowers(bonus);
 								saruman.upgradeItem(tower);
 							}
 						}
@@ -116,10 +138,17 @@ public class Program {
 					//TODO:Saruman nem kezeli le ha nincs kove
 					// Meghivja a megadott cellaban az akadaly upgrade fuggvenyet
 					if(saruman.getSelectedMagicStone() != null){
-						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+						Cell cellatid = CellIDs.get("1");
 						ArrayList<Obstacle> obstacles = map.getObstacles();
 						for(Obstacle obs : obstacles){
 							if(obs.getPosition().equals(cellatid)){
+								MagicStone ms = saruman.getSelectedMagicStone();
+								ms.setSlowRate(1);
+								HashMap<String, Double> bonus = new HashMap<String, Double>();
+								bonus.put("humanBonus",2.0);
+								bonus.put("elfBonus",3.0);
+								bonus.put("hobbitBonus",4.0);
+								ms.setBonusSlowRate(bonus);
 								saruman.upgradeItem(obs);
 							}
 						}
@@ -243,6 +272,7 @@ public class Program {
 		if(tempNode.hasAttribute("magicStone")) {
 			ms = tempNode.getAttribute("magicStone");
 			saruman.createStone(ms);
+			saruman.changeMagicPowerBy(saruman.getMagicStoneCost());
 		}
 		
 		// Mapnak beallitjuk a saruman referenciat
@@ -289,7 +319,7 @@ public class Program {
 	
 	/*
 	 * Akadaly letrehozasa megfelelo ertekekkel
-	 * Map.addObstacle()-t nem hasznaltuk mert az ertekeit nem lehet beallitani ugy
+	 * Saruman.addObstacle()-t nem hasznaltuk mert az ertekeit nem lehet beallitani ugy
 	 */
 	private static void xmlObstacle(Element tempNode, Cell cell) {
 		Obstacle obs;
@@ -329,7 +359,7 @@ public class Program {
 	
 	/*
 	 * Torony letrehozo fuggveny
-	 * Map.addTower()-t nem hasznaltuk mert ugy nem lehet beallitani az ertekeit
+	 * Saruman.addTower()-t nem hasznaltuk mert ugy nem lehet beallitani az ertekeit
 	 */
 	private static void xmlTower(Element tempNode, Cell cell) {
 		Tower tower;
@@ -427,6 +457,7 @@ public class Program {
 			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
 			    		+ "\" northCell=\"2\" northCellEnabled=\"true\">\n");
 			    
+			    //TODO: Enemy .getClass nem jo es a enemy hozza adasa meg nincs megcsinalva a jatek inditasanal
 			    ArrayList<Enemy> enemyList = map.getEnemies();
 			    for(Enemy enemy : enemyList){
 			    	if(enemy.getPosition().equals(cell)){
@@ -451,7 +482,7 @@ public class Program {
 			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
 			    		+ "\"/>\n");
 			    
-			    // A Double erteknek a elvalasztojat pontra allitja es formazza
+			    // A Double erteknek a elvalasztojat pontra allitja es formazza az alakjat
 			    Round round = map.getRound();
 			    DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
 			    otherSymbols.setDecimalSeparator('.');
@@ -493,8 +524,35 @@ public class Program {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
+			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" northCell=\"2\" northCellEnabled=\"true\"/>\n");
+			    
+			    cell = CellIDs.get("2");
+			    writer.write("\t<cell id=\"2\" type=\"" + cell.getCellType().toString()
+			    		+ "\" southCell=\"1\" westCell=\"3\" southCellEnabled=\"false\"/>\n");
+			    
+			    cell = CellIDs.get("3");
+			    writer.write("\t<cell id=\"3\" type=\"" + cell.getCellType().toString()
+			    		+ "\" eastCell=\"2\">\n");
+			    
+			    ArrayList<Tower> towers = map.getTowers();
+			    for(Tower tower : towers){
+			    	writer.write("\t\t<tower power=\"" + tower.getFirePower()
+			    			+ "\" attackSpeed=\"" + tower.getAttackSpeed()
+			    			+ "\" range=\"" + tower.getRange()
+			    			+ "\"/>\n");
+			    }
+			    
+			    writer.write("\t</cell>\n");
+			    
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\" towerCost=\"" + saruman.getTowerCost()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			    <map>
@@ -522,8 +580,40 @@ public class Program {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
+			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" northCell=\"2\" northCellEnabled=\"true\"/>\n");
+			    
+			    cell = CellIDs.get("2");
+			    writer.write("\t<cell id=\"2\" type=\"" + cell.getCellType().toString()
+			    		+ "\" southCell=\"1\" westCell=\"3\" southCellEnabled=\"false\">\n");
+			    
+			    ArrayList<Obstacle> obstacles = map.getObstacles();
+			    
+			    // A Double erteknek a elvalasztojat pontra allitja es formazza az alakjat
+			    DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
+			    otherSymbols.setDecimalSeparator('.');
+			    otherSymbols.setGroupingSeparator('.'); 
+			    DecimalFormat df = new DecimalFormat("#.##", otherSymbols);
+			    
+			    for(Obstacle obs : obstacles){
+			    	writer.write("\t\t<obstacle slowRate=\"" + df.format(obs.getSlowRate())
+			    			+ "\"/>\n");
+			    }
+			    
+			    writer.write("\t</cell>\n");
+			    
+			    cell = CellIDs.get("3");
+			    writer.write("\t<cell id=\"3\" type=\"" + cell.getCellType().toString()
+			    		+ "\" eastCell=\"2\"/>\n");
+			    
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\" obstacleCost=\"" + saruman.getObstacleCost()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			    <map>
@@ -551,8 +641,18 @@ public class Program {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
+			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\"/>\n");
+			    
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\" magicStoneCost=\"" + saruman.getMagicStoneCost()
+			    		+ "\" magicStone=\"" + saruman.getSelectedMagicStone().getName()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			    <map>
@@ -576,8 +676,40 @@ public class Program {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
+			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\">\n");
+			    
+			    ArrayList<Tower> towers = map.getTowers();
+			    for(Tower tower : towers){
+			    	HashMap<String, Integer> bonus = tower.getBonusPowers();
+			    	writer.write("\t\t<tower power=\"" + tower.getFirePower()
+			    			+ "\" attackSpeed=\"" + tower.getAttackSpeed()
+			    			+ "\" range=\"" + tower.getRange()
+			    			+ "\" humanBonus=\"" + bonus.get("humanBonus")
+			    			+ "\" dwarfBonus=\"" + bonus.get("dwarfBonus")
+			    			+ "\" elfBonus=\"" + bonus.get("elfBonus")
+			    			+ "\" hobbitBonus=\"" + bonus.get("hobbitBonus")
+			    			+ "\"/>\n");
+			    }
+			    
+			    writer.write("\t</cell>\n");
+			    
+			    MagicStone stone = saruman.getSelectedMagicStone();
+			    String stonename;
+			    if(stone == null){
+			    	stonename = "";
+			    } else {
+			    	stonename = saruman.getSelectedMagicStone().getName();
+			    }
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\" magicStone=\"" + stonename
+			    		+ "\" towerCost=\"" + saruman.getTowerCost()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			    <map>
@@ -603,8 +735,44 @@ public class Program {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("xml/"+outputfile), "utf-8"));
 			    
+			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\">\n");
+			    
+			    ArrayList<Obstacle> obstacles = map.getObstacles();
+			    
+			    // A Double erteknek a elvalasztojat pontra allitja es formazza az alakjat
+			    DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
+			    otherSymbols.setDecimalSeparator('.');
+			    otherSymbols.setGroupingSeparator('.'); 
+			    DecimalFormat df = new DecimalFormat("#.##", otherSymbols);
+			    
+			    for(Obstacle obs : obstacles){
+				    HashMap<String, Double> bonus = obs.getBonusSlowRates();
+			    	writer.write("\t\t<obstacle slowRate=\"" + df.format(obs.getSlowRate())
+			    			+ "\" humanBonus=\"" + df.format(bonus.get("humanBonus"))
+			    			+ "\" dwarfBonus=\"" + df.format(bonus.get("dwarfBonus"))
+			    			+ "\" elfBonus=\"" + df.format(bonus.get("elfBonus"))
+			    			+ "\" hobbitBonus=\"" + df.format(bonus.get("hobbitBonus"))
+			    			+ "\"/>\n");
+			    }
+			    
+			    writer.write("\t</cell>\n");
+
+			    MagicStone stone = saruman.getSelectedMagicStone();
+			    String stonename;
+			    if(stone == null){
+			    	stonename = "";
+			    } else {
+			    	stonename = saruman.getSelectedMagicStone().getName();
+			    }
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\" magicStone=\"" + stonename
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			    <map>
