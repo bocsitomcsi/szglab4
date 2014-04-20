@@ -14,14 +14,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-
 import Tower.Cell.CellType;
 
 public class Program {
 	static String testcase;
 	static String inputfile;
 	static String outputfile;
+	static HashMap<String, Cell> CellIDs;
 	
 	static Map map;
 	static Saruman saruman;
@@ -33,7 +32,7 @@ public class Program {
 			DocumentBuilder casedBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document tcdoc = casedBuilder.parse(tc);
 			if(!tcdoc.getDocumentElement().getNodeName().equals("testCase")){
-				//TODO: EXIT
+				System.out.println("The file input is wrong");
 				System.exit(-1);
 			}
 			testcase = (tcdoc.getDocumentElement()).getAttribute("name");
@@ -46,6 +45,7 @@ public class Program {
 	}
 
 	private static void command(Node commands){
+		CellIDs = new HashMap<String, Cell>();
 		NodeList nodeList = commands.getChildNodes();
 		for (int count = 0; count < nodeList.getLength(); count++) {
 			Node tempNode = nodeList.item(count);
@@ -59,7 +59,7 @@ public class Program {
 						DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 						Document doc = dBuilder.parse(file);
 						if(!doc.getDocumentElement().getNodeName().equals("map")) {
-							// TODO: a root element nem 'map', ami nalunk nem lehet. kulturaltan kilepni
+							System.out.println("Wrong file: " + inputfile);
 							System.exit(-1);
 						}
 						if (doc.hasChildNodes()) {
@@ -72,10 +72,10 @@ public class Program {
 					outputfile = ((Element)tempNode).getAttribute("file");
 					xmlSave();
 				} else if (nodeName.equals("addTower")) {
-					//TODO: Cell id-n keresztuli letrehozas
 					if(saruman.getMagicPower() > saruman.getTowerCost()){
 						saruman.changeMagicPowerBy((-1)*saruman.getTowerCost());
-						Tower tower = new Tower(new Cell(map, null),map);
+						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+						Tower tower = new Tower(cellatid,map);
 					
 						ArrayList<Tower> towerList;
 						towerList = map.getTowers();
@@ -87,10 +87,10 @@ public class Program {
 						System.out.println("Sarumannak nincs magicje, why!");
 					}
 				} else if (nodeName.equals("addObstacle")) {
-					//TODO: Cell id-n keresztuli letrehozas
 					if(saruman.getMagicPower() > saruman.getObstacleCost()){
 						saruman.changeMagicPowerBy((-1)*saruman.getObstacleCost());
-						Obstacle obs = new Obstacle(new Cell(map, null));
+						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+						Obstacle obs = new Obstacle(cellatid);
 					
 						ArrayList<Obstacle> obsList;
 						obsList = map.getObstacles();
@@ -112,7 +112,8 @@ public class Program {
 					}
 				} else if (nodeName.equals("upgradeTower")) {
 					if(saruman.getSelectedMagicStone() != null){
-						//TODO: Megfelelo CellID-n levo torony upgradeje
+						Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("CellId"));
+						//TODO: get tower on the cell with the ID
 						Tower tower = new Tower(new Cell(map, null),map);
 						saruman.upgradeItem(tower);
 					}
@@ -182,6 +183,8 @@ public class Program {
 		cellList = map.getCells();
 		cellList.add(cell);
 		map.setCells(cellList);
+		
+		CellIDs.put(Node.getAttribute("id"), cell);
 		
 		//TODO: a cellanak vannak szomszedjai ezeket hozzakene adni a cellahoz
 		
