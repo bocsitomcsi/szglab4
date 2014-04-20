@@ -1,0 +1,7 @@
+<testCase name="5-upgradeTower">
+    <commands>
+        <load file="5-upgradeTowerInputMap.xml"/>
+        <upgradeTower cellId="3"/>
+        <save file="5-upgradeTowerOutput.xml"/>
+    </commands>
+</testCase>
