@@ -1,0 +1,6 @@
+<testCase name="8-enemyAtCrossMoves">
+    <commands>
+        <load file="8-enemyAtCrossMovesInputMap.xml"/>
+        <save file="8-enemyAtCrossMovesOutput.xml" delay="2200"/>
+    </commands>
+</testCase>
