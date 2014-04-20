@@ -1,0 +1,7 @@
+<testCase name="4-createMagicStone">
+    <commands>
+        <load file="4-createMagicStoneInputMap.xml"/>
+        <createStone type="purple"/>
+        <save file="4-createMagicStoneOutput.xml"/>
+    </commands>
+</testCase>
