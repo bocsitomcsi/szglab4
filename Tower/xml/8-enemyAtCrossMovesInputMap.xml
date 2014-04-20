@@ -1,0 +1,9 @@
+<map>
+    <cell id="1" type="road" northCell="2" northCellEnabled="true">
+        <enemy type="elf" health="40" actualSpeed="1000" magic="50"/>
+    </cell>
+    <cell id="2" type="road" southCell="1" westCell="3" eastCell="4" southCellEnabled="false" eastCellEnabled="true" westCellEnabled="false"/>
+    <cell id="3" type="road" eastCell="2" eastCellEnabled="true"/>
+    <cell id="4" type="road" westCell="2" westCellEnabled="false"/>
+    <saruman magicPower="300"/>
+</map>
