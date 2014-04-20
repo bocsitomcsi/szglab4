@@ -73,8 +73,8 @@ public class Tower extends Item
 	 */
 	public Tower(Cell pos, Map m) {
 		this(
-				20,		// Power
-				2000,	// AttackSpeed
+				10,		// Power
+				500,	// AttackSpeed
 				1,		// Range
 				3,		// Varazskovek maximalis szama
 				pos,	// Pozicio
@@ -264,7 +264,7 @@ public class Tower extends Item
 	 * A torony ralo egy ellenfelre.
 	 * Ehhez meghivja a map getEnemysInRange fuggvenyet atadva onmagat. 
 	 * Ha nem null erteket kap vissza, akkor egy logika alapjan kivalaszt 
-	 *  egy Enemy-t a kapott listabol és meghivja annak a damage fuggvenyet
+	 *  egy Enemy-t a kapott listabol Ã©s meghivja annak a damage fuggvenyet
 	 *  atadva a firePower-t, es a bonusPowers attributumok ertekeit. 
 	 * Ha a damage fuggveny true-val ter vissza akkor meghivja a map 
 	 *  removeEnemy fuggvenyet atadva a kivalasztott Enemy-t.
