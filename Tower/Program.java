@@ -10,15 +10,43 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map.Entry;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
+
+import Tower.Cell.CellEntry;
 import Tower.Cell.CellType;
+import Tower.Map.Direction;
 
 public class Program {
+	// Segedosztaly a cellak beolvasasahoz az
+	// osszerendelesek miatt
+	public static class CellHelper {
+		// A cella akire vonatkozik
+		Cell cell;	
+		// A cella melyik iranyban levo szomszedja
+		Direction direction; 
+		// A cella direction iranyban levo szomszedjanak id-ja
+		int neighbourCellId; 
+		// A cella direction iranyban levo neighbourCellId szomszedjanak elerhetosege
+		boolean neighbourEnabled; 
+		
+		public CellHelper(Cell cell, Direction direction, int neighbourCellId, boolean neighbourEnabled) {
+			this.cell = cell;
+			this.direction = direction;
+			this.neighbourCellId = neighbourCellId;
+			this.neighbourEnabled = neighbourEnabled;
+		}
+	}
+	static ArrayList<CellHelper> cellHelpers = 
+			new ArrayList<CellHelper>();
+	
 	static String testcase;
 	static String inputfile;
 	static String outputfile;
@@ -84,6 +112,9 @@ public class Program {
 						if (doc.hasChildNodes()) {
 							// A felepito fuggveny meghivasa
 							printNote(doc.getChildNodes());
+							
+							// Utolsokent, osszerendeljuk a cellakat
+							xmlCellConnections();
 						}
 						// Ha ez az elso testcase akkor meg kell varnunk amig letrejon egy elf
 						if (testcaseNumber == 1) {
@@ -98,6 +129,14 @@ public class Program {
 						e.printStackTrace();
 					}
 				} else if (nodeName.equals("save")) {
+					Node delayNode = tempNode.getAttributes().getNamedItem("delay");
+					// Ha van delay, akkor kesleltetjuk a mentest
+					if (delayNode != null) {
+						long delayTime = Integer.parseInt(delayNode.getNodeValue());
+						delayEnd = System.currentTimeMillis() + delayTime;
+						map.simulateWorld();
+					}
+					
 					// Ha mentes parancsot kap meghivja a mento fuggvenyt
 					outputfile = ((Element)tempNode).getAttribute("file");
 					xmlSave();
@@ -240,7 +279,48 @@ public class Program {
 		// Egy valtozoban eltaroljuk az ID-ket mivel a Cell-nek nincs ilyen attributuma
 		CellIDs.put(Node.getAttribute("id"), cell);
 		
-		//TODO: a cellanak vannak szomszedjai ezeket hozzakene adni a cellahoz
+		// Letrehozzuk a segedvaltozokat ami tarolja a szomszedokat
+		Direction[] directions = {
+				Direction.North, 
+				Direction.West, 
+				Direction.South, 
+				Direction.East
+		};
+		String[] dirStrings = { 
+				"northCell",
+				"westCell",
+				"southCell",
+				"eastCell",
+		};
+		String[] enabledStrings = { 
+				"northCellEnabled",
+				"westCellEnabled",
+				"southCellEnabled",
+				"eastCellEnabled"
+		};
+		Direction direction;
+		int neighbourCellId;
+		boolean neighbourEnabled;
+		
+		for (int i = 0; i < 4; i++) {
+			neighbourEnabled = false;
+			if (Node.hasAttribute(dirStrings[i])) {
+				direction = directions[i];
+				neighbourCellId = Integer.parseInt(Node.getAttributeNode(dirStrings[i]).getValue());
+				if (Node.hasAttribute(enabledStrings[i])) {
+					String enabledString = Node.getAttributeNode(enabledStrings[i]).getValue();
+					if (enabledString.equals("true")) {
+						neighbourEnabled = true;
+					}
+					else if (enabledString.equals("false")) {
+						neighbourEnabled = false;
+					}
+				}
+				
+				CellHelper cellHelper = new CellHelper(cell, direction, neighbourCellId, neighbourEnabled);
+				cellHelpers.add(cellHelper);
+			}
+		}
 		
 		// A cellaban levo Item-ek es Enemy-k feldolgozasa
 		for (int count = 0; count < nodeList.getLength(); count++) {
@@ -318,6 +398,9 @@ public class Program {
 		}
 		if(tempNode.hasAttribute("actualSpeed")) {
 			enemy.setActualSpeed(Integer.parseInt(tempNode.getAttribute("actualSpeed")));
+			if(!tempNode.hasAttribute("originalSpeed")) {
+				enemy.setOriginalSpeed(Integer.parseInt(tempNode.getAttribute("actualSpeed")));
+			}
 		}
 		if(tempNode.hasAttribute("magic")) {
 			enemy.setMagic(Integer.parseInt(tempNode.getAttribute("magic")));
@@ -330,6 +413,7 @@ public class Program {
 		enemyList = map.getEnemies();
 		enemyList.add(enemy);
 		map.setEnemies(enemyList);
+		System.out.println(enemy.getActualSpeed());
 	}
 	
 	/*
@@ -450,6 +534,28 @@ public class Program {
 		
 		// Maphoz beallitjuk a Round referenciat
 		map.setRound(round);
+	}
+	
+	/*
+	 * A beolvasott cellak kozotti osszerendelesek vegzi el
+	 * a cellHelpers kollekcio segitsegevel
+	 */
+	private static void xmlCellConnections() {
+		// Minden CellHelper-en vegig megyunk
+		for (CellHelper cellHelper : cellHelpers) {
+			// Szomszed elerese
+			String neighbourCellIdString = Integer.toString(cellHelper.neighbourCellId);
+			Cell neighbourCell = CellIDs.get(neighbourCellIdString);
+			
+			cellHelper.cell.getNeighbours().put(
+					cellHelper.direction, 
+					new Cell.CellEntry<Cell, Boolean>(
+							neighbourCell,
+							new Boolean(cellHelper.neighbourEnabled)
+							)
+					);
+			
+		}
 	}
 	
 	/*
@@ -808,13 +914,36 @@ public class Program {
 			}
 		} else if(testcase.equals("7-enemyMoves")){
 			Writer writer = null;
-
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" northCell=\"2\" northCellEnabled=\"true\"/>\n");
+			    
+			    cell = CellIDs.get("2");
+			    writer.write("\t<cell id=\"2\" type=\"" + cell.getCellType().toString()
+			    		+ "\" southCell=\"1\" southCellEnabled=\"false\">\n");
+			    
+			    Cell cell2 = CellIDs.get("2");
+			    Enemy enemy = null;
+			    if (map.getEnemies().get(0).getPosition() == cell2) {
+					enemy = map.getEnemies().get(0);
+					writer.write("\t\t<enemy type=\"" + enemy.toString()
+			    			+ "\" health=\"" + enemy.getHealthPoint()
+			    			+ "\" actualSpeed=\"" + enemy.getActualSpeed()
+			    			+ "\" magic=\"" + enemy.getMagic()
+			    			+ "\"/>\n");
+				}
+			    
+			    writer.write("\t</cell>\n");
+
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			    <map>

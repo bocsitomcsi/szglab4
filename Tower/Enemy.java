@@ -84,6 +84,7 @@ public abstract class Enemy
 		this.isDead = false;
 		this.lastTime = System.currentTimeMillis();
 		this.enemySpeeds = new HashMap<String,Integer>();
+		System.out.println("Elf created");
 	}
 
 	/**
@@ -107,11 +108,6 @@ public abstract class Enemy
 	 */
 	public int getActualSpeed()
 	{
-		String logString = "Enemy.getActualSpeed()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
-
 		return this.actualSpeed;
 	}
 
@@ -185,12 +181,8 @@ public abstract class Enemy
 	 */
 	public void setActualSpeed(int as)
 	{
-		String logString = "Enemy.setActualSpeed(as)";
-		Logger.Log(1, logString, this);
-
 		this.actualSpeed = as;
 
-		Logger.Log(0, logString, this);
 	}
 
 	/**

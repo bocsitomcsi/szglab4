@@ -489,6 +489,7 @@ public class Map
 		
 		// GAME LOOP
 		while (gameRunning) {
+			ArrayList<Enemy> es = enemies;
 			
 			long currentTime = System.currentTimeMillis();
 			int random;
@@ -563,36 +564,40 @@ public class Map
 				roundStartedTime = currentTime;
 			}
 			
-			// ENEMY HOZZAADAS
-			// Ha meg tart az aktualis kor es eljott 
-			// az ellenseg hozzaadasanak ideje
-			if (currentTime - roundStartedTime < round.roundTime &&
-					currentTime - lastEnemyAddedTime >= round.enemyAddingTime) {
-				// A round-ban tarolt enemyNumber erteknek megfeleloen
-				// hozaadunk enemyNumber darab ellenseget a palyahoz
-				for (int i = 0; i < round.enemyNumber; i++) {
-					// Kivalasztunk veletlenszeruen egy ellenseg tipust
-					String[] enemyTypes = {"dwarf", "elf", "hobbit", "human"};
-					random = (int)(Math.random() * enemyTypes.length);
-					String enemyType = enemyTypes[random];
-					
-					// Kigyujtjuk a StartPoint tipusu cellakat
-					ArrayList<Cell> startPoints = new ArrayList<Cell>();
-					for (Cell cell : cells) {
-						if (cell.getCellType() == CellType.StartPoint) {
-							startPoints.add(cell);
+			// Csak akkor adunk hozza random ellensegeket a palyahoz
+			// ha nincs teszteles
+			if (Program.testcase == null) {
+				// ENEMY HOZZAADAS
+				// Ha meg tart az aktualis kor es eljott 
+				// az ellenseg hozzaadasanak ideje
+				if (currentTime - roundStartedTime < round.roundTime &&
+						currentTime - lastEnemyAddedTime >= round.enemyAddingTime) {
+					// A round-ban tarolt enemyNumber erteknek megfeleloen
+					// hozaadunk enemyNumber darab ellenseget a palyahoz
+					for (int i = 0; i < round.enemyNumber; i++) {
+						// Kivalasztunk veletlenszeruen egy ellenseg tipust
+						String[] enemyTypes = {"dwarf", "elf", "hobbit", "human"};
+						random = (int)(Math.random() * enemyTypes.length);
+						String enemyType = enemyTypes[random];
+						
+						// Kigyujtjuk a StartPoint tipusu cellakat
+						ArrayList<Cell> startPoints = new ArrayList<Cell>();
+						for (Cell cell : cells) {
+							if (cell.getCellType() == CellType.StartPoint) {
+								startPoints.add(cell);
+							}
 						}
+						// Kivalasztunk egyet veletlenszeruen
+						random = (int)(Math.random() * startPoints.size());
+						Cell startPoint = startPoints.get(random);
+						
+						// Hozzaadjuk az ellenseget a palyahoz
+						addEnemy(enemyType, startPoint);
 					}
-					// Kivalasztunk egyet veletlenszeruen
-					random = (int)(Math.random() * startPoints.size());
-					Cell startPoint = startPoints.get(random);
-					
-					// Hozzaadjuk az ellenseget a palyahoz
-					addEnemy(enemyType, startPoint);
-				}
 
-				// Beallitjuk a legutoljara hozzaadott ellenseg idejet
-				lastEnemyAddedTime = currentTime;
+					// Beallitjuk a legutoljara hozzaadott ellenseg idejet
+					lastEnemyAddedTime = currentTime;
+				}
 			}
 
 			// JATEK VEGE CHECK
@@ -631,6 +636,8 @@ public class Map
 			if (currentTime >= Program.delayEnd) {
 				return gameResult.Loose;
 			}
+			
+			//System.out.println(enemies.get(0).actualSpeed);
 		}
 
 		// Visszaterunk az eredmennyel

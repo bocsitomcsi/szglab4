@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javax.rmi.CORBA.UtilDelegate;
+import javax.tools.JavaCompiler;
+
 import Tower.Map.Direction;
 
 //
@@ -23,6 +26,39 @@ import Tower.Map.Direction;
  */
 public class Cell
 {
+	/**
+	 * Map.Entry absztrakt osztaly implementacioja.
+	 * @param <K> A kulcs tipusa
+	 * @param <V> Az ertek tipusa
+	 */
+	final static class CellEntry<K, V> implements java.util.Map.Entry<K, V> {
+		private final K key;
+		private V value;
+		
+		public CellEntry(K key, V value) {
+			this.key = key;
+			this.value = value;
+		}
+		
+		@Override
+		public K getKey() {
+			return key;
+		}
+
+		@Override
+		public V getValue() {
+			return value;
+		}
+
+		@Override
+		public V setValue(V value) {
+			V oldValue = this.value;
+			this.value = value;
+			return oldValue;
+		}
+		
+	}
+	
 	/**
 	 * A cella foglaltsaga.
 	 */
@@ -57,7 +93,7 @@ public class Cell
 	{
 		this.busy = false;
 		this.map = map;
-		this.neighbours = new HashMap<Map.Direction, Entry<Cell, Boolean>>();
+		this.neighbours = new HashMap<Direction, Entry<Cell, Boolean>>();
 		this.type = ct;
 	}
 
