@@ -309,7 +309,11 @@ public class Map
 		
 		Enemy enemy;
 		// Letrehozzuk a megfelelo ellenseget
-		if (type.equals("human")) {
+		// TESZTELESHEZ:
+		// Ha ez a testcase1, akkor egy specialis elfet hozunk letre
+		if (Program.testcaseNumber == 1) {
+			enemy = new Elf(40, 1000, 1000, 50);
+		} else if (type.equals("human")) {
 			enemy = new Human();
 			Logger.AddName(enemy, "HumanID");
 		} else if (type.equals("elf")) {
@@ -481,11 +485,15 @@ public class Map
 	{
 		boolean gameRunning = true;
 		GameResult gameResult = GameResult.Loose;
-
+		long lastLoopTime = System.currentTimeMillis();
+		
 		// GAME LOOP
 		while (gameRunning) {
+			
 			long currentTime = System.currentTimeMillis();
 			int random;
+			System.out.println("game loop, dt: " + (currentTime - lastLoopTime));
+			lastLoopTime = currentTime;
 
 			// ELLENSEGEK ES TORNYOK ERTESITESE
 			for (Enemy enemy : enemies) {
@@ -523,6 +531,24 @@ public class Map
 				}
 			}
 
+			// Ha testcase1 van akkor letrehozunk egy elfet
+			if (Program.testcaseNumber == 1) {
+				// Kigyujtjuk a StartPoint tipusu cellakat
+				ArrayList<Cell> startPoints = new ArrayList<Cell>();
+				for (Cell cell : cells) {
+					if (cell.getCellType() == CellType.StartPoint) {
+						startPoints.add(cell);
+					}
+				}
+				// Kivalasztunk egyet veletlenszeruen
+				random = (int)(Math.random() * startPoints.size());
+				Cell startPoint = startPoints.get(random);
+				
+				// Hozzaadjuk az ellenseget a palyahoz
+				addEnemy("elf", startPoint);
+				return GameResult.Loose;
+						}
+			
 			// ROUND KARBANTARTAS
 			// Ha veget ert az aktualis kor es ez nem az utolso volt akkor,
 			// atlepunk a kovetkezo korbe
@@ -536,7 +562,7 @@ public class Map
 				// Beallitjuk az uj kor kezdetenek idejet
 				roundStartedTime = currentTime;
 			}
-
+			
 			// ENEMY HOZZAADAS
 			// Ha meg tart az aktualis kor es eljott 
 			// az ellenseg hozzaadasanak ideje

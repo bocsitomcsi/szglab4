@@ -30,12 +30,15 @@ public class Program {
 	
 	// Az aktualis parancs delay ideje eddig tart
 	public static long delayEnd;
-	public static boolean testcase1;
+	public static int testcaseNumber = 0;
 	
 	public static void main(String[] args) {
 		try {
 			// Beolvassa a beadott testcase<number>.xml-t es az xml-t parseolja
 			File tc = new File(args[0]);
+			if (args[0].contains("testcase1.xml")) {
+				testcaseNumber = 1;
+			}
 			DocumentBuilder casedBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document tcdoc = casedBuilder.parse(tc);
 			// Ha a gyoker nem testCase
@@ -83,8 +86,13 @@ public class Program {
 							printNote(doc.getChildNodes());
 						}
 						// Ha ez az elso testcase akkor meg kell varnunk amig letrejon egy elf
-						delayEnd = System.currentTimeMillis() + 1500;
-						map.simulateWorld();
+						if (testcaseNumber == 1) {
+							long currentTime = System.currentTimeMillis();
+							delayEnd = currentTime + 1500;
+							System.out.println("simulate called at " + currentTime);
+							map.simulateWorld();
+							System.out.println("simulate ended at " + currentTime);
+						}
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 						e.printStackTrace();
@@ -468,7 +476,7 @@ public class Program {
 			    ArrayList<Enemy> enemyList = map.getEnemies();
 			    for(Enemy enemy : enemyList){
 			    	if(enemy.getPosition().equals(cell)){
-			    		writer.write("\t\t<enemy type=\"" + enemy.getClass().toString().toLowerCase()
+			    		writer.write("\t\t<enemy type=\"" + enemy.toString()
 				    			+ "\" health=\"" + enemy.getHealthPoint()
 				    			+ "\" actualSpeed=\"" + enemy.getActualSpeed()
 				    			+ "\" magic=\"" + enemy.getMagic()

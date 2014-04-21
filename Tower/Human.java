@@ -94,4 +94,8 @@ public class Human extends Enemy
 			actualSpeed *= obstacle.getBonusSlowRates().get("human");
 		}
 	}
+	
+	public String toString() {
+		return "human";
+	}
 }

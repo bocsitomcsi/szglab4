@@ -94,4 +94,8 @@ public class Elf extends Enemy
 			actualSpeed *= obstacle.getBonusSlowRates().get("elf");
 		}
 	}
+	
+	public String toString() {
+		return "elf";
+	}
 }

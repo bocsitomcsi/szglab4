@@ -148,4 +148,8 @@ public class Hobbit extends Enemy
 		Logger.Log(0, logString, this);
 		*/
 	}
+	
+	public String toString() {
+		return "hobbit";
+	}
 }

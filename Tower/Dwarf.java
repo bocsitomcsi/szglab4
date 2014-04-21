@@ -95,4 +95,8 @@ public class Dwarf extends Enemy
 			actualSpeed *= obstacle.getBonusSlowRates().get("dwarf");
 		}
 	}
+	
+	public String toString() {
+		return "dwarf";
+	}
 }
