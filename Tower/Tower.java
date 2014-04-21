@@ -158,6 +158,14 @@ public class Tower extends Item
 	public boolean getFogActive() {
 		return fogActive;
 	}
+	
+	/**
+	 * Getter a rangeDecreaseByFog attributumra.
+	 * @return  A rangeDecreaseByFog attributum.
+	 */
+	public int getRangeDecreaseByFog() {
+		return rangeDecreaseByFog;
+	}
 
 	/**
 	 * Setter a firePower attributumra.

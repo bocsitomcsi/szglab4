@@ -91,11 +91,11 @@ public class Map
 	/**
 	 * A kod ennyivel csokkenti egy torony lotavolsagat.
 	 */
-	private final static int fogDecreason = 1;
+	private static int fogDecreason = 1;
 	/**
 	 * A kod ennyi ideig csokkenti egy torony lotavolsagat.
 	 */
-	private final static int fogDuration = 4000;
+	private static int fogDuration = 4000;
 
 	/**
 	 * Ennyi idonkent ertesulnek az objektumok az ido mulasarol.
@@ -121,11 +121,23 @@ public class Map
 
 		// Fog tulajdonsagok
 		fogApplianceTime = 5000;
+		fogDecreason = 1;
+		fogDuration = 4000;
 		lastFog = current;
 
 		// Round letrehozasa
 		this.round = new Round();
 		roundNumber = 1;
+	}
+	
+	/**
+	 * Konstrukor
+	 */
+	public Map(int neighbour, int fogApplianceTime, int fogDecreason, int fogDuration) {
+		this(neighbour);
+		this.fogApplianceTime = fogApplianceTime;
+		this.fogDecreason = fogDecreason;
+		this.fogDuration = fogDuration;
 	}
 
 	/**

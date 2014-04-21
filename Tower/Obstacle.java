@@ -39,7 +39,7 @@ public class Obstacle extends Item
 	 */
 	public Obstacle(Cell pos) {
 		this(
-				0.25,	// Lassitas
+				5,	// Lassitas
 				3,		// Varazskovek maximalis szama
 				pos
 				);

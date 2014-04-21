@@ -248,14 +248,28 @@ public class Program {
 		if(tempNode.getAttribute("neightbourNumber") != "") {
 			nn = Integer.parseInt(tempNode.getAttribute("neightbourNumber"));
 		}
-		map = new Map(nn);
+		
 		
 		if(tempNode.getAttribute("sliceShootProbability") != "") {
 			sliceShootProbability = Double.parseDouble(tempNode.getAttribute("sliceShootProbability"));
 		} else {
 			sliceShootProbability = 0;
 		}
-		//TODO: FOGdecression fog appliance and fog duration
+		
+		int fogApplianceTime = 10000;
+		int fogDecreason = 1;
+		int fogDuration = 4000;
+		if(tempNode.getAttribute("fogApplianceTime") != "") {
+			fogApplianceTime = Integer.parseInt(tempNode.getAttribute("fogApplianceTime"));
+		}
+		if(tempNode.getAttribute("fogDecreason") != "") {
+			fogDecreason = Integer.parseInt(tempNode.getAttribute("fogDecreason"));
+		} 
+		if(tempNode.getAttribute("fogDuration") != "") {
+			fogDuration = Integer.parseInt(tempNode.getAttribute("fogDuration"));
+		} 
+		
+		map = new Map(nn, fogApplianceTime, fogDecreason, fogDuration);
 	}
 
 	/*
@@ -1132,8 +1146,34 @@ public class Program {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    writer.write("<map fogApplianceTime=\"100\" fogDecreason=\"5\" fogDuration=\"5000\">\n");
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" eastCell=\"2\">\n");
+			    
+			    for (Tower tower : map.getTowers()) {
+			    	int power = tower.getFirePower();
+			    	int attackSpeed = tower.getAttackSpeed();
+			    	int range = 3;
+			    	int rangeDecreaseByFog = 1;
+			    	boolean fogActive = tower.getFogActive();
+			    	
+			    	writer.write("\t\t<tower "
+			    			+ "power=\"" + Integer.toString(power)  + "\" "
+			    			+ "attackSpeed=\"" + Integer.toString(attackSpeed)  + "\" "
+			    			+ "range=\"" + Integer.toString(range)  + "\" "
+			    			+ "rangeDecreaseByFog=\"" + Integer.toString(rangeDecreaseByFog)  + "\" "
+			    			+ "fogActive=\"" + Boolean.toString(fogActive)  + "\""
+			    			+ "/>\n");
+			    	break;
+				}
+			    
+			    writer.write("\t</cell>\n");
+			    
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			   	<map fogApplianceTime="100" fogDecreason="5" fogDuration="5000">
@@ -1317,7 +1357,7 @@ public class Program {
 			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
-			    
+
 			    Cell cell = CellIDs.get("1");
 			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
 			    		+ "\" northCell=\"2\" northCellEnabled=\"true\">\n");
