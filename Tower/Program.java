@@ -30,7 +30,7 @@ public class Program {
 
 	public static void main(String[] args) {
 		try {
-			// Beolvassa a beadott testcase<number>.xml-t és az xml-t parseolja
+			// Beolvassa a beadott testcase<number>.xml-t es az xml-t parseolja
 			File tc = new File(args[0]);
 			DocumentBuilder casedBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document tcdoc = casedBuilder.parse(tc);
@@ -67,7 +67,7 @@ public class Program {
 					inputfile = ((Element)tempNode).getAttribute("file");
 					try{
 						// Beolvassuk commandban megadott xml fajlt xml parse-olva
-						File file = new File("xml/" + inputfile);
+						File file = new File("Tower/xml/" + inputfile);
 						DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 						Document doc = dBuilder.parse(file);
 						if(!doc.getDocumentElement().getNodeName().equals("map")) {
@@ -448,7 +448,7 @@ public class Program {
 			try {
 				// A beolvasott fajlba irunk
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
@@ -522,7 +522,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
@@ -578,7 +578,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
@@ -639,7 +639,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
@@ -674,7 +674,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
@@ -733,7 +733,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    // Az xml felepitese es az ertekek kikerese
 			    writer.write("<map>\n");
@@ -796,7 +796,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
@@ -824,7 +824,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
@@ -854,7 +854,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
@@ -885,7 +885,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
@@ -917,7 +917,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
@@ -944,7 +944,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
@@ -974,7 +974,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
@@ -1005,7 +1005,7 @@ public class Program {
 
 			try {
 			    writer = new BufferedWriter(new OutputStreamWriter(
-			          new FileOutputStream("xml/"+outputfile), "utf-8"));
+			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
 			    //TODO: Rendes sorrendben kiirni
