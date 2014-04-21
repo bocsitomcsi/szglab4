@@ -1317,7 +1317,34 @@ public class Program {
 			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" northCell=\"2\" northCellEnabled=\"true\">\n");
+			    
+			    writer.write("\t</cell>\n");
+			    
+			    cell = CellIDs.get("2");
+			    writer.write("\t<cell id=\"2\" type=\"" + cell.getCellType().toString()
+			    		+ "\" southCell=\"1\" "
+			    		+ "southCellEnabled=\"false\">\n");
+			    
+			    ArrayList<Enemy> enemies = map.getEnemies();
+			    for(Enemy enemy : enemies){
+			    	if (enemy.getPosition() == cell) {
+			    		writer.write("\t\t<enemy type=\"" + enemy.toString()
+			    			+ "\" health=\"" + enemy.getHealthPoint()
+			    			+ "\" actualSpeed=\"" + enemy.getActualSpeed()
+			    			+ "\" magic=\"" + enemy.getMagic()
+			    			+ "\"/>\n");
+			    	}
+			    }    
+			    
+			    writer.write("\t</cell>\n");
+			    
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			   	<map>
