@@ -110,6 +110,8 @@ public class Program {
 							System.out.println("Wrong file: " + inputfile);
 							System.exit(-1);
 						}
+						System.out.println("Starting testcase: " + testcase);
+						
 						if (doc.hasChildNodes()) {
 							// A felepito fuggveny meghivasa
 							printNote(doc.getChildNodes());
@@ -121,9 +123,7 @@ public class Program {
 						if (testcaseNumber == 1) {
 							long currentTime = System.currentTimeMillis();
 							delayEnd = currentTime + 1500;
-							System.out.println("simulate called at " + currentTime);
 							map.simulateWorld();
-							System.out.println("simulate ended at " + currentTime);
 						}
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
@@ -140,11 +140,13 @@ public class Program {
 					
 					// Ha mentes parancsot kap meghivja a mento fuggvenyt
 					outputfile = ((Element)tempNode).getAttribute("file");
+					System.out.println("Saving into: " + outputfile);
 					xmlSave();
 				} else if (nodeName.equals("addTower")) {
 					// Hozza ad egy tornyot a megfelelo pozicioban
 					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("cellId"));
 					saruman.addTower(cellatid);
+					System.out.println("Tower created");
 					ArrayList<Tower> towers = map.getTowers();
 					for(Tower tower : towers){
 						if(tower.getPosition().equals(cellatid)){
@@ -156,6 +158,7 @@ public class Program {
 					// Hozza ad egy akadalyt a megfelelo pozicioban
 					Cell cellatid = CellIDs.get(((Element)tempNode).getAttribute("cellId"));
 					saruman.addObstacle(cellatid);
+					System.out.println("Obstacle created");
 					ArrayList<Obstacle> obstacles = map.getObstacles();
 					for(Obstacle obs : obstacles){
 						if(obs.getPosition().equals(cellatid)){
@@ -165,6 +168,7 @@ public class Program {
 				} else if (nodeName.equals("createStone")) {
 					// Letrehoz egy varazskovet
 					saruman.createStone(((Element)tempNode).getAttribute("type"));
+					System.out.println("MagicStone created");
 				} else if (nodeName.equals("upgradeTower")) {
 					// Meghivja a megfelelo torony upgradejet, a megadott cellaban
 					if(saruman.getSelectedMagicStone() != null){
@@ -182,6 +186,7 @@ public class Program {
 								bonus.put("hobbitBonus",3);
 								ms.setBonusPowers(bonus);
 								saruman.upgradeItem(tower);
+								System.out.println("Tower upgraded");
 							}
 						}
 					}
@@ -203,6 +208,7 @@ public class Program {
 								bonus.put("hobbitBonus",4.0);
 								ms.setBonusSlowRate(bonus);
 								saruman.upgradeItem(obs);
+								System.out.println("Obstacle upgraded");
 							}
 						}
 					}
