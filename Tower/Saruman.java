@@ -374,15 +374,20 @@ public class Saruman
 	 */
 	public boolean upgradeItem(Item item)
 	{
-		// Fejlesztjuk az item-et
-		boolean result = item.upgrade(selectedMagicStone);
+		if(getSelectedMagicStone() != null){
+		
+			// Fejlesztjuk az item-et
+			boolean result = item.upgrade(selectedMagicStone);
 
-		// Ha sikeres volt a fejlesztes akkor megsemmisitjuk a kovet
-		if (result) {
-			selectedMagicStone = null;
+			// Ha sikeres volt a fejlesztes akkor megsemmisitjuk a kovet
+			if (result) {
+				selectedMagicStone = null;
+			}
+
+			return result;
 		}
-
-		return result;
+		
+		return false;
 
 		/*
 		String logString = "Saruman.upgradeItem(item)";
