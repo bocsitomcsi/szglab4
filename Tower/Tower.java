@@ -287,16 +287,15 @@ public class Tower extends Item
 			Enemy enemy = enemys.get(random);
 			boolean result = enemy.damage(firePower, bonusPowers);
 
-			// Ha meghalt az ellenseg, akkor eltavolitjuk a palyarol
-			if (result) {
-				map.removeEnemy(enemy);
-			}
-			
 			// Ha teszteles van akkor beallitjuk a sliceshootprobability-t
 			if (Program.sliceShootProbability >= 0) {
 				sliceShootProbability = Program.sliceShootProbability;
 			}
 			
+			// Ha meghalt az ellenseg, akkor eltavolitjuk a palyarol
+			if (result) {
+				map.removeEnemy(enemy);
+			}
 			// Ha nem halt meg az ellenseg, akkor a tarolt valoszinusegnek
 			// megfeleloen kettobe lojuk
 			else if (Math.random() < sliceShootProbability) {
