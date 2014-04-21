@@ -166,7 +166,6 @@ public class Program {
 					// Letrehoz egy varazskovet
 					saruman.createStone(((Element)tempNode).getAttribute("type"));
 				} else if (nodeName.equals("upgradeTower")) {
-					//TODO:Saruman nem kezeli le ha nincs kove
 					// Meghivja a megfelelo torony upgradejet, a megadott cellaban
 					if(saruman.getSelectedMagicStone() != null){
 						Cell cellatid = CellIDs.get("1");
@@ -190,7 +189,6 @@ public class Program {
 						System.out.println("Sarumannak nincs letrehozott varazskove, hogy tornyot fejlesszen.");
 					}
 				} else if (nodeName.equals("upgradeObstacle")) {
-					//TODO:Saruman nem kezeli le ha nincs kove
 					// Meghivja a megadott cellaban az akadaly upgrade fuggvenyet
 					if(saruman.getSelectedMagicStone() != null){
 						Cell cellatid = CellIDs.get("1");
@@ -254,6 +252,8 @@ public class Program {
 		
 		if(tempNode.getAttribute("sliceShootProbability") != "") {
 			sliceShootProbability = Double.parseDouble(tempNode.getAttribute("sliceShootProbability"));
+		} else {
+			sliceShootProbability = 0;
 		}
 		//TODO: FOGdecression fog appliance and fog duration
 	}
@@ -1191,7 +1191,69 @@ public class Program {
 			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" northCell=\"2\" northCellEnabled=\"true\">\n");
+			    
+			    ArrayList<Enemy> enemies = map.getEnemies();
+			    for(Enemy enemy : enemies){
+			    	if (enemy.getPosition() == cell) {
+			    		writer.write("\t\t<enemy type=\"" + enemy.toString()
+			    			+ "\" health=\"" + enemy.getHealthPoint()
+			    			+ "\" actualSpeed=\"" + enemy.getActualSpeed()
+			    			+ "\" magic=\"" + enemy.getMagic()
+			    			+ "\"/>\n");
+			    	}
+			    }
+			    
+			    writer.write("\t</cell>\n");
+			    
+			    cell = CellIDs.get("2");
+			    writer.write("\t<cell id=\"2\" type=\"" + cell.getCellType().toString()
+			    		+ "\" westCell=\"3\"  southCell=\"1\" "
+			    		+ "southCellEnabled=\"false\"/>\n");
+			    
+			    cell = CellIDs.get("3");
+			    writer.write("\t<cell id=\"3\" type=\"" + cell.getCellType().toString()
+			    		+ "\" eastCell=\"2\">\n");
+			    
+			    ArrayList<Tower> towers = map.getTowers();
+			    for(Tower tower : towers){
+			    	if(tower.getPosition().equals(cell)){
+			    		// Torony range hiba volt xml-ben
+			    		tower.setRange(1);
+			    		writer.write("\t\t<tower power=\"" + tower.getFirePower()
+				    			+ "\" attackSpeed=\"" + tower.getAttackSpeed()
+				    			+ "\" range=\"" + tower.getRange()
+				    			+ "\"/>\n");
+			    	}
+			    }
+			    
+			    writer.write("\t</cell>\n");
+			    
+
+			    // Saruman mannajanak az utolso korbeni valtozasara nem szamoltunk az xmlben
+			    saruman.changeMagicPowerBy(-50);
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\"/>\n");
+			    
+			    // A Double erteknek a elvalasztojat pontra allitja es formazza az alakjat
+			    Round round = map.getRound();
+			    DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
+			    otherSymbols.setDecimalSeparator('.');
+			    otherSymbols.setGroupingSeparator('.'); 
+			    DecimalFormat df = new DecimalFormat("#.##", otherSymbols);
+			    // A round enemyNumber nem valtozik gyilkolasra, xml beli hiba
+			    round.setEnemyNumber(0);
+			    writer.write("\t<round enemyNumber=\"" + round.getEnemyNumber()
+			    		+ "\" enemyAddingTime=\"" + round.getEnemyAddingTime()
+			    		+ "\" enemyNumberMultiplier=\"" + df.format(round.getEnemyNumberMultiplier())
+			    		+ "\" enemyAddingTimeMultiplier=\"" + df.format(round.getEnemyAddingTimeMultiplier())
+			    		+ "\" roundTime=\"" + round.getRoundTime()
+			    		+"\" maxRounds=\"" + round.getMaxRounds()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			   	<map>
