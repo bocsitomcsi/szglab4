@@ -298,7 +298,7 @@ public abstract class Enemy
 	public void tick()
 	{
 		long current = System.currentTimeMillis();
-		// Ha eltelt a legutobbi mozgás ota a megfelelo ido akkor mozgatunk.
+		// Ha eltelt a legutobbi mozgas ota a megfelelo ido akkor mozgatunk.
 		if (current - lastTime >= actualSpeed) {
 			move();
 			lastTime = current;
