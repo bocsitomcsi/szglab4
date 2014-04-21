@@ -365,9 +365,11 @@ public class Program {
 		
 		// Ha van varazs kove azt is letrehozza
 		if(tempNode.hasAttribute("magicStone")) {
-			ms = tempNode.getAttribute("magicStone");
-			saruman.createStone(ms);
-			saruman.changeMagicPowerBy(saruman.getMagicStoneCost());
+			if(!tempNode.getAttribute("magicStone").equals("")){
+				ms = tempNode.getAttribute("magicStone");
+				saruman.createStone(ms);
+				saruman.changeMagicPowerBy(saruman.getMagicStoneCost());
+			}
 		}
 		
 		// Mapnak beallitjuk a saruman referenciat
