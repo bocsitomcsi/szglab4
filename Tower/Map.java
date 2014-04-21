@@ -598,48 +598,16 @@ public class Map
 					e.printStackTrace();
 				}
 			}
+			
+			// PROTOTIPUS TESZTELESHEZ
+			// Ha a parancs delayTime-ja eltelt, akkor visszater a fuggveny,
+			// hogy folytatodjon a parancsfeldolgozas
+			if (currentTime >= Program.delayEnd) {
+				return gameResult.Loose;
+			}
 		}
 
 		// Visszaterunk az eredmennyel
 		return gameResult;
-
-		/*
-		String logString = "Map.simulateWorld()";
-		Logger.Log(1, logString, this);
-
-		boolean isEndPoint = false;
-		String answerText;
-		Scanner scanner = new Scanner (System.in);
-
-		while(true) {
-			for(Enemy enemy: enemies) {
-				enemy.getPosition().getCellType();
-
-				// Felhasznaloi interakcio
-				if(Program.usecaseNumber==2) {
-					while(true) {
-						System.out.print("Celmezore lepett [igen, nem]: ");
-						answerText = scanner.next();
-						if(answerText.equals("igen")) {
-							isEndPoint=true;
-							break;
-						} else if(answerText.equals("nem")) {
-							isEndPoint=false;
-							break;
-						} else {
-							System.out.println("Helytelen ertek");
-							continue;
-						}
-					}
-				}
-			}
-
-			if(isEndPoint) {
-					break;
-			}
-		}
-		Logger.Log(0, logString, this);
-		return null;
-		*/
 	}
 }

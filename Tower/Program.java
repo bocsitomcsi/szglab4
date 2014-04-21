@@ -27,7 +27,11 @@ public class Program {
 	static Map map;
 	static Saruman saruman;
 	static Round round;
-
+	
+	// Az aktualis parancs delay ideje eddig tart
+	public static long delayEnd;
+	public static boolean testcase1;
+	
 	public static void main(String[] args) {
 		try {
 			// Beolvassa a beadott testcase<number>.xml-t es az xml-t parseolja
@@ -78,6 +82,9 @@ public class Program {
 							// A felepito fuggveny meghivasa
 							printNote(doc.getChildNodes());
 						}
+						// Ha ez az elso testcase akkor meg kell varnunk amig letrejon egy elf
+						delayEnd = System.currentTimeMillis() + 1500;
+						map.simulateWorld();
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 						e.printStackTrace();
