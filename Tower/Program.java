@@ -1114,8 +1114,59 @@ public class Program {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    // A Double erteknek a elvalasztojat pontra allitja es formazza az alakjat
+			    DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
+			    otherSymbols.setDecimalSeparator('.');
+			    otherSymbols.setGroupingSeparator('.'); 
+			    DecimalFormat df = new DecimalFormat("#.##", otherSymbols);
+			    
+			    writer.write("<map sliceShootProbability=\"" + df.format(sliceShootProbability)
+			    		+ "\">\n");
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" northCell=\"2\" northCellEnabled=\"true\">\n");
+			    
+			    ArrayList<Enemy> enemies = map.getEnemies();
+			    for(Enemy enemy : enemies){
+			    	if (enemy.getPosition() == cell) {
+			    		writer.write("\t\t<enemy type=\"" + enemy.toString()
+			    			+ "\" health=\"" + enemy.getHealthPoint()
+			    			+ "\" actualSpeed=\"" + enemy.getActualSpeed()
+			    			+ "\" magic=\"" + enemy.getMagic()
+			    			+ "\"/>\n");
+			    	}
+			    }
+			    
+			    writer.write("\t</cell>\n");
+			    
+			    cell = CellIDs.get("2");
+			    writer.write("\t<cell id=\"2\" type=\"" + cell.getCellType().toString()
+			    		+ "\" westCell=\"3\"  southCell=\"1\" "
+			    		+ "southCellEnabled=\"false\"/>\n");
+			    
+			    cell = CellIDs.get("3");
+			    writer.write("\t<cell id=\"3\" type=\"" + cell.getCellType().toString()
+			    		+ "\" eastCell=\"2\">\n");
+			    
+			    ArrayList<Tower> towers = map.getTowers();
+			    for(Tower tower : towers){
+			    	if(tower.getPosition().equals(cell)){
+			    		// Torony range hiba volt xml-ben
+			    		tower.setRange(1);
+			    		writer.write("\t\t<tower power=\"" + tower.getFirePower()
+				    			+ "\" attackSpeed=\"" + tower.getAttackSpeed()
+				    			+ "\" range=\"" + tower.getRange()
+				    			+ "\"/>\n");
+			    	}
+			    }
+			    
+			    writer.write("\t</cell>\n");
+			    
+
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			   	<map sliceShootProbability="1">
