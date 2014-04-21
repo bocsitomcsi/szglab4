@@ -408,10 +408,14 @@ public class Map
 
 		// Eltavolitjuk azokat a cellakat, amelyek terep tipusuak
 		// mert azokon nem lehet ellenseg
+		ArrayList<Cell> cellsToRemove = new ArrayList<Cell>();
 		for (Cell cell : cellsInRange) {
 			if (cell.getCellType() == CellType.Terrain) {
-				cellsInRange.remove(cell);
+				cellsToRemove.add(cell);
 			}
+		}
+		for (Cell cell : cellsToRemove) {
+			cellsInRange.remove(cell);
 		}
 
 		// Vegigmegyunk az ellensegek listajan

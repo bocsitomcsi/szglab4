@@ -291,6 +291,12 @@ public class Tower extends Item
 			if (result) {
 				map.removeEnemy(enemy);
 			}
+			
+			// Ha teszteles van akkor beallitjuk a sliceshootprobability-t
+			if (Program.sliceShootProbability >= 0) {
+				sliceShootProbability = Program.sliceShootProbability;
+			}
+			
 			// Ha nem halt meg az ellenseg, akkor a tarolt valoszinusegnek
 			// megfeleloen kettobe lojuk
 			else if (Math.random() < sliceShootProbability) {
@@ -301,47 +307,6 @@ public class Tower extends Item
 				map.getEnemies().add(enemy2);
 			}
 		}
-
-		/*
-		Enemy enemy;
-		boolean isDead = false;
-		String answerText;
-		Scanner scanner = new Scanner (System.in);
-
-		String logString = "Tower.shoot()";
-		Logger.Log(1, logString, this);
-
-		ArrayList<Enemy> enemies;
-		enemies = map.getEnemiesInRange(this);
-
-		enemy = enemies.get(0);
-		HashMap<String, Integer> hm = new HashMap<String, Integer>();
-		hm.put("hobbit", 1);
-		enemy.damage(1, hm);
-
-		// Felhasznaloi interakcio
-		if(Program.usecaseNumber==10) {
-			while(true) {
-				System.out.print("Meghalt az ellenseg [igen, nem]: ");
-				answerText = scanner.next();
-				if(answerText.equals("igen")) {
-					isDead=true;
-					break;
-				} else if(answerText.equals("nem")) {
-					isDead=false;
-					break;
-				} else {
-					System.out.println("Helytelen ertek");
-					continue;
-				}
-			}
-		}
-
-		if(isDead) {
-			map.removeEnemy(enemy);
-		}
-		Logger.Log(0, logString, this);
-		*/
 	}
 
 	/**

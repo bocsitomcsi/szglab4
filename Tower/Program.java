@@ -59,6 +59,7 @@ public class Program {
 	// Az aktualis parancs delay ideje eddig tart
 	public static long delayEnd;
 	public static int testcaseNumber = 0;
+	public static double sliceShootProbability = -1;
 	
 	public static void main(String[] args) {
 		try {
@@ -252,7 +253,7 @@ public class Program {
 		map = new Map(nn);
 		
 		if(tempNode.getAttribute("sliceShootProbability") != "") {
-			//TODO az osszes toronynak beallitani a sliceshootprobabilityt
+			sliceShootProbability = Double.parseDouble(tempNode.getAttribute("sliceShootProbability"));
 		}
 		//TODO: FOGdecression fog appliance and fog duration
 	}
@@ -973,7 +974,40 @@ public class Program {
 			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
 			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" northCell=\"2\" northCellEnabled=\"true\"/>\n");
+			    
+			    cell = CellIDs.get("2");
+			    writer.write("\t<cell id=\"2\" type=\"" + cell.getCellType().toString()
+			    		+ "\" southCell=\"1\" westCell=\"3\" eastCell=\"4\" "
+			    		+ "southCellEnabled=\"false\" eastCellEnabled=\"true\" westCellEnabled=\"false\"/>\n");
+			    
+			    cell = CellIDs.get("3");
+			    writer.write("\t<cell id=\"3\" type=\"" + cell.getCellType().toString()
+			    		+ "\" eastCell=\"2\" eastCellEnabled=\"true\"/>\n");
+			    
+			    cell = CellIDs.get("4");
+			    writer.write("\t<cell id=\"4\" type=\"" + cell.getCellType().toString()
+			    		+ "\" westCell=\"2\" westCellEnabled=\"false\">\n");
+			    
+			    Cell cell4 = CellIDs.get("4");
+			    Enemy enemy = null;
+			    if (map.getEnemies().get(0).getPosition() == cell4) {
+					enemy = map.getEnemies().get(0);
+					writer.write("\t\t<enemy type=\"" + enemy.toString()
+			    			+ "\" health=\"" + enemy.getHealthPoint()
+			    			+ "\" actualSpeed=\"" + enemy.getActualSpeed()
+			    			+ "\" magic=\"" + enemy.getMagic()
+			    			+ "\"/>\n");
+				}
+			    
+			    writer.write("\t</cell>\n");
+
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			   <map>
@@ -1002,8 +1036,42 @@ public class Program {
 			    writer = new BufferedWriter(new OutputStreamWriter(
 			          new FileOutputStream("Tower/xml/"+outputfile), "utf-8"));
 			    
-			    writer.write("<map>\n");
-			    //TODO: Rendes sorrendben kiirni
+			    writer.write("<map sliceShootProbability=\"0\">\n");
+			    
+			    Cell cell = CellIDs.get("1");
+			    writer.write("\t<cell id=\"1\" type=\"" + cell.getCellType().toString()
+			    		+ "\" northCell=\"2\" northCellEnabled=\"true\">\n");
+			    
+			    Cell cell1 = CellIDs.get("1");
+			    Enemy enemy = null;
+			    if (map.getEnemies().get(0).getPosition() == cell1) {
+					enemy = map.getEnemies().get(0);
+					writer.write("\t\t<enemy type=\"" + enemy.toString()
+			    			+ "\" health=\"" + enemy.getHealthPoint()
+			    			+ "\" actualSpeed=\"" + enemy.getActualSpeed()
+			    			+ "\" magic=\"" + enemy.getMagic()
+			    			+ "\"/>\n");
+				}
+			    
+			    writer.write("\t</cell>\n");
+			    
+			    cell = CellIDs.get("2");
+			    writer.write("\t<cell id=\"2\" type=\"" + cell.getCellType().toString()
+			    		+ "\" westCell=\"3\"  southCell=\"1\" "
+			    		+ "southCellEnabled=\"false\"/>\n");
+			    
+			    cell = CellIDs.get("3");
+			    writer.write("\t<cell id=\"3\" type=\"" + cell.getCellType().toString()
+			    		+ "\" eastCell=\"2\">\n");
+			    
+			    writer.write("\t\t<tower power=\"10\" attackSpeed=\"500\" range=\"1\"/>\n");
+			    
+			    writer.write("\t</cell>\n");
+			    
+
+			    writer.write("\t<saruman magicPower=\"" + saruman.getMagicPower()
+			    		+ "\"/>\n");
+			    
 			    writer.write("</map>");
 			    /*Elvart kimenet:
 			   	<map sliceShootProbability="0">
