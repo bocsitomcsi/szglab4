@@ -1,4 +1,4 @@
-package Tower;
+package Model;
 import java.util.ArrayList;
 
 //
@@ -60,10 +60,6 @@ public abstract class Item
 	 */
 	public Cell getPosition()
 	{
-		String logString = "Item.getPosition()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
 		return this.position;
 	}
 /**

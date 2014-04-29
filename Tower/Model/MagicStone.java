@@ -1,4 +1,4 @@
-package Tower;
+package Model;
 import java.util.HashMap;
 //
 //

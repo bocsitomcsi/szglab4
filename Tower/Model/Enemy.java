@@ -1,9 +1,11 @@
-package Tower;
+package Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import Tower.Cell.CellType;
+import Model.Cell.CellType;
+import View.CellView;
+import View.EnemyView;
 
 //
 //
@@ -53,6 +55,10 @@ public abstract class Enemy
 	 */
 	protected Cell position;
 	/**
+	 * Az ellenseget megjelenito EnemyView referenciaja.
+	 */
+	protected EnemyView view;
+	/**
 	 * Az egyes ellenseg tipusok sebessegei.
 	 */
 	public static HashMap<String, Integer> enemySpeeds = 
@@ -83,8 +89,7 @@ public abstract class Enemy
 		this.magic = m;
 		this.isDead = false;
 		this.lastTime = System.currentTimeMillis();
-		this.enemySpeeds = new HashMap<String,Integer>();
-		System.out.println("Elf created");
+		System.out.println("Enemy created");
 	}
 
 	/**
@@ -117,11 +122,6 @@ public abstract class Enemy
 	 */
 	public int getOriginalSpeed()
 	{
-		String logString = "Enemy.getOriginalSpeed()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
-
 		return this.originalSpeed;
 	}
 
@@ -158,12 +158,16 @@ public abstract class Enemy
 	 */
 	public Cell getPosition()
 	{
-		String logString = "Enemy.getPosition()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
-
 		return this.position;
+	}
+	
+	/**
+	 * Getter a view attributumra.
+	 * @return  A view attributum.
+	 */
+	public EnemyView getView()
+	{
+		return this.view;
 	}
 
 	/**
@@ -227,12 +231,16 @@ public abstract class Enemy
 	 */
 	public void setPosition(Cell pos)
 	{
-		String logString = "Enemy.setPosition(position)";
-		Logger.Log(1, logString, this);
-
 		this.position = pos;
-
-		Logger.Log(0, logString, this);
+	}
+	
+	/**
+	 * Setter a view attributumra.
+	 * @param b  A view attributum kivant erteke.
+	 */
+	public void setView(EnemyView view)
+	{
+		this.view = view;
 	}
 
 	/**
@@ -247,6 +255,7 @@ public abstract class Enemy
 	 */
 	protected Obstacle moveToNextCell() {
 		ArrayList<Cell> nextCells = new ArrayList<Cell>();
+		Cell startCell = position;
 		// Vegigiteralunk a szomszedos cellakon
 		for(Entry<Cell, Boolean> neighbour : position.getNeighbours().values()) {
 			Cell cell = neighbour.getKey();
@@ -270,6 +279,11 @@ public abstract class Enemy
 			if (actualSpeed != originalSpeed) {
 				actualSpeed = originalSpeed;
 			}
+			
+			// Ertesitjuk az uj CellView-t, hogy raleptunk
+			position.getView().modelChanged();
+			// Ertesitjuk a regi CellView-t, hogy elhagytuk
+			startCell.getView().modelChanged();
 		}
 
 		// Elkerjuk az uj cellan levo akadalyt, es ha van akadaly akkor lassitunk

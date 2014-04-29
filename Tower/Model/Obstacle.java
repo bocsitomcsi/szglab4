@@ -1,8 +1,12 @@
-package Tower;
+package Model;
 
 import java.util.HashMap;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
+import View.CellView;
+import View.ObstacleView;
+import View.TowerView;
 
 //
 //
@@ -23,6 +27,10 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
  */
 public class Obstacle extends Item
 {
+	/**
+	 * Az akadalyt megjelenito ObstacleView referenciaja.
+	 */
+	private ObstacleView view;
 	/**
 	 * A lassitasi szorzo.
 	 */
@@ -56,18 +64,26 @@ public class Obstacle extends Item
 		super(mm, pos);
 		this.slowRate = sr;
 		bonusSlowRates = new HashMap<String,Double>();
+		
+		// ObstacleView letrehozasa
+		view = new ObstacleView(this);
 	}
 
+	/**
+	 * Getter a view attributumra.
+	 * @return  A view attributum.
+	 */
+	public ObstacleView getView()
+	{
+		return this.view;
+	}
+	
 	/**
 	 * Getter a slowRate attributumra.
 	 * @return  A slowRate attributum.
 	 */
 	public double getSlowRate()
 	{
-		String logString = "Obstacle.getSlowRate()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
 		return this.slowRate;
 	}
 
@@ -77,13 +93,18 @@ public class Obstacle extends Item
 	 */
 	public HashMap<String,Double> getBonusSlowRates()
 	{
-		String logString = "Obstacle.getBonusSlowRates()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
 		return this.bonusSlowRates;
 	}
 
+	/**
+	 * Setter a view attributumra.
+	 * @param b  A view attributum kivant erteke.
+	 */
+	public void setView(ObstacleView view)
+	{
+		this.view = view;
+	}
+	
 	/**
 	 * Setter a slowRate attributumra.
 	 * @param b  A slowRate attributum kivant erteke.

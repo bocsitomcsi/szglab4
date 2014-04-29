@@ -1,4 +1,4 @@
-package Tower;
+package Model;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,7 +6,10 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import Tower.Cell.CellType;
+import Model.Cell.CellType;
+import Program.MapLoader;
+import Program.Program;
+import View.ControlPanel;
 
 //
 //
@@ -41,9 +44,22 @@ public class Map
 		Win, Loose
 	};
 	/**
+	 * A ControlPanel referenciaja, amely a map
+	 *  bizonyos adatait jeleniti meg
+	 */
+	private ControlPanel controlPanel;
+	/**
 	 * A palyan szereplo cellak szomszedainak maximalis szama.
 	 */
 	private int neighbourNumber;
+	/**
+	 * A map sorainak szama
+	 */
+	private int rowNumber;
+	/**
+	 * A map oszlopainak szama
+	 */
+	private int columnNumber;
 	/**
 	 * Az az idopont, amikor legutoljara ellenseget adtak a palyahoz.
 	 */
@@ -55,7 +71,7 @@ public class Map
 	/**
 	 * Az akutalis kor sorszama.
 	 */
-	private long roundNumber;
+	private int roundNumber;
 	/**
 	 * A palyan levo cellak.
 	 */
@@ -96,6 +112,14 @@ public class Map
 	 * A kod ennyi ideig csokkenti egy torony lotavolsagat.
 	 */
 	private static int fogDuration = 4000;
+	/**
+	 * A felhasznaloi feluleten ki van-e valasztva a torony.
+	 */
+	private boolean towerSelected;
+	/**
+	 * A felhasznaloi feluleten ki van-e valasztva az akadaly.
+	 */
+	private boolean obstacleSelected;
 
 	/**
 	 * Ennyi idonkent ertesulnek az objektumok az ido mulasarol.
@@ -118,6 +142,9 @@ public class Map
 		this.neighbourNumber = neighbour;
 		this.lastEnemyAddedTime = current;
 		this.roundStartedTime = current;
+		
+		this.towerSelected = false;
+		this.obstacleSelected = false;
 
 		// Fog tulajdonsagok
 		fogApplianceTime = 5000;
@@ -141,12 +168,39 @@ public class Map
 	}
 
 	/**
+	 * Getter a controlPanel attributumra.
+	 * @return  A controlPanel attributum.
+	 */
+	public ControlPanel getControlPanel()
+	{
+		return this.controlPanel;
+	}
+	
+	/**
 	 * Getter a neighbourNumber attributumra.
 	 * @return  A neighbourNumber attributum.
 	 */
 	public int getNeighbourNumber()
 	{
 		return this.neighbourNumber;
+	}
+	
+	/**
+	 * Getter a rowNumber attributumra.
+	 * @return  A rowNumber attributum.
+	 */
+	public int getRowNumber()
+	{
+		return this.rowNumber;
+	}
+	
+	/**
+	 * Getter a columnNumber attributumra.
+	 * @return  A columnNumber attributum.
+	 */
+	public int getColumnNumber()
+	{
+		return this.columnNumber;
 	}
 
 	/**
@@ -193,6 +247,24 @@ public class Map
 	{
 		return this.towers;
 	}
+	
+	/**
+	 * Getter az obstacleSelected attributumra.
+	 * @return  Az obstacleSelected attributum.
+	 */
+	public boolean getObstacleSelected()
+	{
+		return this.obstacleSelected;
+	}
+	
+	/**
+	 * Getter a towerSelected attributumra.
+	 * @return  Az towerSelected attributum.
+	 */
+	public boolean getTowerSelected()
+	{
+		return this.towerSelected;
+	}
 
 	/**
 	 * Getter az obstacles attributumra.
@@ -200,11 +272,6 @@ public class Map
 	 */
 	public ArrayList<Obstacle> getObstacles()
 	{
-		String logString = "Map.getObstacles()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
-
 		return this.obstacles;
 	}
 
@@ -233,12 +300,73 @@ public class Map
 	}
 	
 	/**
+	 * Getter a saruman attributumra.
+	 * @return  A saruman attributum.
+	 */
+	public Saruman getSaruman() {
+		return saruman;
+	}
+	
+	/**
+	 * Getter a roundNumber attributumra.
+	 * @return  A roundNumber attributum.
+	 */
+	public int getRoundNumber() {
+		return roundNumber;
+	}
+	
+	/**
+	 * Setter a controlPanel attributumra.
+	 * @param b  A controlPanel attributum kivant erteke.
+	 */
+	public void setControlPanel(ControlPanel controlPanel)
+	{
+		this.controlPanel = controlPanel;
+	}
+	
+	/**
 	 * Setter a neighbourNumber attributumra.
 	 * @param b  A neighbourNumber attributum kivant erteke.
 	 */
 	public void setNeighbourNumber(int neighbour)
 	{
 		this.neighbourNumber = neighbour;
+	}
+	
+	/**
+	 * Setter a rowNumber attributumra.
+	 * @param b  A rowNumber attributum kivant erteke.
+	 */
+	public void setRowNumber(int rowNumber)
+	{
+		this.rowNumber = rowNumber;
+	}
+	
+	/**
+	 * Setter a columnNumber attributumra.
+	 * @param b  A columnNumber attributum kivant erteke.
+	 */
+	public void setColumnNumber(int columnNumber)
+	{
+		this.columnNumber = columnNumber;
+	}
+	
+	/**
+	 * Setter a towerSelected attributumra.
+	 * @param b  A towerSelected attributum kivant erteke.
+	 */
+	public void setTowerSelected(boolean towerSelected)
+	{
+		this.towerSelected = towerSelected;
+	}
+	
+	/**
+	 * Setter az obstacleSelected attributumra.
+	 * @param b  Az obstacleSelected attributum kivant erteke.
+	 */
+	public void setObstacleSelected(boolean obstacleSelected)
+	{
+		this.obstacleSelected = obstacleSelected;
 	}
 
 	/**
@@ -306,6 +434,14 @@ public class Map
 	public void setRound(Round r){
 		this.round = r;
 	}
+		
+	/**
+	 * Setter a roundNumber attributumra.
+	 * @param b A roundNumber attributum kivant erteke.
+	 */
+	public void setRoundNumber(int rn){
+		this.roundNumber = rn;
+	}
 	
 	/**
 	 * Letrehoz egy Enemy leszarmazottat a parameterkent kapott 
@@ -315,28 +451,17 @@ public class Map
 	 * @param pos  Az ellenseg pozicioja.
 	 */
 	public void addEnemy(String type, Cell pos)
-	{
-		String logString = "Map.addEnemy(type, position)";
-		Logger.Log(1, logString, this);
-		
+	{	
 		Enemy enemy;
-		// Letrehozzuk a megfelelo ellenseget
-		// TESZTELESHEZ:
-		// Ha ez a testcase1, akkor egy specialis elfet hozunk letre
-		if (Program.testcaseNumber == 1) {
-			enemy = new Elf(40, 1000, 1000, 50);
-		} else if (type.equals("human")) {
+		
+		if (type.equals("human")) {
 			enemy = new Human();
-			Logger.AddName(enemy, "HumanID");
 		} else if (type.equals("elf")) {
 			enemy = new Elf();
-			Logger.AddName(enemy, "ElfID");
 		} else if (type.equals("dwarf")) {
 			enemy = new Dwarf();
-			Logger.AddName(enemy, "DwarfID");
 		} else if (type.equals("hobbit")) { 
 			enemy = new Hobbit();
-			Logger.AddName(enemy, "HobbitID");
 		}
 		// Ha nem letezo ellenseg tipust kaptunk akkor 
 		// nem hozunk letre semmit
@@ -347,8 +472,6 @@ public class Map
 		// Beallitjuk az ellenseg poziciojat es hozzaadjuk a map-hoz
 		enemy.setPosition(pos);
 		enemies.add(enemy);
-
-		Logger.Log(0, logString, this);
 	}
 
 	/**
@@ -359,15 +482,10 @@ public class Map
 	 */
 	public void removeEnemy(Enemy enemy)
 	{
-		String logString = "Map.removeEnemy(enemy)";
-		Logger.Log(1, logString, this);
-
 		// Noveljuk saruman varazserejet
 		saruman.changeMagicPowerBy(enemy.getMagic());
 		// Eltavolitjuk az ellenseget
 		enemies.remove(enemy);
-
-		Logger.Log(0, logString, this);
 	}
 
 	/**
@@ -375,13 +493,8 @@ public class Map
 	 * @param tower  A palyahoz adando torony.
 	 */
 	protected void addTower(Tower tower) {
-		String logString = "Map.addTower(tower)";
-		Logger.Log(1, logString, this);
-
 		// Hozzadjuk a tornyot a listahoz
 		towers.add(tower);
-
-		Logger.Log(0, logString, this);
 	}
 
 	/**
@@ -389,13 +502,8 @@ public class Map
 	 * @param obstacle  A palyahoz adando akadaly.
 	 */
 	protected void addObstacle(Obstacle obstacle) {
-		String logString = "Map.addObstacle(obstacle)";
-		Logger.Log(1, logString, this);
-
 		// Hozzaadjuk az akadalyt a listahoz
 		obstacles.add(obstacle);
-
-		Logger.Log(0, logString, this);
 	}
 
 	/**
@@ -491,6 +599,16 @@ public class Map
 	}
 
 	/**
+	 * Betolti a palyat a megadott fajlbol.
+	 * @param fileName A fajl elresi utvonala, amelybol be kell tolteni a palyat.
+	 * @return  A betoltes sikeressege.
+	 */
+	public boolean loadFromFile(String fileName) {
+		MapLoader loader = new MapLoader(this);
+		return loader.loadFromFile(fileName);
+	}
+	
+	/**
 	 * A palyan levo ellensegeket, es tornyokat ertesiti az ido mulasarol.
 	 * Ehhez a towers es enemies listakban tarolt objektumok tick fuggvenyet hivja meg. 
 	 * Idonkenkent karbantartja az aktualis kort, hozzad ellenfeleket a palyahoz es
@@ -505,7 +623,7 @@ public class Map
 		
 		// GAME LOOP
 		while (gameRunning) {
-			ArrayList<Enemy> es = enemies;
+			//ArrayList<Enemy> es = enemies;
 			
 			long currentTime = System.currentTimeMillis();
 			int random;
@@ -547,24 +665,6 @@ public class Map
 					lastFog = currentTime;
 				}
 			}
-
-			// Ha testcase1 van akkor letrehozunk egy elfet
-			if (Program.testcaseNumber == 1) {
-				// Kigyujtjuk a StartPoint tipusu cellakat
-				ArrayList<Cell> startPoints = new ArrayList<Cell>();
-				for (Cell cell : cells) {
-					if (cell.getCellType() == CellType.StartPoint) {
-						startPoints.add(cell);
-					}
-				}
-				// Kivalasztunk egyet veletlenszeruen
-				random = (int)(Math.random() * startPoints.size());
-				Cell startPoint = startPoints.get(random);
-				
-				// Hozzaadjuk az ellenseget a palyahoz
-				addEnemy("elf", startPoint);
-				return GameResult.Loose;
-						}
 			
 			// ROUND KARBANTARTAS
 			// Ha veget ert az aktualis kor es ez nem az utolso volt akkor,
@@ -576,44 +676,42 @@ public class Map
 				round.enemyAddingTime *= round.enemyAddingTimeMultiplier;
 				// Noveljuk az aktualis kor sorszamat
 				roundNumber++;
+				// Ertesitjuk a ControlPanel-t a valtozasrol
+				notifyControlPanel();
 				// Beallitjuk az uj kor kezdetenek idejet
 				roundStartedTime = currentTime;
 			}
 			
-			// Csak akkor adunk hozza random ellensegeket a palyahoz
-			// ha nincs teszteles
-			if (Program.testcase == null) {
-				// ENEMY HOZZAADAS
-				// Ha meg tart az aktualis kor es eljott 
-				// az ellenseg hozzaadasanak ideje
-				if (currentTime - roundStartedTime < round.roundTime &&
-						currentTime - lastEnemyAddedTime >= round.enemyAddingTime) {
-					// A round-ban tarolt enemyNumber erteknek megfeleloen
-					// hozaadunk enemyNumber darab ellenseget a palyahoz
-					for (int i = 0; i < round.enemyNumber; i++) {
-						// Kivalasztunk veletlenszeruen egy ellenseg tipust
-						String[] enemyTypes = {"dwarf", "elf", "hobbit", "human"};
-						random = (int)(Math.random() * enemyTypes.length);
-						String enemyType = enemyTypes[random];
-						
-						// Kigyujtjuk a StartPoint tipusu cellakat
-						ArrayList<Cell> startPoints = new ArrayList<Cell>();
-						for (Cell cell : cells) {
-							if (cell.getCellType() == CellType.StartPoint) {
-								startPoints.add(cell);
-							}
+			// ENEMY HOZZAADAS
+			// Ha meg tart az aktualis kor es eljott 
+			// az ellenseg hozzaadasanak ideje
+			if (currentTime - roundStartedTime < round.roundTime &&
+					currentTime - lastEnemyAddedTime >= round.enemyAddingTime) {
+				// A round-ban tarolt enemyNumber erteknek megfeleloen
+				// hozaadunk enemyNumber darab ellenseget a palyahoz
+				for (int i = 0; i < round.enemyNumber; i++) {
+					// Kivalasztunk veletlenszeruen egy ellenseg tipust
+					String[] enemyTypes = {"dwarf", "elf", "hobbit", "human"};
+					random = (int)(Math.random() * enemyTypes.length);
+					String enemyType = enemyTypes[random];
+					
+					// Kigyujtjuk a StartPoint tipusu cellakat
+					ArrayList<Cell> startPoints = new ArrayList<Cell>();
+					for (Cell cell : cells) {
+						if (cell.getCellType() == CellType.StartPoint) {
+							startPoints.add(cell);
 						}
-						// Kivalasztunk egyet veletlenszeruen
-						random = (int)(Math.random() * startPoints.size());
-						Cell startPoint = startPoints.get(random);
-						
-						// Hozzaadjuk az ellenseget a palyahoz
-						addEnemy(enemyType, startPoint);
 					}
-
-					// Beallitjuk a legutoljara hozzaadott ellenseg idejet
-					lastEnemyAddedTime = currentTime;
+					// Kivalasztunk egyet veletlenszeruen
+					random = (int)(Math.random() * startPoints.size());
+					Cell startPoint = startPoints.get(random);
+					
+					// Hozzaadjuk az ellenseget a palyahoz
+					addEnemy(enemyType, startPoint);
 				}
+
+				// Beallitjuk a legutoljara hozzaadott ellenseg idejet
+				lastEnemyAddedTime = currentTime;
 			}
 
 			// JATEK VEGE CHECK
@@ -645,18 +743,17 @@ public class Map
 					e.printStackTrace();
 				}
 			}
-			
-			// PROTOTIPUS TESZTELESHEZ
-			// Ha a parancs delayTime-ja eltelt, akkor visszater a fuggveny,
-			// hogy folytatodjon a parancsfeldolgozas
-			if (currentTime >= Program.delayEnd) {
-				return gameResult.Loose;
-			}
-			
-			//System.out.println(enemies.get(0).actualSpeed);
 		}
 
+		System.out.println("Gameresult: " + gameResult);
 		// Visszaterunk az eredmennyel
 		return gameResult;
+	}
+	
+	/**
+	 * Ertesiti a ControlPanel-t, hogy a model megvaltozott
+	 */
+	public void notifyControlPanel() {
+		controlPanel.modelChanged();
 	}
 }

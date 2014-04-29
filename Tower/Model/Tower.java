@@ -1,7 +1,11 @@
-package Tower;
+package Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import Program.Program;
+import View.CellView;
+import View.TowerView;
 
 //
 //
@@ -22,6 +26,10 @@ import java.util.Scanner;
  */
 public class Tower extends Item
 {
+	/**
+	 * A tornyot megjelenito TowerView referenciaja.
+	 */
+	private TowerView view;
 	/**
 	 * Sebzesi ero.
 	 */
@@ -104,8 +112,20 @@ public class Tower extends Item
 		this.map = map;
 		this.fogActive = false;
 		sliceShootProbability = slice;
+		
+		// TowerView letrehozasa
+		view = new TowerView(this);
 	}
 
+	/**
+	 * Getter a view attributumra.
+	 * @return  A view attributum.
+	 */
+	public TowerView getView()
+	{
+		return this.view;
+	}
+	
 	/**
 	 * Getter a firePower attributumra.
 	 * @return  A firePower attributum.
@@ -167,6 +187,15 @@ public class Tower extends Item
 		return rangeDecreaseByFog;
 	}
 
+	/**
+	 * Setter a view attributumra.
+	 * @param b  A view attributum kivant erteke.
+	 */
+	public void setView(TowerView view)
+	{
+		this.view = view;
+	}
+	
 	/**
 	 * Setter a firePower attributumra.
 	 * @param power  A firePower attributum kivant erteke.
@@ -294,11 +323,6 @@ public class Tower extends Item
 			int random = (int)(Math.random() * enemys.size());
 			Enemy enemy = enemys.get(random);
 			boolean result = enemy.damage(firePower, bonusPowers);
-
-			// Ha teszteles van akkor beallitjuk a sliceshootprobability-t
-			if (Program.sliceShootProbability >= 0) {
-				sliceShootProbability = Program.sliceShootProbability;
-			}
 			
 			// Ha meghalt az ellenseg, akkor eltavolitjuk a palyarol
 			if (result) {

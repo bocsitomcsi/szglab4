@@ -1,4 +1,4 @@
-package Tower;
+package Model;
 
 import java.util.Scanner;
 //
@@ -12,7 +12,9 @@ import java.util.Scanner;
 //
 //
 
-import Tower.Cell.CellType;
+
+
+import Model.Cell.CellType;
 
 
 
@@ -129,12 +131,7 @@ public class Saruman
 	 */
 	public void setMagicPower(int mp)
 	{
-		String logString = "Saruman.setMagicPower(mp)";
-		Logger.Log(1, logString, this);
-
 		this.magicPower = mp;
-
-		Logger.Log(0, logString, this);
 	}
 
 	/**
@@ -193,6 +190,8 @@ public class Saruman
 
 			// Csokkentjuk a varazserot
 			magicPower -= magicStoneCost;
+			// Ertesitjuk a ControlPanel-t a valtozasrol
+			map.notifyControlPanel();
 
 			return true;
 		}
@@ -200,28 +199,6 @@ public class Saruman
 		else {
 			return false;
 		}
-
-		/*
-		String logString = "Saruman.createStone(type)";
-		Logger.Log(1, logString, this);
-
-		MagicStone stone;
-
-		if(type.equals("purple")) {
-			stone = new PurpleMagicStone("purple", 1, 1, 1, 1);
-			Logger.AddName(stone, "PurpleStoneID");
-		} else if(type.equals("cyan")) {
-			stone = new CyanMagicStone("cyan", 1, 1, 1, 1);
-			Logger.AddName(stone, "CyanStoneID");
-		} else { //it's green
-			stone = new GreenMagicStone("green", 1, 1, 1, 1);
-			Logger.AddName(stone, "GreenStoneID");
-		}
-		this.selectedMagicStone = stone;
-		Logger.Log(0, logString, this);
-
-		return true;
-		*/
 	}
 
 	/**
@@ -246,6 +223,8 @@ public class Saruman
 
 			// Csokkentjuk a varazserot
 			magicPower -= towerCost;
+			// Ertesitjuk a ControlPanel-t a valtozasrol
+			map.notifyControlPanel();
 			// Jelezzuk a cella foglaltsagat
 			pos.setBusy(true);
 
@@ -254,44 +233,6 @@ public class Saruman
 		else {
 			return false;
 		}
-
-		/*
-		String logString = "Saruman.addTower(pos)";
-		Logger.Log(1, logString, this);
-		String answerText;
-		Tower tower;
-		boolean isUsable;
-		Scanner scanner = new Scanner (System.in);
-
-		pos.getCellType();
-		pos.getBusy();
-		while(true) {
-			System.out.print("Lehet elhelyezni a cellara tornyot [igen, nem]: ");
-			answerText = scanner.next();
-			if(answerText.equals("igen")) {
-				isUsable=true;
-				break;
-			} else if(answerText.equals("nem")) {
-				isUsable=false;
-				break;
-			} else {
-				System.out.println("Helytelen ertek");
-				continue;
-			}
-		}
-
-		if(isUsable) {
-			tower = new Tower(1, 1, 1, 1, 1, pos, map, 0);
-			map.addTower(tower);
-			this.changeMagicPowerBy(-1);
-			Logger.Log(0, logString, this);
-
-			return true;
-		}
-		Logger.Log(0, logString, this);
-
-		return false;
-		*/
 	}
 
 	/**
@@ -316,6 +257,8 @@ public class Saruman
 
 			// Csokkentjuk a varazserot
 			magicPower -= obstacleCost;
+			// Ertesitjuk a ControlPanel-t a valtozasrol
+			map.notifyControlPanel();
 			// Jelezzuk a cella foglaltsagat
 			pos.setBusy(true);
 
@@ -324,45 +267,6 @@ public class Saruman
 		else {
 			return false;
 		}
-
-		/*
-		String logString = "Saruman.addObstacle(pos)";
-		Logger.Log(1, logString, this);
-
-		Obstacle obstacle;
-		boolean isUsable;
-		String answerText;
-		Scanner scanner = new Scanner (System.in);
-
-		pos.getCellType();
-		pos.getBusy();
-		while(true) {
-			System.out.print("Lehet elhelyezni a cellara akadalyt [igen, nem]: ");
-			answerText = scanner.next();
-			if(answerText.equals("igen")) {
-				isUsable=true;
-				break;
-			} else if(answerText.equals("nem")) {
-				isUsable=false;
-				break;
-			} else {
-				System.out.println("Helytelen ertek");
-				continue;
-			}
-		}
-
-		if(isUsable) {
-			obstacle = new Obstacle(1, 1, pos);
-			map.addObstacle(obstacle);
-			this.changeMagicPowerBy(-1);
-			Logger.Log(0, logString, this);
-
-			return true;
-		}
-		Logger.Log(0, logString, this);
-
-		return false;
-		*/
 	}
 
 	/**
@@ -388,16 +292,6 @@ public class Saruman
 		}
 		
 		return false;
-
-		/*
-		String logString = "Saruman.upgradeItem(item)";
-		Logger.Log(1, logString, this);
-
-		item.upgrade(this.selectedMagicStone);
-
-		Logger.Log(0, logString, this);
-		return true;
-		*/
 	}
 
 	/**
@@ -406,11 +300,8 @@ public class Saruman
 	 */
 	public void changeMagicPowerBy(int power)
 	{
-		String logString = "Saruman.changeMagicPowerBy(power)";
-		Logger.Log(1, logString, this);
-
 		magicPower += power;
-
-		Logger.Log(0, logString, this);
+		// Ertesitjuk a ControlPanel-t a valtozasrol
+		map.notifyControlPanel();
 	}
 }

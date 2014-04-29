@@ -1,0 +1,22 @@
+<map rowNumber="3" columnNumber="3">
+	<!-- ROW: 0 -->
+	<cell id="1000" rowid="0" columnid="0" type="startpoint" southCell="1100" eastCell="1001" 
+		eastCellEnabled="true"/>
+	<cell id="1001" rowid="0" columnid="1" type="road" westCell="1000" southCell="1101" eastCell="1002" 
+		westCellEnabled="false" southCellEnabled="true"/>
+		
+	<cell id="1002" rowid="0" columnid="2" type="terrain" westCell="1001" southCell="1102"/>
+	
+	<!-- ROW: 1 -->
+	<cell id="1100" rowid="1" columnid="0" type="terrain" northCell="1000" southCell="1200" eastCell="1101"/>
+	
+	<cell id="1101" rowid="1" columnid="1" type="road" northCell="1001" westCell="1100" southCell="1201" eastCell="1102"
+		northCellEnabled="false" eastCellEnabled="true"/>
+	<cell id="1102" rowid="1" columnid="2" type="endpoint" northCell="1002" westCell="1101" southCell="1202"
+		westCellEnabled="false"/>
+	
+	<!-- ROW: 2 -->
+	<cell id="1200" rowid="2" columnid="0" type="terrain" northCell="1100" eastCell="1201"/>
+	<cell id="1201" rowid="2" columnid="1" type="terrain" northCell="1101" westCell="1200" eastCell="1202"/>
+	<cell id="1202" rowid="2" columnid="2" type="terrain" northCell="1102" westCell="1201"/>
+</map>

@@ -1,0 +1,197 @@
+<map rowNumber="7" columnNumber="12">
+	<!-- Id felepitese 4 digit: 1(1), rowid(1), columnid(2) -->
+	<!-- Pl.: 1211: 2. sor, 11. oszlop -->
+	<!-- ROW: 0 -->
+	<cell id="1000" rowid="0" columnid="0" type="terrain" southCell="1100" eastCell="1001"/>
+	<cell id="1001" rowid="0" columnid="1" type="terrain" westCell="1000" southCell="1101" eastCell="1002"/>
+	
+	<cell id="1002" rowid="0" columnid="2" type="road" westCell="1001" southCell="1102" eastCell="1003" 
+		southCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1003" rowid="0" columnid="3" type="road" westCell="1002" southCell="1103" eastCell="1004" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1004" rowid="0" columnid="4" type="road" westCell="1003" southCell="1104" eastCell="1005" 
+		westCellEnabled="false" southCellEnabled="true"
+	/>
+	
+	<cell id="1005" rowid="0" columnid="5" type="terrain" westCell="1004" southCell="1105" eastCell="1006"/>
+	<cell id="1006" rowid="0" columnid="6" type="terrain" westCell="1005" southCell="1106" eastCell="1007"/>
+	<cell id="1007" rowid="0" columnid="7" type="terrain" westCell="1006" southCell="1107" eastCell="1008"/>
+	<cell id="1008" rowid="0" columnid="8" type="terrain" westCell="1007" southCell="1108" eastCell="1009"/>
+	<cell id="1009" rowid="0" columnid="9" type="terrain" westCell="1008" southCell="1109" eastCell="1010"/>
+	<cell id="1010" rowid="0" columnid="10" type="terrain" westCell="1009" southCell="1110" eastCell="1011"/>
+	<cell id="1011" rowid="0" columnid="11" type="terrain" westCell="1010" southCell="1111"/>
+	
+	<!-- ROW: 1 -->
+	<cell id="1100" rowid="1" columnid="0" type="startpoint" northCell="1000" southCell="1200" eastCell="1101" 
+		eastCellEnabled="true"
+	/>
+	<cell id="1101" rowid="1" columnid="1" type="road" northCell="1001" westCell="1100" southCell="1201" eastCell="1102" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1102" rowid="1" columnid="2" type="road" northCell="1002" westCell="1101" southCell="1202" eastCell="1103" 
+		westCellEnabled="false" northCellEnabled="true"
+	/>
+	
+	<cell id="1103" rowid="1" columnid="3" type="terrain" northCell="1003" westCell="1102" southCell="1203" eastCell="1104"/>
+	
+	<cell id="1104" rowid="1" columnid="4" type="road" northCell="1004" westCell="1103" southCell="1204" eastCell="1105" 
+		northCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1105" rowid="1" columnid="5" type="road" northCell="1005" westCell="1104" southCell="1205" eastCell="1106" 
+		westCellEnabled="false" southCellEnabled="true"
+	/>
+	
+	<cell id="1106" rowid="1" columnid="6" type="terrain" northCell="1006" westCell="1105" southCell="1206" eastCell="1107"/>
+	
+	<cell id="1107" rowid="1" columnid="7" type="road" northCell="1007" westCell="1106" southCell="1207" eastCell="1108" 
+		southCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1108" rowid="1" columnid="8" type="road" northCell="1008" westCell="1107" southCell="1208" eastCell="1109" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1109" rowid="1" columnid="9" type="road" northCell="1009" westCell="1108" southCell="1209" eastCell="1110" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1110" rowid="1" columnid="10" type="road" northCell="1010" westCell="1109" southCell="1210" eastCell="1111" 
+		westCellEnabled="false" southCellEnabled="true"
+	/>
+	
+	<cell id="1111" rowid="1" columnid="11" type="terrain" northCell="1011" westCell="1110" southCell="1211"/>
+	
+	<!-- ROW: 2 -->
+	<cell id="1200" rowid="2" columnid="0" type="terrain" northCell="1100" southCell="1300" eastCell="1201"/>
+	<cell id="1201" rowid="2" columnid="1" type="terrain" northCell="1101" westCell="1200" southCell="1301" eastCell="1202"/>
+	<cell id="1202" rowid="2" columnid="2" type="terrain" northCell="1102" westCell="1201" southCell="1302" eastCell="1203"/>
+	<cell id="1203" rowid="2" columnid="3" type="terrain" northCell="1103" westCell="1202" southCell="1303" eastCell="1204"/>
+	<cell id="1204" rowid="2" columnid="4" type="terrain" northCell="1104" westCell="1203" southCell="1304" eastCell="1205"/>
+	
+	<cell id="1205" rowid="2" columnid="5" type="road" northCell="1105" westCell="1204" southCell="1305" eastCell="1206" 
+		northCellEnabled="false" southCellEnabled="true"
+	/>
+	
+	<cell id="1206" rowid="2" columnid="6" type="terrain" northCell="1106" westCell="1205" southCell="1306" eastCell="1207"/>
+	
+	<cell id="1207" rowid="2" columnid="7" type="road" northCell="1107" westCell="1206" southCell="1307" eastCell="1208" 
+		northCellEnabled="true" southCellEnabled="false"
+	/>
+	
+	<cell id="1208" rowid="2" columnid="8" type="terrain" northCell="1108" westCell="1207" southCell="1308" eastCell="1209"/>
+	<cell id="1209" rowid="2" columnid="9" type="terrain" northCell="1109" westCell="1208" southCell="1309" eastCell="1210"/>
+	
+	<cell id="1210" rowid="2" columnid="10" type="road" northCell="1110" westCell="1209" southCell="1310" eastCell="1211" 
+		northCellEnabled="false" southCellEnabled="true"
+	/>
+	
+	<cell id="1211" rowid="2" columnid="11" type="terrain" northCell="1111" westCell="1210" southCell="1311"/>
+	
+	<!-- ROW: 3 -->
+	<cell id="1300" rowid="3" columnid="0" type="startpoint" northCell="1200" southCell="1400" eastCell="1301" 
+		eastCellEnabled="true"
+	/>
+	<cell id="1301" rowid="3" columnid="1" type="road" northCell="1201" westCell="1300" southCell="1401" eastCell="1302" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1302" rowid="3" columnid="2" type="road" northCell="1202" westCell="1301" southCell="1402" eastCell="1303" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1303" rowid="3" columnid="3" type="road" northCell="1203" westCell="1302" southCell="1403" eastCell="1304" 
+		westCellEnabled="false" southCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1304" rowid="3" columnid="4" type="road" northCell="1204" westCell="1303" southCell="1404" eastCell="1305" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1305" rowid="3" columnid="5" type="road" northCell="1205" westCell="1304" southCell="1405" eastCell="1306" 
+		northCellEnabled="false" westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1306" rowid="3" columnid="6" type="road" northCell="1206" westCell="1305" southCell="1406" eastCell="1307" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1307" rowid="3" columnid="7" type="road" northCell="1207" westCell="1306" southCell="1407" eastCell="1308" 
+		westCellEnabled="false" northCellEnabled="true" southCellEnabled="true"
+	/>
+	
+	<cell id="1308" rowid="3" columnid="8" type="terrain" northCell="1208" westCell="1307" southCell="1408" eastCell="1309"/>
+	<cell id="1309" rowid="3" columnid="9" type="terrain" northCell="1209" westCell="1308" southCell="1409" eastCell="1310"/>
+	
+	<cell id="1310" rowid="3" columnid="10" type="road" northCell="1210" westCell="1309" southCell="1410" eastCell="1311" 
+		northCellEnabled="false" southCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1311" rowid="3" columnid="11" type="endpoint" northCell="1211" westCell="1310" southCell="1411" 
+		westCellEnabled="false"
+	/>
+	
+	<!-- ROW: 4 -->
+	<cell id="1400" rowid="4" columnid="0" type="terrain" northCell="1300" southCell="1500" eastCell="1401"/>
+	<cell id="1401" rowid="4" columnid="1" type="terrain" northCell="1301" westCell="1400" southCell="1501" eastCell="1402"/>
+	<cell id="1402" rowid="4" columnid="2" type="terrain" northCell="1302" westCell="1401" southCell="1502" eastCell="1403"/>
+	
+	<cell id="1403" rowid="4" columnid="3" type="road" northCell="1303" westCell="1402" southCell="1503" eastCell="1404" 
+		northCellEnabled="true" southCellEnabled="false"
+	/>
+	
+	<cell id="1404" rowid="4" columnid="4" type="terrain" northCell="1304" westCell="1403" southCell="1504" eastCell="1405"/>
+	<cell id="1405" rowid="4" columnid="5" type="terrain" northCell="1305" westCell="1404" southCell="1505" eastCell="1406"/>
+	<cell id="1406" rowid="4" columnid="6" type="terrain" northCell="1306" westCell="1405" southCell="1506" eastCell="1407"/>
+	
+	<cell id="1407" rowid="4" columnid="7" type="road" northCell="1307" westCell="1406" southCell="1507" eastCell="1408" 
+		northCellEnabled="false" southCellEnabled="true"
+	/>
+	
+	<cell id="1408" rowid="4" columnid="8" type="terrain" northCell="1308" westCell="1407" southCell="1508" eastCell="1409"/>
+	<cell id="1409" rowid="4" columnid="9" type="terrain" northCell="1309" westCell="1408" southCell="1509" eastCell="1410"/>
+	
+	<cell id="1410" rowid="4" columnid="10" type="road" northCell="1310" westCell="1409" southCell="1510" eastCell="1411" 
+		northCellEnabled="true" southCellEnabled="false"
+	/>
+	
+	<cell id="1411" rowid="4" columnid="11" type="terrain" northCell="1311" westCell="1410" southCell="1511"/>
+	
+	<!-- ROW: 5 -->
+	<cell id="1500" rowid="5" columnid="0" type="startpoint" northCell="1400" southCell="1600" eastCell="1501" 
+		eastCellEnabled="true"
+	/>
+	<cell id="1501" rowid="5" columnid="1" type="road" northCell="1401" westCell="1500" southCell="1601" eastCell="1502" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1502" rowid="5" columnid="2" type="road" northCell="1402" westCell="1501" southCell="1602" eastCell="1503" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1503" rowid="5" columnid="3" type="road" northCell="1403" westCell="1502" southCell="1603" eastCell="1504" 
+		westCellEnabled="false" northCellEnabled="true"
+	/>
+	
+	<cell id="1504" rowid="5" columnid="4" type="terrain" northCell="1404" westCell="1503" southCell="1604" eastCell="1505"/>
+	<cell id="1505" rowid="5" columnid="5" type="terrain" northCell="1405" westCell="1504" southCell="1605" eastCell="1506"/>
+	<cell id="1506" rowid="5" columnid="6" type="terrain" northCell="1406" westCell="1505" southCell="1606" eastCell="1507"/>
+	
+	<cell id="1507" rowid="5" columnid="7" type="road" northCell="1407" westCell="1506" southCell="1607" eastCell="1508" 
+		northCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1508" rowid="5" columnid="8" type="road" northCell="1408" westCell="1507" southCell="1608" eastCell="1509" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1509" rowid="5" columnid="9" type="road" northCell="1409" westCell="1508" southCell="1609" eastCell="1510" 
+		westCellEnabled="false" eastCellEnabled="true"
+	/>
+	<cell id="1510" rowid="5" columnid="10" type="road" northCell="1410" westCell="1509" southCell="1610" eastCell="1511" 
+		westCellEnabled="false" northCellEnabled="true"
+	/>
+	
+	<cell id="1511" rowid="5" columnid="11" type="terrain" northCell="1411" westCell="1510" southCell="1611"/>
+	
+	<!-- ROW: 6 -->
+	<cell id="1600" rowid="6" columnid="0" type="terrain" northCell="1500" eastCell="1601"/>
+	<cell id="1601" rowid="6" columnid="1" type="terrain" northCell="1501" westCell="1600" eastCell="1602"/>
+	<cell id="1602" rowid="6" columnid="2" type="terrain" northCell="1502" westCell="1601" eastCell="1603"/>
+	<cell id="1603" rowid="6" columnid="3" type="terrain" northCell="1503" westCell="1602" eastCell="1604"/>
+	<cell id="1604" rowid="6" columnid="4" type="terrain" northCell="1504" westCell="1603" eastCell="1605"/>
+	<cell id="1605" rowid="6" columnid="5" type="terrain" northCell="1505" westCell="1604" eastCell="1606"/>
+	<cell id="1606" rowid="6" columnid="6" type="terrain" northCell="1506" westCell="1605" eastCell="1607"/>
+	<cell id="1607" rowid="6" columnid="7" type="terrain" northCell="1507" westCell="1606" eastCell="1608"/>
+	<cell id="1608" rowid="6" columnid="8" type="terrain" northCell="1508" westCell="1607" eastCell="1609"/>
+	<cell id="1609" rowid="6" columnid="9" type="terrain" northCell="1509" westCell="1608" eastCell="1610"/>
+	<cell id="1610" rowid="6" columnid="10" type="terrain" northCell="1510" westCell="1609" eastCell="1611"/>
+	<cell id="1611" rowid="6" columnid="11" type="terrain" northCell="1511" westCell="1610"/>
+</map>

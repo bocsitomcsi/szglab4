@@ -1,4 +1,4 @@
-package Tower;
+package Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -6,7 +6,9 @@ import java.util.Map.Entry;
 import javax.rmi.CORBA.UtilDelegate;
 import javax.tools.JavaCompiler;
 
-import Tower.Map.Direction;
+import Model.Map.Direction;
+import View.CellView;
+import View.EnemyView;
 
 //
 //
@@ -31,7 +33,7 @@ public class Cell
 	 * @param <K> A kulcs tipusa
 	 * @param <V> Az ertek tipusa
 	 */
-	final static class CellEntry<K, V> implements java.util.Map.Entry<K, V> {
+	public final static class CellEntry<K, V> implements java.util.Map.Entry<K, V> {
 		private final K key;
 		private V value;
 		
@@ -60,6 +62,18 @@ public class Cell
 	}
 	
 	/**
+	 * A cella soranak azonositoja, amely fenntrol lefele, 0-tol kezdodoen szamozodik.
+	 */
+	private int rowId;
+	/**
+	 * A cella oszlopanak azonositoja, amely balrol jobbra, 0-tol kezdodoen szamozodik.
+	 */
+	private int columnId;
+	/**
+	 * A cellat megjelenito CellView referenciaja.
+	 */
+	private CellView view;
+	/**
 	 * A cella foglaltsaga.
 	 */
 	private boolean busy;
@@ -76,7 +90,7 @@ public class Cell
 	/**
 	 * Egy cella lehetseges tipusait tartalmazo enumeracio.
 	 */
-	protected enum CellType {
+	public enum CellType {
 		Terrain, Road, StartPoint, EndPoint
 	};
 	/**
@@ -95,18 +109,44 @@ public class Cell
 		this.map = map;
 		this.neighbours = new HashMap<Direction, Entry<Cell, Boolean>>();
 		this.type = ct;
+		
+		// CellView letrehozasa
+		view = new CellView(this);
 	}
 
+	/**
+	 * Getter a rowId attributumra.
+	 * @return  A rowId attributum.
+	 */
+	public int getRowId()
+	{
+		return this.rowId;
+	}
+	
+	/**
+	 * Getter a columnId attributumra.
+	 * @return  A columnId attributum.
+	 */
+	public int getColumnId()
+	{
+		return this.columnId;
+	}
+	
+	/**
+	 * Getter a view attributumra.
+	 * @return  A view attributum.
+	 */
+	public CellView getView()
+	{
+		return this.view;
+	}
+	
 	/**
 	 * Getter a busy attributumra.
 	 * @return  A busy attributum.
 	 */
 	public boolean getBusy()
 	{
-		String logString = "Cell.getBusy()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
 		return this.busy;
 	}
 
@@ -121,11 +161,6 @@ public class Cell
 
 		public CellType getCellType()
 	{
-		String logString = "Cell.getCellType()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
-
 		return this.type;
 	}
 
@@ -135,23 +170,16 @@ public class Cell
 	 */
 	public HashMap<Direction, Entry<Cell, Boolean>> getNeighbours()
 	{
-		String logString = "Cell.getNeighbours()";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
-
 		return this.neighbours;
 	}
 
 	/**
-	 * Visszaadja a cellan talalhato akadalyt.
-	 * @return A cellan talalhato akadaly.
+	 * Visszaadja a cellan talalhato akadalyt. Ha nincs akadaly a cellan
+	 *  akkor null-t ad vissza.
+	 * @return A cellan talalhato akadaly vagy null.
 	 */
 	public Obstacle getObstacle()
 	{
-		//String logString = "Cell.getObstacle()";
-		//Logger.Log(1, logString, this);
-
 		Obstacle returnValue = null;
 		ArrayList<Obstacle> obstacles = map.getObstacles();
 		for(Obstacle obstacle: obstacles) {
@@ -161,10 +189,78 @@ public class Cell
 			}
 		}
 
-		//Logger.Log(0, logString, this);
 		return returnValue;
 	}
+	
+	/**
+	 * Visszaadja a cellan talalhato tornyot. Ha nincs torony a cellan
+	 *  akkor null-t ad vissza.
+	 * @return A cellan talalhato torony vagy null.
+	 */
+	public Tower getTower()
+	{
+		Tower returnValue = null;
+		ArrayList<Tower> towers = map.getTowers();
+		for(Tower tower: towers) {
+			if(tower.getPosition() == this) {
+				returnValue = tower;
+				break;
+			}
+		}
 
+		return returnValue;
+	}
+	
+	/**
+	 * Visszaadja a cellan talalhato ellensegeket. Ha nincs ellenseg a cellan
+	 *  akkor null-t ad vissza.
+	 * @return A cellan talalhato ellensegek listaja vagy null.
+	 */
+	public ArrayList<Enemy> getEnemys()
+	{
+		ArrayList<Enemy> returnValue = new ArrayList<Enemy>();
+		ArrayList<Enemy> enemies = map.getEnemies();
+		for(Enemy enemy: enemies) {
+			if(enemy.getPosition() == this) {
+				returnValue.add(enemy);
+			}
+		}
+
+		if (returnValue.isEmpty()) {
+			return null;
+		}
+		else {
+			return returnValue;
+		}
+	}
+
+	/**
+	 * Setter a rowId attributumra.
+	 * @param b  A rowId attributum kivant erteke.
+	 */
+	public void setRowId(int rowId)
+	{
+		this.rowId = rowId;
+	}
+	
+	/**
+	 * Setter a columnId attributumra.
+	 * @param b  A columnId attributum kivant erteke.
+	 */
+	public void setColumnId(int columnId)
+	{
+		this.columnId = columnId;
+	}
+	
+	/**
+	 * Setter a view attributumra.
+	 * @param b  A view attributum kivant erteke.
+	 */
+	public void setView(CellView view)
+	{
+		this.view = view;
+	}
+	
 	/**
 	 * Setter a busy attributumra.
 	 * @param b  A busy attributum kivant erteke.

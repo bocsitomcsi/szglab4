@@ -1,5 +1,7 @@
-package Tower;
+package Model;
 import java.util.HashMap;
+
+import View.EnemyView;
 
 //
 //
@@ -42,6 +44,9 @@ public class Human extends Enemy
 	 */
 	public Human(int hp, int as, int os, int m) {
 		super(hp, as, os, m);
+		
+		// EnemyView letrehozasa
+		view = new EnemyView(this, "human");
 	}
 
 	public Enemy clone() {

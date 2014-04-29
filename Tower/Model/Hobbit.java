@@ -1,6 +1,8 @@
-package Tower;
+package Model;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import View.EnemyView;
 
 //
 //
@@ -43,6 +45,9 @@ public class Hobbit extends Enemy
 	 */
 	public Hobbit(int hp, int as, int os, int m) {
 		super(hp, as, os, m);
+		
+		// EnemyView letrehozasa
+		view = new EnemyView(this, "hobbit");
 	}
 
 	public Enemy clone() {
