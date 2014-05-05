@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,6 +19,7 @@ import java.util.Locale;
 import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -95,20 +97,19 @@ public class Program {
 		// Frame letrehozasa
 		JFrame frame = new JFrame("Tower Defense");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setPreferredSize(new Dimension(900, 700));
+		frame.getContentPane().setPreferredSize(new Dimension(870, 700));
 		
 		// Kepek betoltese a View osztalyokhoz
 		loadViewImages(frame);
 		
 		// Map inicializalasa es beolvasasa
-				createAndLoadMap(frame);
+		createAndLoadMap(frame);
 		
 		// CONTROL PANEL LETREHOZASA
 		//ControlPanel controlPanel = new ControlPanel(null);
 		ControlPanel controlPanel = new ControlPanel(map, frame);
 		controlPanel.modelChanged();
 		map.setControlPanel(controlPanel);
-		
 		
 		// MAP PANEL LETREHOZASA
 		// Panel letrehozasa
@@ -131,7 +132,6 @@ public class Program {
 		// Control es Map panelek hozzaadasa a frame-hez
 		frame.add(controlPanel, BorderLayout.NORTH);
 		frame.add(mapPanel, BorderLayout.CENTER);
-		
 		// Frame megjelenitese
 		frame.pack();
 		frame.setVisible(true);
