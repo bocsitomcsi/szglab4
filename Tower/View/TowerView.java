@@ -3,11 +3,6 @@ package View;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import Model.Dwarf;
-import Model.Elf;
-import Model.Enemy;
-import Model.Hobbit;
-import Model.Human;
 import Model.Tower;
 
 /**

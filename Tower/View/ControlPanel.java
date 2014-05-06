@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 import javax.swing.border.Border;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
@@ -71,7 +72,19 @@ public class ControlPanel extends JPanel {
 	private JPanel ChoosableItemPanel;
 	private JPanel InformationPanel;
 	private JPanel GameInformationPanel;
-		
+	
+	/**
+	 * Segedosztaly, amivel elinditjuk a jatekot
+	 * Tobbszor orokles problemajat keruljuk el vele
+	 */
+	private class StartGameHelper extends SwingWorker<String,Object> {
+		@Override
+		protected String doInBackground() throws Exception {
+			map.simulateWorld();
+			return null;
+		}	
+	}
+	
 	/**
 	 * Konstruktor. 
 	 * Letrehozza a panelen talalhato komponenseket.
@@ -500,8 +513,6 @@ public class ControlPanel extends JPanel {
 		this.add(SauronPanel);
 	}
 	
-	
-	
 	/**
 	 * A map adatainak megvaltozasakor hivodik meg.
 	 * Frissiti az adatokat a Control Panelen.
@@ -527,8 +538,9 @@ public class ControlPanel extends JPanel {
 	 * Start gomb megnyomasat kezelo fuggveny.
 	 */
 	public void onStartButtonClicked() {
-		// Elinditjuk a jatekot
-		map.simulateWorld();
+		// Elinditjuk a jatekot egy hatterszalon
+		StartGameHelper start = new StartGameHelper();
+		start.execute();
 	}
 	
 	/**

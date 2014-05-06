@@ -3,13 +3,8 @@ package View;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JPanel;
-
-import Model.Dwarf;
-import Model.Elf;
 import Model.Enemy;
-import Model.Hobbit;
-import Model.Human;
+
 
 /**
  * Egy ellenseget megjelenito osztaly.
@@ -49,7 +44,7 @@ public class EnemyView {
 	 * @param enemyType Az abrazolando ellenseg tipusa.
 	 */
 	public EnemyView(Enemy model, String enemyType) {
-		this.model = model;
+		this.setModel(model);
 
 		// Beallitjuk az imageEnemy valtozot az abrazolando 
 		// ellensegnek megfelelo kepre
@@ -124,5 +119,13 @@ public class EnemyView {
 				(int) ((double) h * hr), 
 				null
 				);
+	}
+
+	public Enemy getModel() {
+		return model;
+	}
+
+	public void setModel(Enemy model) {
+		this.model = model;
 	}
 }

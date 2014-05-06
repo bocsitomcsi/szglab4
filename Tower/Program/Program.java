@@ -2,53 +2,18 @@ package Program;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Element;
 
 import Model.Cell;
-import Model.Dwarf;
-import Model.Elf;
-import Model.Enemy;
-import Model.Hobbit;
-import Model.Human;
-import Model.MagicStone;
 import Model.Map;
-import Model.Obstacle;
-import Model.Round;
 import Model.Saruman;
-import Model.Tower;
-import Model.Cell.CellEntry;
-import Model.Cell.CellType;
-import Model.Map.Direction;
 import View.CellView;
 import View.ControlPanel;
 import View.EnemyView;
@@ -106,7 +71,6 @@ public class Program {
 		createAndLoadMap(frame);
 		
 		// CONTROL PANEL LETREHOZASA
-		//ControlPanel controlPanel = new ControlPanel(null);
 		ControlPanel controlPanel = new ControlPanel(map, frame);
 		controlPanel.modelChanged();
 		map.setControlPanel(controlPanel);

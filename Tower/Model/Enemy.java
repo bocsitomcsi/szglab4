@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import Model.Cell.CellType;
-import View.CellView;
 import View.EnemyView;
 
 //

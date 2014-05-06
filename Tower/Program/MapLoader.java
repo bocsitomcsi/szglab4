@@ -175,6 +175,7 @@ public class MapLoader {
 	 * @param Node
 	 * @param nodeList
 	 */
+	@SuppressWarnings("static-access")
 	private void xmlCell(Element Node, NodeList nodeList) {
 		Cell cell;
 		if(Node.getAttribute("type").equals("startpoint")) {

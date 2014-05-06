@@ -1,6 +1,5 @@
 package Model;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import View.EnemyView;
 
@@ -65,12 +64,6 @@ public class Hobbit extends Enemy
 
 	public boolean damage(int power, HashMap<String, Integer> bonus)
 	{
-		/*String logString = "Hobbit.damage(power, bonus)";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
-		return true;*/
-
 		// Csokkentjuk az eleterot
 		healthPoint -= power;
 
@@ -105,53 +98,6 @@ public class Hobbit extends Enemy
 		if (obstacle != null && obstacle.getBonusSlowRates().containsKey("hobbit")) {
 			actualSpeed *= obstacle.getBonusSlowRates().get("hobbit");
 		}
-				
-		/*String logString = "Hobbit.move()";
-		Logger.Log(1, logString, this);
-
-		String answerText;
-		boolean isSlowed = false;
-		boolean isEndPoint = false;
-		Obstacle obstacle;
-		Cell cell;
-		Scanner scanner = new Scanner (System.in);
-
-		// Kivalasztjuk a kovetkezo cellat, amire lepni fog az ellenseg
-		cell = this.getPosition().getNeighbours().get(0);
-
-		this.setPosition(cell);
-
-		cell.getBusy();
-
-		// Felhasznaloi interakcio
-		if(Program.usecaseNumber==4) {
-			while(true) {
-				System.out.print("Akadalyra lepett [igen, nem]: ");
-				answerText = scanner.next();
-				if(answerText.equals("igen")) {
-					isSlowed=true;
-					break;
-				} else if(answerText.equals("nem")) {
-					isSlowed=false;
-					break;
-				} else {
-					System.out.println("Helytelen ertek");
-					continue;
-				}
-			}
-		}
-
-		if(isSlowed) {
-			obstacle = cell.getObstacle();
-			obstacle.getSlowRate();
-			obstacle.getBonusSlowRates();
-			this.setActualSpeed(1);
-		} else {
-			this.setActualSpeed(this.getOriginalSpeed());
-		}
-
-		Logger.Log(0, logString, this);
-		*/
 	}
 	
 	public String toString() {

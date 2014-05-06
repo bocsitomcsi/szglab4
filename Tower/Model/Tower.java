@@ -1,10 +1,7 @@
 package Model;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
-import Program.Program;
-import View.CellView;
 import View.TowerView;
 
 //

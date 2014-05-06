@@ -23,7 +23,7 @@ public class ObstacleView {
 	 * @param model Az akadaly objektum, amit meg kell majd jeleniteni.
 	 */
 	public ObstacleView(Obstacle model) {
-		this.model = model;
+		this.setModel(model);
 	}
 	
 	/**
@@ -59,5 +59,13 @@ public class ObstacleView {
 				(int) ((double) h * hr), 
 				null
 				);
+	}
+
+	public Obstacle getModel() {
+		return model;
+	}
+
+	public void setModel(Obstacle model) {
+		this.model = model;
 	}
 }

@@ -1,14 +1,11 @@
 package Model;
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.Map.Entry;
 
 import Model.Cell.CellType;
 import Program.MapLoader;
-import Program.Program;
 import View.ControlPanel;
 
 //
@@ -21,9 +18,6 @@ import View.ControlPanel;
 //  @ Author : 
 //
 //
-
-
-
 
 /**
  * A palyat reprezentalo osztaly. 
@@ -163,8 +157,8 @@ public class Map
 	public Map(int neighbour, int fogApplianceTime, int fogDecreason, int fogDuration) {
 		this(neighbour);
 		this.fogApplianceTime = fogApplianceTime;
-		this.fogDecreason = fogDecreason;
-		this.fogDuration = fogDuration;
+		Map.fogDecreason = fogDecreason;
+		Map.fogDuration = fogDuration;
 	}
 
 	/**
@@ -204,7 +198,7 @@ public class Map
 	}
 
 	/**
-	 * Getter a lastEnemyAddedTime attributumra.
+	 * Getter a lastmyAddedTime attributumra.
 	 * @return  A lastEnemyAddedTime attributum.
 	 */
 	public long getLastEnemyAddedTime()
@@ -472,6 +466,9 @@ public class Map
 		// Beallitjuk az ellenseg poziciojat es hozzaadjuk a map-hoz
 		enemy.setPosition(pos);
 		enemies.add(enemy);
+		
+		//Jelezzuk, hogy megvaltozott az ellensegek szama
+		notifyControlPanel();
 	}
 
 	/**
@@ -556,20 +553,6 @@ public class Map
 
 		// Kulonben null-t adunk vissza
 		return null;
-
-		/*
-		String logString = "Map.getEnemiesInRange(tower)";
-		Logger.Log(1, logString, this);
-		ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-
-		tower.getPosition();
-		for(Enemy enemy: enemies) {
-			enemy.getPosition();
-			enemyList.add(enemy);
-		}
-		Logger.Log(0, logString, this);
-		return enemyList;
-		*/
 	}
 
 	/**

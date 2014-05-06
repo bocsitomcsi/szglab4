@@ -2,11 +2,7 @@ package Model;
 
 import java.util.HashMap;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
-
-import View.CellView;
 import View.ObstacleView;
-import View.TowerView;
 
 //
 //
@@ -47,7 +43,7 @@ public class Obstacle extends Item
 	 */
 	public Obstacle(Cell pos) {
 		this(
-				5,	// Lassitas
+				5,		// Lassitas
 				3,		// Varazskovek maximalis szama
 				pos
 				);
@@ -162,13 +158,5 @@ public class Obstacle extends Item
 
 		// Ha nem lehetett fejleszteni akkor visszaterunk false-szal
 		return false;
-
-		/*
-		String logString = "Obstacle.upgrade(stone)";
-		Logger.Log(1, logString, this);
-
-		Logger.Log(0, logString, this);
-		return true;
-		*/
 	}
 }

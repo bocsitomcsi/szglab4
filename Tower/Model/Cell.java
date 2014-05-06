@@ -3,12 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import javax.rmi.CORBA.UtilDelegate;
-import javax.tools.JavaCompiler;
-
 import Model.Map.Direction;
 import View.CellView;
-import View.EnemyView;
 
 //
 //
