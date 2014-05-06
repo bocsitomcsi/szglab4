@@ -98,10 +98,12 @@ public class Program {
 								if(cell.getCellType() == CellType.Road && map.getObstacleSelected())
 								{
 									saruman.addObstacle(cell);
+									cell.getView().modelChanged();
 								}
 								else if(cell.getCellType() == CellType.Terrain && map.getTowerSelected())
 								{
 									saruman.addTower(cell);
+									cell.getView().modelChanged();
 								}
 								else
 								{
