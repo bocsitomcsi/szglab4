@@ -39,7 +39,7 @@ public class Saruman
 	 */
 	public Saruman(Map map) {
 		this(
-				200,	// Varazsero
+				100000,	// Varazsero
 				50,		// Torony ar
 				80,		// Akadaly ar
 				100,	// Varazsko ar

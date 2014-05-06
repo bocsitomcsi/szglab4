@@ -80,6 +80,8 @@ public class ControlPanel extends JPanel {
 	private class StartGameHelper extends SwingWorker<String,Object> {
 		@Override
 		protected String doInBackground() throws Exception {
+			long currentTimeTmp = System.currentTimeMillis();
+			map.setRoundStartedTime(currentTimeTmp);
 			map.simulateWorld();
 			return null;
 		}	
@@ -209,8 +211,11 @@ public class ControlPanel extends JPanel {
 				//Mindig a megfelelo flag legyen bebillentve
 				if(map.getTowerSelected())
 					map.setTowerSelected(false);
-				else
+				else 
+				{
 					map.setTowerSelected(true);
+					map.setObstacleSelected(false);
+				}
 				JOptionPane.showMessageDialog(null,"Ez a torony " + map.getTowerSelected());
 		    }
 		});
@@ -264,8 +269,11 @@ public class ControlPanel extends JPanel {
 		    {  //Mindig a megfelelo flag legyen bebillentve
 				if(map.getObstacleSelected())
 					map.setObstacleSelected(false);
-				else
+				else 
+				{
 					map.setObstacleSelected(true);
+					map.setTowerSelected(false);
+				}
 				JOptionPane.showMessageDialog(null,"Ez az akadaly " + map.getObstacleSelected());
 		    }
 		});
@@ -553,6 +561,7 @@ public class ControlPanel extends JPanel {
 	 */
 	public void onStartButtonClicked() {
 		// Elinditjuk a jatekot egy hatterszalon
+		btnStart.setEnabled(false);
 		StartGameHelper start = new StartGameHelper();
 		start.execute();
 	}

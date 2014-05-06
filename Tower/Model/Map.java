@@ -469,6 +469,8 @@ public class Map
 		
 		//Jelezzuk, hogy megvaltozott az ellensegek szama
 		notifyControlPanel();
+		//Jelezzuk a modelvaltozasat
+		pos.getView().modelChanged();
 	}
 
 	/**
@@ -482,6 +484,7 @@ public class Map
 		// Noveljuk saruman varazserejet
 		saruman.changeMagicPowerBy(enemy.getMagic());
 		// Eltavolitjuk az ellenseget
+		enemy.getPosition().getView().modelChanged();
 		enemies.remove(enemy);
 	}
 
@@ -700,6 +703,7 @@ public class Map
 			// akkor a jatek veget ert gyozelemmel
 			if (enemies.isEmpty() && currentTime - roundStartedTime >= round.roundTime) {
 				gameRunning = false;
+				notifyControlPanel();
 				gameResult = GameResult.Win;
 			}
 			// Ha nincs gyozelem, akkor megnezzuk, hogy vesztettunk-e
