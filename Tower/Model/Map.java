@@ -605,9 +605,7 @@ public class Map
 		long lastLoopTime = System.currentTimeMillis();
 		
 		// GAME LOOP
-		while (gameRunning) {
-			//ArrayList<Enemy> es = enemies;
-			
+		while (gameRunning) {			
 			long currentTime = System.currentTimeMillis();
 			int random;
 			System.out.println("game loop, dt: " + (currentTime - lastLoopTime));

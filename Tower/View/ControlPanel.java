@@ -91,7 +91,7 @@ public class ControlPanel extends JPanel {
 	 * @param map A map referenciaja
 	 * @param f A Frame referenciaja
 	 */
-	public ControlPanel(Map map, JFrame f) {
+	public ControlPanel(final Map map, JFrame f) {
 		this.map = map;
 		this.frame = f;
 		
@@ -158,7 +158,6 @@ public class ControlPanel extends JPanel {
 		CombinedItemPanel = new JPanel(new FlowLayout());
 		CombinedItemPanel.setBorder(loweredbevel);
 		
-		//TODO A toronyhoz es obstaclehoz addMousListener metodus definialasa
 		/***A tornyot megjelenito label***/
 		TowerPanel = new JPanel(new BorderLayout());
 
@@ -206,8 +205,13 @@ public class ControlPanel extends JPanel {
 		
 		labelTower.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
-		    {  
-				JOptionPane.showMessageDialog(null,"Ez a torony");
+		    {
+				//Mindig a megfelelo flag legyen bebillentve
+				if(map.getTowerSelected())
+					map.setTowerSelected(false);
+				else
+					map.setTowerSelected(true);
+				JOptionPane.showMessageDialog(null,"Ez a torony " + map.getTowerSelected());
 		    }
 		});
 		/************************************/
@@ -257,8 +261,12 @@ public class ControlPanel extends JPanel {
 		
 		labelObstacle.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
-		    {  
-				JOptionPane.showMessageDialog(null,"Ez az akadaly");
+		    {  //Mindig a megfelelo flag legyen bebillentve
+				if(map.getObstacleSelected())
+					map.setObstacleSelected(false);
+				else
+					map.setObstacleSelected(true);
+				JOptionPane.showMessageDialog(null,"Ez az akadaly " + map.getObstacleSelected());
 		    }
 		});
 		
@@ -307,7 +315,9 @@ public class ControlPanel extends JPanel {
 		labelPurpleStone.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
 		    {  
-				JOptionPane.showMessageDialog(null,"Ez a lilakõ");
+				map.getSaruman().createStone("purple");
+				//Jaj de ronda!!!!!!!!!!!!!!!!
+				JOptionPane.showMessageDialog(null,"Ez a " + map.getSaruman().getSelectedMagicStone().getName() + "kõ");
 		    }
 		});
 		
@@ -351,7 +361,9 @@ public class ControlPanel extends JPanel {
 		labelGreenStone.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
 		    {  
-				JOptionPane.showMessageDialog(null,"Ez a zöldkõ");
+				map.getSaruman().createStone("green");
+				//Jaj de ronda!!!!!!!!!!!!!!!!
+				JOptionPane.showMessageDialog(null,"Ez a " + map.getSaruman().getSelectedMagicStone().getName() + "kõ");
 		    }
 		});
 		
@@ -395,7 +407,9 @@ public class ControlPanel extends JPanel {
 		labelCyanStone.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
 		    {  
-				JOptionPane.showMessageDialog(null,"Ez a cián kõ");
+				map.getSaruman().createStone("cyan");
+				//Jaj de ronda!!!!!!!!!!!!!!!!
+				JOptionPane.showMessageDialog(null,"Ez a " + map.getSaruman().getSelectedMagicStone().getName() + "kõ");
 		    }
 		});
 		

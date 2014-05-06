@@ -143,6 +143,11 @@ public class Saruman
 	{
 		this.magicStoneCost = mc;
 	}
+	
+	public void setMap(Map map)
+	{
+		this.map = map;
+	}
 
 	/**
 	 * A megadott tipusu varazsko letrehozasa. 

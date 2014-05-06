@@ -2,6 +2,8 @@ package Program;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -12,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import Model.Cell;
+import Model.Cell.CellType;
 import Model.Map;
 import Model.Saruman;
 import View.CellView;
@@ -22,7 +25,7 @@ import View.TowerView;
 
 public class Program {
 	static Map map;
-	
+	static Saruman saruman;
 	/**
 	 * Kep fajlok betoltese a View osztalyokba
 	 */
@@ -84,9 +87,28 @@ public class Program {
 		// CellView-k hozzaadasa a mapPanel-hez
 		for (int i = 0; i < map.getRowNumber(); i++) {
 			for (int j = 0; j < map.getColumnNumber(); j++) {
-				for (Cell cell : map.getCells()) {
+				for (final Cell cell : map.getCells()) {
 					if (cell.getRowId() == i && cell.getColumnId() == j) {
 						mapPanel.add(cell.getView());
+						
+						//Egerrel valo kijelolesre add listenert
+						cell.getView().addMouseListener(new MouseAdapter() {
+							public void mouseClicked(MouseEvent e)  
+							{  
+								if(cell.getCellType() == CellType.Road && map.getObstacleSelected())
+								{
+									saruman.addObstacle(cell);
+								}
+								else if(cell.getCellType() == CellType.Terrain && map.getTowerSelected())
+								{
+									saruman.addTower(cell);
+								}
+								else
+								{
+									JOptionPane.showMessageDialog(null,"Ejnye");
+								}
+							}
+							});
 						break;
 					}
 				}
@@ -113,7 +135,8 @@ public class Program {
 
 	private static void createAndLoadMap(JFrame frame) {
 		map = new Map(4);
-		map.setSaruman(new Saruman(map));
+		saruman = new Saruman(map);
+		map.setSaruman(saruman);
 		boolean loadResult = map.loadFromFile("maps/map1.xml");
 		// Ha nem sikerul a beolvasas hibat dobunk es kilepunk
 		if (!loadResult || (map.getRowNumber() == 0 && map.getColumnNumber() == 0)) {
