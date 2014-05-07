@@ -30,6 +30,7 @@ import javax.swing.event.AncestorListener;
 
 import Model.Map;
 import Model.Saruman;
+import Program.Program;
 
 public class ControlPanel extends JPanel {
 	/**
@@ -209,15 +210,17 @@ public class ControlPanel extends JPanel {
 			public void mouseClicked(MouseEvent e)  
 		    {
 				//Mindig a megfelelo flag legyen bebillentve
-				if(map.getTowerSelected())
+				if(map.getTowerSelected()){
 					map.setTowerSelected(false);
-					
+					Program.setLabelText("Nincs kivalasztott opcio");
+				}	
 				else 
 				{
 					map.setTowerSelected(true);
 					map.setObstacleSelected(false);
+					map.setStoneSelected("none");
+					Program.setLabelText("Torony kivalasztva");
 				}
-				JOptionPane.showMessageDialog(null,"Ez a torony " + map.getTowerSelected());
 		    }
 		});
 		/************************************/
@@ -268,14 +271,17 @@ public class ControlPanel extends JPanel {
 		labelObstacle.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
 		    {  //Mindig a megfelelo flag legyen bebillentve
-				if(map.getObstacleSelected())
+				if(map.getObstacleSelected()){
 					map.setObstacleSelected(false);
+					Program.setLabelText("Nincs kivalasztott opcio");
+				}
 				else 
 				{
 					map.setObstacleSelected(true);
 					map.setTowerSelected(false);
+					map.setStoneSelected("none");
+					Program.setLabelText("Akadaly kivalasztva");
 				}
-				JOptionPane.showMessageDialog(null,"Ez az akadaly " + map.getObstacleSelected());
 		    }
 		});
 		
@@ -326,13 +332,14 @@ public class ControlPanel extends JPanel {
 		    {  			
 				if(map.getStoneSelected().equals("purple")){
 					map.setStoneSelected("none");
+					Program.setLabelText("Nincs kivalasztott opcio");
 				} 
 				else {
 					map.setObstacleSelected(false);
 					map.setTowerSelected(false);
 					map.setStoneSelected("purple");
-					//Jaj de ronda!!!!!!!!!!!!!!!!
-					JOptionPane.showMessageDialog(null,"Ez a " + map.getStoneSelected() + "ko");
+
+					Program.setLabelText("Lila varazsko kivalasztva");
 				}
 		    }
 		});
@@ -379,13 +386,14 @@ public class ControlPanel extends JPanel {
 		    {  
 				if(map.getStoneSelected().equals("green")){
 					map.setStoneSelected("none");
+					Program.setLabelText("Nincs kivalasztott opcio");
 				} 
 				else {
 					map.setObstacleSelected(false);
 					map.setTowerSelected(false);
 					map.setStoneSelected("green");
-					//Jaj de ronda!!!!!!!!!!!!!!!!
-					JOptionPane.showMessageDialog(null,"Ez a " + map.getStoneSelected() + "ko");
+
+					Program.setLabelText("Zold varazsko kivalasztva");
 				}
 		    }
 		});
@@ -432,13 +440,14 @@ public class ControlPanel extends JPanel {
 		    {  
 				if(map.getStoneSelected().equals("cyan")){
 					map.setStoneSelected("none");
+					Program.setLabelText("Nincs kivalasztott opcio");
 				} 
 				else {
 					map.setObstacleSelected(false);
 					map.setTowerSelected(false);
 					map.setStoneSelected("cyan");
-					//Jaj de ronda!!!!!!!!!!!!!!!!
-					JOptionPane.showMessageDialog(null,"Ez a " + map.getStoneSelected() + "ko");
+
+					Program.setLabelText("Cian varazsko kivalasztva");
 				}
 		    }
 		});
