@@ -95,15 +95,49 @@ public class Program {
 						cell.getView().addMouseListener(new MouseAdapter() {
 							public void mouseClicked(MouseEvent e)  
 							{  
-								if(cell.getCellType() == CellType.Road && map.getObstacleSelected())
+								if(cell.getCellType() == CellType.Road && map.getObstacleSelected() && !cell.getBusy())
 								{
 									saruman.addObstacle(cell);
 									cell.getView().modelChanged();
 								}
-								else if(cell.getCellType() == CellType.Terrain && map.getTowerSelected())
+								else if(cell.getCellType() == CellType.Terrain && map.getTowerSelected() && !cell.getBusy())
 								{
 									saruman.addTower(cell);
 									cell.getView().modelChanged();
+								}
+								else if(cell.getTower()!=null && !map.getStoneSelected().equals("none")){
+									if(saruman.getMagicPower() > saruman.getMagicStoneCost()){
+										saruman.createStone(map.getStoneSelected());
+										Boolean result = saruman.upgradeItem(cell.getTower());
+										if(result==true){
+											JOptionPane.showMessageDialog(null,cell.getTower().getFirePower()+" "
+													+cell.getTower().getAttackSpeed()+" "
+													+cell.getTower().getRange());
+										}
+										else{
+											saruman.changeMagicPowerBy(saruman.getMagicStoneCost());
+											JOptionPane.showMessageDialog(null,"Tornyot nem lehet tovabb fejleszteni");
+										}
+									}
+									else{
+										JOptionPane.showMessageDialog(null,"Nincs eleg varazserod");
+									}
+								}
+								else if(cell.getObstacle()!=null && !map.getStoneSelected().equals("none")){
+									if(saruman.getMagicPower() > saruman.getMagicStoneCost()){
+										saruman.createStone(map.getStoneSelected());
+										Boolean result = saruman.upgradeItem(cell.getObstacle());
+										if(result==true){
+											JOptionPane.showMessageDialog(null,cell.getObstacle().getSlowRate());
+										}
+										else{
+											saruman.changeMagicPowerBy(saruman.getMagicStoneCost());
+											JOptionPane.showMessageDialog(null,"Akadalyt nem lehet tovabb fejleszteni");
+										}
+									}
+									else{
+										JOptionPane.showMessageDialog(null,"Nincs eleg varazserod");
+									}
 								}
 								else
 								{
