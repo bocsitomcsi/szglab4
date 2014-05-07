@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -26,6 +27,8 @@ import View.TowerView;
 public class Program {
 	static Map map;
 	static Saruman saruman;
+	static JLabel resultLabel;
+	
 	/**
 	 * Kep fajlok betoltese a View osztalyokba
 	 */
@@ -98,11 +101,13 @@ public class Program {
 								if(cell.getCellType() == CellType.Road && map.getObstacleSelected() && !cell.getBusy())
 								{
 									saruman.addObstacle(cell);
+									resultLabel.setText("Akadaly letrehozva");
 									cell.getView().modelChanged();
 								}
 								else if(cell.getCellType() == CellType.Terrain && map.getTowerSelected() && !cell.getBusy())
 								{
 									saruman.addTower(cell);
+									resultLabel.setText("Torony letrehozva");
 									cell.getView().modelChanged();
 								}
 								else if(cell.getTower()!=null && !map.getStoneSelected().equals("none")){
@@ -110,17 +115,19 @@ public class Program {
 										saruman.createStone(map.getStoneSelected());
 										Boolean result = saruman.upgradeItem(cell.getTower());
 										if(result==true){
-											JOptionPane.showMessageDialog(null,cell.getTower().getFirePower()+" "
-													+cell.getTower().getAttackSpeed()+" "
+											JOptionPane.showMessageDialog(null,"Fire: "+cell.getTower().getFirePower()+" Speed: "
+													+cell.getTower().getAttackSpeed()+" Range: "
 													+cell.getTower().getRange());
+											
+											resultLabel.setText("Torony fejlesztve");
 										}
 										else{
 											saruman.changeMagicPowerBy(saruman.getMagicStoneCost());
-											JOptionPane.showMessageDialog(null,"Tornyot nem lehet tovabb fejleszteni");
+											resultLabel.setText("Tornyot nem lehet tovabb fejleszteni");
 										}
 									}
 									else{
-										JOptionPane.showMessageDialog(null,"Nincs eleg varazserod");
+										resultLabel.setText("Nincs eleg varazsero");
 									}
 								}
 								else if(cell.getObstacle()!=null && !map.getStoneSelected().equals("none")){
@@ -128,20 +135,22 @@ public class Program {
 										saruman.createStone(map.getStoneSelected());
 										Boolean result = saruman.upgradeItem(cell.getObstacle());
 										if(result==true){
-											JOptionPane.showMessageDialog(null,cell.getObstacle().getSlowRate());
+											JOptionPane.showMessageDialog(null,"Slow: "+cell.getObstacle().getSlowRate());
+											
+											resultLabel.setText("Akadaly fejlesztve");
 										}
 										else{
 											saruman.changeMagicPowerBy(saruman.getMagicStoneCost());
-											JOptionPane.showMessageDialog(null,"Akadalyt nem lehet tovabb fejleszteni");
+											resultLabel.setText("Akadalyt nem lehet tovabb fejleszteni");
 										}
 									}
 									else{
-										JOptionPane.showMessageDialog(null,"Nincs eleg varazserod");
+										resultLabel.setText("Nincs eleg varazserod");
 									}
 								}
 								else
 								{
-									JOptionPane.showMessageDialog(null,"Ejnye");
+									resultLabel.setText("Nem helyes opcio");
 								}
 							}
 							});
@@ -151,9 +160,16 @@ public class Program {
 			}
 		}
 		
+		JPanel resultPanel = new JPanel();
+		resultLabel = new JLabel();
+		
+		resultPanel.add(resultLabel);
+		resultLabel.setText("Az inditas gombal kezdodhet a jatek!");
+		
 		// Control es Map panelek hozzaadasa a frame-hez
 		frame.add(controlPanel, BorderLayout.NORTH);
 		frame.add(mapPanel, BorderLayout.CENTER);
+		frame.add(resultPanel, BorderLayout.SOUTH);
 		// Frame megjelenitese
 		frame.pack();
 		frame.setVisible(true);
@@ -184,5 +200,9 @@ public class Program {
 					);
 			System.exit(-1);
 		}
+	}
+	
+	public static void setLabelText(String text){
+		resultLabel.setText(text);
 	}
 }
