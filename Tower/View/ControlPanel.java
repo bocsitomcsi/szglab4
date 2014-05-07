@@ -147,7 +147,7 @@ public class ControlPanel extends JPanel {
 			}
 		});
 				
-		labelMagicPower = new JLabel("Varázserõ: ");
+		labelMagicPower = new JLabel("Varazsero: ");
 		labelMagicPower.setFont(new Font("Tahoma", Font.BOLD, 16));
 		labelMagicPower.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -196,7 +196,7 @@ public class ControlPanel extends JPanel {
 			}
 		});
 		
-		labelTowerCost = new JLabel("Torony ára: ");
+		labelTowerCost = new JLabel("Torony ara: ");
 		labelTowerCost.setFont(new Font("Tahoma", Font.BOLD, 16));
 		labelTowerCost.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -211,6 +211,7 @@ public class ControlPanel extends JPanel {
 				//Mindig a megfelelo flag legyen bebillentve
 				if(map.getTowerSelected())
 					map.setTowerSelected(false);
+					
 				else 
 				{
 					map.setTowerSelected(true);
@@ -257,7 +258,7 @@ public class ControlPanel extends JPanel {
 			}
 		});
 
-		labelObstacleCost = new JLabel("Akadály ára: ");
+		labelObstacleCost = new JLabel("Akadaly ara: ");
 		labelObstacleCost.setFont(new Font("Tahoma", Font.BOLD, 16));
 		labelObstacleCost.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -322,10 +323,17 @@ public class ControlPanel extends JPanel {
 
 		labelPurpleStone.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
-		    {  
-				map.getSaruman().createStone("purple");
-				//Jaj de ronda!!!!!!!!!!!!!!!!
-				JOptionPane.showMessageDialog(null,"Ez a " + map.getSaruman().getSelectedMagicStone().getName() + "kõ");
+		    {  			
+				if(map.getStoneSelected().equals("purple")){
+					map.setStoneSelected("none");
+				} 
+				else {
+					map.setObstacleSelected(false);
+					map.setTowerSelected(false);
+					map.setStoneSelected("purple");
+					//Jaj de ronda!!!!!!!!!!!!!!!!
+					JOptionPane.showMessageDialog(null,"Ez a " + map.getStoneSelected() + "ko");
+				}
 		    }
 		});
 		
@@ -369,9 +377,16 @@ public class ControlPanel extends JPanel {
 		labelGreenStone.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
 		    {  
-				map.getSaruman().createStone("green");
-				//Jaj de ronda!!!!!!!!!!!!!!!!
-				JOptionPane.showMessageDialog(null,"Ez a " + map.getSaruman().getSelectedMagicStone().getName() + "kõ");
+				if(map.getStoneSelected().equals("green")){
+					map.setStoneSelected("none");
+				} 
+				else {
+					map.setObstacleSelected(false);
+					map.setTowerSelected(false);
+					map.setStoneSelected("green");
+					//Jaj de ronda!!!!!!!!!!!!!!!!
+					JOptionPane.showMessageDialog(null,"Ez a " + map.getStoneSelected() + "ko");
+				}
 		    }
 		});
 		
@@ -415,16 +430,23 @@ public class ControlPanel extends JPanel {
 		labelCyanStone.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)  
 		    {  
-				map.getSaruman().createStone("cyan");
-				//Jaj de ronda!!!!!!!!!!!!!!!!
-				JOptionPane.showMessageDialog(null,"Ez a " + map.getSaruman().getSelectedMagicStone().getName() + "kõ");
+				if(map.getStoneSelected().equals("cyan")){
+					map.setStoneSelected("none");
+				} 
+				else {
+					map.setObstacleSelected(false);
+					map.setTowerSelected(false);
+					map.setStoneSelected("cyan");
+					//Jaj de ronda!!!!!!!!!!!!!!!!
+					JOptionPane.showMessageDialog(null,"Ez a " + map.getStoneSelected() + "ko");
+				}
 		    }
 		});
 		
 		StonesPanel.add(labelCyanStone);
 		/***************************************/
 		
-		labelStoneCost = new JLabel("Kõ ára:");
+		labelStoneCost = new JLabel("Ko ara:");
 		labelStoneCost.setFont(new Font("Tahoma", Font.BOLD, 16));
 		labelStoneCost.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -443,10 +465,10 @@ public class ControlPanel extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.HORIZONTAL);
 		
-		labelRound = new JLabel("Kör: ");
+		labelRound = new JLabel("Kor: ");
 		labelRound.setFont(new Font("Tahoma", Font.BOLD, 23));
 		
-		labelEnemy = new JLabel("Ellenségek száma: ");
+		labelEnemy = new JLabel("Ellensegek szama: ");
 		labelEnemy.setFont(new Font("Tahoma", Font.BOLD, 23));
 		
 		InformationPanel.add(labelRound, BorderLayout.NORTH);
@@ -457,7 +479,7 @@ public class ControlPanel extends JPanel {
 		/***Start es Stop gombok esemenykezeloinek beregisztralasa***/
 		JPanel btnStartPanel = new JPanel(new FlowLayout());
 		
-		btnStart = new JButton("Indítás");
+		btnStart = new JButton("Inditas");
 		btnStart.setPreferredSize(new Dimension(90,60));
 		btnStart.addActionListener(new ActionListener() {
 				@Override
@@ -467,7 +489,7 @@ public class ControlPanel extends JPanel {
 				});
 		
 		JPanel btnExitPanel = new JPanel(new FlowLayout());
-		btnExit = new JButton("Kilépés");
+		btnExit = new JButton("Kilepes");
 		btnExit.setPreferredSize(new Dimension(90,60));
 		btnExit.addActionListener(new ActionListener() {
 				@Override
@@ -542,18 +564,18 @@ public class ControlPanel extends JPanel {
 	public void modelChanged() {
 		Saruman saruman = map.getSaruman();
 		// Varazsero frissitese
-		labelMagicPower.setText("Varázserõ: " + saruman.getMagicPower());
+		labelMagicPower.setText("Varazsero: " + saruman.getMagicPower());
 		
 		// Tower, obstacle es magicstone arainak frissitese
-		labelTowerCost.setText("Ár: " + saruman.getTowerCost());
-		labelObstacleCost.setText("Ár: " + saruman.getObstacleCost());
-		labelStoneCost.setText("Ár: " + saruman.getMagicStoneCost());
+		labelTowerCost.setText("ar: " + saruman.getTowerCost());
+		labelObstacleCost.setText("ar: " + saruman.getObstacleCost());
+		labelStoneCost.setText("ar: " + saruman.getMagicStoneCost());
 		
 		// Kor sorszamanak frissitese
-		labelRound.setText("Kör: " + map.getRoundNumber());
+		labelRound.setText("Kor: " + map.getRoundNumber());
 		
-		// Ellenségek számának visszadadása
-		labelEnemy.setText("Ellenségek száma: " + map.getEnemies().size());
+		// Ellensegek szamanak visszadadasa
+		labelEnemy.setText("Ellensegek szama: " + map.getEnemies().size());
 	}
 	
 	/**
