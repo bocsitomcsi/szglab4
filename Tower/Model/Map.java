@@ -114,6 +114,10 @@ public class Map
 	 * A felhasznaloi feluleten ki van-e valasztva az akadaly.
 	 */
 	private boolean obstacleSelected;
+	/**
+	 * A felhasznaloi feluleten ki van-e valasztva valamilyen ko.
+	 */
+	private String stoneSelected;
 
 	/**
 	 * Ennyi idonkent ertesulnek az objektumok az ido mulasarol.
@@ -139,6 +143,7 @@ public class Map
 		
 		this.towerSelected = false;
 		this.obstacleSelected = false;
+		this.stoneSelected = "none";
 
 		// Fog tulajdonsagok
 		fogApplianceTime = 5000;
@@ -259,6 +264,15 @@ public class Map
 	{
 		return this.towerSelected;
 	}
+	
+	/**
+	 * Getter a stoneSelected attributumra.
+	 * @return  A stoneSelected attributum.
+	 */
+	public String getStoneSelected()
+	{
+		return this.stoneSelected;
+	}
 
 	/**
 	 * Getter az obstacles attributumra.
@@ -352,6 +366,15 @@ public class Map
 	public void setTowerSelected(boolean towerSelected)
 	{
 		this.towerSelected = towerSelected;
+	}
+	
+	/**
+	 * Setter a stoneSelected attributumra.
+	 * @param b  A stoneSelected attributum kivant erteke.
+	 */
+	public void setStoneSelected(String stoneSelected)
+	{
+		this.stoneSelected = stoneSelected;
 	}
 	
 	/**
