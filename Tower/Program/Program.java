@@ -115,10 +115,6 @@ public class Program {
 										saruman.createStone(map.getStoneSelected());
 										Boolean result = saruman.upgradeItem(cell.getTower());
 										if(result==true){
-											JOptionPane.showMessageDialog(null,"Fire: "+cell.getTower().getFirePower()+" Speed: "
-													+cell.getTower().getAttackSpeed()+" Range: "
-													+cell.getTower().getRange());
-											
 											resultLabel.setText("Torony fejlesztve");
 										}
 										else{
@@ -134,9 +130,7 @@ public class Program {
 									if(saruman.getMagicPower() > saruman.getMagicStoneCost()){
 										saruman.createStone(map.getStoneSelected());
 										Boolean result = saruman.upgradeItem(cell.getObstacle());
-										if(result==true){
-											JOptionPane.showMessageDialog(null,"Slow: "+cell.getObstacle().getSlowRate());
-											
+										if(result==true){									
 											resultLabel.setText("Akadaly fejlesztve");
 										}
 										else{
@@ -147,6 +141,43 @@ public class Program {
 									else{
 										resultLabel.setText("Nincs eleg varazserod");
 									}
+								}
+								else if(cell.getTower()!=null){
+									/*
+									int humanBonus = cell.getTower().getBonusPowers().get("human");
+									int elfBonus = cell.getTower().getBonusPowers().get("elf");
+									int hobbitBonus = cell.getTower().getBonusPowers().get("hobbit");
+									int dwarfBonus = cell.getTower().getBonusPowers().get("dwarf");
+									resultLabel.setText("Torony: tuzero: "+cell.getTower().getFirePower()+
+											" sebesseg: " + cell.getTower().getAttackSpeed()+
+											" tav: " + cell.getTower().getRange()+
+											" bonusz: ("+ 
+											" ember: " + humanBonus +
+											" tunde: " + elfBonus +
+											" hobbit: " + hobbitBonus +
+											" torpe: " + dwarfBonus +")"
+											);
+									*/
+									resultLabel.setText("Torony: tuzero: "+cell.getTower().getFirePower()+
+											" sebesseg: " + cell.getTower().getAttackSpeed()+
+											" tav: " + cell.getTower().getRange()
+											);
+								}
+								else if(cell.getObstacle()!=null){
+									/*
+									Double humanBonus = cell.getObstacle().getBonusSlowRates().get("human");
+									Double elfBonus = cell.getObstacle().getBonusSlowRates().get("elf");
+									Double hobbitBonus = cell.getObstacle().getBonusSlowRates().get("hobbit");
+									Double dwarfBonus = cell.getObstacle().getBonusSlowRates().get("dwarf");
+									resultLabel.setText("Akadaly: lassitas: "+cell.getObstacle().getSlowRate()+
+											" bonusz: ("+ 
+											" ember: " + humanBonus +
+											" tunde: " + elfBonus +
+											" hobbit: " + hobbitBonus +
+											" torpe: " + dwarfBonus +")");
+									*/
+									resultLabel.setText("Akadaly: lassitas: "+cell.getObstacle().getSlowRate()
+											);
 								}
 								else
 								{
