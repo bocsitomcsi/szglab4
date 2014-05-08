@@ -70,7 +70,7 @@ public class Program {
 		// Frame letrehozasa
 		JFrame frame = new JFrame("Tower Defense");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setPreferredSize(new Dimension(870, 700));
+		frame.getContentPane().setPreferredSize(new Dimension(1000, 870));
 		
 		// Kepek betoltese a View osztalyokhoz
 		loadViewImages(frame);
@@ -195,7 +195,7 @@ public class Program {
 		
 		JPanel resultPanel = new JPanel();
 		resultLabel = new JLabel();
-		resultLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		resultLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
 		resultLabel.setForeground(Color.RED);
 		
 		resultPanel.add(resultLabel);

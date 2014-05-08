@@ -40,7 +40,7 @@ public class CellView extends JPanel{
 	/**
 	 * A cella szegelyenek vastagsaga.
 	 */
-	private static int strokeWidth = 4;
+	private static int strokeWidth = 2;
 	
 	/**
 	 * Konstruktor.

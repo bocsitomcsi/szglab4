@@ -134,7 +134,7 @@ public class ControlPanel extends JPanel {
 							);
 					System.exit(-1);
 				}
-				Image imageResized = image.getScaledInstance(160,200, Image.SCALE_FAST);
+				Image imageResized = image.getScaledInstance(160,250, Image.SCALE_SMOOTH);
 				labelSaruman.setIcon(new ImageIcon(imageResized));
 			}
 
@@ -184,7 +184,7 @@ public class ControlPanel extends JPanel {
 							);
 					System.exit(-1);
 				}
-				Image imageResized = image.getScaledInstance(100, 100, Image.SCALE_FAST);
+				Image imageResized = image.getScaledInstance(50, 140, Image.SCALE_SMOOTH);
 				labelTower.setIcon(new ImageIcon(imageResized));
 			}
 
@@ -256,7 +256,7 @@ public class ControlPanel extends JPanel {
 							);
 					System.exit(-1);
 				}
-				Image imageResized = image.getScaledInstance(100, 100, Image.SCALE_FAST);
+				Image imageResized = image.getScaledInstance(150, 120, Image.SCALE_SMOOTH);
 				labelObstacle.setIcon(new ImageIcon(imageResized));
 			}
 	
@@ -331,7 +331,7 @@ public class ControlPanel extends JPanel {
 							);
 					System.exit(-1);
 				}
-				Image imageResized = image.getScaledInstance(50,50, Image.SCALE_FAST);
+				Image imageResized = image.getScaledInstance(80,50, Image.SCALE_SMOOTH);
 				labelPurpleStone.setIcon(new ImageIcon(imageResized));
 			}	
 			
@@ -395,7 +395,7 @@ public class ControlPanel extends JPanel {
 							);
 					System.exit(-1);
 				}
-				Image imageResized = image.getScaledInstance(50,50,Image.SCALE_FAST);
+				Image imageResized = image.getScaledInstance(80,50,Image.SCALE_SMOOTH);
 				labelGreenStone.setIcon(new ImageIcon(imageResized));
 			}
 	
@@ -460,7 +460,7 @@ public class ControlPanel extends JPanel {
 							);
 					System.exit(-1);
 				}
-				Image imageResized = image.getScaledInstance(50,50,Image.SCALE_FAST);
+				Image imageResized = image.getScaledInstance(80,50,Image.SCALE_SMOOTH);
 				labelCyanStone.setIcon(new ImageIcon(imageResized));
 			}
 
@@ -589,7 +589,7 @@ public class ControlPanel extends JPanel {
 									);
 							System.exit(-1);
 						}
-						Image imageResized = image.getScaledInstance(180,220, Image.SCALE_FAST);
+						Image imageResized = image.getScaledInstance(250,270, Image.SCALE_SMOOTH);
 						labelSauron.setIcon(new ImageIcon(imageResized));
 					}
 
