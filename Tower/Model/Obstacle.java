@@ -43,7 +43,7 @@ public class Obstacle extends Item
 	 */
 	public Obstacle(Cell pos) {
 		this(
-				5,		// Lassitas
+				1.25,		// Lassitas
 				3,		// Varazskovek maximalis szama
 				pos
 				);
@@ -135,7 +135,7 @@ public class Obstacle extends Item
 			magicStones.add(stone);
 
 			// Noveljuk a lassitasi szorzot
-			slowRate *= stone.slowRate;
+			slowRate += stone.slowRate;
 
 			// Modositjuk a bonusz lassitasi szorzokat
 			for (String enemy : stone.bonusSlowRates.keySet()) {
@@ -144,7 +144,7 @@ public class Obstacle extends Item
 				if (bonusSlowRates.containsKey(enemy)) {
 					bonusSlowRates.put(
 							enemy, 
-							bonusSlowRates.get(enemy) * stone.bonusSlowRates.get(enemy)
+							bonusSlowRates.get(enemy) + stone.bonusSlowRates.get(enemy)
 							);
 				}
 				// Ha nincs, akkor letrehozzuk
