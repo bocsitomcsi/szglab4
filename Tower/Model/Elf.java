@@ -28,7 +28,7 @@ public class Elf extends Enemy
 	 */
 	public Elf() {
 		this(
-				150, // Health
+				80, // Health
 				enemySpeeds.get("elf"), // Aktualis sebesseg
 				enemySpeeds.get("elf"), // Eredeti sebesseg
 				30 // Varazsero
