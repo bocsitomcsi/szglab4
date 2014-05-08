@@ -31,7 +31,7 @@ public class Human extends Enemy
 				200, // Health
 				enemySpeeds.get("human"), // Aktualis sebesseg
 				enemySpeeds.get("human"), // Eredeti sebesseg
-				30 // Varazsero
+				40 // Varazsero
 				);
 	}
 
