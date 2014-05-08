@@ -225,6 +225,9 @@ public class ControlPanel extends JPanel {
 					Program.setLabelText("Torony kivalasztva");
 					TowerPanel.setBackground(Color.GRAY);
 					ObstaclePanel.setBackground(Color.WHITE);
+					labelCyanStone.setBackground(Color.WHITE);
+					labelGreenStone.setBackground(Color.WHITE);
+					labelPurpleStone.setBackground(Color.WHITE);
 				}
 
 		    }
@@ -291,6 +294,9 @@ public class ControlPanel extends JPanel {
 					Program.setLabelText("Akadaly kivalasztva");
 					ObstaclePanel.setBackground(Color.GRAY);
 					TowerPanel.setBackground(Color.WHITE);
+					labelCyanStone.setBackground(Color.WHITE);
+					labelGreenStone.setBackground(Color.WHITE);
+					labelPurpleStone.setBackground(Color.WHITE);
 				}
 		    }
 		});
@@ -353,11 +359,13 @@ public class ControlPanel extends JPanel {
 					map.setTowerSelected(false);
 					map.setStoneSelected("purple");
 
-					Program.setLabelText("Lila varazsko kivalasztva");
+					Program.setLabelText("Lila: torony: tuzero, erosseg: ember, torpe | akadaly: lassitas");
 					
 					labelPurpleStone.setBackground(Color.GRAY);
 					labelGreenStone.setBackground(Color.WHITE);
 					labelCyanStone.setBackground(Color.WHITE);
+					ObstaclePanel.setBackground(Color.WHITE);
+					TowerPanel.setBackground(Color.WHITE);
 				}
 		    }
 		});
@@ -416,11 +424,13 @@ public class ControlPanel extends JPanel {
 					map.setTowerSelected(false);
 					map.setStoneSelected("green");
 
-					Program.setLabelText("Zold varazsko kivalasztva");
+					Program.setLabelText("Zold: torony: gyorsasag erosseg: ember, tunde | akadaly: erosseg: ember, tunde");
 					
 					labelGreenStone.setBackground(Color.GRAY);
 					labelPurpleStone.setBackground(Color.WHITE);
 					labelCyanStone.setBackground(Color.WHITE);
+					ObstaclePanel.setBackground(Color.WHITE);
+					TowerPanel.setBackground(Color.WHITE);
 				}
 		    }
 		});
@@ -479,11 +489,13 @@ public class ControlPanel extends JPanel {
 					map.setTowerSelected(false);
 					map.setStoneSelected("cyan");
 
-					Program.setLabelText("Cian varazsko kivalasztva");
+					Program.setLabelText("Cian: torony: tavolsag, erosseg: tunde, hobbit, torpe | akadaly: erosseg: hobbit, torpe");
 					
 					labelCyanStone.setBackground(Color.GRAY);
 					labelGreenStone.setBackground(Color.WHITE);
 					labelPurpleStone.setBackground(Color.WHITE);
+					ObstaclePanel.setBackground(Color.WHITE);
+					TowerPanel.setBackground(Color.WHITE);
 				}
 		    }
 		});
