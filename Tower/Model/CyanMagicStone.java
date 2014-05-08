@@ -25,10 +25,10 @@ public class CyanMagicStone extends MagicStone
 	public CyanMagicStone() {
 		this(
 				"cyan",	// A varazsko neve 
-				100,	// Power bonus
-				100,	// Speed bonus
-				100,	// Range bonus
-				100		// Slowrate bonus
+				0,	// Power bonus
+				0,	// Speed bonus
+				1,	// Range bonus
+				0.02		// Slowrate bonus
 				);
 	}
 
