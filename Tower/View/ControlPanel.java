@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -163,6 +164,7 @@ public class ControlPanel extends JPanel {
 		
 		/***A tornyot megjelenito label***/
 		TowerPanel = new JPanel(new BorderLayout());
+		TowerPanel.setBackground(Color.WHITE);
 
 		labelTower = new JLabel();
 		labelTower.addAncestorListener(new AncestorListener() {
@@ -213,6 +215,7 @@ public class ControlPanel extends JPanel {
 				if(map.getTowerSelected()){
 					map.setTowerSelected(false);
 					Program.setLabelText("Nincs kivalasztott opcio");
+					TowerPanel.setBackground(Color.WHITE);
 				}	
 				else 
 				{
@@ -220,13 +223,17 @@ public class ControlPanel extends JPanel {
 					map.setObstacleSelected(false);
 					map.setStoneSelected("none");
 					Program.setLabelText("Torony kivalasztva");
+					TowerPanel.setBackground(Color.GRAY);
+					ObstaclePanel.setBackground(Color.WHITE);
 				}
+
 		    }
 		});
 		/************************************/
 		
 		/***Az akadalyt megjelenito label***/
 		ObstaclePanel = new JPanel(new BorderLayout());
+		ObstaclePanel.setBackground(Color.WHITE);
 		
 		labelObstacle = new JLabel();
 		labelObstacle.addAncestorListener(new AncestorListener() {
@@ -274,6 +281,7 @@ public class ControlPanel extends JPanel {
 				if(map.getObstacleSelected()){
 					map.setObstacleSelected(false);
 					Program.setLabelText("Nincs kivalasztott opcio");
+					ObstaclePanel.setBackground(Color.WHITE);
 				}
 				else 
 				{
@@ -281,6 +289,8 @@ public class ControlPanel extends JPanel {
 					map.setTowerSelected(false);
 					map.setStoneSelected("none");
 					Program.setLabelText("Akadaly kivalasztva");
+					ObstaclePanel.setBackground(Color.GRAY);
+					TowerPanel.setBackground(Color.WHITE);
 				}
 		    }
 		});
@@ -295,6 +305,9 @@ public class ControlPanel extends JPanel {
 		
 		/***A lila varazskovet megjelenito label***/
 		labelPurpleStone = new JLabel();
+		labelPurpleStone.setBackground(Color.WHITE);
+		labelPurpleStone.setOpaque(true);
+		
 		labelPurpleStone.addAncestorListener(new AncestorListener() {
 			@Override
 			public void ancestorAdded(AncestorEvent arg0) {
@@ -333,6 +346,7 @@ public class ControlPanel extends JPanel {
 				if(map.getStoneSelected().equals("purple")){
 					map.setStoneSelected("none");
 					Program.setLabelText("Nincs kivalasztott opcio");
+					labelPurpleStone.setBackground(Color.WHITE);
 				} 
 				else {
 					map.setObstacleSelected(false);
@@ -340,6 +354,10 @@ public class ControlPanel extends JPanel {
 					map.setStoneSelected("purple");
 
 					Program.setLabelText("Lila varazsko kivalasztva");
+					
+					labelPurpleStone.setBackground(Color.GRAY);
+					labelGreenStone.setBackground(Color.WHITE);
+					labelCyanStone.setBackground(Color.WHITE);
 				}
 		    }
 		});
@@ -349,6 +367,9 @@ public class ControlPanel extends JPanel {
 		
 		/***A zold varazskovet megjelenito label***/
 		labelGreenStone = new JLabel();
+		labelGreenStone.setBackground(Color.WHITE);
+		labelGreenStone.setOpaque(true);
+		
 		labelGreenStone.addAncestorListener(new AncestorListener() {
 			@Override
 			public void ancestorAdded(AncestorEvent arg0) {
@@ -387,6 +408,8 @@ public class ControlPanel extends JPanel {
 				if(map.getStoneSelected().equals("green")){
 					map.setStoneSelected("none");
 					Program.setLabelText("Nincs kivalasztott opcio");
+					
+					labelGreenStone.setBackground(Color.WHITE);
 				} 
 				else {
 					map.setObstacleSelected(false);
@@ -394,6 +417,10 @@ public class ControlPanel extends JPanel {
 					map.setStoneSelected("green");
 
 					Program.setLabelText("Zold varazsko kivalasztva");
+					
+					labelGreenStone.setBackground(Color.GRAY);
+					labelPurpleStone.setBackground(Color.WHITE);
+					labelCyanStone.setBackground(Color.WHITE);
 				}
 		    }
 		});
@@ -403,6 +430,9 @@ public class ControlPanel extends JPanel {
 		
 		/***A cian varazskovet megjelenito label***/
 		labelCyanStone = new JLabel();
+		labelCyanStone.setBackground(Color.WHITE);
+		labelCyanStone.setOpaque(true);
+		
 		labelCyanStone.addAncestorListener(new AncestorListener() {
 			@Override
 			public void ancestorAdded(AncestorEvent arg0) {
@@ -441,6 +471,8 @@ public class ControlPanel extends JPanel {
 				if(map.getStoneSelected().equals("cyan")){
 					map.setStoneSelected("none");
 					Program.setLabelText("Nincs kivalasztott opcio");
+					
+					labelCyanStone.setBackground(Color.WHITE);
 				} 
 				else {
 					map.setObstacleSelected(false);
@@ -448,6 +480,10 @@ public class ControlPanel extends JPanel {
 					map.setStoneSelected("cyan");
 
 					Program.setLabelText("Cian varazsko kivalasztva");
+					
+					labelCyanStone.setBackground(Color.GRAY);
+					labelGreenStone.setBackground(Color.WHITE);
+					labelPurpleStone.setBackground(Color.WHITE);
 				}
 		    }
 		});

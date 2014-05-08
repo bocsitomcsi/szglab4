@@ -1,6 +1,8 @@
 package Program;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -193,6 +195,8 @@ public class Program {
 		
 		JPanel resultPanel = new JPanel();
 		resultLabel = new JLabel();
+		resultLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
+		resultLabel.setForeground(Color.RED);
 		
 		resultPanel.add(resultLabel);
 		resultLabel.setText("Az inditas gombal kezdodhet a jatek!");
