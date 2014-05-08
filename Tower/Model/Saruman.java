@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.HashMap;
+
 import Model.Cell.CellType;
 
 /**
@@ -39,10 +41,10 @@ public class Saruman
 	 */
 	public Saruman(Map map) {
 		this(
-				100000,	// Varazsero
-				50,		// Torony ar
-				80,		// Akadaly ar
-				100,	// Varazsko ar
+				200,	// Varazsero
+				100,		// Torony ar
+				50,		// Akadaly ar
+				30,	// Varazsko ar
 				map		// Map referencia
 				);
 	}
@@ -162,13 +164,31 @@ public class Saruman
 	{
 		// Ha van eleg varazsero akkor letrehozzuk a kovet
 		if (magicPower >= magicStoneCost) {
+			HashMap<String, Integer> bonusp = new HashMap<String, Integer>();
+			HashMap<String, Double> bonuss = new HashMap<String, Double>();
 			// Letrehozzuk a megfelelo kovet
 			if (type.equals("cyan")) {
 				selectedMagicStone = new CyanMagicStone();
+				
+				bonusp.put("elf",10);
+				bonusp.put("hobbit",5);
+				bonusp.put("dwarf",10);
+				
+				bonuss.put("hobbit",1.10);
+				bonuss.put("dwarf",1.10);
 			} else if (type.equals("green")) {
 				selectedMagicStone = new GreenMagicStone();
+				
+				bonusp.put("human",10);
+				bonusp.put("elf",10);
+				
+				bonuss.put("human",1.10);
+				bonuss.put("elf",1.10);
 			} else if (type.equals("purple")) {
 				selectedMagicStone = new PurpleMagicStone();
+				
+				bonusp.put("human",10);
+				bonusp.put("dwarf",20);
 			}
 			// Ha nem letezo varazsko nevet adtak meg akkor false-t
 			// adunk vissza
@@ -176,6 +196,8 @@ public class Saruman
 				return false;
 			}
 
+			selectedMagicStone.setBonusPowers(bonusp);
+			selectedMagicStone.setBonusSlowRate(bonuss);
 			// Csokkentjuk a varazserot
 			magicPower -= magicStoneCost;
 			// Ertesitjuk a ControlPanel-t a valtozasrol
