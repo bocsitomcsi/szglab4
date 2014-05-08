@@ -195,7 +195,7 @@ public class Program {
 		
 		JPanel resultPanel = new JPanel();
 		resultLabel = new JLabel();
-		resultLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
+		resultLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		resultLabel.setForeground(Color.RED);
 		
 		resultPanel.add(resultLabel);
