@@ -29,10 +29,10 @@ public class Dwarf extends Enemy
 	 */
 	public Dwarf() {
 		this(
-				300, // Health
+				400, // Health
 				enemySpeeds.get("dwarf"), // Aktualis sebesseg
 				enemySpeeds.get("dwarf"), // Eredeti sebesseg
-				30 // Varazsero
+				60 // Varazsero
 				);
 	}
 
