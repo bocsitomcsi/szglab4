@@ -25,7 +25,7 @@ public class GreenMagicStone extends MagicStone
 		this(
 				"green",	// A varazsko neve 
 				0,		// Power bonus
-				-100,		// Speed bonus
+				100,		// Speed bonus
 				0,		// Range bonus
 				0.02			// Slowrate bonus
 				);
