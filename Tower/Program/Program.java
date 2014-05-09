@@ -105,18 +105,28 @@ public class Program {
 								System.out.println("Onclick on: " + cell.getRowId() + ", " + cell.getColumnId());
 								if(cell.getCellType() == CellType.Road && map.getObstacleSelected() && !cell.getBusy())
 								{
-									saruman.addObstacle(cell);
-									resultLabel.setText("Akadaly letrehozva");
+									Boolean result = saruman.addObstacle(cell);
+									if(result){
+										resultLabel.setText("Akadaly letrehozva");
+									}
+									else{
+										resultLabel.setText("Nincs eleg varazsero akadaly letrehozasara");
+									}
 									cell.getView().modelChanged();
 								}
 								else if(cell.getCellType() == CellType.Terrain && map.getTowerSelected() && !cell.getBusy())
 								{
-									saruman.addTower(cell);
-									resultLabel.setText("Torony letrehozva");
+									Boolean result = saruman.addTower(cell);
+									if(result){
+										resultLabel.setText("Torony letrehozva");
+									}
+									else{
+										resultLabel.setText("Nincs eleg varazsero torony letrehozasara");
+									}
 									cell.getView().modelChanged();
 								}
 								else if(cell.getTower()!=null && !map.getStoneSelected().equals("none")){
-									if(saruman.getMagicPower() > saruman.getMagicStoneCost()){
+									if(saruman.getMagicPower() >= saruman.getMagicStoneCost()){
 										saruman.createStone(map.getStoneSelected());
 										Boolean result = saruman.upgradeItem(cell.getTower());
 										if(result==true){
@@ -132,7 +142,7 @@ public class Program {
 									}
 								}
 								else if(cell.getObstacle()!=null && !map.getStoneSelected().equals("none")){
-									if(saruman.getMagicPower() > saruman.getMagicStoneCost()){
+									if(saruman.getMagicPower() >= saruman.getMagicStoneCost()){
 										saruman.createStone(map.getStoneSelected());
 										Boolean result = saruman.upgradeItem(cell.getObstacle());
 										if(result==true){									
