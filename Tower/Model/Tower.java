@@ -105,7 +105,7 @@ public class Tower extends Item
 		this.attackSpeed = as;
 		this.range = r;
 		this.bonusPowers = new HashMap<String,Integer>();
-		this.lastTime = System.currentTimeMillis();
+		this.lastTime = System.currentTimeMillis() - attackSpeed;
 		this.map = map;
 		this.fogActive = false;
 		sliceShootProbability = slice;
@@ -306,6 +306,7 @@ public class Tower extends Item
 	 */
 	public void shoot()
 	{
+		System.out.println("Shoot");
 		// Ha van kod a tornyon es lejart az ideje, akkor azt eltavolitjuk
 		if (fogActive && System.currentTimeMillis() >= fogRemovalTime ) {
 			removeFog();

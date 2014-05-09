@@ -209,7 +209,7 @@ public class ControlPanel extends JPanel {
 		CombinedItemPanel.add(TowerPanel);
 		
 		labelTower.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e)  
+			public void mousePressed(MouseEvent e)  
 		    {
 				//Mindig a megfelelo flag legyen bebillentve
 				if(map.getTowerSelected()){
@@ -279,7 +279,7 @@ public class ControlPanel extends JPanel {
 		ObstaclePanel.add(labelObstacleCost, BorderLayout.CENTER);
 		
 		labelObstacle.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e)  
+			public void mousePressed(MouseEvent e)  
 		    {  //Mindig a megfelelo flag legyen bebillentve
 				if(map.getObstacleSelected()){
 					map.setObstacleSelected(false);
@@ -347,7 +347,7 @@ public class ControlPanel extends JPanel {
 		});
 
 		labelPurpleStone.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e)  
+			public void mousePressed(MouseEvent e)  
 		    {  			
 				if(map.getStoneSelected().equals("purple")){
 					map.setStoneSelected("none");
@@ -411,7 +411,7 @@ public class ControlPanel extends JPanel {
 		});
 		
 		labelGreenStone.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e)  
+			public void mousePressed(MouseEvent e)  
 		    {  
 				if(map.getStoneSelected().equals("green")){
 					map.setStoneSelected("none");
@@ -476,7 +476,7 @@ public class ControlPanel extends JPanel {
 		});
 		
 		labelCyanStone.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e)  
+			public void mousePressed(MouseEvent e)  
 		    {  
 				if(map.getStoneSelected().equals("cyan")){
 					map.setStoneSelected("none");

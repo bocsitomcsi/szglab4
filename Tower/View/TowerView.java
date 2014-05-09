@@ -54,7 +54,7 @@ public class TowerView {
 	 */
 	public void draw(Graphics g) {
 		// Kep, szelessegenek, magassaganak megadasa a cellahoz viszonyitva
-		double wr = 0.7;
+		double wr = 0.4;
 		double hr = 0.9;
 		// A Graphics objektum mereteinek meghatarozasa
 		int w = (int) g.getClipBounds().getWidth();

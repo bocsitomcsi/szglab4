@@ -94,12 +94,15 @@ public class Program {
 			for (int j = 0; j < map.getColumnNumber(); j++) {
 				for (final Cell cell : map.getCells()) {
 					if (cell.getRowId() == i && cell.getColumnId() == j) {
-						mapPanel.add(cell.getView());
+						CellView cellView = cell.getView();
+						mapPanel.add(cellView);
 						
 						//Egerrel valo kijelolesre add listenert
-						cell.getView().addMouseListener(new MouseAdapter() {
-							public void mouseClicked(MouseEvent e)  
+						cellView.addMouseListener(new MouseAdapter() {
+							
+							public void mousePressed(MouseEvent e)  
 							{  
+								System.out.println("Onclick on: " + cell.getRowId() + ", " + cell.getColumnId());
 								if(cell.getCellType() == CellType.Road && map.getObstacleSelected() && !cell.getBusy())
 								{
 									saruman.addObstacle(cell);
