@@ -667,7 +667,7 @@ public class Map
 
 					// Elhelyezzuk rajta a kodot
 					fogTower.applyFog(fogDecreason, fogDuration);
-
+					fogTower.getPosition().getView().modelChanged();
 					// Elmentjuk az elhelyezes idejet
 					lastFog = currentTime;
 				}
