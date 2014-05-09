@@ -84,7 +84,17 @@ public class ControlPanel extends JPanel {
 		protected String doInBackground() throws Exception {
 			long currentTimeTmp = System.currentTimeMillis();
 			map.setRoundStartedTime(currentTimeTmp);
-			map.simulateWorld();
+			Model.Map.GameResult gameresult = map.simulateWorld();
+			
+			if(gameresult == Model.Map.GameResult.Win){
+				JOptionPane.showMessageDialog(null, "A gyuru biztonsagba kerult!\n Gyozelem!");
+				Program.setLabelText("A gyuru biztonsagba kerult!\n Gyozelem!");
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "A gyuru el lett pusztitva.\n Vereseg.");
+				Program.setLabelText("A gyuru el lett pusztitva.\n Vereseg.");
+			}
+			
 			return null;
 		}	
 	}
