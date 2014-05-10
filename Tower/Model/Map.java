@@ -146,9 +146,9 @@ public class Map
 		this.stoneSelected = "none";
 
 		// Fog tulajdonsagok
-		fogApplianceTime = 5000;
+		fogApplianceTime = 6000;
 		fogDecreason = 1;
-		fogDuration = 4000;
+		fogDuration = 3000;
 		lastFog = current;
 
 		// Round letrehozasa
