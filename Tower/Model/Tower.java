@@ -11,7 +11,7 @@ import View.TowerView;
 //  @ Project : Untitled
 //  @ File Name : Tower.java
 //  @ Date : 2014.03.20.
-//  @ Author :
+//  @ Author : 
 //
 //
 
@@ -32,7 +32,7 @@ public class Tower extends Item
 	 */
 	private int firePower;
 	/**
-	 * Egy loves utan ennyi idonek kell eltelnie,
+	 * Egy loves utan ennyi idonek kell eltelnie, 
 	 *  hogy a torony ujra lohessen.
 	 */
 	private int attackSpeed;
@@ -72,7 +72,7 @@ public class Tower extends Item
 
 	/**
 	 * Konstruktor. Peldanyositashoz ajanlott ezt hasznalni.
-	 * Default parameterekkel jon letre a torony.
+	 * Default parameterekkel jon letre a torony. 
 	 * @param pos
 	 * @param m
 	 */
@@ -109,7 +109,7 @@ public class Tower extends Item
 		this.map = map;
 		this.fogActive = false;
 		sliceShootProbability = slice;
-
+		
 		// TowerView letrehozasa
 		view = new TowerView(this);
 	}
@@ -122,7 +122,7 @@ public class Tower extends Item
 	{
 		return this.view;
 	}
-
+	
 	/**
 	 * Getter a firePower attributumra.
 	 * @return  A firePower attributum.
@@ -175,7 +175,7 @@ public class Tower extends Item
 	public boolean getFogActive() {
 		return fogActive;
 	}
-
+	
 	/**
 	 * Getter a rangeDecreaseByFog attributumra.
 	 * @return  A rangeDecreaseByFog attributum.
@@ -192,7 +192,7 @@ public class Tower extends Item
 	{
 		this.view = view;
 	}
-
+	
 	/**
 	 * Setter a firePower attributumra.
 	 * @param power  A firePower attributum kivant erteke.
@@ -271,7 +271,7 @@ public class Tower extends Item
 				// akkor azt modositjuk
 				if (bonusPowers.containsKey(enemy)) {
 					bonusPowers.put(
-							enemy,
+							enemy, 
 							bonusPowers.get(enemy) + stone.bonusPowers.get(enemy)
 							);
 				}
@@ -293,14 +293,14 @@ public class Tower extends Item
 		Logger.Log(0, logString, this);
 		return true;*/
 	}
-
+	
 	/**
 	 * A torony ralo egy ellenfelre.
-	 * Ehhez meghivja a map getEnemysInRange fuggvenyet atadva onmagat.
-	 * Ha nem null erteket kap vissza, akkor egy logika alapjan kivalaszt
+	 * Ehhez meghivja a map getEnemysInRange fuggvenyet atadva onmagat. 
+	 * Ha nem null erteket kap vissza, akkor egy logika alapjan kivalaszt 
 	 *  egy Enemy-t a kapott listabol és meghivja annak a damage fuggvenyet
-	 *  atadva a firePower-t, es a bonusPowers attributumok ertekeit.
-	 * Ha a damage fuggveny true-val ter vissza akkor meghivja a map
+	 *  atadva a firePower-t, es a bonusPowers attributumok ertekeit. 
+	 * Ha a damage fuggveny true-val ter vissza akkor meghivja a map 
 	 *  removeEnemy fuggvenyet atadva a kivalasztott Enemy-t.
 	 * Aktiv kod eseten leszedi a kodot a toronyrol, ha mar lejart az ideje.
 	 */
@@ -321,7 +321,7 @@ public class Tower extends Item
 			int random = (int)(Math.random() * enemys.size());
 			Enemy enemy = enemys.get(random);
 			boolean result = enemy.damage(firePower, bonusPowers);
-
+			
 			// Ha meghalt az ellenseg, akkor eltavolitjuk a palyarol
 			if (result) {
 				map.removeEnemy(enemy);
@@ -360,11 +360,10 @@ public class Tower extends Item
 	public void removeFog() {
 		// Jelezzuk, hogy mar nincs kod a tornyon
 		fogActive = false;
-		position.getView().modelChanged();
 		// Visszaallitjuk a lotavolsagot
 		range += rangeDecreaseByFog;
-
-
+		
+		position.getView().modelChanged();
 	}
 
 	/**
